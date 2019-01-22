@@ -18,11 +18,8 @@ body{
     left: 0;
     bottom: 0;
     right: 0;
-    background: rgba(255, 255, 255, 0.5);
-}
-
-.font-28{
-    font-size: 28px;
+    margin: auto;
+    background: rgba(238, 238, 238, 0.7);
 }
 
 .clear{
