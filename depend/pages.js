@@ -14,6 +14,7 @@ const page_public_file = {
     "js": [
         file_cdn + "file/js/common.js?" + page_time,
         file_cdn + "file/js/all.js?" + page_time,
+        file_cdn + "file/common/foot/foot.js?" + page_time,  // foot
     ],
     "css": [
         file_cdn + "file/css/all.css?" + page_time,

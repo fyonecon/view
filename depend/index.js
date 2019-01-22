@@ -155,7 +155,9 @@ function console_log(txt) {
                 url: file_path,
                 async: true,
                 success: function (data) {
-                    document.getElementById("depend").innerHTML = data; // 将模块渲染入主文件
+                    let div = document.createElement("div");
+                    div.innerHTML = data;
+                    document.getElementById("depend").appendChild(div); // 将模块渲染入主文件
 
                     resolve();
                 },
