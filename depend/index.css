@@ -1,0 +1,31 @@
+/*
+    主入口css，可以做全局css使用。
+*/
+
+body{
+    margin: 0;
+    background: #eeeeee;
+}
+
+.hide{
+    display: none;
+}
+
+.loading-div{
+    position: fixed;
+    z-index: 988800;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.font-28{
+    font-size: 28px;
+}
+
+.clear{
+    clear: both;
+}
+

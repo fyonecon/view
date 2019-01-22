@@ -1,0 +1,15 @@
+/*
+    局部模块css
+*/
+.time{
+    font-size: 14px;
+    color: grey;
+}
+.p404{
+    color: grey;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+.content-404{
+    padding: 20px;
+}

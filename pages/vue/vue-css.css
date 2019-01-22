@@ -1,0 +1,14 @@
+/*
+    局部模块css
+*/
+
+.content-vue{
+
+    padding: 10px;
+
+}
+.input-msg{
+    height: 32px;
+    width: 300px;
+    font-size: 14px;
+}
