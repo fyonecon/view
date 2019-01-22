@@ -2,11 +2,6 @@
     主入口css，可以做全局css使用。
 */
 
-body{
-    margin: 0;
-    background: #eeeeee;
-}
-
 .hide{
     display: none;
 }

@@ -7,7 +7,7 @@ let route_404       = "index.html#route=404";  // 404
 let route_default   = "index.html#route=home";  // 页面进入默认页
 const file_cdn      = "";  // 资源文件cdn主域名（js、css）
 const api_url       = "";  // api主地址
-const page_time     = Math.floor((new Date()).getTime()/1000);  // 页面时间戳：s
+const page_time     = Math.floor((new Date()).getTime()/10000)*10;  // 页面时间戳：十秒为资源单位
 
 // 页面公用js、css文件
 const page_public_file = {
