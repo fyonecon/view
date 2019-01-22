@@ -161,7 +161,7 @@ function console_log(txt) {
                 },
                 error: function (error) {
                     console.log("缺失模块html文件=" + error);
-                    alert("1.非同源政策限制模块文件的拉取；2.本应用需要服务器环境。");
+                    console.log("1.非同源政策限制模块文件的拉取；2.本应用需要服务器环境。");
                     reject();
                 }
             });
