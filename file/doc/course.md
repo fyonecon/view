@@ -2,7 +2,7 @@
 
 ## 单页应用功能加载顺序
 
-###### index.html——pages.js——index.js——获取url路由——渲染模块html——引入公共css和js——渲染foot等公共html模块——引入本页html模块css和js——执行页面入口函数start_this_page()
+###### index.html——pages.js——index.js——检测ES6环境——获取url路由——渲染模块html——引入公共css和js——渲染foot等公共html模块——引入本页html模块css和js——执行页面入口函数start_this_page()
 
 ## 新建一个单页应用
 ##### 新建并访问模块：
