@@ -1,6 +1,4 @@
-/*
-*  页面和模块信息配置
-* */
+/*页面和模块信息配置*/
 
 const debug         = true;  // 调试模式
 let route_404       = "index.html#route=404";  // 404
