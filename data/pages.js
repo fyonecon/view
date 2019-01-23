@@ -1,28 +1,42 @@
 /*页面和模块信息配置*/
 
-const debug         = true;  // 调试模式
-let route_404       = "index.html#route=404";  // 404
-let route_default   = "index.html#route=home";  // 页面进入默认页
-const file_cdn      = "";  // 资源文件cdn主域名（js、css）
-const api_url       = "";  // api主地址
-const page_time     = Math.floor((new Date()).getTime()/10000)*10;  // 页面时间戳：十秒为资源单位
 
 // 页面公用js、css文件
 const page_public_file = {
     "js": [
-        file_cdn + "file/js/common.js?" + page_time,
-        file_cdn + "file/js/all.js?" + page_time,
-        file_cdn + "file/common/foot/foot.js?" + page_time,  // foot
+        file_cdn + "public/js/common.js?" + page_time,
+        file_cdn + "public/js/all.js?" + page_time,
+        file_cdn + "public/common/foot/foot.js?" + page_time,  // foot
     ],
     "css": [
-        file_cdn + "file/css/all.css?" + page_time,
-        file_cdn + "file/css/animate.min.css?" + page_time,
-        file_cdn + "file/css/common.css?" + page_time,
+        file_cdn + "public/css/all.css?" + page_time,
+        file_cdn + "public/css/animate.min.css?" + page_time,
+        file_cdn + "public/css/common.css?" + page_time,
     ],
 };
 
 // 模块白名单配置
 const pages = [
+
+    // 开始-其他页面模块
+
+    { // 页面-home
+        "route"     : "home",
+        "file_path" : "home/home.htm",
+        "title"     : "主页",
+        "file"      : [
+            {
+                "js": [
+                    file_cdn + "pages/home/home.js?" + page_time,
+                ],
+                "css": [
+                    file_cdn + "pages/home/home.css?" + page_time,
+                ],
+            },
+        ],
+    },
+
+    // 结束-其他页面模块
 
     // 开始-模块范本，不需要做修改。
     { // 页面-404
@@ -58,23 +72,4 @@ const pages = [
     },
     // 结束-模块范本
 
-    // 开始-其他页面模块
-
-    { // 页面-home
-        "route"     : "home",
-        "file_path" : "home/home.htm",
-        "title"     : "主页",
-        "file"      : [
-            {
-                "js": [
-                    file_cdn + "pages/home/home.js?" + page_time,
-                ],
-                "css": [
-                    file_cdn + "pages/home/home.css?" + page_time,
-                ],
-            },
-        ],
-    },
-
-    // 结束-其他页面模块
 ];

@@ -8,7 +8,7 @@
 ##### 新建并访问模块：
 ###### 1）新建模块：pages/名字/名字.htm，pages/名字/名字.css，pages/名字/名字.js；
 ###### 2）注册模块：depend/pages.js，配置变量pages的参数即可，可以参照404页面的心法，注意路径和文件引入即可；
-###### 3）foot部分渲染，需要将/file/common/foot/foot/foot.js作为公共js资源，通过foot.js将/file/common/foot/foot/foot.htm引入inject区；
+###### 3）foot部分渲染，需要将/public/common/foot/foot/foot.js作为公共js资源，通过foot.js将/public/common/foot/foot/foot.htm引入inject区；
 ###### 4）访问新建模块：“index.html#route=名字”，成功访问即可。
 
 ## 配置模块页面js
@@ -19,7 +19,7 @@
 ###### 2）css也可参照上面。
 
 ## 配置页面公共html模块比如foot模块
-###### 1）在文件夹file/common/中新建文件“名字/名字.html”和“名字/名字.js ”；
+###### 1）在文件夹public/common/中新建文件“名字/名字.html”和“名字/名字.js ”；
 ###### 2）在pages.js中将注册“名字/名字.js ”到页面公共资源变量page_public_file下即可；
 ###### 3）具体“名字/名字.js ”内容可参考foot的写法。
 

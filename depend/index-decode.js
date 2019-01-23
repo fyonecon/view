@@ -1,4 +1,4 @@
-/*主入口js，一般不要做修改。**/
+/*主入口js，下面一般不要做修改。**/
 
 // 浏览器环境检查，主要检测是否支持ES6语法
 (function () {
@@ -26,16 +26,6 @@
     }
 })();
 
-// 日志函数
-function console_log(txt) {
-    if (txt === 0 || txt === "0") {
-
-    }else {
-        if (!txt){txt = "空txt";}
-    }
-    debug === true ? console.log(txt): "";
-}
-
 // 监听url是否发生变化，确保页面跳转成功
 (function () {
     let url = window.location.href;
@@ -45,7 +35,7 @@ function console_log(txt) {
         if (url !== now_url){
             window.location.reload();
         }else {
-            console_log("跳过url变化检测。");
+            console.log("跳过url变化检测。");
         }
     };
 
@@ -112,7 +102,7 @@ function console_log(txt) {
                 console.log("框架初始化完成。");
                 setTimeout(function () {
                     document.getElementsByClassName("loading-div")[0].classList.add("hide");
-                }, 200);
+                }, 100);
                 start_this_page();
             }catch (e) {
                 console.log("start_this_page()" + "页面起始模块函数未定义，但是此函数可忽略。");
@@ -125,74 +115,97 @@ function console_log(txt) {
     let _file = "";         // 真实文件路径+文件名
     let pages_index = null; // 页面资源索引
 
-    new Promise(function(resolve, reject) {
+    // 首先导入pages.js文件
+    let head = document.head || document.getElementsByTagName("head")[0];
+    let onload = 0;
+    for (let i=0; i<index_load.index_js.length; i++){
+        let pages_script = document.createElement("script");
+        pages_script.setAttribute("src", file_cdn + index_load.index_js[i]+"?" + page_time);
+        head.appendChild(pages_script);
 
-        new Promise(function(_resolve, _reject) {  // 处理页面路由
-            page_name = depend.getThisUrlParam("", "route");
-            for (let i=0; i<pages.length; i++){ // 获取真正文件路径名
-                if (pages[i].route === page_name){
-                    _file = pages[i].file_path;
-                    document.getElementsByTagName("title")[0].innerHTML = pages[i].title;
-                    pages_index = i;
-                }
+        pages_script.onload = function () {
+            onload++;
+            if (onload === index_load.index_js.length) {
+                // 公共js加载完成后开始加载页面js
+
+                new Promise(function(resolve, reject) {
+
+                    new Promise(function(_resolve, _reject) {  // 处理页面路由
+                        page_name = depend.getThisUrlParam("", "route");
+                        for (let i=0; i<pages.length; i++){ // 获取真正文件路径名
+                            if (pages[i].route === page_name){
+                                _file = pages[i].file_path;
+                                document.getElementsByTagName("title")[0].innerHTML = pages[i].title;
+                                pages_index = i;
+                            }
+                        }
+                        setTimeout(function () {
+                            if (pages_index === null){
+                                console.log("页面没有正确路由#route=xxx");
+                                window.location.replace(route_default);  // 则进入默认页
+                                _resolve();
+                            }else{
+                                _resolve();
+                            }
+                        },20);
+                    }).then(function () {
+                        const file_path = "pages/" + _file;
+
+                        $.ajax({ // 利用ajax的get请求获取文本内容
+                            url: file_path,
+                            async: true,
+                            success: function (data) {
+                                let div = document.createElement("div");
+                                div.innerHTML = data;
+                                document.getElementById("depend").appendChild(div); // 将模块渲染入主文件
+
+                                resolve();
+                            },
+                            error: function (error) {
+                                console.log("缺失模块html文件=" + error);
+                                console.log("1.非同源政策限制模块文件的拉取；2.本应用需要服务器环境。");
+                                reject();
+                            }
+                        });
+
+                    });
+
+                }).then(function () {
+
+                    let head = document.head || document.getElementsByTagName("head")[0];
+                    let had_onload = 0;
+
+                    // 页面渲染完毕，开始执行公共css、js引入
+                    for (let i=0; i<page_public_file.css.length; i++){
+                        let link = document.createElement('link');
+                        link.setAttribute("href", page_public_file.css[i]);
+                        link.setAttribute("rel", "stylesheet");
+                        head.appendChild(link);
+                    }
+                    for (let i=0; i<page_public_file.js.length; i++){
+                        let script = document.createElement("script");
+                        script.setAttribute("src", page_public_file.js[i]);
+                        head.appendChild(script);
+
+                        script.onload = function () {
+                            had_onload++;
+                            if (had_onload === page_public_file.js.length) {
+                                // 公共js加载完成后开始加载页面js
+                                depend.page_file(pages_index);
+                            }
+                        };
+
+                    }
+                });
+                //
+
             }
-            setTimeout(function () {
-                if (pages_index === null){
-                    console.log("页面没有正确路由#route=xxx");
-                    window.location.replace(route_default);  // 则进入默认页
-                    _resolve();
-                }else{
-                    _resolve();
-                }
-            },20);
-        }).then(function () {
-            const file_path = "pages/" + _file;
+        };
 
-            $.ajax({ // 利用ajax的get请求获取文本内容
-                url: file_path,
-                async: true,
-                success: function (data) {
-                    let div = document.createElement("div");
-                    div.innerHTML = data;
-                    document.getElementById("depend").appendChild(div); // 将模块渲染入主文件
+    }
 
-                    resolve();
-                },
-                error: function (error) {
-                    console.log("缺失模块html文件=" + error);
-                    console.log("1.非同源政策限制模块文件的拉取；2.本应用需要服务器环境。");
-                    reject();
-                }
-            });
-
-        });
-
-    }).then(function () {
-
-        let head = document.head || document.getElementsByTagName("head")[0];
-        let had_onload = 0;
-
-        // 页面渲染完毕，开始执行公共css、js引入
-        for (let i=0; i<page_public_file.css.length; i++){
-            let link = document.createElement('link');
-            link.setAttribute("href", page_public_file.css[i]);
-            link.setAttribute("rel", "stylesheet");
-            head.appendChild(link);
-        }
-        for (let i=0; i<page_public_file.js.length; i++){
-            let script = document.createElement("script");
-            script.setAttribute("src", page_public_file.js[i]);
-            head.appendChild(script);
-
-            script.onload = function () {
-                had_onload++;
-                if (had_onload === page_public_file.js.length) {
-                    // 公共js加载完成后开始加载页面js
-                    depend.page_file(pages_index);
-                }
-            };
-
-        }
-    });
 
 })();
+
+
+
