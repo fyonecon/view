@@ -120,7 +120,7 @@
     let onload = 0;
     for (let i=0; i<index_load.index_js.length; i++){
         let pages_script = document.createElement("script");
-        pages_script.setAttribute("src", file_cdn + index_load.index_js[i]+"?" + page_time);
+        pages_script.setAttribute("src", file_url + index_load.index_js[i]+"?" + page_time);
         head.appendChild(pages_script);
 
         pages_script.onload = function () {

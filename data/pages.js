@@ -4,14 +4,14 @@
 // 页面公用js、css文件
 const page_public_file = {
     "js": [
-        file_cdn + "public/js/common.js?" + page_time,
-        file_cdn + "public/js/all.js?" + page_time,
-        file_cdn + "public/common/foot/foot.js?" + page_time,  // foot
+        file_url + "public/js/common.js?" + page_time,
+        file_url + "public/js/all.js?" + page_time,
+        file_url + "public/common/foot/foot.js?" + page_time,  // foot
     ],
     "css": [
-        file_cdn + "public/css/all.css?" + page_time,
-        file_cdn + "public/css/animate.min.css?" + page_time,
-        file_cdn + "public/css/common.css?" + page_time,
+        file_url + "public/css/all.css?" + page_time,
+        file_url + "public/css/animate.min.css?" + page_time,
+        file_url + "public/css/common.css?" + page_time,
     ],
 };
 
@@ -27,10 +27,10 @@ const pages = [
         "file"      : [
             {
                 "js": [
-                    file_cdn + "pages/home/home.js?" + page_time,
+                    file_url + "pages/home/home.js?" + page_time,
                 ],
                 "css": [
-                    file_cdn + "pages/home/home.css?" + page_time,
+                    file_url + "pages/home/home.css?" + page_time,
                 ],
             },
         ],
@@ -41,15 +41,15 @@ const pages = [
     // 开始-模块范本，不需要做修改。
     { // 页面-404
         "route"     : "404",  // url中#route=xxx，便于定位页面
-        "file_path" : "404/404.htm", // 实际文件路径+文件名
+        "file_path" : "404/404.htm", // 实际文件路径+文件名，为了方便起见，文件后缀统一用“htm”
         "title"     : "404-页面没找到",  // 页面title
         "file"      : [  // 本页面需要引入的局部资源文件
             {
                 "js": [
-                    file_cdn + "pages/404/404.js?" + page_time,
+                    file_url + "pages/404/404.js?" + page_time,
                 ],
                 "css": [
-                    file_cdn + "pages/404/404.css?" + page_time,
+                    file_url + "pages/404/404.css?" + page_time,
                 ],
             },
         ],
@@ -61,11 +61,11 @@ const pages = [
         "file"      : [
             {
                 "js": [
-                    file_cdn + "pages/vue/vue.min.js?" + page_time,  // vue.js框架
-                    file_cdn + "pages/vue/vue-js.js?" + page_time,
+                    file_url + "pages/vue/vue.min.js?" + page_time,  // vue.js框架
+                    file_url + "pages/vue/vue-js.js?" + page_time,
                 ],
                 "css": [
-                    file_cdn + "pages/vue/vue-css.css?" + page_time,
+                    file_url + "pages/vue/vue-css.css?" + page_time,
                 ],
             },
         ],
