@@ -10,7 +10,7 @@ function run_foot() {
 
 (function () {
 
-    const file_path = "public/common/foot/foot.htm";
+    const file_path = page_url + "/common/foot/foot.htm";
 
     $.ajax({ // 利用ajax的get请求获取文本内容
         url: file_path,

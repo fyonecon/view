@@ -16,6 +16,7 @@ function run_vue() {
 
     document.getElementsByClassName("ok")[0].innerHTML = getThisUrlParam("", "p1");
 
+
 }
 
 

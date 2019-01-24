@@ -1,12 +1,11 @@
 /*页面和模块信息配置*/
 
-
 // 页面公用js、css文件
 const page_public_file = {
     "js": [
         file_url + "public/js/common.js?" + page_time,
         file_url + "public/js/all.js?" + page_time,
-        file_url + "public/common/foot/foot.js?" + page_time,  // foot
+        file_url + "pages/common/foot/foot.js?" + page_time,  // foot
     ],
     "css": [
         file_url + "public/css/all.css?" + page_time,
@@ -22,7 +21,7 @@ const pages = [
 
     { // 页面-home
         "route"     : "home",
-        "file_path" : "home/home.htm",
+        "file_path" : page_url + "home/home.htm",
         "title"     : "主页",
         "file"      : [
             {
@@ -41,7 +40,7 @@ const pages = [
     // 开始-模块范本，不需要做修改。
     { // 页面-404
         "route"     : "404",  // url中#route=xxx，便于定位页面
-        "file_path" : "404/404.htm", // 实际文件路径+文件名，为了方便起见，文件后缀统一用“htm”
+        "file_path" : page_url + "404/404.htm", // 实际文件路径+文件名，为了方便起见，文件后缀统一用“htm”
         "title"     : "404-页面没找到",  // 页面title
         "file"      : [  // 本页面需要引入的局部资源文件
             {
@@ -56,7 +55,7 @@ const pages = [
     },
     { // 页面-vue
         "route"     : "vue",
-        "file_path" : "vue/vue.htm",
+        "file_path" : page_url + "vue/vue.htm",
         "title"     : "测试vue.js双向绑定",
         "file"      : [
             {

@@ -1,4 +1,10 @@
 /*主入口js，下面一般不要做修改。**/
+/*https://www.sojson.com/aaencode.html*/
+
+let time_start = 0;  // ms。开始载入外部文件的时间戳
+let time_loaded = 0;  // ms。框架载入完成的时间戳
+let time_error = 0;  // ms。框架出错的时间戳
+
 
 // 浏览器环境检查，主要检测是否支持ES6语法
 (function () {
@@ -22,7 +28,7 @@
 
     }catch (e) {
         alert("浏览器版本不支持ES6语法。");
-        window.location.replace("help.html");
+        window.location.replace("help-es6.html");
     }
 })();
 
@@ -102,7 +108,8 @@
                 console.log("框架初始化完成。");
                 setTimeout(function () {
                     document.getElementsByClassName("loading-div")[0].classList.add("hide");
-                }, 100);
+                }, 50);
+                time_loaded = Math.floor((new Date()).getTime());
                 start_this_page();
             }catch (e) {
                 console.log("start_this_page()" + "页面起始模块函数未定义，但是此函数可忽略。");
@@ -114,6 +121,8 @@
     let page_name = "";     // 拉取哪个html文件块
     let _file = "";         // 真实文件路径+文件名
     let pages_index = null; // 页面资源索引
+
+    time_start = Math.floor((new Date()).getTime());
 
     // 首先导入pages.js文件
     let head = document.head || document.getElementsByTagName("head")[0];
@@ -142,6 +151,7 @@
                         setTimeout(function () {
                             if (pages_index === null){
                                 console.log("页面没有正确路由#route=xxx");
+                                time_error = Math.floor((new Date()).getTime());
                                 window.location.replace(route_default);  // 则进入默认页
                                 _resolve();
                             }else{
@@ -149,7 +159,7 @@
                             }
                         },20);
                     }).then(function () {
-                        const file_path = "pages/" + _file;
+                        const file_path = _file;
 
                         $.ajax({ // 利用ajax的get请求获取文本内容
                             url: file_path,
@@ -163,7 +173,12 @@
                             },
                             error: function (error) {
                                 console.log("缺失模块html文件=" + error);
-                                console.log("1.非同源政策限制模块文件的拉取；2.本应用需要服务器环境。");
+                                console.log("1.非同源政策限制模块文件的拉取；2.本应用需要服务器环境（网络环境）；3.htm组件文件404。");
+                                time_error = Math.floor((new Date()).getTime());
+                                setTimeout(function () {
+                                    window.location.replace("help-htm.html");
+                                },1000);
+
                                 reject();
                             }
                         });
