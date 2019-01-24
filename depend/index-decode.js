@@ -71,9 +71,7 @@ let time_error = 0;  // ms。框架出错的时间戳
 
             if (pages_index === null){
                 console.log("pages参数好像未定义，页面和框架数据将不能渲染");
-                setTimeout(function () {
-                    window.location.replace(route_404);  // 则进入默认页
-                }, 1000);
+                window.location.replace(route_404);  // 则进入默认页
                 return;
             }
 
