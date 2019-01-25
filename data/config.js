@@ -54,6 +54,29 @@ let view = {
         });
 
     },
+    "write_js": function (js_src_array, call_func) { // 写入外部js
+        if (js_src_array.constructor !== Array){
+            view.log("js_src_array不是数组。");
+            return;
+        }
+        let had_onload = 0;
+        let head = document.head || document.getElementsByTagName("head")[0];
+        for (let i=0; i<js_src_array.length; i++){
+            let script = document.createElement("script");
+            script.setAttribute("src", js_src_array[i]);
+            head.appendChild(script);
+            script.onload = function () {
+                had_onload++;
+                if (had_onload === js_src_array.length) {
+                    try {
+                        call_func(true);
+                    }catch (e) {
+                        view.log("可选回调函数没有设置。");
+                    }
+                }
+            };
+        }
+    },
     "get_url_param": function (url, key) { // 获取url中的参数
         // 兼容模式url地址，例如：poop.html?page=3&ok=222#p=2#name=kd
         let url_str = "";
@@ -72,6 +95,39 @@ let view = {
     "id_write_html": function (id_name, html) { // 根据唯一id写入html
         document.getElementById(id_name).innerHTML = html;
     },
+    "set_cookie": function (name, value, time) {
+        if (!time){
+            time = 1*24*60*60*1000; // 默认1天
+        }
+        let exp = new Date();
+        exp.setTime(exp.getTime() + time);
+        document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+    },
+    "get_cookie": function (name) {
+        let arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+        if(arr=document.cookie.match(reg)){
+            return unescape(arr[2]);
+        } else{
+            return null;
+        }
+    },
+    "del_cookie": function (name) {
+        let exp = new Date();
+        exp.setTime(exp.getTime() - 1);
+        let cval=getCookie(name);
+        if(cval!=null) {
+            document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+        }
+    },
+    "base64_encode": function (string) {
+        return btoa(string);
+    },
+    "base64_decode": function (string) {
+        return atob(string);
+    },
+
 
 };
+
+
 

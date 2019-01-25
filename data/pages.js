@@ -3,7 +3,6 @@
 // 页面公用js、css文件
 const page_public_file = {
     "js": [
-        file_url + "public/js/common.js?" + page_time,
         file_url + "public/js/all.js?" + page_time,
 
         file_url + "pages/common/foot/foot.js?" + page_time,  // foot
@@ -12,7 +11,6 @@ const page_public_file = {
     "css": [
         file_url + "public/css/all.css?" + page_time,
         file_url + "public/css/animate.min.css?" + page_time,
-        file_url + "public/css/common.css?" + page_time,
 
         file_url + "pages/common/foot/foot.css?" + page_time,  // foot
 
