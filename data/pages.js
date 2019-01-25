@@ -5,12 +5,17 @@ const page_public_file = {
     "js": [
         file_url + "public/js/common.js?" + page_time,
         file_url + "public/js/all.js?" + page_time,
+
         file_url + "pages/common/foot/foot.js?" + page_time,  // foot
+
     ],
     "css": [
         file_url + "public/css/all.css?" + page_time,
         file_url + "public/css/animate.min.css?" + page_time,
         file_url + "public/css/common.css?" + page_time,
+
+        file_url + "pages/common/foot/foot.css?" + page_time,  // foot
+
     ],
 };
 
@@ -65,6 +70,21 @@ const pages = [
                 ],
                 "css": [
                     file_url + "pages/vue/vue-css.css?" + page_time,
+                ],
+            },
+        ],
+    },
+    { // 页面-vue
+        "route"     : "test",
+        "file_path" : page_url + "test/test.htm",
+        "title"     : "测试test",
+        "file"      : [
+            {
+                "js": [
+                    file_url + "pages/test/test.js?" + page_time,
+                ],
+                "css": [
+                    file_url + "pages/test/test.css?" + page_time,
                 ],
             },
         ],

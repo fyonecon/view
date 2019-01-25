@@ -3,7 +3,7 @@
 /*可以定义一些组件成功载入完成后的一些个性化东西*/
 
 // 组件加载时间
-console_log(time_start);
-console_log(time_loaded);
-console_log(time_error);
+view.log(time_start);
+view.log(time_loaded);
+view.log(time_error);
 

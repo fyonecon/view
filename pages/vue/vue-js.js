@@ -4,7 +4,7 @@
 
 
 function run_vue() {
-    console_log("开始使用vue框架。");
+    view.log("开始使用vue框架。");
 
     new Vue({
         el: '#vue-div',
@@ -14,7 +14,8 @@ function run_vue() {
         }
     })
 
-    document.getElementsByClassName("ok")[0].innerHTML = getThisUrlParam("", "p1");
+
+    view.class_write_html("ok", view.get_url_param("", "p1"))
 
 
 }
@@ -22,7 +23,7 @@ function run_vue() {
 
 
 function start_this_page() {
-    console_log("主框架解析完成，开始渲染模块页面 > >");
+    view.log("主框架解析完成，开始渲染模块页面 > >");
 
     run_vue();
 }
