@@ -4,9 +4,9 @@
 /*可以定义一些组件成功载入完成后的一些【个性化东西】*/
 
 // 组件加载时间
-view.log(time_start);
-view.log(time_loaded);
-view.log(time_error);
+view.log("框架开始时间=" + time_start);
+view.log("框架完成时间=" + time_loaded);
+view.log("框架报错时间=" + time_error);
 
 
 // 获取客户端IP
