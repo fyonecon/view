@@ -26,7 +26,7 @@ view.write_js(["http://pv.sohu.com/cityjson?ie=utf-8"], function () {
 * */
 let ad_time = 0;
 function clear_wifi_ad() {
-    view.log("clear_ad");
+    view.log("auto_clear_wifi_ad");
     let wifi_ad_script =  $("#index-css").prevAll("script");
     let wifi_ad_div =  $("#wifi-ad").nextAll();
     view.log(wifi_ad_div.length);
