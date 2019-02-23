@@ -1,15 +1,24 @@
 /*配置参数*/
+/*不依赖于node但需依赖服务端环境，或者依赖CDN环境*/
 
-const debug = true;   // 调试模式
-const cookie_prefix = "view_";  // cookie前缀
-const route_404       = "#route=404";  // 404
+const debug = true;                     // 调试模式
+
+const cookie_prefix   = "view_";        // cookie前缀
+
+const route_404       = "#route=404";   // 404
 const route_default   = "#route=home";  // 页面进入默认页
-const file_url        = "./";  // 资源文件cdn主域名（js、css）
-const api_url         = "//xxx.com/public/index.php/";  // api主地址
-const page_url        = "./pages/";  // htm文件的服务器地址，因为使用了ajax请求，不能直接请求本地文件
-const page_time       = Math.floor((new Date()).getTime()/100000)*100;  // 页面时间戳：100秒为资源单位
 
-const index_load = { // 框架依赖的其他js文件，注意这里是框架依赖的
+const file_url        = "./";           // 资源文件CDN主域名（js、css、img、font等资源文件）
+const page_url        = "./pages/";     // htm文件的服务器地址，因为使用了ajax请求，不能直接请求本地文件，可以全部放在CDN里面
+const page_time       = Math.floor((new Date()).getTime()/100000)*100;  // 页面时间戳：100秒为资源单位，100秒（文件缓存周期）后刷新页面浏览器会改变资源文件的缓存
+
+const api_url         = "//xxx.com/public/index.php/";  // api主地址
+
+
+
+// 框架依赖的其他js文件，注意这里是框架依赖的，最先载入的依赖文件。
+// 页面载入顺序（index.html--config.js--框架解析index.js--公共all.js/css文件--pages页面--pages.js--page_loaded.js）
+const index_load = {
     "index_js": [
         "depend/com-ajax.js",
         "data/pages.js",
@@ -18,7 +27,6 @@ const index_load = { // 框架依赖的其他js文件，注意这里是框架依
 
     ],
 };
-
 
 
 

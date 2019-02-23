@@ -1,5 +1,6 @@
 /*页面和模块信息配置*/
 
+
 // 页面公用js、css文件
 const page_public_file = {
     "js": [
@@ -17,7 +18,8 @@ const page_public_file = {
     ],
 };
 
-// 模块白名单配置
+
+// pages页面模块白名单配置
 const pages = [
 
     // 开始-其他页面模块
