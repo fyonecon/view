@@ -27,7 +27,7 @@ let time_error = 0;  // ms。框架出错的时间戳
         });
 
     }catch (e) {
-        alert("浏览器版本不支持ES6语法。");
+        alert("该古老的浏览器不支持ES6语法。");
         window.location.replace("help-es6.html");
     }
 })();
