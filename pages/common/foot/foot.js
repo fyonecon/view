@@ -1,13 +1,4 @@
 
-
-
-
-function run_foot(e) {
-   view.log("foot渲染完成。");
-
-}
-
-
 // 注射文件
 (function () {
 
@@ -16,3 +7,8 @@ function run_foot(e) {
     view.write_htm(file_path, "depend", run_foot);
 
 })();
+
+function run_foot(e) {
+    view.log("foot渲染完成。");
+
+}
