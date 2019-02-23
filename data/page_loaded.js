@@ -21,16 +21,14 @@ view.write_js(["http://pv.sohu.com/cityjson?ie=utf-8"], function () {
 
 
 /*
-* 清除页面被广告劫持
+* 全局清除页面被广告劫持
 * 一般添加ad元素在页面尾部
 * */
 let ad_time = 0;
 function clear_wifi_ad() {
-    view.log("auto_clear_wifi_ad");
     let wifi_ad_script =  $("#index-css").prevAll("script");
     let wifi_ad_div =  $("#wifi-ad").nextAll();
-    view.log(wifi_ad_div.length);
-    view.log(wifi_ad_script.length);
+    view.log("WiFi广告劫持script="+wifi_ad_script.length);
     wifi_ad_script.remove();
     wifi_ad_div.remove();
     if (wifi_ad_script.length === 0 && wifi_ad_div.length === 0){

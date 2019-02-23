@@ -8,8 +8,8 @@ const cookie_prefix   = "view_";        // cookie前缀
 const route_404       = "#route=404";   // 404
 const route_default   = "#route=home";  // 页面进入默认页
 
-const file_url        = "./";           // 资源文件CDN主域名（js、css、img、font等资源文件）
-const page_url        = "./pages/";     // htm文件的服务器地址，因为使用了ajax请求，不能直接请求本地文件，可以全部放在CDN里面
+const file_url        = "";           // 资源文件CDN主域名（js、css、img、font等资源文件）
+const page_url        = "pages/";     // htm文件的服务器地址，因为使用了ajax请求，不能直接请求本地文件，可以全部放在CDN里面
 const page_time       = Math.floor((new Date()).getTime()/100000)*100;  // 页面时间戳：100秒为资源单位，100秒（文件缓存周期）后刷新页面浏览器会改变资源文件的缓存
 
 const api_url         = "//xxx.com/public/index.php/";  // api主地址
@@ -71,6 +71,7 @@ let view = {
         let head = document.head || document.getElementsByTagName("head")[0];
         for (let i=0; i<js_src_array.length; i++){
             let script = document.createElement("script");
+            script.setAttribute("class", "write-js");
             script.setAttribute("src", js_src_array[i]);
             head.appendChild(script);
             script.onload = function () {
