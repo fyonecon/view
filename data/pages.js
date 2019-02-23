@@ -74,7 +74,7 @@ const pages = [
             },
         ],
     },
-    { // 页面-vue
+    { // 页面-test
         "route"     : "test",
         "file_path" : page_url + "test/test.htm",
         "title"     : "测试test",
