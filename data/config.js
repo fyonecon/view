@@ -17,7 +17,7 @@ const api_url         = "//xxx.com/public/index.php/";  // api主地址
 
 
 // 框架依赖的其他js文件，注意这里是框架依赖的，最先载入的依赖文件。
-// 页面生命周期（index.html--config.js--框架解析index.js--公共all.js/css文件--执行wifi广告劫持的严重和清除--pages页面--pages.js--page_loaded.js）
+// 页面生命周期（index.html--config.js--框架解析index.js--公共all.js/css文件--执行wifi广告劫持的严重和清除--pages.htm--pages.js--page_loaded.js）
 const index_load = {
     "index_js": [
         "depend/com-ajax.js",
