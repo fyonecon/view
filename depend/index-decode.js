@@ -110,8 +110,14 @@ let time_error = 0;  // ms。框架出错的时间戳
                 console.log("框架初始化完成。");
                 setTimeout(function () {
                     document.getElementById("loading-div").classList.add("hide");
-                }, 200);
+                }, 100);
                 time_loaded = Math.floor((new Date()).getTime());
+
+                let head = document.head || document.getElementsByTagName("head")[0];
+                let script = document.createElement("script");
+                script.setAttribute("src", "data/page_loaded.js?"+page_time);
+                head.appendChild(script);
+
                 start_this_page();
             }catch (e) {
                 console.log("start_this_page()" + "页面起始模块函数未定义，但是此函数可忽略。");
