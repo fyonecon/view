@@ -10,14 +10,14 @@ view.log("框架报错时间=" + time_error);
 
 
 // 获取客户端IP
-view.write_js(["http://pv.sohu.com/cityjson?ie=utf-8"], function () {
-    let cip = returnCitySN["cip"];
-    let cname = returnCitySN["cname"];
-    let cid = returnCitySN["cid"];
-
-    view.log([cip, cname, cid]);
-
-});
+// view.write_js(["http://pv.sohu.com/cityjson?ie=utf-8"], function () {
+//     let cip = returnCitySN["cip"];
+//     let cname = returnCitySN["cname"];
+//     let cid = returnCitySN["cid"];
+//
+//     view.log([cip, cname, cid]);
+//
+// });
 
 
 

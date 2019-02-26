@@ -31,6 +31,7 @@ const index_load = {
 
 
 // 框架自带公共函数
+const map_cache = new Map();
 let view = {
     "log": function (txt) { // 日志打印统一函数
         if (txt === 0 || txt === "0") {}else {if (!txt){txt = "空txt";} }
@@ -134,6 +135,57 @@ let view = {
     "base64_decode": function (string) {
         return atob(string);
     },
+    "md5": function (string) {
+        return hex_md5(string);
+    },
+    "set_cache": function (_key, _value) { // key-value对 存入系统内存，页面关闭即key-value消失
+
+        let state = 0;
+        let msg = "";
+        let content = [];
+
+        // 校验是否已经存在key
+        const cache = new Map(map_cache);
+        let has = cache.get(_key);
+        if (has || has === 0) {
+            state = 2;
+            msg = "update-cache";
+        }else {
+            state = 1;
+            msg = "insert-cache";
+        }
+
+        const items = [
+            [_key, _value],
+        ];
+        content = items;
+
+        items.forEach(
+            ([key, value]) => map_cache.set(key, value)
+        );
+
+        return [state, msg, content];
+    },
+    "get_cache": function (_key) {
+
+        let state = 0;
+        let msg = "";
+        let content = [];
+
+        const cache = new Map(map_cache);
+
+        let has = cache.get(_key);
+        if (has || has === 0) {
+            state = 1;
+            msg = "has-cache";
+        }else {
+            state = 0;
+            msg = "null-cache";
+        }
+        content = [_key, has];
+
+        return [state, msg, content];
+    }
 
 
 };
