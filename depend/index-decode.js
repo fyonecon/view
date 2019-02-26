@@ -5,7 +5,6 @@ let time_start = 0;  // ms。开始载入外部文件的时间戳
 let time_loaded = 0;  // ms。框架载入完成的时间戳
 let time_error = 0;  // ms。框架出错的时间戳
 
-
 // 浏览器环境检查，主要检测是否支持ES6语法
 (function () {
     try{

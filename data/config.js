@@ -1,5 +1,9 @@
-/*配置参数*/
-/*不依赖于node但需依赖服务端环境，或者依赖CDN环境*/
+/*自定义配置页面的一些全局参数*/
+
+/*
+* 1）页面生命周期（index.html--config.js--框架解析index.js--公共all.js/css文件--执行wifi广告劫持严重和清除--pages.htm--pages.js--page_loaded.js）。
+* 2）不依赖于node但需依赖服务端环境，或者依赖CDN环境。
+* */
 
 const debug = true;                     // 调试模式
 
@@ -15,9 +19,7 @@ const page_time       = Math.floor((new Date()).getTime()/100000)*100;  // 页�
 const api_url         = "//xxx.com/public/index.php/";  // api主地址
 
 
-
 // 框架依赖的其他js文件，注意这里是框架依赖的，最先载入的依赖文件。
-// 页面生命周期（index.html--config.js--框架解析index.js--公共all.js/css文件--执行wifi广告劫持的严重和清除--pages.htm--pages.js--page_loaded.js）
 const index_load = {
     "index_js": [
         "depend/com-ajax.js",
@@ -29,9 +31,8 @@ const index_load = {
 };
 
 
-
 // 框架自带公共函数
-const map_cache = new Map();
+const map_cache = new Map(); // 设置页面键-值对缓存
 let view = {
     "log": function (txt) { // 日志打印统一函数
         if (txt === 0 || txt === "0") {}else {if (!txt){txt = "空txt";} }
