@@ -105,8 +105,8 @@ let time_error = 0;  // ms。框架出错的时间戳
             try {
                 console.log("框架初始化完成。");
                 setTimeout(function () {
-                    document.getElementsByClassName("loading-div")[0].classList.add("hide");
-                }, 50);
+                    document.getElementById("loading-div")[0].classList.add("hide");
+                }, 500);
                 time_loaded = Math.floor((new Date()).getTime());
                 start_this_page();
             }catch (e) {
