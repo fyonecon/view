@@ -69,8 +69,13 @@ let time_error = 0;  // ms。框架出错的时间戳
         "page_file": function (pages_index) {  // 添加页面js、css资源文件
 
             if (pages_index === null){
-                console.log("pages参数好像未定义，页面和框架数据将不能渲染");
-                window.location.replace(route_404);  // 则进入默认页
+                console.log("pages参数好像未定义，pages.js数组参数找不到,页面和框架数据将不能渲染");
+
+                setTimeout(function () {
+                    window.location.replace(route_default);
+                }, 2000);
+
+                //window.location.replace(route_404);  // 则进入默认页
                 return;
             }
 
