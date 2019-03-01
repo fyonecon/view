@@ -188,10 +188,10 @@ let view = {
         return [state, msg, content];
     },
     "post": function (api, json_data, call_func, call_data) { // 由于存在异步操作，所以设置回调函数。
-        if (!call_data || call_data === "") {
+        if (call_data === "") {
             call_data = "none";
         }
-        if (!api || api === "") {
+        if (api === "") {
             view.log("没有设置api接口，请保持 'view.post(api, json_data, call_func);' 写法。");
             return;
         }
@@ -233,10 +233,10 @@ let view = {
 
     },
     "get": function (api, call_func, call_data) {
-        if (!call_data || call_data === "") {
+        if (call_data === "") {
             call_data = "none";
         }
-        if (!api || api === "") {
+        if (api === "") {
             view.log("没有设置api接口，请保持 'view.get(api, call_func);' 写法。");
             return;
         }
