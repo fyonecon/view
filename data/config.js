@@ -186,6 +186,68 @@ let view = {
         content = [_key, has];
 
         return [state, msg, content];
+    },
+    "post": function (api, json_data, call_func, call_data) { // 由于存在异步操作，所以设置回调函数。
+        if (!call_data || call_data === "") {
+            call_data = "none";
+        }
+        if (!api || api === "") {
+            view.log("没有设置api接口，请保持 'view.post(api, json_data, call_func);' 写法。");
+            return;
+        }
+        if (typeof json_data !== "object"){
+            view.log("请保持data为json格式");
+            return;
+        }
+        if (!call_func){
+            view.log("post没有设置回调函数！请求的结果将无法输出！");
+            return;
+        }
+
+        // 请求POST数据
+        $.ajax({
+            url: api,
+            type: "POST",
+            dataType: "json",
+            async: true,
+            // 字典数据
+            data: json_data,
+            success: function(back, status){
+
+                let json = data = "";
+                if(typeof back === "string"){
+                    json = JSON.parse(back);
+                    data = back;
+                } else {
+                    json = back;
+                    data = JSON.stringify(back)
+                }
+
+                call_func([1, "POST请求完成，结果格式转换完成。", call_data, json]);
+            },
+            error: function (xhr) {
+                console.log(xhr);
+                call_func([0, xhr, call_data, {}]);
+            }
+        });
+
+    },
+    "get": function (api, call_func, call_data) {
+        if (!call_data || call_data === "") {
+            call_data = "none";
+        }
+        if (!api || api === "") {
+            view.log("没有设置api接口，请保持 'view.get(api, call_func);' 写法。");
+            return;
+        }
+        if (!call_func){
+            view.log("get没有设置回调函数！请求的结果将无法输出！");
+            return;
+        }
+
+        $.get(api, function(result){
+            call_func([1, "GET请求完成", call_data, result]);
+        });
     }
 
 
