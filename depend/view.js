@@ -176,6 +176,18 @@ let view = {
 
         return json;
     },
+    "json_to_string": function (json) { // 将json转化为string
+        let string;
+        let back = json;
+
+        if(typeof back === "object"){
+            string = JSON.stringify(back);
+        } else {
+            string = back;
+        }
+
+        return string;
+    },
     "post": function (api, json_data, call_func, call_data) { // 由于存在异步操作，所以设置回调函数。
         if (call_data) {
 
