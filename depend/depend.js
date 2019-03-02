@@ -113,7 +113,7 @@ let time_error = 0;  // ms。框架出错的时间戳
 
                 let head = document.head || document.getElementsByTagName("head")[0];
                 let script = document.createElement("script");
-                script.setAttribute("src", "data/page_loaded.js?"+page_time);
+                script.setAttribute("src", "config/page_loaded.js?"+page_time);
                 head.appendChild(script);
 
                 start_this_page();
@@ -156,9 +156,11 @@ let time_error = 0;  // ms。框架出错的时间戳
                         }
                         setTimeout(function () {
                             if (pages_index === null){
-                                console.log("页面没有正确路由#route=xxx");
+                                console.log("页面没有正确路由#route=xxx，将进入默认页面。");
                                 time_error = Math.floor((new Date()).getTime());
-                                window.location.replace(route_default);  // 则进入默认页
+                                setTimeout(function () {
+                                    window.location.replace(route_default);  // 则进入默认页
+                                },0);
                                 _resolve();
                             }else{
                                 _resolve();
