@@ -221,7 +221,6 @@ let view = {
             view.log("get没有设置回调函数！请求的结果将无法输出！");
             return;
         }
-
         $.get(api, function(result){
             call_func([1, "GET请求完成", call_data, result]);
         });

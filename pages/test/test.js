@@ -26,4 +26,9 @@ function start_this_page() {
     // cookie
     view.set_cookie("test", "cookie-cache", 7*24*60*60*1000);
 
+    // get
+    view.get("http://localhost/liangjian/public/?s=/find_alive", function (e) {
+        view.log(e[2]);
+    }, "get===");
+
 }
