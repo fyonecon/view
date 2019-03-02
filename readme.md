@@ -25,4 +25,33 @@ https://github.com/fyonecon/view-play
 ##### 5. 对域名要求比较高的情况比如在微信中传播请将入口index.html更换为index.php，以便处理服务器状态返回和防标记页面。 
 ##### 6. 页面生命周期（index.html--config.js--框架解析index.js--公共all.js/css文件--执行Wi-Fi广告劫持的验证与清除--pages.htm--pages.js--page_loaded.js）
 
+## 自带常用函数功能列表（view.js）：
+打印日志：view.log(txt)
+
+写入htm文件：view.write_htm(file_path,  by_id, cal_func)
+
+写入js文件：view.write_js(js_src_array,  call_func)
+
+获取url中的参数：view.get_url_param(url,  key)
+
+设置cookie：view.set_cookie(name,  value,  time)
+
+获取cookie：view.get_cookie(name)
+
+删除cookie：view.del_cookie(name)
+
+md5加密：view.md5(string)
+
+base64加密：base64_encode(string)
+
+base64解密：base64_decode(string)
+
+设置页面数据缓存，即用即走：view.set_cache(key,  value)
+
+读取页面数据缓存：view.get_cache(key)
+
+POST请求：view.post(api,  json_data,  call_func,  call_data)
+
+GET请求：view.get(api,  call_func,  call_data)
+
 ## 编于：2019-1-22 11:08，更新于：2019-2-26
