@@ -54,4 +54,8 @@ POST请求：view.post(api,  json_data,  call_func,  call_data)
 
 GET请求：view.get(api,  call_func,  call_data)
 
+string转json格式：string_to_json(string)
+
+json转string格式：json_to_string(json)
+
 ## 编于：2019-1-22 11:08，更新于：2019-2-26
