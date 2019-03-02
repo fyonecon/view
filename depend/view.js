@@ -164,6 +164,18 @@ let view = {
 
         return [state, msg, content];
     },
+    "string_to_json": function (string) { // 将string转化为json
+        let json;
+        let back = string;
+
+        if(typeof back === "string"){
+            json = JSON.parse(back);
+        } else {
+            json = back;
+        }
+
+        return json;
+    },
     "post": function (api, json_data, call_func, call_data) { // 由于存在异步操作，所以设置回调函数。
         if (call_data) {
 
@@ -192,15 +204,7 @@ let view = {
             // 字典数据
             data: json_data,
             success: function(back, status){
-
-                let json = data = "";
-                if(typeof back === "string"){
-                    json = JSON.parse(back);
-                    data = back;
-                } else {
-                    json = back;
-                    data = JSON.stringify(back)
-                }
+                let json = view.string_to_json(back);
 
                 call_func([1, "POST请求完成，结果格式转换完成。", call_data, json]);
             },
@@ -228,7 +232,8 @@ let view = {
         $.get(api, function(result){
             call_func([1, "GET请求完成", call_data, result]);
         });
-    }
+    },
+
 
 
 };
