@@ -164,7 +164,7 @@ let view = {
 
         return [state, msg, content];
     },
-    "string_to_json": function (string) { // 将string转化为json
+    "string_to_json": function (string) { // 将string转化为json，注意，里面所有key的引号为双引号，否则浏览器会报错。
         let json;
         let back = string;
 
