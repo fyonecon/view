@@ -5,6 +5,7 @@
 const page_public_file = {
     "js": [
         file_url + "depend/assist.js?" + page_time,  // 帮助框架可以在多种苛刻条件下正常使用
+        file_url + "public/js/vue.min.js?" + page_time,  // vue.js框架，实现双向绑定
         file_url + "public/js/all.js?" + page_time,
         /*以下加入你自己的js*/
 
@@ -65,7 +66,6 @@ const pages = [
         "file"      : [
             {
                 "js": [
-                    file_url + "pages/vue/vue.min.js?" + page_time,  // vue.js框架
                     file_url + "pages/vue/vue-js.js?" + page_time,
                 ],
                 "css": [
