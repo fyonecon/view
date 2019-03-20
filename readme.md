@@ -15,7 +15,7 @@ http://cdn.meishid.cn/view-play/index.html
 view框架的应用demo。BBC，VOA等在线广播收听——利用view的框架和设置实际应用一个web应用。
 https://github.com/fyonecon/view-play
 
-## view框架的php写法，利用php将框架重写一遍
+## view框架的php写法，利用php将view框架重写一遍
 https://github.com/fyonecon/view-php
 
 ## 介绍：
