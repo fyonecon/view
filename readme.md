@@ -15,6 +15,8 @@ http://cdn.meishid.cn/view-play/index.html
 view框架的应用demo。BBC，VOA等在线广播收听——利用view的框架和设置实际应用一个web应用。
 https://github.com/fyonecon/view-play
 
+## view框架的php写法，利用php将框架重写一遍
+https://github.com/fyonecon/view-php
 
 ## 介绍：
 ##### 0. view的速度能力完全依靠文件的【CDN+api+客户端】能力，可以不依赖于node。渲染过程：依赖器将初步页面组装完成——页面进行api交互丰富页面内容。只需要两步即可完成页面所有内容的加载；
