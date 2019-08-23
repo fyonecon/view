@@ -22,7 +22,7 @@ let time_error = 0;  // ms。框架出错的时间戳
                 ["check", check],
             ]);
             map.get("check");
-            console.log("ES6 YES! The view is running.");
+            console.log("ES6 Supported.");
         });
 
     }catch (e) {
@@ -105,7 +105,7 @@ let time_error = 0;  // ms。框架出错的时间戳
         },
         "page_all_js_has": function () {  // 页面全部js加载完执行
             try {
-                console.log("框架初始化完成。");
+                console.log("View Framework is Running.");
                 setTimeout(function () {
                     document.getElementById("loading-div").classList.add("hide");
                 }, 50);
@@ -117,6 +117,7 @@ let time_error = 0;  // ms。框架出错的时间戳
                 head.appendChild(script);
 
                 start_this_page();
+                console.log("Files Cache_time = "+cache_time +"s");
             }catch (e) {
                 console.log("start_this_page()" + "页面起始模块函数未定义，但是此函数可忽略。");
             }
