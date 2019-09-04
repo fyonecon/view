@@ -1,9 +1,33 @@
 /*主入口js，下面一般不要做修改。**/
 /*https://www.sojson.com/aaencode.html*/
 
-let time_start = 0;  // ms。开始载入外部文件的时间戳
+let time_start  = 0;  // ms。开始载入外部文件的时间戳
 let time_loaded = 0;  // ms。框架载入完成的时间戳
-let time_error = 0;  // ms。框架出错的时间戳
+let time_error  = 0;  // ms。框架出错的时间戳
+
+// 原生依赖
+const index_load = {
+    "index_js": [
+        "depend/com-ajax.js",
+        "config/pages.js",
+        "depend/md5.js",
+        // 以上两个文件不需要更改位置
+
+    ],
+};
+
+// 所有页面公用js、css文件，全局有效
+const page_public_file = {
+    "js": [
+        "depend/assist.js",  // 帮助框架可以在多种苛刻条件下正常使用
+        "public/js/vue.min.js",  // vue.js框架，实现双向绑定
+        "public/js/all.js",
+    ],
+    "css": [
+        "public/css/all.css",
+        "public/css/animate.min.css",
+    ],
+};
 
 // 浏览器环境检查，主要检测是否支持ES6语法
 (function () {
@@ -71,7 +95,7 @@ let time_error = 0;  // ms。框架出错的时间戳
 
                 setTimeout(function () {
                     window.location.replace(route_default);
-                }, 2000);
+                }, 1000);
 
                 //window.location.replace(route_404);  // 则进入默认页
                 return;
@@ -83,14 +107,14 @@ let time_error = 0;  // ms。框架出错的时间戳
 
             for (let i=0; i<file.css.length; i++){
                 let link = document.createElement('link');
-                link.setAttribute("href", file.css[i]);
+                link.setAttribute("href", file_url + file.css[i] +"?"+ page_time);
                 link.setAttribute("rel", "stylesheet");
                 head.appendChild(link);
             }
             for (let i=0; i<file.js.length; i++){
 
                 let script = document.createElement("script");
-                script.setAttribute("src", file.js[i]);
+                script.setAttribute("src", file_url + file.js[i] +"?"+ page_time);
                 head.appendChild(script);
 
                 script.onload = function () {
@@ -106,17 +130,17 @@ let time_error = 0;  // ms。框架出错的时间戳
         "page_all_js_has": function () {  // 页面全部js加载完执行
             try {
                 console.log("View Framework is Running.");
-                setTimeout(function () {
-                    document.getElementById("loading-div").classList.add("hide");
-                }, 50);
+
                 time_loaded = Math.floor((new Date()).getTime());
 
                 let head = document.head || document.getElementsByTagName("head")[0];
                 let script = document.createElement("script");
-                script.setAttribute("src", "config/page_loaded.js?"+page_time);
+                script.setAttribute("src", file_url + "config/page_loaded.js?"+page_time);
                 head.appendChild(script);
 
                 start_this_page();
+
+                document.getElementById("loading-div").classList.add("hide");
                 console.log("Files Cache_time = "+cache_time +"s");
             }catch (e) {
                 console.log("start_this_page()" + "页面起始模块函数未定义，但是此函数可忽略。");
@@ -150,7 +174,7 @@ let time_error = 0;  // ms。框架出错的时间戳
                         page_name = depend.getThisUrlParam("", "route");
                         for (let i=0; i<pages.length; i++){ // 获取真正文件路径名
                             if (pages[i].route === page_name){
-                                _file = pages[i].file_path;
+                                _file = page_url + "pages/" + pages[i].file_path + "?"+page_time;
                                 document.getElementsByTagName("title")[0].innerHTML = pages[i].title;
                                 pages_index = i;
                             }
@@ -201,13 +225,13 @@ let time_error = 0;  // ms。框架出错的时间戳
                     // 页面渲染完毕，开始执行公共css、js引入
                     for (let i=0; i<page_public_file.css.length; i++){
                         let link = document.createElement('link');
-                        link.setAttribute("href", page_public_file.css[i]);
+                        link.setAttribute("href", file_url + page_public_file.css[i] + "?" + page_time);
                         link.setAttribute("rel", "stylesheet");
                         head.appendChild(link);
                     }
                     for (let i=0; i<page_public_file.js.length; i++){
                         let script = document.createElement("script");
-                        script.setAttribute("src", page_public_file.js[i]);
+                        script.setAttribute("src", file_url + page_public_file.js[i] + "?" + page_time);
                         head.appendChild(script);
 
                         script.onload = function () {

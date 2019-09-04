@@ -8,12 +8,37 @@
     <link rel="icon" href="public/img/favicon.ico" type="image/x-icon">
     <meta name="robots" content="noindex, nofollow"/>
     <meta name="keywords" content=""/>
-    <meta name="description" content="单页应用-模块化、组件化MVVM框架-view"/>
+    <meta name="description" content="单页应用-模块化、组件化框架-view。强烈建议部署在CDN容器里。"/>
 
-    <link id="depend-css" href="depend/depend.css" rel="stylesheet" />
-    <script id="depend-config" src="config/config.js"></script>
-    <script id="depend-view" src="depend/view.js"></script>
-    <script id="depend-js" src="depend/depend.js"></script>
+    <script id="depend-js">
+        (function () {
+            var cdn_file = ""; // 配置和框架部署文件的CDN
+            var js_src_array = [
+                "config/config.js",
+                "depend/view.js",
+                "depend/depend.js"
+            ];
+            var clear_cache =  Math.floor(new Date().getTime()/10)*10; // 核心文件每次加载都自动清除缓存
+            var had_onload = 0;
+            var head = document.head || document.getElementsByTagName("head")[0];
+            for (var i=0; i<js_src_array.length; i++){
+                var script = document.createElement("script");
+                script.setAttribute("class", "write-js");
+                script.setAttribute("src", cdn_file+js_src_array[i]+"?"+clear_cache);
+                head.appendChild(script);
+                script.onload = function () {
+                    had_onload++;
+                    if (had_onload === js_src_array.length) {
+                        var link = document.createElement("link");
+                        link.setAttribute("id", "depend-css");
+                        link.setAttribute("href", cdn_file+"depend/depend.css?"+clear_cache);
+                        link.setAttribute("rel", "stylesheet");
+                        head.appendChild(link);
+                    }
+                };
+            }
+        })();
+    </script>
 
 </head>
 <body class="body">

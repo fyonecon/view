@@ -1,14 +1,6 @@
 /*框架自带公共函数*/
 
 // 框架依赖的其他js文件，注意这里是框架依赖的，最先载入的依赖文件。
-const index_load = {
-    "index_js": [
-        "depend/com-ajax.js",
-        "config/pages.js",
-        "depend/md5.js",
-        // 以上两个文件不需要更改位置
-    ],
-};
 const map_cache = new Map(); // 设置页面键-值对缓存
 let view = {
     "log": function (txt) { // 日志打印统一函数
@@ -17,7 +9,7 @@ let view = {
     },
     "write_htm": function (file_path, by_id, call_func) {  // 注射文件 | 写入htm
         $.ajax({ // 利用ajax的get请求获取文本内容
-            url: file_path,
+            url: file_path + "?" + page_time,
             async: true,
             success: function (data) {
                 let div = document.createElement("div");
@@ -51,7 +43,7 @@ let view = {
         for (let i=0; i<js_src_array.length; i++){
             let script = document.createElement("script");
             script.setAttribute("class", "write-js");
-            script.setAttribute("src", js_src_array[i]);
+            script.setAttribute("src", js_src_array[i]+ "?" + page_time);
             head.appendChild(script);
             script.onload = function () {
                 had_onload++;
@@ -63,6 +55,32 @@ let view = {
                     }
                 }
             };
+        }
+    },
+    "write_css": function (css_src_array, call_func) { // 写入外部js
+        if (css_src_array.constructor !== Array){
+            view.log("css_src_array不是数组。");
+            return;
+        }
+        let had_onload = 0;
+        let head = document.head || document.getElementsByTagName("head")[0];
+        for (let i=0; i<css_src_array.length; i++){
+            let link = document.createElement("link");
+
+            link.setAttribute("id", "depend-css");
+            link.setAttribute("href",css_src_array[i] + "?" + page_time);
+            link.setAttribute("rel", "stylesheet");
+            head.appendChild(link);
+
+            had_onload++;
+
+            if (had_onload === css_src_array.length) {
+                try {
+                    call_func(true);
+                }catch (e) {
+                    view.log("可选回调函数没有设置。");
+                }
+            }
         }
     },
     "get_url_param": function (url, key) { // 获取url中的参数
@@ -244,6 +262,45 @@ let view = {
         $.get(api, function(result){
             call_func([1, "GET请求完成", call_data, result]);
         });
+    },
+    "timestamp": function() {
+        return new Date().getTime();
+    },
+    "set_data": function (key, value){
+        localStorage.setItem(key,value);
+        if (localStorage.getItem(key)){
+            return true;
+        }else {
+            return false;
+        }
+    },
+    "get_data": function (key, test) {
+        if (test || test === 0){
+            console.log("注意，你使用了get_data函数。。");
+            return false;
+        }
+        let value = localStorage.getItem(key);
+        if (value){
+            return value;
+        }else {
+            return null;
+        }
+    },
+    "del_data": function (key) {
+        let del = localStorage.removeItem(key);
+        if (del){
+            return true;
+        }else {
+            return false;
+        }
+    },
+    "clear_data": function () {
+        let clear = localStorage.clear();
+        if (clear){
+            return true;
+        }else {
+            return false;
+        }
     },
 
 
