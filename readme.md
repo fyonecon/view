@@ -42,6 +42,8 @@ https://github.com/fyonecon/view-php
 
 删除cookie：view.del_cookie(name)
 
+获取localStorage：view.get_data(name,  value)
+
 md5加密：view.md5(string)
 
 base64加密：base64_encode(string)
@@ -60,4 +62,4 @@ string转json格式：string_to_json(string)
 
 json转string格式：json_to_string(json)
 
-## 编于：2019-1-22 11:08，更新于：2019-2-26
+## 编于：2019-1-22 11:08，更新于：2019-2-26，更新于：2019-9-4
