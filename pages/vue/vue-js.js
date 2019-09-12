@@ -3,7 +3,8 @@
 * */
 
 
-function run_vue() {
+function run_vue(info) {
+    view.log(info);
     view.log("开始使用vue框架。");
 
     new Vue({
@@ -16,7 +17,6 @@ function run_vue() {
 
 
     view.class_write_html("ok", view.get_url_param("", "p1"))
-
 
 }
 

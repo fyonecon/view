@@ -1,5 +1,18 @@
 /*页面和模块信息配置*/
 
+// 所有页面公用js、css文件，全局有效
+const page_public_file = {
+    "js": [
+        "public/js/assist.js",  // 帮助框架可以在多种苛刻条件下正常使用
+        "public/js/vue.min.js",  // vue.js框架，实现双向绑定
+        "public/js/all.js",
+    ],
+    "css": [
+        "public/css/all.css",
+        "public/css/animate.min.css",
+    ],
+};
+
 // pages模块页面白名单配置
 const pages = [
     // 开始-其他页面模块

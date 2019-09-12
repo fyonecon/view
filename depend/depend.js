@@ -13,19 +13,6 @@ const index_load = {
     ],
 };
 
-// 所有页面公用js、css文件，全局有效
-const page_public_file = {
-    "js": [
-        "depend/assist.js",  // 帮助框架可以在多种苛刻条件下正常使用
-        "public/js/vue.min.js",  // vue.js框架，实现双向绑定
-        "public/js/all.js",
-    ],
-    "css": [
-        "public/css/all.css",
-        "public/css/animate.min.css",
-    ],
-};
-
 // 浏览器环境检查，主要检测是否支持ES6语法
 (function () {
     try{
