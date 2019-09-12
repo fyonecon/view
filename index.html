@@ -8,48 +8,57 @@
     <link rel="icon" href="public/img/favicon.ico" type="image/x-icon">
     <meta name="robots" content="noindex, nofollow"/>
     <meta name="keywords" content=""/>
-    <meta name="description" content="单页应用-模块化、组件化框架-view。强烈建议部署在CDN容器里。"/>
+    <meta name="description" content="单页应用-模块化、组件化框架-view。强烈建议部署在CDN容器里。Github：https://github.com/fyonecon/view"/>
 
     <script id="depend-js">
-        (function () {
-            var cdn_file = ""; // 配置和框架部署文件的CDN
-            var js_src_array = [
+        let time_start  = Math.floor((new Date()).getTime());  // ms。开始载入外部文件的时间戳
+        let time_loaded = 0;  // ms。框架载入完成的时间戳
+        let time_error  = 0;  // ms。框架出错的时间戳
+        (function () { // 同步载入核心依赖js，完成框架解析
+            var cdn_file = ""; // 自定义，配置和框架部署文件的CDN主网址
+            var js_src_array = [ // 不可更改
                 "config/config.js",
                 "depend/view.js",
-                "depend/depend.js"
+                "depend/depend.js",
             ];
             var clear_cache =  Math.floor(new Date().getTime()/10)*10; // 核心文件每次加载都自动清除缓存
-            var had_onload = 0;
             var head = document.head || document.getElementsByTagName("head")[0];
-            for (var i=0; i<js_src_array.length; i++){
-                var script = document.createElement("script");
-                script.setAttribute("class", "write-js");
-                script.setAttribute("src", cdn_file+js_src_array[i]+"?"+clear_cache);
-                head.appendChild(script);
-                script.onload = function () {
-                    had_onload++;
-                    if (had_onload === js_src_array.length) {
-                        var link = document.createElement("link");
-                        link.setAttribute("id", "depend-css");
-                        link.setAttribute("href", cdn_file+"depend/depend.css?"+clear_cache);
-                        link.setAttribute("rel", "stylesheet");
-                        head.appendChild(link);
-                    }
+            var script_config = document.createElement("script");
+            script_config.setAttribute("class", "write-js");
+            script_config.setAttribute("src", cdn_file+js_src_array[0]+"?"+clear_cache);
+            head.appendChild(script_config);
+            script_config.onload = function () {
+                var script_view = document.createElement("script");
+                script_view.setAttribute("class", "write-js");
+                script_view.setAttribute("src", cdn_file+js_src_array[1]+"?"+clear_cache);
+                head.appendChild(script_view);
+                script_view.onload = function (){
+                    var script_depend = document.createElement("script");
+                    script_depend.setAttribute("class", "write-js");
+                    script_depend.setAttribute("src", cdn_file+js_src_array[2]+"?"+clear_cache);
+                    head.appendChild(script_depend);
+                    script_depend.onload = function () {
+                        var link_depend = document.createElement("link");
+                        link_depend.setAttribute("id", "depend-css");
+                        link_depend.setAttribute("href", cdn_file+"depend/depend.css?"+clear_cache);
+                        link_depend.setAttribute("rel", "stylesheet");
+                        head.appendChild(link_depend);
+                    };
                 };
-            }
+            };
+
         })();
     </script>
 
 </head>
 <body class="body">
-    <!--start-->
-    <!--inject content-->
-    <div class="depend" id="depend"></div>
-    <!--loading show-->
-    <div class="loading-div" id="loading-div"></div>
-
-    <!--end-->
-    <!--like wifi ad-->
-    <div class="wifi-ad" id="wifi-ad"></div>
+<!--start-->
+<!--inject content-->
+<div class="depend" id="depend"></div>
+<!--loading show-->
+<div class="loading-div" id="loading-div"></div>
+<!--end-->
+<!--like wifi ad-->
+<div class="wifi-ad" id="wifi-ad"></div>
 </body>
 </html>
