@@ -60,9 +60,9 @@ base64解密：base64_decode(string)
 
 读取页面数据缓存：view.get_cache(key)
 
-POST请求：view.post(api,  json_data,  call_func,  call_data)
+POST请求：view.request_post(api, map_data, call_func)
 
-GET请求：view.get(api,  call_func,  call_data)
+GET请求：view.request_get(api, map_data, call_func)
 
 string转json格式：string_to_json(string)
 
