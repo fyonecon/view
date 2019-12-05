@@ -22,7 +22,7 @@ function run_vue(info) {
 
 
 
-function start_this_page() {
+function page_data_init() { // 此页面模块起始
     view.log("主框架解析完成，开始渲染模块页面 > >");
 
     run_vue();

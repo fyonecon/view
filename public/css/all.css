@@ -2,7 +2,55 @@
 .font-28{
     font-size: 28px;
 }
+.body{
+    margin: 0;
+    background: #eee;
+    font-size: 18px;
+    font-family: SimSun, serif; /*默认免费字体：宋体*/
+}
+.clear{
+    clear: both;
+}
+.float-left{
+    float: left;
+}
+.float-right{
+    float: right;
+}
 
+.click{
+    cursor: pointer;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.click:hover{
+    opacity: 0.8;
+}
+.click:active{
+    opacity: 0.6;
+}
 
+.not-click{
+    cursor: no-drop;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    opacity: 0.4;
+}
 
+.select-none{ /*禁止复制*/
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 
+.hide{
+    display: none !important;
+}
+.opacity-0{
+    opacity: 0;
+}

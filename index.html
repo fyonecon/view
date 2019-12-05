@@ -1,24 +1,25 @@
+
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>loading...</title>
     <link rel="icon" href="public/img/favicon.ico" type="image/x-icon">
     <meta name="robots" content="noindex, nofollow"/>
-    <meta name="keywords" content=""/>
+    <meta name="keywords" content=" "/>
     <meta name="description" content="单页应用-模块化、组件化框架-view。强烈建议部署在CDN容器里。Github：https://github.com/fyonecon/view"/>
 
-    <script id="depend-js">
+    <script id="depend-js" class=" ">
         let time_start  = Math.floor((new Date()).getTime());  // ms。开始载入外部文件的时间戳
         let time_loaded = 0;  // ms。框架载入完成的时间戳
         let time_error  = 0;  // ms。框架出错的时间戳
         (function () { // 同步载入核心依赖js，完成框架解析
-            var file_url = ""; // 自定义
-            var depend_file = "//cdnaliyun.oss-cn-hangzhou.aliyuncs.com/view/"; // 自定义
+            var config_file = ""; // 自定义
+            var depend_file = ""; // 自定义
             var js_src_array = [ // 不可更改
-                file_url + "config/config.js",
+                config_file + "config/config.js",
                 depend_file + "depend/view.js",
                 depend_file + "depend/depend.js",
             ];
@@ -52,10 +53,10 @@
     </script>
 
 </head>
-<body class="body">
+<body class="body  " id=" ">
 <!--start-->
 <!--inject content-->
-<div class="depend" id="depend"></div>
+<div class="depend  " id="depend"></div>
 <!--loading show-->
 <div class="loading-div" id="loading-div"></div>
 <!--end-->

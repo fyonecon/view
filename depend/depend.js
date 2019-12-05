@@ -3,7 +3,7 @@
 /*2019/9/12/9:55*/
 
 // 原生依赖
-const index_load = {
+const depend_load_file = {
     "index_js": [
         "depend/com-ajax.js",
         "config/pages.js",
@@ -72,13 +72,13 @@ const index_load = {
                 return null;
             }
         },
-        "page_file": function (pages_index) {  // 添加页面js、css资源文件
+        "pages_load_file": function (pages_index) {  // 添加页面js、css资源文件
 
             if (pages_index === null){
                 console.log("pages参数好像未定义，pages.js数组参数找不到,页面和框架数据将不能渲染");
 
                 setTimeout(function () {
-                    window.location.replace(route_default);
+                    window.location.replace(config.route_default);
                 }, 1000);
 
                 //window.location.replace(route_404);  // 则进入默认页
@@ -86,19 +86,19 @@ const index_load = {
             }
 
             let head = document.head || document.getElementsByTagName("head")[0];
-            let file = pages[pages_index].file[0];
+            let file = pages_load_file.pages_model_file[pages_index].file[0];
             let had_onload = 0;
 
             for (let i=0; i<file.css.length; i++){
                 let link = document.createElement('link');
-                link.setAttribute("href", file_url + file.css[i] +"?"+ page_time);
+                link.setAttribute("href", config.file_url + file.css[i] +"?"+ config.page_time);
                 link.setAttribute("rel", "stylesheet");
                 head.appendChild(link);
             }
             for (let i=0; i<file.js.length; i++){
 
                 let script = document.createElement("script");
-                script.setAttribute("src", file_url + file.js[i] +"?"+ page_time);
+                script.setAttribute("src", config.file_url + file.js[i] +"?"+ config.page_time);
                 head.appendChild(script);
 
                 script.onload = function () {
@@ -113,7 +113,7 @@ const index_load = {
         },
         "page_all_js_has": function () {  // 页面全部js加载完执行
             view.log("View Framework is Running.");
-            view.log("Files Cache_time = "+cache_time +"s");
+            view.log("Files Cache_time = "+config.cache_time +"s");
             document.getElementById("loading-div").classList.add("hide");
             time_loaded = Math.floor((new Date()).getTime());
             let view_loaded_time = time_loaded - time_start;
@@ -121,23 +121,23 @@ const index_load = {
 
                 let head = document.head || document.getElementsByTagName("head")[0];
                 let script = document.createElement("script");
-                script.setAttribute("src", file_url + "config/page_loaded.js?"+page_time);
+                script.setAttribute("src", config.file_url + "config/page_loaded.js?"+config.page_time);
                 head.appendChild(script);
 
                 let page = depend.get_url_param("", "route");
 
-                start_this_page([view_loaded_time, "框架解析完成，用时"+view_loaded_time+"ms", "开始执行"+page+"页面数据>>"]);
+                page_data_init([view_loaded_time, "框架解析完成，用时"+view_loaded_time+"ms", "开始执行"+page+"页面数据>>"]);
 
             }catch (e) {
-                console.log("start_this_page()" + "页面起始模块函数未定义，但是此函数可忽略。");
+                console.log("page_data_init()" + "页面起始模块函数未定义，但是此函数可忽略。");
             }
         },
 
     };
 
     // 校验文件引入参数是否已经存在，不存在就不需要解析框架
-    if( typeof time_start === "undefined" || typeof file_url === "undefined" || typeof page_url === "undefined" || typeof page_time === "undefined" ){
-        console.log("参数未定义：%s，框架产生了异步时差，需要决解框架Bug。5s秒后将重试网页。", [time_start, file_url, page_url, page_time]);
+    if( typeof time_start === "undefined" || typeof config.file_url === "undefined" || typeof config.page_url === "undefined" || typeof config.page_time === "undefined" ){
+        console.log("参数未定义：%s，框架产生了异步时差，需要决解框架Bug。5s秒后将重试网页。", [time_start, config.file_url, config.page_url, config.page_time]);
         setTimeout(function () {
             window.location.reload();
         }, 5000);
@@ -151,24 +151,24 @@ const index_load = {
         // 首先导入pages.js文件
         let head = document.head || document.getElementsByTagName("head")[0];
         let onload = 0;
-        for (let i=0; i<index_load.index_js.length; i++){
+        for (let i=0; i<depend_load_file.index_js.length; i++){
             let pages_script = document.createElement("script");
-            pages_script.setAttribute("src", file_url + index_load.index_js[i]+"?" + page_time);
+            pages_script.setAttribute("src", config.file_url + depend_load_file.index_js[i]+"?" + config.page_time);
             head.appendChild(pages_script);
 
             pages_script.onload = function () {
                 onload++;
-                if (onload === index_load.index_js.length) {
+                if (onload === depend_load_file.index_js.length) {
                     // 公共js加载完成后开始加载页面js
 
                     new Promise(function(resolve, reject) {
 
                         new Promise(function(_resolve, _reject) {  // 处理页面路由
                             page_name = depend.get_url_param("", "route");
-                            for (let i=0; i<pages.length; i++){ // 获取真正文件路径名
-                                if (pages[i].route === page_name){
-                                    _file = page_url + "pages/" + pages[i].file_path + "?"+page_time;
-                                    document.getElementsByTagName("title")[0].innerHTML = pages[i].title;
+                            for (let i=0; i<pages_load_file.pages_model_file.length; i++){ // 获取真正文件路径名
+                                if (pages_load_file.pages_model_file[i].route === page_name){
+                                    _file = config.page_url + "pages/" + pages_load_file.pages_model_file[i].file_path + "?"+config.page_time;
+                                    document.getElementsByTagName("title")[0].innerHTML = pages_load_file.pages_model_file[i].title;
                                     pages_index = i;
                                 }
                             }
@@ -177,7 +177,7 @@ const index_load = {
                                     console.log("页面没有正确路由#route=xxx，将进入默认页面。");
                                     time_error = Math.floor((new Date()).getTime());
                                     setTimeout(function () {
-                                        window.location.replace(route_default);  // 则进入默认页
+                                        window.location.replace(config.route_default);  // 则进入默认页
                                     },0);
                                     _resolve();
                                 }else{
@@ -216,22 +216,22 @@ const index_load = {
                         let had_onload = 0;
 
                         // 页面渲染完毕，开始执行公共css、js引入
-                        for (let i=0; i<page_public_file.css.length; i++){
+                        for (let i=0; i<pages_load_file.pages_public_file.css.length; i++){
                             let link = document.createElement('link');
-                            link.setAttribute("href", file_url + page_public_file.css[i] + "?" + page_time);
+                            link.setAttribute("href", config.file_url + pages_load_file.pages_public_file.css[i] + "?" + config.page_time);
                             link.setAttribute("rel", "stylesheet");
                             head.appendChild(link);
                         }
-                        for (let i=0; i<page_public_file.js.length; i++){
+                        for (let i=0; i<pages_load_file.pages_public_file.js.length; i++){
                             let script = document.createElement("script");
-                            script.setAttribute("src", file_url + page_public_file.js[i] + "?" + page_time);
+                            script.setAttribute("src", config.file_url + pages_load_file.pages_public_file.js[i] + "?" + config.page_time);
                             head.appendChild(script);
 
                             script.onload = function () {
                                 had_onload++;
-                                if (had_onload === page_public_file.js.length) {
+                                if (had_onload === pages_load_file.pages_public_file.js.length) {
                                     // 公共js加载完成后开始加载页面js
-                                    depend.page_file(pages_index);
+                                    depend.pages_load_file(pages_index);
                                 }
                             };
 

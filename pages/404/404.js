@@ -10,7 +10,7 @@ function run_time() {
 
 
 
-function start_this_page(info) {
+function page_data_init(info) { // 此页面模块起始
     view.log(info);
 
     run_time();

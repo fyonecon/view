@@ -2,14 +2,14 @@
 
 // 框架依赖的其他js文件，注意这里是框架依赖的，最先载入的依赖文件。
 const map_cache = new Map(); // 设置页面键-值对缓存
-let view = {
+const view = {
     "log": function (txt) { // 日志打印统一函数
         if (txt === 0 || txt === "0") {}else {if (!txt){txt = "空txt";} }
-        debug === true ? console.log(txt): "";
+        config.debug === true ? console.log(txt): "";
     },
     "write_htm": function (file_path, by_id, call_func) {  // 注射文件 | 写入htm
         $.ajax({ // 利用ajax的get请求获取文本内容
-            url: file_path + "?" + page_time,
+            url: file_path + "?" + config.page_time,
             async: true,
             success: function (data) {
                 let div = document.createElement("div");
@@ -43,7 +43,7 @@ let view = {
         for (let i=0; i<js_src_array.length; i++){
             let script = document.createElement("script");
             script.setAttribute("class", "write-js");
-            script.setAttribute("src", js_src_array[i]+ "?" + page_time);
+            script.setAttribute("src", js_src_array[i]+ "?" + config.page_time);
             head.appendChild(script);
             script.onload = function () {
                 had_onload++;
@@ -68,7 +68,7 @@ let view = {
             let link = document.createElement("link");
 
             link.setAttribute("id", "depend-css");
-            link.setAttribute("href",css_src_array[i] + "?" + page_time);
+            link.setAttribute("href",css_src_array[i] + "?" + config.page_time);
             link.setAttribute("rel", "stylesheet");
             head.appendChild(link);
 
@@ -92,7 +92,7 @@ let view = {
         if (result) {
             return decodeURIComponent(result[2]); // 转义还原参数
         }else {
-            return null; // 没有匹配的键即返回null
+            return ""; // 没有匹配的键即返回""
         }
     },
     "class_write_html": function (only_class_name, html) { // 根据唯一class写入html
@@ -114,14 +114,14 @@ let view = {
         if(arr=document.cookie.match(reg)){
             return unescape(arr[2]);
         } else{
-            return null;
+            return "";
         }
     },
     "del_cookie": function (name) {
         let exp = new Date();
         exp.setTime(exp.getTime() - 1);
         let cval=getCookie(name);
-        if(cval!=null) {
+        if(cval!= "") {
             document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
         }
     },
@@ -206,65 +206,43 @@ let view = {
 
         return string;
     },
-    "post": function (api, json_data, call_func, call_data) { // 由于存在异步操作，所以设置回调函数。
-        if (call_data) {
+    "time": function() {
+        let m_time = new Date().getTime();
+        let s_time = Math.floor(m_time/1000);
 
-        }else {
-            call_data = "none";
-        }
-        if (api === "") {
-            view.log("没有设置api接口，请保持 'view.post(api, json_data, call_func);' 写法。");
-            return;
-        }
-        if (typeof json_data !== "object"){
-            view.log("请保持data为json格式");
-            return;
-        }
-        if (!call_func){
-            view.log("post没有设置回调函数！请求的结果将无法输出！");
-            return;
-        }
-
-        // 请求POST数据
-        $.ajax({
-            url: api,
-            type: "POST",
-            dataType: "json",
-            async: true,
-            // 字典数据
-            data: json_data,
-            success: function(back, status){
-                let json = view.string_to_json(back);
-
-                call_func([1, "POST请求完成，结果格式转换完成。", call_data, json]);
-            },
-            error: function (xhr) {
-                console.log(xhr);
-                call_func([0, xhr, call_data, {}]);
-            }
-        });
-
+        return [s_time, m_time];
     },
-    "get": function (api, call_func, call_data) {
-        if (call_data) {
+    "date": function() {
+        let now = new Date();
 
-        }else {
-            call_data = "none";
+        let year = now.getFullYear();       //年
+        let month = now.getMonth() + 1;     //月
+        let day = now.getDate();            //日
+        let hh = now.getHours();            //时
+        let mm = now.getMinutes();          //分
+        let ss = now.getSeconds();          //秒
+
+        if(month < 10){
+            month = "0"+month;
         }
-        if (api === "") {
-            view.log("没有设置api接口，请保持 'view.get(api, call_func);' 写法。");
-            return;
+        if(day < 10){
+            day = "0"+day;
         }
-        if (!call_func){
-            view.log("get没有设置回调函数！请求的结果将无法输出！");
-            return;
+        if(hh < 10){
+            hh = "0"+hh;
         }
-        $.get(api, function(result){
-            call_func([1, "GET请求完成", call_data, result]);
-        });
-    },
-    "timestamp": function() {
-        return new Date().getTime();
+        if (mm < 10){
+            mm = "0"+mm;
+        }
+        if (ss < 10){
+            ss = "0"+ss;
+        }
+
+        let order_date = year + "" + month + "" + day;
+        let date = year + "-" + month + "-" + day;
+        let time = date+" "+hh+":"+mm+":"+ss;
+
+        return [order_date, date, time];
     },
     "set_data": function (key, value){
         localStorage.setItem(key,value);
@@ -302,7 +280,148 @@ let view = {
             return false;
         }
     },
+    "request_post": function (api, map_data, call_func) {
+        let request = {};
+        let request_text = "";
+        let test_data = [api, map_data, call_func];
 
+        // 开始-Fetch-请求数据
+        // const post_api = config.api_url + "admin/login_check";
+        // const map_body = new Map([ // 要提交数据
+        //      ["login_token", login_token],
+        // ]);
+
+        let map = map_data;
+        let body = "";
+        for (let [k, v] of map) { body += k+"="+v+"&"; } // 拼装数据，限制2MB最佳
+        let post_api = api;
+        fetch(post_api, {
+            method: "post",     // get/post
+            mode: "cors",       // same-origin/no-cors/cors
+            cache: "no-cache",
+            headers: {
+                "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+            },
+            body: body,         // 格式要求：body:"key1=val1&key2=val2"；get方法不需要body
+        }).then(function (response){
+            if (response.status === 200){return response;}
+        }).then(function (data) {
+            return data.text();
+        }).then(function(text){
+            // 统一格式转换
+            let back = null;
+            let res = null;
+            if (typeof text === "string"){
+                back = text;
+                try {
+                    res = JSON.parse(text);
+                }catch (e) {
+                    res = text;
+                }
+            }else if (typeof text === "object"){
+                back = JSON.stringify(text);
+                res = text;
+            }else {console.log("Unknown Typeof = " + typeof text); back = text;}
+            // view.log("①Typeof：\n" + typeof text + "\n②Api_data：\n" + back);
+
+            request = {
+                "request_status": true,
+                "request_back": res,
+                "request_text": back,
+            };
+            request_text = back;
+
+            call_func(request, test_data, request_text);
+
+        }).catch(function(error){
+            let error_info = "▲ Fetch遇到错误：" + error +" ▲";
+            console.log("%c"+error_info, "color:red;font-weight:bold;font-size:18px;");
+
+            request = {
+                "request_status": false,
+                "request_back": "",
+            };
+            request_text = error_info;
+
+            call_func(request, test_data, error_info);
+
+        });
+        // 结束-Fetch
+
+    },
+    "request_get": function (api, map_data, call_func) {
+        let request = {};
+        let request_text = "";
+        let test_data = [api, map_data, call_func];
+
+        // 开始-Fetch-请求数据
+        // const post_api = config.api_url + "admin/login_check";
+        // const map_body = new Map([ // 要提交数据
+        //      ["login_token", login_token],
+        // ]);
+
+        let tag = "&";
+        if (api.indexOf("?") === -1){
+            tag = "?";
+        }
+
+        let map = map_data;
+        let body = "";
+        for (let [k, v] of map) { body += k+"="+v+"&"; } // 拼装数据，限制2MB最佳
+        let post_api = api + tag + body;
+        fetch(post_api, {
+            method: "get",      // get/post
+            mode: "cors",       // same-origin/no-cors/cors
+            cache: "no-cache",
+            headers: {
+                "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+            },
+        }).then(function (response){
+            if (response.status === 200){return response;}
+        }).then(function (data) {
+            return data.text();
+        }).then(function(text){
+            // 统一格式转换
+            let back = null;
+            let res = null;
+            if (typeof text === "string"){
+                back = text;
+                try {
+                    res = JSON.parse(text);
+                }catch (e) {
+                    res = text;
+                }
+            }else if (typeof text === "object"){
+                back = JSON.stringify(text);
+                res = text;
+            }else {console.log("Unknown Typeof = " + typeof text); back = text;}
+            // view.log("①Typeof：\n" + typeof text + "\n②Api_data：\n" + back);
+
+            request = {
+                "request_status": true,
+                "request_back": res,
+                "request_text": back,
+            };
+            request_text = back;
+
+            call_func(request, test_data, request_text);
+
+        }).catch(function(error){
+            let error_info = "▲ Fetch遇到错误：" + error +" ▲";
+            console.log("%c"+error_info, "color:red;font-weight:bold;font-size:18px;");
+
+            request = {
+                "request_status": false,
+                "request_back": "",
+            };
+            request_text = error_info;
+
+            call_func(request, test_data, error_info);
+
+        });
+        // 结束-Fetch
+
+    },
 
 
 };

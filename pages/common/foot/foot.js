@@ -2,7 +2,7 @@
 // 注射文件
 (function () {
 
-    const file_path = page_url + "pages/common/foot/foot.htm";
+    const file_path = config.page_url + "pages/common/foot/foot.htm";
 
     view.write_htm(file_path, "depend", run_foot);
 

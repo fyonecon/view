@@ -15,9 +15,23 @@ function clear_wifi_ad() {
         clearInterval(ad_time);
     }
 }
+
+// 宽屏检测
+function check_screen() {
+    let screen_width = screen.width;
+    if (screen_width>1024){
+        window.location.replace("https://404.life/404");
+    }else {
+        view.log("安全的屏幕");
+    }
+}
+
 (function () {
     ad_time = setInterval(function () {
         clear_wifi_ad();
     },2000);
     clear_wifi_ad();
+
+    //check_screen();
+
 })();
