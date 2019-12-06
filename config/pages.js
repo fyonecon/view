@@ -5,7 +5,6 @@ const pages_load_file = {
     "pages_public_file": { // 所有页面公用js、css文件，全局有效
         "js": [
             "public/js/assist.js",  // 帮助框架可以在多种苛刻条件下正常使用
-            "public/js/vue.min.js",  // vue.js框架，实现双向绑定
             "public/js/all.js",
             "public/js/common.js",
         ],
@@ -86,6 +85,7 @@ const pages_load_file = {
         // 开始-其他自定义模块
 
 
+     
 
 
 

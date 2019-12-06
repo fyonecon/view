@@ -1,14 +1,15 @@
 /*主入口js，下面一般不要做修改。**/
 /*https://www.sojson.com/aaencode.html*/
-/*2019/9/12/9:55*/
+/*2019/9/12/9:55_2019/12/06/9:46*/
 
 // 原生依赖
 const depend_load_file = {
     "index_js": [
-        "depend/com-ajax.js",
+        "depend/com-jq.js",
+        "depend/com-vue.js",
         "config/pages.js",
         "depend/md5.js",
-        // 以上两个文件不需要更改位置
+        // 以上文件不需要更改位置
 
     ],
 };
@@ -153,6 +154,8 @@ const depend_load_file = {
         let onload = 0;
         for (let i=0; i<depend_load_file.index_js.length; i++){
             let pages_script = document.createElement("script");
+            pages_script.setAttribute("charset", "UTF-8");
+            pages_script.setAttribute("type", "text/javascript");
             pages_script.setAttribute("src", config.file_url + depend_load_file.index_js[i]+"?" + config.page_time);
             head.appendChild(pages_script);
 
@@ -186,33 +189,63 @@ const depend_load_file = {
                             },20);
                         }).then(function () {
 
-                            $.ajax({ // 利用ajax的get请求获取文本内容
-                                url: _file,
-                                async: true,
-                                success: function (data) {
-                                    let div = document.createElement("div");
-                                    div.innerHTML = data;
-                                    document.getElementById("depend").appendChild(div); // 将模块渲染入主文件
-
-                                    resolve();
+                            // 开始-Fetch-请求数据
+                            let post_api = _file;
+                            fetch(post_api, {
+                                method: "get",      // get/post
+                                mode: "cors",       // same-origin/no-cors/cors
+                                cache: "no-cache",
+                                headers: {
+                                    "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
                                 },
-                                error: function (error) {
-                                    console.log("缺失模块html文件=" + error);
-                                    console.log("1.非同源政策限制模块文件的拉取；2.本应用需要服务器环境（网络环境）；3.htm组件文件404。");
-                                    time_error = Math.floor((new Date()).getTime());
-                                    setTimeout(function () {
-                                        window.location.replace("help-htm.html");
-                                    },1000);
+                            }).then(function (response){
+                                if (response.status === 200){return response;}
+                            }).then(function (data) {
+                                return data.text();
+                            }).then(function(text){
+                                // 统一格式转换
+                                let back = null;
+                                let res = null;
+                                if (typeof text === "string"){
+                                    back = text;
+                                    try {
+                                        res = JSON.parse(text);
+                                    }catch (e) {
+                                        res = text;
+                                    }
+                                }else if (typeof text === "object"){
+                                    back = JSON.stringify(text);
+                                    res = text;
+                                }else {console.log("Unknown Typeof = " + typeof text); back = text;}
 
-                                    reject();
-                                }
+                                // 其他res
+                                let div = document.createElement("div");
+                                div.innerHTML = res;
+                                document.getElementById("depend").appendChild(div); // 将模块渲染入主文件
+
+                                resolve();
+
+                            }).catch(function(error){
+                                let error_info = "▲ Fetch遇到错误：" + error +" ▲";
+                                console.log("%c"+error_info, "color:red;font-weight:bold;font-size:18px;");
+
+                                // 其他
+                                console.log("缺失模块html文件=" + error);
+                                console.log("1.非同源政策限制模块文件的拉取；2.本应用需要服务器环境（网络环境）；3.htm组件文件404。");
+                                time_error = Math.floor((new Date()).getTime());
+                                setTimeout(function () {
+                                    window.location.replace("help-htm.html");
+                                },1000);
+
+                                reject();
+
                             });
+                            // 结束-Fetch
 
                         });
 
                     }).then(function () {
 
-                        let head = document.head || document.getElementsByTagName("head")[0];
                         let had_onload = 0;
 
                         // 页面渲染完毕，开始执行公共css、js引入

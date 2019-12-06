@@ -8,29 +8,60 @@ const view = {
         config.debug === true ? console.log(txt): "";
     },
     "write_htm": function (file_path, by_id, call_func) {  // 注射文件 | 写入htm
-        $.ajax({ // 利用ajax的get请求获取文本内容
-            url: file_path + "?" + config.page_time,
-            async: true,
-            success: function (data) {
-                let div = document.createElement("div");
-                div.innerHTML = data;
-                document.getElementById(by_id).appendChild(div); // 将模块渲染入主文件
 
-                try {
-                    call_func(true);
-                }catch (e) {
-                    view.log("可选回调函数没有设置。");
-                }
+        // 开始-Fetch-请求数据
+        let post_api = file_path + "?" + config.page_time;
+        fetch(post_api, {
+            method: "get",      // get/post
+            mode: "cors",       // same-origin/no-cors/cors
+            cache: "no-cache",
+            headers: {
+                "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
             },
-            error: function (error) {
-                console.log("缺失模块htm文件=" + error);
+        }).then(function (response){
+            if (response.status === 200){return response;}
+        }).then(function (data) {
+            return data.text();
+        }).then(function(text){
+            // 统一格式转换
+            let back = null;
+            let res = null;
+            if (typeof text === "string"){
+                back = text;
                 try {
-                    call_func(false);
+                    res = JSON.parse(text);
                 }catch (e) {
-                    view.log("可选回调函数没有设置。");
+                    res = text;
                 }
+            }else if (typeof text === "object"){
+                back = JSON.stringify(text);
+                res = text;
+            }else {console.log("Unknown Typeof = " + typeof text); back = text;}
+
+            // 其他res
+            let div = document.createElement("div");
+            div.innerHTML = res;
+            document.getElementById(by_id).appendChild(div); // 将模块渲染入主文件
+
+            try {
+                call_func(true);
+            }catch (e) {
+                view.log("可选回调函数没有设置。");
             }
+
+        }).catch(function(error){
+            let error_info = "▲ Fetch遇到错误：" + error +" ▲";
+            console.log("%c"+error_info, "color:red;font-weight:bold;font-size:18px;");
+
+            // 其他
+            try {
+                call_func(false);
+            }catch (e) {
+                view.log("可选回调函数没有设置。");
+            }
+
         });
+        // 结束-Fetch
 
     },
     "write_js": function (js_src_array, call_func) { // 写入外部js
@@ -43,6 +74,8 @@ const view = {
         for (let i=0; i<js_src_array.length; i++){
             let script = document.createElement("script");
             script.setAttribute("class", "write-js");
+            script.setAttribute("charset", "UTF-8");
+            script.setAttribute("type", "text/javascript");
             script.setAttribute("src", js_src_array[i]+ "?" + config.page_time);
             head.appendChild(script);
             script.onload = function () {
@@ -296,7 +329,7 @@ const view = {
         for (let [k, v] of map) { body += k+"="+v+"&"; } // 拼装数据，限制2MB最佳
         let post_api = api;
         fetch(post_api, {
-            method: "post",     // get/post
+            method: "post",     // get/post/options
             mode: "cors",       // same-origin/no-cors/cors
             cache: "no-cache",
             headers: {
@@ -349,6 +382,80 @@ const view = {
         // 结束-Fetch
 
     },
+    "request_options": function (api, map_data, call_func) { // options会产生两次请求
+        let request = {};
+        let request_text = "";
+        let test_data = [api, map_data, call_func];
+
+        // 开始-Fetch-请求数据
+        // const post_api = config.api_url + "admin/login_check";
+        // const map_body = new Map([ // 要提交数据
+        //      ["login_token", login_token],
+        // ]);
+
+        let map = map_data;
+        let body = "";
+        for (let [k, v] of map) { body += k+"="+v+"&"; } // 拼装数据，限制2MB最佳
+        // let post_api = api;
+        let tag = "&";
+        if (api.indexOf("?") === -1){
+            tag = "?";
+        }
+        let post_api = api + tag + body;
+        fetch(post_api, {
+            method: "options",     // get/post/options
+            mode: "cors",       // same-origin/no-cors/cors
+            cache: "no-cache",
+            headers: {
+                "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+            },
+            body: body,         // 格式要求：body:"key1=val1&key2=val2"；get方法不需要body
+        }).then(function (response){
+            if (response.status === 200){return response;}
+        }).then(function (data) {
+            return data.text();
+        }).then(function(text){
+            // 统一格式转换
+            let back = null;
+            let res = null;
+            if (typeof text === "string"){
+                back = text;
+                try {
+                    res = JSON.parse(text);
+                }catch (e) {
+                    res = text;
+                }
+            }else if (typeof text === "object"){
+                back = JSON.stringify(text);
+                res = text;
+            }else {console.log("Unknown Typeof = " + typeof text); back = text;}
+            view.log("①Typeof：\n" + typeof text + "\n②Api_data：\n" + back);
+
+            request = {
+                "request_status": true,
+                "request_back": res,
+                "request_text": back,
+            };
+            request_text = back;
+
+            call_func(request, test_data, request_text);
+
+        }).catch(function(error){
+            let error_info = "▲ Fetch遇到错误：" + error +" ▲";
+            console.log("%c"+error_info, "color:red;font-weight:bold;font-size:18px;");
+
+            request = {
+                "request_status": false,
+                "request_back": "",
+            };
+            request_text = error_info;
+
+            call_func(request, test_data, error_info);
+
+        });
+        // 结束-Fetch
+
+    },
     "request_get": function (api, map_data, call_func) {
         let request = {};
         let request_text = "";
@@ -360,14 +467,13 @@ const view = {
         //      ["login_token", login_token],
         // ]);
 
+        let map = map_data;
+        let body = "";
+        for (let [k, v] of map) { body += k+"="+v+"&"; } // 拼装数据，限制2MB最佳
         let tag = "&";
         if (api.indexOf("?") === -1){
             tag = "?";
         }
-
-        let map = map_data;
-        let body = "";
-        for (let [k, v] of map) { body += k+"="+v+"&"; } // 拼装数据，限制2MB最佳
         let post_api = api + tag + body;
         fetch(post_api, {
             method: "get",      // get/post
