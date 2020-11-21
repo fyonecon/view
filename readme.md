@@ -17,7 +17,7 @@ v2.1.0
 
 ## 项目实际应用展示：代码完全托管与CND的应用的访问地址
 整个web端项目完全托管于CDN容器里面，速度贼快。
-http://cdn.meishid.cn/view-play/index.html
+https://cdnaliyun.oss-cn-hangzhou.aliyuncs.com/
 
 ## view框架应用的一个例子
 
