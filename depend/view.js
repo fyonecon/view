@@ -2,71 +2,49 @@
 
 // 框架依赖的其他js文件，注意这里是框架依赖的，最先载入的依赖文件。
 const map_cache = new Map(); // 设置页面键-值对缓存
-const view = {
+let view = {
     "log": function (txt) { // 日志打印统一函数
-        if (txt === 0 || txt === "0") {}else {if (!txt){txt = "空txt";} }
-        config.debug === true ? console.log(txt): "";
+        if (txt === 0 || txt === "0") {}else {if (!txt){txt = "空txt，-log";} }
+        debug === true ? console.log(JSON.stringify(txt)): "";
+    },
+    "error": function (txt) { // 日志打印统一函数
+        console.error(JSON.stringify(txt));
     },
     "write_htm": function (file_path, by_id, call_func) {  // 注射文件 | 写入htm
+        let that = this;
+        $.ajax({ // 利用ajax的get请求获取文本内容
+            url: file_path + "?" + page_time,
+            async: true,
+            success: function (data) {
+                let div = document.createElement("div");
+                div.classList.add("part-div");
+                div.classList.add("clear");
+                div.classList.add("part-div-" + that.js_rand(100000000, 9999999999));
+                div.setAttribute("data-view", that.js_rand(100000000, 9999999999));
+                div.innerHTML = data;
+                document.getElementById(by_id).appendChild(div); // 将模块渲染入主文件
 
-        // 开始-Fetch-请求数据
-        let post_api = file_path + "?" + config.page_time;
-        fetch(post_api, {
-            method: "get",      // get/post
-            mode: "cors",       // same-origin/no-cors/cors
-            cache: "no-cache",
-            headers: {
-                "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-            },
-        }).then(function (response){
-            if (response.status === 200){return response;}
-        }).then(function (data) {
-            return data.text();
-        }).then(function(text){
-            // 统一格式转换
-            let back = null;
-            let res = null;
-            if (typeof text === "string"){
-                back = text;
                 try {
-                    res = JSON.parse(text);
+                    call_func(true);
                 }catch (e) {
-                    res = text;
+                    that.log("可选回调函数没有设置。");
                 }
-            }else if (typeof text === "object"){
-                back = JSON.stringify(text);
-                res = text;
-            }else {console.log("Unknown Typeof = " + typeof text); back = text;}
-
-            // 其他res
-            let div = document.createElement("div");
-            div.innerHTML = res;
-            document.getElementById(by_id).appendChild(div); // 将模块渲染入主文件
-
-            try {
-                call_func(true);
-            }catch (e) {
-                view.log("可选回调函数没有设置。");
+            },
+            error: function (error) {
+                console.log("缺失模块htm文件=" + error);
+                try {
+                    call_func(false);
+                }catch (e) {
+                    that.log("可选回调函数没有设置。");
+                }
             }
-
-        }).catch(function(error){
-            let error_info = "▲ Fetch遇到错误：" + error +" ▲";
-            console.log("%c"+error_info, "color:red;font-weight:bold;font-size:18px;");
-
-            // 其他
-            try {
-                call_func(false);
-            }catch (e) {
-                view.log("可选回调函数没有设置。");
-            }
-
         });
-        // 结束-Fetch
 
     },
     "write_js": function (js_src_array, call_func) { // 写入外部js
+        let that = this;
         if (js_src_array.constructor !== Array){
-            view.log("js_src_array不是数组。");
+            that.log("js_src_array不是数组。");
             return;
         }
         let had_onload = 0;
@@ -74,9 +52,7 @@ const view = {
         for (let i=0; i<js_src_array.length; i++){
             let script = document.createElement("script");
             script.setAttribute("class", "write-js");
-            script.setAttribute("charset", "UTF-8");
-            script.setAttribute("type", "text/javascript");
-            script.setAttribute("src", js_src_array[i]+ "?" + config.page_time);
+            script.setAttribute("src", js_src_array[i]);
             head.appendChild(script);
             script.onload = function () {
                 had_onload++;
@@ -84,15 +60,16 @@ const view = {
                     try {
                         call_func(true);
                     }catch (e) {
-                        view.log("可选回调函数没有设置。");
+                        that.log("可选回调函数没有设置。");
                     }
                 }
             };
         }
     },
     "write_css": function (css_src_array, call_func) { // 写入外部js
+        let that = this;
         if (css_src_array.constructor !== Array){
-            view.log("css_src_array不是数组。");
+            that.log("css_src_array不是数组。");
             return;
         }
         let had_onload = 0;
@@ -101,7 +78,7 @@ const view = {
             let link = document.createElement("link");
 
             link.setAttribute("id", "depend-css");
-            link.setAttribute("href",css_src_array[i] + "?" + config.page_time);
+            link.setAttribute("href",css_src_array[i] + "?" + page_time);
             link.setAttribute("rel", "stylesheet");
             head.appendChild(link);
 
@@ -111,7 +88,7 @@ const view = {
                 try {
                     call_func(true);
                 }catch (e) {
-                    view.log("可选回调函数没有设置。");
+                    that.log("可选回调函数没有设置。");
                 }
             }
         }
@@ -125,7 +102,7 @@ const view = {
         if (result) {
             return decodeURIComponent(result[2]); // 转义还原参数
         }else {
-            return ""; // 没有匹配的键即返回""
+            return ""; // 没有匹配的键即返回空
         }
     },
     "class_write_html": function (only_class_name, html) { // 根据唯一class写入html
@@ -154,7 +131,7 @@ const view = {
         let exp = new Date();
         exp.setTime(exp.getTime() - 1);
         let cval=getCookie(name);
-        if(cval!= "") {
+        if(cval!=null) {
             document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
         }
     },
@@ -168,6 +145,7 @@ const view = {
         return hex_md5(string);
     },
     "set_cache": function (_key, _value) { // key-value对 存入系统内存，页面关闭即key-value消失
+        let that = this;
 
         let state = 0;
         let msg = "";
@@ -193,9 +171,10 @@ const view = {
             ([key, value]) => map_cache.set(key, value)
         );
 
-        return [state, msg, content];
+        that.log([state, msg, content]);
     },
     "get_cache": function (_key) {
+        let that = this;
 
         let state = 0;
         let msg = "";
@@ -211,9 +190,11 @@ const view = {
             state = 0;
             msg = "null-cache";
         }
-        content = [_key, has];
+        content = [_key, has, state, msg];
 
-        return [state, msg, content];
+        that.log(content);
+
+        return has;
     },
     "string_to_json": function (string) { // 将string转化为json，注意，里面所有key的引号为双引号，否则浏览器会报错。
         let json;
@@ -239,43 +220,70 @@ const view = {
 
         return string;
     },
-    "time": function() {
-        let m_time = new Date().getTime();
-        let s_time = Math.floor(m_time/1000);
+    "post": function (api, json_data, call_func, call_data) { // 由于存在异步操作，所以设置回调函数。
+        let that = this;
+        if (call_data) {
 
-        return [s_time, m_time];
+        }else {
+            call_data = "none";
+        }
+        if (api === "") {
+            that.log("没有设置api接口，请保持 'view.post(api, json_data, call_func);' 写法。");
+            return;
+        }
+        if (typeof json_data !== "object"){
+            that.log("请保持data为json格式");
+            return;
+        }
+        if (!call_func){
+            that.log("post没有设置回调函数！请求的结果将无法输出！");
+            return;
+        }
+
+        // 请求POST数据
+        $.ajax({
+            url: api,
+            type: "POST",
+            dataType: "json",
+            async: true,
+            // 字典数据
+            data: json_data,
+            success: function(back, status){
+                let json = view.string_to_json(back);
+
+                call_func([1, "POST请求完成，结果格式转换完成。", call_data, json]);
+            },
+            error: function (xhr) {
+                console.log(xhr);
+                call_func([0, xhr, call_data, {}]);
+            }
+        });
+
     },
-    "date": function() {
-        let now = new Date();
+    "get": function (api, call_func, call_data) {
+        let that = this;
+        if (call_data) {
 
-        let year = now.getFullYear();       //年
-        let month = now.getMonth() + 1;     //月
-        let day = now.getDate();            //日
-        let hh = now.getHours();            //时
-        let mm = now.getMinutes();          //分
-        let ss = now.getSeconds();          //秒
-
-        if(month < 10){
-            month = "0"+month;
+        }else {
+            call_data = "none";
         }
-        if(day < 10){
-            day = "0"+day;
+        if (api === "") {
+            that.log("没有设置api接口，请保持 'view.get(api, call_func);' 写法。");
+            return;
         }
-        if(hh < 10){
-            hh = "0"+hh;
+        if (!call_func){
+            that.log("get没有设置回调函数！请求的结果将无法输出！");
+            return;
         }
-        if (mm < 10){
-            mm = "0"+mm;
-        }
-        if (ss < 10){
-            ss = "0"+ss;
-        }
-
-        let order_date = year + "" + month + "" + day;
-        let date = year + "-" + month + "-" + day;
-        let time = date+" "+hh+":"+mm+":"+ss;
-
-        return [order_date, date, time];
+        $.get(api, function(result){
+            call_func([1, "GET请求完成", call_data, result]);
+        });
+    },
+    "timestamp": function() {
+        return new Date().getTime();
+    },
+    "js_rand": function (min, max) { // [min, max]
+        return Math.floor(Math.random() * (max - min + 1) + min);
     },
     "set_data": function (key, value){
         localStorage.setItem(key,value);
@@ -294,7 +302,7 @@ const view = {
         if (value){
             return value;
         }else {
-            return null;
+            return "";
         }
     },
     "del_data": function (key) {
@@ -313,220 +321,115 @@ const view = {
             return false;
         }
     },
-    "request_post": function (api, map_data, call_func) {
-        let request = {};
-        let request_text = "";
-        let test_data = [api, map_data, call_func];
+    "time": function () {
+        return new Date();
+    }, // 时间戳
+    "time_ms": function(){
+        return (new Date()).getTime();
+    }, // 时间戳
+    "get_date": function () {
+        let t=new Date();
+        let seconds = t.getSeconds(); if (seconds<10){seconds = "0"+seconds;}
+        let minutes = t.getMinutes(); if (minutes<10){seconds = "0"+minutes;}
+        let hour = t.getHours(); if (hour<10){hour = "0"+hour;}
+        let day = t.getDate(); if (day<10){day = "0"+day;}
+        let month = t.getMonth() + 1; if (month<10){month = "0"+month;}
+        let year = t.getFullYear();
 
-        // 开始-Fetch-请求数据
-        // const post_api = config.api_url + "admin/login_check";
-        // const map_body = new Map([ // 要提交数据
-        //      ["login_token", login_token],
-        // ]);
-
-        let map = map_data;
-        let body = "";
-        for (let [k, v] of map) { body += k+"="+v+"&"; } // 拼装数据，限制2MB最佳
-        let post_api = api;
-        fetch(post_api, {
-            method: "post",     // get/post/options
-            mode: "cors",       // same-origin/no-cors/cors
-            cache: "no-cache",
-            headers: {
-                "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-            },
-            body: body,         // 格式要求：body:"key1=val1&key2=val2"；get方法不需要body
-        }).then(function (response){
-            if (response.status === 200){return response;}
-        }).then(function (data) {
-            return data.text();
-        }).then(function(text){
-            // 统一格式转换
-            let back = null;
-            let res = null;
-            if (typeof text === "string"){
-                back = text;
-                try {
-                    res = JSON.parse(text);
-                }catch (e) {
-                    res = text;
-                }
-            }else if (typeof text === "object"){
-                back = JSON.stringify(text);
-                res = text;
-            }else {console.log("Unknown Typeof = " + typeof text); back = text;}
-            // view.log("①Typeof：\n" + typeof text + "\n②Api_data：\n" + back);
-
-            request = {
-                "request_status": true,
-                "request_back": res,
-                "request_text": back,
-            };
-            request_text = back;
-
-            call_func(request, test_data, request_text);
-
-        }).catch(function(error){
-            let error_info = "▲ Fetch遇到错误：" + error +" ▲";
-            console.log("%c"+error_info, "color:red;font-weight:bold;font-size:18px;");
-
-            request = {
-                "request_status": false,
-                "request_back": "",
-            };
-            request_text = error_info;
-
-            call_func(request, test_data, error_info);
-
-        });
-        // 结束-Fetch
-
+        return [
+            year+""+month+""+day+""+hour+""+minutes+""+seconds,
+            year+"-"+month+"-"+day+" "+hour+":"+minutes+":"+seconds,
+        ];
     },
-    "request_options": function (api, map_data, call_func) { // options会产生两次请求
-        let request = {};
-        let request_text = "";
-        let test_data = [api, map_data, call_func];
+    "alert_txt": function (txt, timeout, clear) { // 文字提醒弹窗。(文字，超时时间，清除所有提示<仅限不为long时>)
+        let that = this;
 
-        // 开始-Fetch-请求数据
-        // const post_api = config.api_url + "admin/login_check";
-        // const map_body = new Map([ // 要提交数据
-        //      ["login_token", login_token],
-        // ]);
-
-        let map = map_data;
-        let body = "";
-        for (let [k, v] of map) { body += k+"="+v+"&"; } // 拼装数据，限制2MB最佳
-        // let post_api = api;
-        let tag = "&";
-        if (api.indexOf("?") === -1){
-            tag = "?";
+        // alert_txt层级形态显示
+        let alert_txt_index = that.get_cache("alert_txt_index")*1;
+        if (!alert_txt_index){
+            alert_txt_index = 8000000;
+        }else {
+            alert_txt_index = alert_txt_index + 10;
         }
-        let post_api = api + tag + body;
-        fetch(post_api, {
-            method: "options",     // get/post/options
-            mode: "cors",       // same-origin/no-cors/cors
-            cache: "no-cache",
-            headers: {
-                "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-            },
-            body: body,         // 格式要求：body:"key1=val1&key2=val2"；get方法不需要body
-        }).then(function (response){
-            if (response.status === 200){return response;}
-        }).then(function (data) {
-            return data.text();
-        }).then(function(text){
-            // 统一格式转换
-            let back = null;
-            let res = null;
-            if (typeof text === "string"){
-                back = text;
-                try {
-                    res = JSON.parse(text);
-                }catch (e) {
-                    res = text;
+        that.set_cache("alert_txt_index", alert_txt_index);
+
+        that.log(["alert_txt", txt, timeout, clear, alert_txt_index]);
+        let class_name = "alert_txt_" + alert_txt_index;
+
+        let div = '<div class="'+class_name+' div-alert_txt select-none" style="z-index:'+alert_txt_index+';">' +
+            '   <div class="div-alert_txt-text" style="z-index:'+ (alert_txt_index + 800000) +';">'+ txt +'</div>' +
+            '   <div class="div-alert_txt-bg" style="z-index:'+ (alert_txt_index + 700000)  +';"></div>' +
+            '   <div class="clear"></div>' +
+            '</div>';
+        $(".depend").append(div);
+
+        if (!timeout || timeout < 200 || timeout > 60*60*1000){ // 默认
+            timeout = 2500;
+            setTimeout(function () {
+                $("." + class_name).remove();
+            }, timeout);
+        }else if (timeout === "long"){ // 一直显示
+            that.log("使用long参数值，则会一直显示");
+        }else{
+            setTimeout(function () {
+                $("." + class_name).remove();
+                if (clear === "clear" || clear === "remove"){ // 清除所有提示框
+                    that.log("清除所有提示框，clear=" + clear);
+                    $(".div-alert_txt").remove();
                 }
-            }else if (typeof text === "object"){
-                back = JSON.stringify(text);
-                res = text;
-            }else {console.log("Unknown Typeof = " + typeof text); back = text;}
-            view.log("①Typeof：\n" + typeof text + "\n②Api_data：\n" + back);
-
-            request = {
-                "request_status": true,
-                "request_back": res,
-                "request_text": back,
-            };
-            request_text = back;
-
-            call_func(request, test_data, request_text);
-
-        }).catch(function(error){
-            let error_info = "▲ Fetch遇到错误：" + error +" ▲";
-            console.log("%c"+error_info, "color:red;font-weight:bold;font-size:18px;");
-
-            request = {
-                "request_status": false,
-                "request_back": "",
-            };
-            request_text = error_info;
-
-            call_func(request, test_data, error_info);
-
-        });
-        // 结束-Fetch
-
+            }, timeout);
+        }
     },
-    "request_get": function (api, map_data, call_func) {
-        let request = {};
-        let request_text = "";
-        let test_data = [api, map_data, call_func];
-
-        // 开始-Fetch-请求数据
-        // const post_api = config.api_url + "admin/login_check";
-        // const map_body = new Map([ // 要提交数据
-        //      ["login_token", login_token],
-        // ]);
-
-        let map = map_data;
-        let body = "";
-        for (let [k, v] of map) { body += k+"="+v+"&"; } // 拼装数据，限制2MB最佳
-        let tag = "&";
-        if (api.indexOf("?") === -1){
-            tag = "?";
+    "check_phone": function (phone) {
+        let that = this;
+        let reg = /^1[3|4|5|6|7|8|9][0-9]{9}$/; //验证规则
+        let res = reg.test(phone); // true、false
+        if(res === false){
+            view.log("不是手机号：" + phone);
+            return false;
+        }else {
+            view.log("是手机号：" + phone);
+            return true;
         }
-        let post_api = api + tag + body;
-        fetch(post_api, {
-            method: "get",      // get/post
-            mode: "cors",       // same-origin/no-cors/cors
-            cache: "no-cache",
-            headers: {
-                "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-            },
-        }).then(function (response){
-            if (response.status === 200){return response;}
-        }).then(function (data) {
-            return data.text();
-        }).then(function(text){
-            // 统一格式转换
-            let back = null;
-            let res = null;
-            if (typeof text === "string"){
-                back = text;
-                try {
-                    res = JSON.parse(text);
-                }catch (e) {
-                    res = text;
+    },
+    "voice": function (read_txt, volume, loop) { // 自动语音朗读文字
+        let that = this;
+        that.log(["voice", read_txt, volume, loop]);
+
+        if (!volume*1){ // 默认半音量
+            volume = 0.5;
+        }else if (volume<0 || volume > 1) {
+            volume = 1;
+        }
+
+        if (!loop){ // 默认关闭循环
+            loop = false;
+        }
+
+        that.write_js([file_url + "static/js/mplayer.js"], function () {
+            // 文字生成语音源
+            let make_mp3 = "https://tts.baidu.com/text2audio?cuid=baike&lan=zh&ctp=1&spd=3&pdt=301&vol=9&rate=32&per=0&tex=" + encodeURI(read_txt);
+
+            // 文档https://github.com/haima16/MPlayer
+            let player = new MPlayer(make_mp3, {
+                loop: loop, // 循环 true or false
+                volume: volume, // 音量 [0, 1]
+                auto: true,
+                index: 1,
+                analyser: {
+                    size: 1024,
                 }
-            }else if (typeof text === "object"){
-                back = JSON.stringify(text);
-                res = text;
-            }else {console.log("Unknown Typeof = " + typeof text); back = text;}
-            // view.log("①Typeof：\n" + typeof text + "\n②Api_data：\n" + back);
-
-            request = {
-                "request_status": true,
-                "request_back": res,
-                "request_text": back,
+            });
+            player.onload = function() {
+                let the = this;
+                that.log("=开始播放=");
+                the.play();
             };
-            request_text = back;
-
-            call_func(request, test_data, request_text);
-
-        }).catch(function(error){
-            let error_info = "▲ Fetch遇到错误：" + error +" ▲";
-            console.log("%c"+error_info, "color:red;font-weight:bold;font-size:18px;");
-
-            request = {
-                "request_status": false,
-                "request_back": "",
+            player.onended = function() {
+                let the = this;
+                that.log("=播放完成=");
             };
-            request_text = error_info;
-
-            call_func(request, test_data, error_info);
-
         });
-        // 结束-Fetch
-
     },
 
 

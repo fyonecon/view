@@ -3,8 +3,7 @@
 * */
 
 
-function run_vue(info) {
-    view.log(info);
+function run_vue() {
     view.log("开始使用vue框架。");
 
     new Vue({
@@ -18,11 +17,12 @@ function run_vue(info) {
 
     view.class_write_html("ok", view.get_url_param("", "p1"))
 
+
 }
 
 
 
-function page_data_init() { // 此页面模块起始
+function start_this_page() {
     view.log("主框架解析完成，开始渲染模块页面 > >");
 
     run_vue();

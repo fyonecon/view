@@ -1,0 +1,204 @@
+/*自定义全局css，公用css*/
+
+body, html{
+    font-family: "Noto Sans Light" !important; /*默认思源黑体Apache开源协议字体*/
+}
+
+.body{
+    margin: 0;
+    font-size: 16px;
+    color: #f5f5f5;
+    line-height: 30px;
+    /*background-color: #333333;*/
+}
+
+.page-div{
+    width: 100%;
+    margin-top: 0px;
+}
+.part-div{
+    width: 100%;
+}
+
+/**/
+.float-left{
+    float: left;
+}
+.float-right{
+    float: right;
+}
+.center{
+    text-align: center;
+}
+
+/**/
+.radius-btn{
+    border-radius: 5px;
+}
+.radius-block{
+    border-radius: 10px;
+}
+
+/*字体大小*/
+.font-mini{
+    font-size: 14px;
+}
+.font-text{
+    font-size: 18px;
+}
+.font-title{
+    font-size: 22px;
+}
+.font-class{
+    font-size: 26px;
+}
+
+/**/
+.border-bottom{
+    border-bottom: 1px solid #cccccc;
+}
+.border-bottom:last-child{
+    border-bottom: 0px solid #cccccc;
+}
+
+/**/
+.red{
+    color: red;
+}
+.blue{
+    color: blue;
+}
+.yellow{
+    color: #EEC900;
+}
+.green{
+    color: green;
+}
+.black{
+    color: black;
+}
+.grey{
+    color: grey;
+}
+
+/**/
+.transform-90{ /*带动画旋转90°*/
+    transition: transform 0.5s;
+    transform: rotateZ(90deg);
+}
+.transform-180{
+    transition: transform 0.5s;
+    transform: rotateZ(180deg);
+}
+
+.transform-0{ /*还原位置*/
+    transition: transform 0.5s;
+    transform: rotateZ(0deg);
+}
+
+/**/
+@media only screen and (max-width: 300px) {
+    body:after{
+        width: 300px; height: 100%;
+        content:"页面宽度太小";
+        position:fixed; top: 0;
+        text-align: center;
+        font-size: 24px; color: white; line-height: 400px;
+        background: rgba(0,0,0,0.5);
+        cursor: not-allowed;
+        letter-spacing: 2px;
+        z-index: 999900000;
+    }
+}
+
+/**/
+::selection { /*复制时的选中样式，猛男粉红*/
+    color: #FCFCFC;
+    background: #CD5C5C;
+    outline: thick solid #FF0000;
+}
+::-moz-selection {
+    color: #FCFCFC;
+    background: #CD5C5C;
+}
+
+/**/
+ul{
+    padding-left: 0;
+}
+li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+
+/**/
+.click-none{
+    cursor: not-allowed;
+    user-select: none;
+}
+.click{
+    cursor: pointer;
+    user-select: none;
+}
+.click:active{
+    opacity: 0.6;
+}
+.click:hover{
+    opacity: 0.8;
+}
+
+.hover:hover{
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+/**/
+.select-none{ /*禁止复制*/
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.select-all{ /*复制任何*/
+    -moz-user-select: all;
+    -webkit-user-select: all;
+    -ms-user-select: all;
+    user-select: all;
+}
+.select-text{ /*可复制文字*/
+    -moz-user-select: text;
+    -webkit-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+.a-href{
+    padding: 0px 5px;
+    color: deepskyblue;
+}
+.a-href:hover{
+    text-decoration: underline;
+}
+.a-href:active{
+    color: skyblue;
+}
+.a-href:visited{
+    color: skyblue;
+}
+
+
+@media only screen and (max-width: 320px) {
+    .depend{
+        width: 320px;
+        overflow: hidden;
+    }
+}
+.depend{
+    min-height: 600px;
+}
+
+.div{
+    display: block;
+}
