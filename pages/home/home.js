@@ -328,6 +328,7 @@ function create_input(pre) { // 渲染模板
         delete_loading();
         write_tips_text('若浏览器阻止打开新标签，务必手动选择允许打开');
         make_new_qr(window.location.href, 200, 200, show_qr, "img-show_qr");
+        view.log("qr");
     }, 300);
 
 }

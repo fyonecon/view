@@ -16,10 +16,9 @@ const file_url        = index_file_url?index_file_url:"./";             // 资�
 const page_url        = index_file_url?index_file_url:"./";             // htm文件的服务器地址，因为使用了ajax请求，不能直接请求本地文件，可以全部放在CDN里面
 
 const cache_time      = 10000;            // 缓存时间：s
-const page_time       =  "cache"; //Math.floor((new Date()).getTime()/10000)*cache_time;  // 页面时间戳：x秒为资源单位，x秒（文件缓存周期）后刷新页面浏览器会改变资源文件的缓存
+const page_time       =  "cache" + cache_time; //Math.floor((new Date()).getTime()/10000)*cache_time;  // 页面时间戳：x秒为资源单位，x秒（文件缓存周期）后刷新页面浏览器会改变资源文件的缓存
 
 const api_url         = "https://xcx.ggvs.cn/chengzi/public/index.php/api/";  // api主地址
-
 const page_title      = " - ggvs.org";
 
 // 白名单refer域名
@@ -34,8 +33,12 @@ let refer = [
 ];
 
 // 自定义
-// 不需要登录使用的验证参数
+// App验证参数
 let app_class = "view_ggvs";
+let app_version = "v3.0.0";
+let app_name = "GGVS";
+let app_platform = "WebApp";
+
 // 登录用户使用的验证参数
 let app_token = "";
 let user_token = "";

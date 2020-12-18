@@ -92,5 +92,5 @@ function web_login() {
 function start_this_page() {
     view.log("主框架解析完成，开始渲染模块页面 > >");
 
-    must_user_token(web_login);
+    must_app_token(web_login);
 }

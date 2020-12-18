@@ -8,7 +8,7 @@ const index_load = {
         "depend/com-ajax.js",
         "config/pages.js",
         "depend/md5.js",
-        // 以上两个文件不需要更改位置
+        // 以上文件不需要更改位置
 
     ],
 };
