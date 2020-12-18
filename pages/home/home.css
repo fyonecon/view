@@ -54,3 +54,11 @@
     overflow-x: hidden;
     overflow-y: auto;
 }
+.div-time{
+    text-align: center;
+    font-size: 16px;
+    min-height: 44px;
+    line-height: 44px;
+    letter-spacing: 1px;
+    margin-top: 20px;
+}

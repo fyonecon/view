@@ -4,8 +4,8 @@
 .body{width: 100%; min-width: 300px;height: 100%;margin: 0;padding: 0;background: #f5f5f5; color: #f5f5f5;}
 .content{min-height: 900px; position: absolute; z-index: 100; left: 0; right: 0; top: 0;margin-right: auto; margin-left: auto;}
 .input-div{background: transparent;border-radius: 40px;width: calc(100% - 20px);margin-top: calc(3% + 50px);height: 50px; min-width: 300px; max-width: 640px; margin-left: auto; margin-right: auto;position: relative;}
-.select{height: calc(42px + 2px);width: 123px;font-size: 15px;color: #0078fe;letter-spacing: 0px;cursor: pointer;font-weight: 600;overflow: hidden;padding: 0 20px 0 8px;float: left;outline: none;border: 2px solid rgba(0,120,254,0.2);border-radius: 42px;background-color: rgba(255, 255, 255, 0.8); text-indent: 0px;box-shadow: 0 0 10px rgba(0,0,0,0.3);text-align: center; appearance: none;-webkit-appearance:none;-moz-appearance:none;}
-.input{height: 42px; line-height: 42px;width: calc(100% - 163px);letter-spacing: 1px;margin-left: 5px;font-size: 16px;color: #000000;padding: 0 15px;float: left;border-radius: 42px;background: rgba(255, 255, 255, 0.8);box-shadow: 0 0 10px rgba(0,0,0,0.3);outline:none;border: 2px solid rgba(0,120,254,0.2);}
+.select{height: calc(42px + 2px);width: 123px;font-size: 15px;color: #0078fe;letter-spacing: 0px;cursor: pointer;font-weight: 600;overflow: hidden;padding: 0 20px 0 8px;float: left;outline: none;border: 2px solid rgba(0,120,254,0.3);border-radius: 42px;background-color: rgba(255, 255, 255, 0.8); text-indent: 0px;box-shadow: 0 0 10px rgba(0,0,0,0.3);text-align: center; appearance: none;-webkit-appearance:none;-moz-appearance:none;}
+.input{height: 42px; line-height: 42px;width: calc(100% - 163px);letter-spacing: 1px;margin-left: 5px;font-size: 16px;color: #000000;padding: 0 15px;float: left;border-radius: 42px;background: rgba(255, 255, 255, 0.8);box-shadow: 0 0 10px rgba(0,0,0,0.3);outline:none;border: 2px solid rgba(0,120,254,0.3);}
 .search-style{}
 .clear{clear: both;}
 .hide{display: none !important;}
@@ -53,4 +53,12 @@
     -ms-overflow-style: none; /* IE 10+ */
     overflow-x: hidden;
     overflow-y: auto;
+}
+.div-time{
+    text-align: center;
+    font-size: 16px;
+    min-height: 44px;
+    line-height: 44px;
+    letter-spacing: 1px;
+    margin-top: 20px;
 }

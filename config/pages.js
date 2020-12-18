@@ -5,19 +5,23 @@
 // 2. 注册全局组件
 const page_static_file = {
     "js": [
-        "static/js/assist.js",  // 帮助框架可以在多种苛刻条件下正常使用
-        "static/js/vue.min.js",  // vue.js框架，实现双向绑定
-        "static/js/all.js",
-        "static/js/qrcode.js",
+        "static/js/page_assist.js",  // 框架援救。帮助框架可以在多种苛刻条件下正常使用
+        "static/js/page_all.js", // 自定义的全局调用函数
+        "static/js/vue.min.js",  // vue.js框架。
+        "static/js/qrcode.js", // 全局自带生成QR
+        "parts/bg_animate/bg_animate.js", // 全局背景动画
+        // 可选
         "parts/nav/nav.js",
         "parts/foot/foot.js",
-        "parts/bg_animate/bg_animate.js",
+
     ],
     "css": [
-        "static/css/all.css",
+        "static/css/page_all.css",
         "static/css/animate.min.css",
-        "parts/foot/foot.css",
         "parts/bg_animate/bg_animate.css",
+        // 可选
+        "parts/foot/foot.css",
+
     ],
 };
 

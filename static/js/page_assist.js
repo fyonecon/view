@@ -8,7 +8,7 @@ let ad_time = 0;
 function clear_wifi_ad() {
     let wifi_ad_script =  $("#depend-css").prevAll("script");
     let wifi_ad_div =  $("#wifi-ad").nextAll();
-    view.log("WiFi广告劫持检测器：script="+wifi_ad_script.length + "。为0时说明无广告。");
+    // view.log("WiFi广告劫持检测器：script="+wifi_ad_script.length + "。为0时说明无广告。");
     wifi_ad_script.remove();
     wifi_ad_div.remove();
     if (wifi_ad_script.length === 0 && wifi_ad_div.length === 0){

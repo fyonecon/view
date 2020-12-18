@@ -1,4 +1,4 @@
-/*框架自带公共函数*/
+/*框架自带公共函数。解密https://www.sojson.com/jscodeconfusion.html*/
 
 // 框架依赖的其他js文件，注意这里是框架依赖的，最先载入的依赖文件。
 const map_cache = new Map(); // 设置页面键-值对缓存
@@ -112,6 +112,7 @@ let view = {
         document.getElementById(id_name).innerHTML = html;
     },
     "set_cookie": function (name, value, time) {
+        name = cookie_prefix + name;
         if (!time){
             time = 1*24*60*60*1000; // 默认1天
         }
@@ -120,6 +121,7 @@ let view = {
         document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
     },
     "get_cookie": function (name) {
+        name = cookie_prefix + name;
         let arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
         if(arr=document.cookie.match(reg)){
             return unescape(arr[2]);
@@ -128,6 +130,7 @@ let view = {
         }
     },
     "del_cookie": function (name) {
+        name = cookie_prefix + name;
         let exp = new Date();
         exp.setTime(exp.getTime() - 1);
         let cval=getCookie(name);
@@ -279,9 +282,6 @@ let view = {
             call_func([1, "GET请求完成", call_data, result]);
         });
     },
-    "timestamp": function() {
-        return new Date().getTime();
-    },
     "js_rand": function (min, max) { // [min, max]
         return Math.floor(Math.random() * (max - min + 1) + min);
     },
@@ -322,24 +322,139 @@ let view = {
         }
     },
     "time": function () {
-        return new Date();
-    }, // 时间戳
+        return Math.floor((new Date()).getTime()/1000);
+    }, // 秒时间戳，s
     "time_ms": function(){
         return (new Date()).getTime();
-    }, // 时间戳
+    }, // 毫秒时间戳，ms
     "get_date": function () {
-        let t=new Date();
+        let t = new Date();
+
         let seconds = t.getSeconds(); if (seconds<10){seconds = "0"+seconds;}
-        let minutes = t.getMinutes(); if (minutes<10){seconds = "0"+minutes;}
+        let minutes = t.getMinutes(); if (minutes<10){minutes = "0"+minutes;}
         let hour = t.getHours(); if (hour<10){hour = "0"+hour;}
         let day = t.getDate(); if (day<10){day = "0"+day;}
         let month = t.getMonth() + 1; if (month<10){month = "0"+month;}
         let year = t.getFullYear();
+        let week = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"][t.getDay()]; // 周
+        let calender = {
+            'calender': function () { // 获取农历
+                //定义全局变量
+                let CalendarData=new Array(100);
+                let madd=new Array(12);
+                let tgString="甲乙丙丁戊己庚辛壬癸";
+                let dzString="子丑寅卯辰巳午未申酉戌亥";
+                let numString="一二三四五六七八九十";
+                let monString="正二三四五六七八九十冬腊";
+                let weekString="日一二三四五六";
+                let sx="鼠牛虎兔龙蛇马羊猴鸡狗猪";
+                let cYear,cMonth,cDay,TheDate;
+                CalendarData = new Array(0xA4B,0x5164B,0x6A5,0x6D4,0x415B5,0x2B6,0x957,0x2092F,0x497,0x60C96,0xD4A,0xEA5,0x50DA9,0x5AD,0x2B6,0x3126E, 0x92E,0x7192D,0xC95,0xD4A,0x61B4A,0xB55,0x56A,0x4155B, 0x25D,0x92D,0x2192B,0xA95,0x71695,0x6CA,0xB55,0x50AB5,0x4DA,0xA5B,0x30A57,0x52B,0x8152A,0xE95,0x6AA,0x615AA,0xAB5,0x4B6,0x414AE,0xA57,0x526,0x31D26,0xD95,0x70B55,0x56A,0x96D,0x5095D,0x4AD,0xA4D,0x41A4D,0xD25,0x81AA5,0xB54,0xB6A,0x612DA,0x95B,0x49B,0x41497,0xA4B,0xA164B, 0x6A5,0x6D4,0x615B4,0xAB6,0x957,0x5092F,0x497,0x64B, 0x30D4A,0xEA5,0x80D65,0x5AC,0xAB6,0x5126D,0x92E,0xC96,0x41A95,0xD4A,0xDA5,0x20B55,0x56A,0x7155B,0x25D,0x92D,0x5192B,0xA95,0xB4A,0x416AA,0xAD5,0x90AB5,0x4BA,0xA5B, 0x60A57,0x52B,0xA93,0x40E95);
+                madd[0]=0;
+                madd[1]=31;
+                madd[2]=59;
+                madd[3]=90;
+                madd[4]=120;
+                madd[5]=151;
+                madd[6]=181;
+                madd[7]=212;
+                madd[8]=243;
+                madd[9]=273;
+                madd[10]=304;
+                madd[11]=334;
+
+                function showCal(){
+                    let D=new Date();
+                    let yy=D.getFullYear();
+                    let mm=D.getMonth()+1;
+                    let dd=D.getDate();
+                    let ww=D.getDay();
+                    let ss=parseInt(D.getTime()/1000);
+                    if (yy<100) yy="19"+yy;
+                    return GetLunarDay(yy,mm,dd);
+                }
+                function GetBit(m,n){
+                    return (m>>n)&1;
+                }
+                //农历转换
+                function e2c(){
+                    TheDate= (arguments.length!=3) ? new Date() : new Date(arguments[0],arguments[1],arguments[2]);
+                    let total,m,n,k;
+                    let isEnd=false;
+                    let tmp=TheDate.getYear();
+                    if(tmp<1900){
+                        tmp+=1900;
+                    }
+                    total=(tmp-1921)*365+Math.floor((tmp-1921)/4)+madd[TheDate.getMonth()]+TheDate.getDate()-38;
+
+                    if(TheDate.getYear()%4==0&&TheDate.getMonth()>1) {
+                        total++;
+                    }
+                    for(m=0;;m++){
+                        k=(CalendarData[m]<0xfff)?11:12;
+                        for(n=k;n>=0;n--){
+                            if(total<=29+GetBit(CalendarData[m],n)){
+                                isEnd=true; break;
+                            }
+                            total=total-29-GetBit(CalendarData[m],n);
+                        }
+                        if(isEnd) break;
+                    }
+                    cYear=1921 + m;
+                    cMonth=k-n+1;
+                    cDay=total;
+                    if(k==12){
+                        if(cMonth==Math.floor(CalendarData[m]/0x10000)+1){
+                            cMonth=1-cMonth;
+                        }
+                        if(cMonth>Math.floor(CalendarData[m]/0x10000)+1){
+                            cMonth--;
+                        }
+                    }
+                }
+                function GetcDateString(){
+                    let tmp="";
+                    if(cMonth<1){
+                        tmp+="(闰)";
+                        tmp+=monString.charAt(-cMonth-1);
+                    }else{
+                        tmp+=monString.charAt(cMonth-1);
+                    }
+                    tmp+="月";
+                    tmp+=(cDay<11)?"初":((cDay<20)?"十":((cDay<30)?"廿":"三十"));
+                    if (cDay%10!=0||cDay==10){
+                        tmp+=numString.charAt((cDay-1)%10);
+                    }
+                    return tmp;
+                }
+                function GetLunarDay(solarYear,solarMonth,solarDay){
+                    //solarYear = solarYear<1900?(1900+solarYear):solarYear;
+                    if(solarYear<1921 || solarYear>2020){
+                        return "";
+                    }else{
+                        solarMonth = (parseInt(solarMonth)>0) ? (solarMonth-1) : 11;
+                        e2c(solarYear,solarMonth,solarDay);
+                        return GetcDateString();
+                    }
+                }
+
+                return showCal();
+            },
+        };
 
         return [
-            year+""+month+""+day+""+hour+""+minutes+""+seconds,
-            year+"-"+month+"-"+day+" "+hour+":"+minutes+":"+seconds,
+            year+""+month+""+day+""+hour+""+minutes+""+seconds, // 0
+            year+"-"+month+"-"+day+" "+hour+":"+minutes+":"+seconds, // 1
+            year, // 2
+            month+""+day, // 3
+            month+"-"+day, // 4
+            month+"/"+day, // 5
+            hour+""+minutes+""+seconds, // 6
+            hour+":"+minutes+":"+seconds, // 7
+            week, // 8
+            calender.calender(), // 农历 // 9
         ];
+
     },
     "alert_txt": function (txt, timeout, clear) { // 文字提醒弹窗。(文字，超时时间，清除所有提示<仅限不为long时>)
         let that = this;
@@ -431,7 +546,17 @@ let view = {
             };
         });
     },
+    "string_include_string": function (big_string, small_string) { // 判断大字符串是否包含小字符串
+        let that = this;
+        that.log([big_string, small_string]);
 
+        let index = big_string.indexOf(small_string);
+        if ( index !== -1){ // 包含该字符串
+            return index;
+        }else {
+            return "";
+        }
+    },
 
 };
 

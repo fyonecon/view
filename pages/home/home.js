@@ -308,6 +308,7 @@ function set_search(val){ // 配置当前的搜索引擎
 
 function create_input(pre) { // 渲染模板
     console_log("渲染模板数据");
+
     document.getElementsByTagName("title")[0].innerText = title;
     let content = document.getElementsByClassName("content")[0];
     content.innerHTML = '<div class="input-div" id="input-div"><select class="select search-style select-none" id="select"></select><input type="text" value="" maxlength="100" id="input" class="input search-style"  placeholder="'+ pre +'输入内容，按Enter搜索"/><div class="clear"></div></div><div class="search-btn-div" id="search-btn"></div><div class="res-div"></div>';
@@ -444,7 +445,7 @@ function init_404(){
         '   <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) "data-href="http://www.ruanyifeng.com/blog/">阮一峰</span>' +
         '   <div class="clear"></div>' +
         '</div>' +
-        '<div class="search-btn-center quick-btn-center">' +
+        '<div class="search-btn-center quick-btn-center hide">' +
         '   <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) "data-href="https://m.ithome.com">IT之家</span>' +
         '   <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) "data-href="https://xueqiu.com/">雪球基金</span>' +
         '   <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) "data-href="https://cn.investing.com/">英为财情</span>' +
@@ -464,7 +465,8 @@ function init_404(){
         // '   <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) "data-href="https://microsoftedge.microsoft.com/addons/detail/%E5%9F%BA%E9%87%91%E5%8A%A9%E6%89%8B/poadlhpbklmejfighaikleppcaiggeoc">基金助手</span>' +
         // '   <div class="clear"></div>' +
         // '</div>' +
-
+        '<div class="clear"></div>' +
+        '<div class="div-time"></div>' +
         '<div class="div-qr hide">' +
         '   <div class="div-qr-box" id="img-show_qr"></div>' +
         '</div>' +
@@ -739,6 +741,20 @@ function href_ext(that) {
     }
 }
 
+// 时间
+function timer() {
+    try {
+        document.getElementsByClassName('div-time')[0].innerHTML =
+            ""  + view.get_date()[5] +
+            " " + view.get_date()[9] +
+            " " + view.get_date()[8] +
+            " " + view.get_date()[7] +
+        "";
+    }catch (e) {
+        view.log("跳过");
+    }
+}
+
 
 
 function start_this_page(info) {
@@ -748,5 +764,9 @@ function start_this_page(info) {
     init_404();
     init_color();
     delete_loading();
+
+    setInterval(function () {
+        timer();
+    }, 1000);
 
 }

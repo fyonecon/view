@@ -8,7 +8,7 @@
 const debug = true;                     // 调试模式，统一打印日志，true & false
 
 // 框架渲染的必要参数
-const cookie_prefix   = "view_ggvs_";        // cookie前缀
+const cookie_prefix   = "view_ggvs_";   // cookie前缀
 const route_404       = "?route=404";   // 404
 const route_default   = "?route=home";  // 页面进入默认页
 
@@ -22,6 +22,17 @@ const api_url         = "https://xcx.ggvs.cn/chengzi/public/index.php/api/";  //
 
 const page_title      = " - ggvs.org";
 
+// 白名单refer域名
+let refer = [
+    {
+        'check_refer': false, // 是否开启白名单refer检测
+        'jump_site': '', // 遇到黑名单refer的落地地址
+        'white_refer': [
+
+        ],
+    }
+];
+
 // 自定义
 // 不需要登录使用的验证参数
 let app_class = "view_ggvs";
@@ -29,5 +40,6 @@ let app_class = "view_ggvs";
 let app_token = "";
 let user_token = "";
 let user_id = 0;
+
 
 

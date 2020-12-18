@@ -38,6 +38,39 @@ const index_load = {
     }
 })();
 
+// 检测白名单refer
+(function () {
+    let the_host = window.location.host;
+    let the_refer = document.referrer;
+
+    try {
+        let check_refer = refer[0].check_refer;
+        let jump_site = refer[0].jump_site;
+        let white_refer = refer[0].white_refer;
+        view.log([the_host, the_refer]);
+
+        if (!check_refer){
+            view.log("refer检测已关闭");
+        }else {
+            view.log("refer检测已开启");
+            for (let j=0; j<white_refer.length; j++){
+                let the_white_refer = white_refer[j];
+                if (view.string_include_string(the_refer, the_white_refer)){ // 处在白名单
+                    view.log("白名单refer=" + the_white_refer);
+                }else {
+                    if (jump_site){
+                        window.location.replace(jump_site);
+                    }
+                    break;
+                }
+            }
+        }
+    }catch (e) {
+        view.log([the_host, the_refer, '参数不全，已跳过']);
+    }
+
+})();
+
 // 监听url是否发生变化，确保页面跳转成功
 (function () {
     let url = window.location.href;
@@ -69,7 +102,7 @@ const index_load = {
             if (result) {
                 return decodeURIComponent(result[2]); // 转义还原参数
             } else {
-                return null;
+                return "";
             }
         },
         "page_file": function (pages_index) {  // 添加页面js、css资源文件
@@ -78,7 +111,7 @@ const index_load = {
                 console.error("pages.js数组参数找不到，页面和框架数据将不能渲染。");
 
                 setTimeout(function () {
-                    window.location.replace(route_default); // 则进入默认页
+                    window.location.replace(route_404); // 则进入默认页
                 }, 1000);
 
                 return;
@@ -119,7 +152,7 @@ const index_load = {
             try {
                 let head = document.head || document.getElementsByTagName("head")[0];
                 let script = document.createElement("script");
-                script.setAttribute("src", file_url + "config/page_loaded.js?"+page_time);
+                script.setAttribute("src", file_url + "static/js/page_loaded.js?"+page_time);
                 head.appendChild(script);
             }catch (e) {
                 console.error(e);
@@ -179,15 +212,19 @@ const index_load = {
                                 }
                             }
                             setTimeout(function () {
-                                if (pages_index === null){
-                                    console.error("页面没有正确路由?route=xxx，将进入默认页面。");
-                                    time_error = Math.floor((new Date()).getTime());
-                                    setTimeout(function () {
-                                        window.location.replace(route_default);  // 则进入默认页
-                                    },0);
-                                    _resolve();
-                                }else{
-                                    _resolve();
+                                if (page_name === ""){ // 空路由
+                                    window.location.replace(route_default);  // 则进入默认页
+                                }else {
+                                    if (pages_index === null){ // 未匹配路由
+                                        console.error("页面没有正确路由?route=xxx，将进入默认页面。");
+                                        time_error = Math.floor((new Date()).getTime());
+                                        setTimeout(function () {
+                                            window.location.replace(route_404);  // 则进入404页
+                                        },0);
+                                        _resolve();
+                                    }else{
+                                        _resolve();
+                                    }
                                 }
                             },20);
                         }).then(function () {
