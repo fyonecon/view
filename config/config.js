@@ -15,8 +15,8 @@ const route_default   = "?route=home";  // 页面进入默认页
 const file_url        = index_file_url?index_file_url:"./";             // 资源文件CDN主域名（js、css、img、font等资源文件）//cdnaliyun.oss-cn-hangzhou.aliyuncs.com/view-ggvs/
 const page_url        = index_file_url?index_file_url:"./";             // htm文件的服务器地址，因为使用了ajax请求，不能直接请求本地文件，可以全部放在CDN里面
 
-const cache_time      = 10000;            // 缓存时间：s
-const page_time       =  "cache" + cache_time; //Math.floor((new Date()).getTime()/10000)*cache_time;  // 页面时间戳：x秒为资源单位，x秒（文件缓存周期）后刷新页面浏览器会改变资源文件的缓存
+const cache_time      = 1000000;            // 缓存时间：ms
+const page_time       =  "cache=" + Math.floor((new Date()).getTime()/cache_time)*cache_time;
 
 const api_url         = "https://xcx.ggvs.cn/chengzi/public/index.php/api/";  // api主地址
 const page_title      = " - ggvs.org";

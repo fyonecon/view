@@ -130,7 +130,7 @@ body{
     user-select: none;
 }
 .btn:active{
-    opacity: 1;
+    opacity: 0.8;
 }
 .select-none{
     -moz-user-select: none;
@@ -226,17 +226,18 @@ body{
     margin-right: 10px;
 }
 .item-title{
-    height: 20px;
-    padding-top: 9px;
+    height: 24px;
+    line-height: 24px;
+    padding-top: 6px;
     overflow: hidden;
     font-size: 16px;
 }
 .item-explanation{
-    height: 20px;
-    line-height: 20px;
+    height: 22px;
+    line-height: 22px;
     overflow: hidden;
     font-size: 14px;
-    margin-top: 3px;
+    margin-top: 0px;
 }
 .kd-item-player{
     position: fixed;

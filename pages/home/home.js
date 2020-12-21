@@ -327,8 +327,7 @@ function create_input(pre) { // 渲染模板
     setTimeout(function () {
         delete_loading();
         write_tips_text('若浏览器阻止打开新标签，务必手动选择允许打开');
-        make_new_qr(window.location.href, 200, 200, show_qr, "img-show_qr");
-        view.log("qr");
+        // make_new_qr(window.location.href, 200, 200, show_qr, "img-show_qr");
     }, 300);
 
 }
@@ -359,7 +358,8 @@ function run_search(){ // 执行搜索
     let _input = document.getElementById("input").value;
     if (!_input.trim()) {
         console_log("内容不能为空");
-        view.alert_txt("搜索内容不能为空", 1500);
+        // view.alert_txt("搜索内容不能为空", 1500);
+        view.notice_txt("搜索内容不能为空", 1500);
         change_focus();
         return;
     }
@@ -436,8 +436,8 @@ function init_404(){
         '</div>' +
         '<div class="search-btn-center quick-btn-center">' +
         '   <span class="search-btn-style href-btn-span click" onclick="href_ext(this)" data-href="https://cdnaliyun.oss-cn-hangzhou.aliyuncs.com/?route=fm">📻·FM</span>' +
-        '   <span class="search-btn-style href-btn-span click" onclick="href_ext(this)" data-href="https://wannianrili.51240.com/">📅·日历</span>' +
-        '   <span class="search-btn-style href-btn-span click" onclick="href_ext(this)" data-href="https://zaixianjisuanqi.51240.com/">🧮·计算</span>' +
+        '   <span class="search-btn-style href-btn-span click" onclick="href_ext(this)" data-href="https://wannianrili.51240.com/">万年历</span>' +
+        '   <span class="search-btn-style href-btn-span click" onclick="href_ext(this)" data-href="./?route=calc">计算器</span>' +
         '   <div class="clear"></div>' +
         '</div>' +
         '<div class="search-btn-center quick-btn-center">' +
@@ -755,7 +755,6 @@ function timer() {
         view.log("跳过");
     }
 }
-
 
 
 function start_this_page(info) {

@@ -9,7 +9,7 @@ let page = {
         let id = view.get_url_param("", "id");
         view.log(id);
         if (!id){
-            view.alert_txt("id不能为空", "long");
+            view.view.alert_txt_txt("id不能为空", "long");
             setTimeout(function () {
                 window.history.go(-1);
             }, 2000);

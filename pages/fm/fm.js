@@ -239,7 +239,7 @@ function this_item(num, open) {
 
     // 播放栏
     let player_div = document.getElementsByClassName("kd-item-player")[0];
-    player_div.innerHTML = '<div class="kd-item-cell player-bg"><img class="kd-item-cover live-cover" onclick="db_player(\''+src+'\')" src="'+cover+'" alt="cover"/><div class="kd-item-font btn open-player-page" onclick="this_page('+num+')"><div class="item-title live-title">'+name+'</div><div class="item-explanation live-explanation">'+language+'</div></div><div class="kd-item-more" onclick="this_page('+num+')">︿</div><div class="clear"></div></div>';
+    player_div.innerHTML = '<div class="kd-item-cell player-bg"><img class="kd-item-cover live-cover" onclick="db_player(\''+src+'\')" src="'+cover+'" alt="cover"/><div class="kd-item-font open-player-page" onclick="this_page('+num+')"><div class="item-title live-title">'+name+'</div><div class="item-explanation live-explanation">'+language+'</div></div><div class="kd-item-more" onclick="this_page('+num+')">︿</div><div class="clear"></div></div>';
 
     // 折叠页
     let player_page = document.getElementsByClassName("kd-player-page")[0];
@@ -272,14 +272,14 @@ function start_this_page() {
     let item_div = document.getElementsByClassName("kd-item-div")[0];
     let append = [];
     for (let i=0; i<live_list.length; i++){
-        let tag = '<div class="kd-item-cell"><img class="kd-item-cover" src="'+live_list[i]["cover"]+'" alt="cover"/><div class="kd-item-font btn" onclick="this_item('+i+')"><div class="item-title">'+live_list[i]["name"]+'</div><div class="item-explanation">'+live_list[i]["language"]+'</div></div><div class="kd-item-more"><!--==--></div><div class="clear"></div></div>';
+        let tag = '<div class="kd-item-cell btn" onclick="this_item('+i+')"><img class="kd-item-cover" src="'+live_list[i]["cover"]+'" alt="cover"/><div class="kd-item-font" ><div class="item-title">'+live_list[i]["name"]+'</div><div class="item-explanation">'+live_list[i]["language"]+'</div></div><div class="kd-item-more"><!--==--></div><div class="clear"></div></div>';
         append.push(tag);
     }
     item_div.innerHTML = append.join("");
 
     // 播放栏
     let player_div = document.getElementsByClassName("kd-item-player")[0];
-    player_div.innerHTML = '<div class="kd-item-cell player-bg"><img class="kd-item-cover live-cover" src="'+null_fm_cover+'" alt="cover"/><div class="kd-item-font btn"><div class="item-title live-title" onclick="this_item(0, 1)">前先选择电台</div><div class="item-explanation live-explanation">红杏出墙FM</div></div><div class="kd-item-more"  onclick="this_item(0, 1)">︿</div><div class="clear"></div></div>';
+    player_div.innerHTML = '<div class="kd-item-cell player-bg"><img class="kd-item-cover live-cover" src="'+null_fm_cover+'" alt="cover"/><div class="kd-item-font"><div class="item-title live-title" onclick="this_item(0, 1)">前先选择电台</div><div class="item-explanation live-explanation">红杏出墙FM</div></div><div class="kd-item-more"  onclick="this_item(0, 1)">︿</div><div class="clear"></div></div>';
 
 }
 

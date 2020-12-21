@@ -456,7 +456,7 @@ let view = {
         ];
 
     },
-    "alert_txt": function (txt, timeout, clear) { // 文字提醒弹窗。(文字，超时时间，清除所有提示<仅限不为long时>)
+    "alert_txt": function (txt, timeout, clear) { // 文字提醒弹窗，会遮挡页面操作。(文字，超时时间，清除所有提示<仅限不为long时>)
         let that = this;
 
         // alert_txt层级形态显示
@@ -476,10 +476,10 @@ let view = {
             '   <div class="div-alert_txt-bg" style="z-index:'+ (alert_txt_index + 700000)  +';"></div>' +
             '   <div class="clear"></div>' +
             '</div>';
-        $(".depend").append(div);
+        $("body").append(div);
 
         if (!timeout || timeout < 200 || timeout > 60*60*1000){ // 默认
-            timeout = 2500;
+            timeout = 2000;
             setTimeout(function () {
                 $("." + class_name).remove();
             }, timeout);
@@ -494,6 +494,45 @@ let view = {
                 }
             }, timeout);
         }
+    },
+    "notice_txt": function (txt, timeout) { // 临时重要通知专用，不会遮挡页面操作
+        let that = this;
+
+        // notice_txt层级形态显示
+        let notice_txt_index = that.get_cache("notice_txt_index")*1;
+        if (!notice_txt_index){
+            notice_txt_index = 7000000;
+        }else {
+            notice_txt_index = notice_txt_index + 10;
+        }
+        that.set_cache("notice_txt_index", notice_txt_index);
+
+        let class_name = "notice_txt_" + notice_txt_index;
+        that.log(["notice_txt", txt, timeout, notice_txt_index, class_name]);
+
+        // 制作容器盒子
+        if (!$(".notice_txt-box").length){
+            $("body").append('<div class="notice_txt-box"></div>');
+        }
+
+        // 渲染
+        let div = '<div class="notice_txt-li '+class_name+'" style="display: none;"><div class="notice_txt-show">'+txt+'</div><div class="notice_txt-close click" onclick="$(this).parent().slideUp(400);setTimeout(function(){$(this).parent().remove();}, 400);">x</div></div>';
+        $(".notice_txt-box").prepend(div);
+        $("." + class_name).slideDown(400);
+
+        // 清除
+        if (!timeout || timeout < 200){ // 默认
+            timeout = 2000;
+        }else if (timeout > 1*60*1000){
+            timeout = 1*60*1000;
+        }
+        setTimeout(function () {
+            $("." + class_name).slideUp(400);
+            setTimeout(function () {
+                $("." + class_name).remove();
+            }, 400);
+        }, timeout);
+
     },
     "check_phone": function (phone) {
         let that = this;

@@ -11,8 +11,8 @@ const page_static_file = {
         "static/js/qrcode.js", // 全局自带生成QR
         "parts/bg_animate/bg_animate.js", // 全局背景动画
         // 可选
-        "parts/nav/nav.js",
-        "parts/foot/foot.js",
+        // "parts/nav/nav.js",
+        // "parts/foot/foot.js",
 
     ],
     "css": [
@@ -20,7 +20,7 @@ const page_static_file = {
         "static/css/animate.min.css",
         "parts/bg_animate/bg_animate.css",
         // 可选
-        "parts/foot/foot.css",
+        // "parts/foot/foot.css",
 
     ],
 };
@@ -232,6 +232,28 @@ const pages = [
             },
         ],
     },
+
+    { // 页面模块-富文本
+        "route"     : "calc",
+        "file_path" : "calc/calc.htm",
+        "title"     : "科学计算器",
+        "file"      : [
+            {
+                "js": [
+                    "pages/calc/calculator.js",
+                    "pages/calc/calc.js",
+                ],
+                "css": [
+                    "pages/calc/calculator.css",
+                    "pages/calc/calc.css",
+                ],
+            },
+        ],
+    },
+
+
+
+    // =============================================
 
     { // 页面模块-转转乐
         "route"     : "zzl-vip",
