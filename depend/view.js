@@ -20,7 +20,7 @@ let view = {
                 div.classList.add("part-div");
                 div.classList.add("clear");
                 div.classList.add("part-div-" + that.js_rand(100000000, 9999999999));
-                div.setAttribute("data-view", that.js_rand(100000000, 9999999999));
+                div.setAttribute("data-view", ""+that.js_rand(100000000, 9999999999));
                 div.innerHTML = data;
                 document.getElementById(by_id).appendChild(div); // 将模块渲染入主文件
 
@@ -53,6 +53,7 @@ let view = {
             let script = document.createElement("script");
             script.setAttribute("class", "write-js");
             script.setAttribute("src", js_src_array[i]);
+            script.setAttribute("nonce", ""+that.js_rand(100000000, 9999999999));
             head.appendChild(script);
             script.onload = function () {
                 had_onload++;

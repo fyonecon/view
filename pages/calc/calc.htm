@@ -28,12 +28,14 @@
             float:left;">
     </div>
 
+    <form name="calc" >
+
     <div id="jisuan">
         <div class="calculator_main" id="calculator">
             <div class="calculator_con">
                 <div id="calculator_base" style="display: block"></div>
                 <div class="calculator_hd">
-                    <input type="text" id="resultIpt" readonly="" class="resultIpt" value="0" size="17" maxlength="17">
+                    <input type="text" id="resultIpt" readonly="" class="resultIpt" value="0" size="17" maxlength="17"  name="display">
                 </div>
                 <div id="baseEprsPanel" valign="middle" width="290" style="display:none"></div>
                 <div class="calculator_bd" id="calculator_bd">
@@ -136,7 +138,7 @@
                             <a class="cal_btn cal_btn_gre" href="javascript:;" id="e" onclick="inputfunction('e','e');">E</a>
                             <a class="cal_btn cal_btn_gre" href="javascript:;" id="bt" onclick="inputfunction('dms','deg');">d.ms</a>
                             <a class="cal_btn cal_btn_gre" href="javascript:;" onclick="addbracket(this);">(</a>
-                            <a class="cal_btn cal_btn_gre" href="javascript:;" onclick="disbracket(this);">)</a>
+                            <a class="cal_btn cal_btn_gre" href="javascript:;" onclick="disbracket(this);" >)</a>
                         </li>
                         <li>
                             <a class="cal_btn cal_btn_gre" href="javascript:;" id="ln" onclick="inputfunction('ln','exp');">In</a>
@@ -210,5 +212,8 @@
             </div>
         </div>
     </div>
+
+    </form>
+
 </div>
 </div>

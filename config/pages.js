@@ -250,6 +250,23 @@ const pages = [
             },
         ],
     },
+    { // 页面模块-富文本
+        "route"     : "calculator",
+        "file_path" : "calculator/calculator.html",
+        "title"     : "科学计算器",
+        "file"      : [
+            {
+                "js": [
+                    "pages/calculator/calculator.js",
+                    "pages/calculator/calculator.js",
+                ],
+                "css": [
+                    "pages/calculator/calculator.css",
+                    "pages/calculator/calculator.css",
+                ],
+            },
+        ],
+    },
 
 
 

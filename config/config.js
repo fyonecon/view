@@ -16,7 +16,7 @@ const file_url        = index_file_url?index_file_url:"./";             // 资�
 const page_url        = index_file_url?index_file_url:"./";             // htm文件的服务器地址，因为使用了ajax请求，不能直接请求本地文件，可以全部放在CDN里面
 
 const cache_time      = 1000000;            // 缓存时间：ms
-const page_time       =  "cache=" + Math.floor((new Date()).getTime()/cache_time)*cache_time;
+const page_time       =  "" + Math.floor((new Date()).getTime()/cache_time)*cache_time;
 
 const api_url         = "https://xcx.ggvs.cn/chengzi/public/index.php/api/";  // api主地址
 const page_title      = " - ggvs.org";

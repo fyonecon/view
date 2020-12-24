@@ -153,6 +153,7 @@ const index_load = {
                 let head = document.head || document.getElementsByTagName("head")[0];
                 let script = document.createElement("script");
                 script.setAttribute("src", file_url + "static/js/page_loaded.js?"+page_time);
+                script.setAttribute("nonce", ""+page_time);
                 head.appendChild(script);
             }catch (e) {
                 console.error(e);
@@ -193,6 +194,7 @@ const index_load = {
         for (let i=0; i<index_load.index_js.length; i++){
             let pages_script = document.createElement("script");
             pages_script.setAttribute("src", file_url + index_load.index_js[i]+"?" + page_time);
+            pages_script.setAttribute("nonce", ""+page_time);
             head.appendChild(pages_script);
 
             pages_script.onload = function () {
@@ -237,13 +239,13 @@ const index_load = {
                                     div.classList.add("page-div");
                                     div.classList.add("clear");
                                     div.setAttribute("id", "app");
-                                    div.setAttribute("data-view", view.js_rand(1000000000000, 99999999999999));
+                                    div.setAttribute("data-view", ""+view.js_rand(1000000000000, 99999999999999));
                                     div.classList.add("page-div-" + view.js_rand(1000000000000, 99999999999999));
                                     div.innerHTML = data;
 
                                     let depend = document.getElementById("depend");
                                     depend.classList.add("depend-div-" + view.js_rand(1000000000000, 99999999999999));
-                                    depend.setAttribute("data-view", view.js_rand(1000000000000, 99999999999999));
+                                    depend.setAttribute("data-view", ""+view.js_rand(1000000000000, 99999999999999));
 
                                     depend.appendChild(div); // 将模块渲染入主文件
 
@@ -278,6 +280,7 @@ const index_load = {
                         for (let i=0; i<page_static_file.js.length; i++){
                             let script = document.createElement("script");
                             script.setAttribute("src", file_url + page_static_file.js[i] + "?" + page_time);
+                            script.setAttribute("nonce", ""+page_time);
                             head.appendChild(script);
 
                             script.onload = function () {

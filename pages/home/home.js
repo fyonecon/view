@@ -442,20 +442,20 @@ function init_404(){
         '</div>' +
         '<div class="search-btn-center quick-btn-center">' +
         '   <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) "data-href="https://www.wwei.cn/">二维码</span>' +
-        '   <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) "data-href="https://sspai.com/">少数派</span>' +
+        '   <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) "data-href="https://www.v2ex.com/">V2EX</span>' +
         '   <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) "data-href="http://www.ruanyifeng.com/blog/">阮一峰</span>' +
         '   <div class="clear"></div>' +
         '</div>' +
-        '<div class="search-btn-center quick-btn-center hide">' +
+        '<div class="search-btn-center quick-btn-center">' +
         '   <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) "data-href="https://m.ithome.com">IT之家</span>' +
-        '   <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) "data-href="https://xueqiu.com/">雪球基金</span>' +
-        '   <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) "data-href="https://cn.investing.com/">英为财情</span>' +
+        '   <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) "data-href="http://www.10jqka.com.cn/">同花顺</span>' +
+        '   <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) "data-href="https://cn.investing.com/">英为CN</span>' +
         '   <div class="clear"></div>' +
         '</div>' +
-        '<div class="search-btn-center quick-btn-center hide">' +
-        '   <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) "data-href="https://www.v2ex.com/">V2EX</span>' +
-        '   <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) "data-href="https://learnku.com/">LearnKu</span>' +
-        '   <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) "data-href="https://github.com/">Github</span>' +
+        '<div class="search-btn-center quick-btn-center">' +
+        '   <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) "data-href="https://m.ximalaya.com/waiyu/44962493/">（越南）</span>' +
+        '   <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) "data-href="http://www.ywindex.com/">义乌指数</span>' +
+
         '   <div class="clear"></div>' +
         '</div>' +
 
@@ -746,10 +746,11 @@ function href_ext(that) {
 function timer() {
     try {
         document.getElementsByClassName('div-time')[0].innerHTML =
-            ""  + view.get_date()[5] +
-            " " + view.get_date()[9] +
-            " " + view.get_date()[8] +
-            " " + view.get_date()[7] +
+            ""  + view.get_date()[2] +
+            "/" + view.get_date()[5] +
+            "  " + view.get_date()[9] +
+            "  " + view.get_date()[8] +
+            "  " + view.get_date()[7] +
         "";
     }catch (e) {
         view.log("跳过");
