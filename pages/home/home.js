@@ -7,16 +7,40 @@ const search_debug = false; // 调试日志，false关闭日志，true显示日�
 const title = " 👈 简洁主页"; // 当前页面标题
 const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。自定义。
     {
-        "name": "必应搜索",
-        "m-url": "https://cdnaliyun.oss-cn-hangzhou.aliyuncs.com/index.html?route=search&engine=bing&word=",
-        "pc-url": "https://cdnaliyun.oss-cn-hangzhou.aliyuncs.com/index.html?route=search&engine=bing&word=",
+        "name": "Bing 搜索",
+        "m-url": "?route=search&engine=bing&word=",
+        "pc-url": "?route=search&engine=bing&word=",
         "url_right": "",
     },
     {
-        "name": "Google搜索", // 引擎名称，可视5个字
-        "m-url": "https://cdnaliyun.oss-cn-hangzhou.aliyuncs.com/index.html?route=search&engine=google&word=", // 移动端，前缀
-        "pc-url": "https://cdnaliyun.oss-cn-hangzhou.aliyuncs.com/index.html?route=search&engine=google&word=", // PC端，前缀
+        "name": "Google 搜索", // 引擎名称，可视5个字
+        "m-url": "?route=search&engine=google&word=", // 移动端，前缀
+        "pc-url": "?route=search&engine=google&word=", // PC端，前缀
         "url_right": "", // 参数的固顶后缀
+    },
+    {
+        "name": "百度搜索",
+        "m-url": "?route=search&engine=baidu&word=",
+        "pc-url": "?route=search&engine=baidu&word=",
+        "url_right": "",
+    },
+    {
+        "name": "头条搜索",
+        "m-url": "?route=search&engine=m-toutiao&word=",
+        "pc-url": "?route=search&engine=toutiao&word=",
+        "url_right": "",
+    },
+    {
+        "name": "搜收费音乐",
+        "m-url": "?route=search&engine=music&word=",
+        "pc-url": "?route=search&engine=music&word=",
+        "url_right": "",
+    },
+    {
+        "name": "搜QQ音乐",
+        "m-url": "https://y.qq.com/portal/search.html#page=1&t=song&w=",
+        "pc-url": "https://y.qq.com/portal/search.html#page=1&t=song&w=",
+        "url_right": "",
     },
     {
         "name": "英中翻译",
@@ -31,31 +55,13 @@ const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。�
         "url_right": "",
     },
     {
-        "name": "白嫖收费音乐",
-        "m-url": "https://cdnaliyun.oss-cn-hangzhou.aliyuncs.com/index.html?route=search&engine=music&word=",
-        "pc-url": "https://cdnaliyun.oss-cn-hangzhou.aliyuncs.com/index.html?route=search&engine=music&word=",
-        "url_right": "",
-    },
-    {
-        "name": "搜索QQ音乐",
-        "m-url": "https://y.qq.com/portal/search.html#page=1&t=song&w=",
-        "pc-url": "https://y.qq.com/portal/search.html#page=1&t=song&w=",
-        "url_right": "",
-    },
-    {
-        "name": "百度一下",
-        "m-url": "https://cdnaliyun.oss-cn-hangzhou.aliyuncs.com/index.html?route=search&engine=baidu&word=",
-        "pc-url": "https://cdnaliyun.oss-cn-hangzhou.aliyuncs.com/index.html?route=search&engine=baidu&word=",
-        "url_right": "",
-    },
-    {
-        "name": "搜索Github",
+        "name": "搜Github",
         "m-url": "https://github.com/search?&type=Repositories&q=",
         "pc-url": "https://github.com/search?&type=Repositories&q=",
         "url_right": "",
     },
     {
-        "name": "搜索电影MP4",
+        "name": "搜电影MP4",
         "m-url": "https://m.domp4.com/",
         "pc-url": "https://www.domp4.com/",
         "url_right": "blank",
@@ -311,7 +317,7 @@ function create_input(pre) { // 渲染模板
 
     document.getElementsByTagName("title")[0].innerText = title;
     let content = document.getElementsByClassName("content")[0];
-    content.innerHTML = '<div class="input-div" id="input-div"><select class="select search-style select-none" id="select"></select><input type="text" value="" maxlength="100" id="input" class="input search-style"  placeholder="'+ pre +'输入内容，按Enter搜索"/><div class="clear"></div></div><div class="search-btn-div" id="search-btn"></div><div class="res-div"></div>';
+    content.innerHTML = '<div class="input-div" id="input-div"><select class="select search-style select-none" id="select"></select><input type="text" value="" maxlength="500" id="input" class="input search-style"  placeholder="'+ pre +'输入内容，按Enter搜索"/><div class="clear"></div></div><div class="search-btn-div" id="search-btn"></div><div class="res-div"></div>';
     let append_tag = [];
     for (let i = 0; i < search.length; i++){
         let tag = '<option class="option option-'+i+'" value="'+i+'">'+ search[i]["name"] +'</option>';
@@ -452,22 +458,16 @@ function init_404(){
         '   <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) "data-href="https://cn.investing.com/">英为CN</span>' +
         '   <div class="clear"></div>' +
         '</div>' +
-        '<div class="search-btn-center quick-btn-center">' +
-        '   <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) "data-href="https://m.ximalaya.com/waiyu/44962493/">（越南）</span>' +
+        '<div class="search-btn-center quick-btn-center hide">' +
+        '   <span class="search-btn-style href-btn-span click" onclick="href_ext(this) "data-href="https://m.ximalaya.com/waiyu/44962493/">越语入门</span>' +
+        '   <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) "data-href="https://active.clewm.net/FwC95g?qrurl=http://qr35.cn/FwC95g&gtype=1&key=2fba516c7fe81e21f08824a04e2676d2f8043b2870">越语基础</span>' +
         '   <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) "data-href="http://www.ywindex.com/">义乌指数</span>' +
 
         '   <div class="clear"></div>' +
         '</div>' +
 
-
-        // '<div class="search-btn-center href-btn-center">' +
-        // '   <span class="search-btn-style href-btn-span click" onclick="href_ext(this)" data-href="https://microsoftedge.microsoft.com/addons/detail/igg%E8%B0%B7%E6%AD%8C%E8%AE%BF%E9%97%AE%E5%8A%A9%E6%89%8B/mchibleoefileemjfghfejaggonplmmg?hl=zh-CN">iGoogle</span>' +
-        // '   <span class="search-btn-style href-btn-span click"  onclick="href_ext(this)" data-href="https://microsoftedge.microsoft.com/addons/detail/adblock-%E2%80%94-%E6%9C%80%E4%BD%B3%E5%B9%BF%E5%91%8A%E6%8B%A6%E6%88%AA%E5%B7%A5%E5%85%B7/ndcileolkflehcjpmjnfbnaibdcgglog?hl=zh-CN">AdBlock</span>' +
-        // '   <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) "data-href="https://microsoftedge.microsoft.com/addons/detail/%E5%9F%BA%E9%87%91%E5%8A%A9%E6%89%8B/poadlhpbklmejfighaikleppcaiggeoc">基金助手</span>' +
-        // '   <div class="clear"></div>' +
-        // '</div>' +
         '<div class="clear"></div>' +
-        '<div class="div-time"></div>' +
+        '<div class="div-time select-none"></div>' +
         '<div class="div-qr hide">' +
         '   <div class="div-qr-box" id="img-show_qr"></div>' +
         '</div>' +
@@ -746,11 +746,14 @@ function href_ext(that) {
 function timer() {
     try {
         document.getElementsByClassName('div-time')[0].innerHTML =
-            ""  + view.get_date()[2] +
-            "/" + view.get_date()[5] +
-            "  " + view.get_date()[9] +
-            "  " + view.get_date()[8] +
-            "  " + view.get_date()[7] +
+            '<div class="div-time-hour">' +
+            "  " + view.get_date()[7] + // 时刻
+            '</div>' +
+            '<div class="div-time-date">' +
+            '   <span class="div-time-span">'  + view.get_date()[2] + '/' + view.get_date()[5] + '</span>' +
+            // '   <span class="div-time-span">' + view.get_date()[9] + '</span>' +
+            '   <span class="div-time-span">' + view.get_date()[8] + '</span>' +
+            '</div>' +
         "";
     }catch (e) {
         view.log("跳过");

@@ -2,7 +2,7 @@
 
 // 框架依赖的其他js文件，注意这里是框架依赖的，最先载入的依赖文件。
 const map_cache = new Map(); // 设置页面键-值对缓存
-let view = {
+const view = {
     "log": function (txt) { // 日志打印统一函数
         if (txt === 0 || txt === "0") {}else {if (!txt){txt = "空txt，-log";} }
         debug === true ? console.log(JSON.stringify(txt)): "";
@@ -47,25 +47,28 @@ let view = {
             that.log("js_src_array不是数组。");
             return;
         }
-        let had_onload = 0;
         let head = document.head || document.getElementsByTagName("head")[0];
+        let js_all = [];
         for (let i=0; i<js_src_array.length; i++){
-            let script = document.createElement("script");
-            script.setAttribute("class", "write-js");
-            script.setAttribute("src", js_src_array[i]);
-            script.setAttribute("nonce", ""+that.js_rand(100000000, 9999999999));
-            head.appendChild(script);
-            script.onload = function () {
-                had_onload++;
-                if (had_onload === js_src_array.length) {
-                    try {
-                        call_func(true);
-                    }catch (e) {
-                        that.log("可选回调函数没有设置。");
-                    }
-                }
-            };
+            let the_p = new Promise((resolve, reject) => {
+                let script = document.createElement("script");
+                script.setAttribute("class", "write-js");
+                script.setAttribute("src", js_src_array[i]);
+                script.setAttribute("nonce", ""+that.js_rand(100000000, 9999999999));
+                head.appendChild(script);
+                script.onload = function () {resolve(i); };
+            });
+            js_all.push(the_p);
         }
+        Promise.all(js_all).then((result) => {
+            try {
+                call_func(true);
+            }catch (e) {
+                that.log("可选回调函数没有设置。");
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
     },
     "write_css": function (css_src_array, call_func) { // 写入外部js
         let that = this;
@@ -175,7 +178,7 @@ let view = {
             ([key, value]) => map_cache.set(key, value)
         );
 
-        that.log([state, msg, content]);
+        // that.log([state, msg, content]);
     },
     "get_cache": function (_key) {
         let that = this;
@@ -196,7 +199,7 @@ let view = {
         }
         content = [_key, has, state, msg];
 
-        that.log(content);
+        // that.log(content);
 
         return has;
     },
@@ -329,6 +332,8 @@ let view = {
         return (new Date()).getTime();
     }, // 毫秒时间戳，ms
     "get_date": function () {
+        let that = this;
+
         let t = new Date();
 
         let seconds = t.getSeconds(); if (seconds<10){seconds = "0"+seconds;}
@@ -379,7 +384,7 @@ let view = {
                 }
                 //农历转换
                 function e2c(){
-                    TheDate= (arguments.length!=3) ? new Date() : new Date(arguments[0],arguments[1],arguments[2]);
+                    TheDate= (arguments.length!==3) ? new Date() : new Date(arguments[0],arguments[1],arguments[2]);
                     let total,m,n,k;
                     let isEnd=false;
                     let tmp=TheDate.getYear();
@@ -388,7 +393,7 @@ let view = {
                     }
                     total=(tmp-1921)*365+Math.floor((tmp-1921)/4)+madd[TheDate.getMonth()]+TheDate.getDate()-38;
 
-                    if(TheDate.getYear()%4==0&&TheDate.getMonth()>1) {
+                    if(TheDate.getYear()%4===0&&TheDate.getMonth()>1) {
                         total++;
                     }
                     for(m=0;;m++){
@@ -404,8 +409,8 @@ let view = {
                     cYear=1921 + m;
                     cMonth=k-n+1;
                     cDay=total;
-                    if(k==12){
-                        if(cMonth==Math.floor(CalendarData[m]/0x10000)+1){
+                    if(k===12){
+                        if(cMonth===Math.floor(CalendarData[m]/0x10000)+1){
                             cMonth=1-cMonth;
                         }
                         if(cMonth>Math.floor(CalendarData[m]/0x10000)+1){
@@ -499,25 +504,24 @@ let view = {
     "notice_txt": function (txt, timeout) { // 临时重要通知专用，不会遮挡页面操作
         let that = this;
 
-        // notice_txt层级形态显示
-        let notice_txt_index = that.get_cache("notice_txt_index")*1;
-        if (!notice_txt_index){
-            notice_txt_index = 7000000;
-        }else {
-            notice_txt_index = notice_txt_index + 10;
-        }
-        that.set_cache("notice_txt_index", notice_txt_index);
-
-        let class_name = "notice_txt_" + notice_txt_index;
-        that.log(["notice_txt", txt, timeout, notice_txt_index, class_name]);
-
         // 制作容器盒子
         if (!$(".notice_txt-box").length){
             $("body").append('<div class="notice_txt-box"></div>');
         }
 
+        // notice_txt层级形态显示
+        let notice_txt_index = that.get_cache("notice_txt_index")*1;
+        if (!notice_txt_index){
+            notice_txt_index = 7000000;
+        }else {
+            notice_txt_index = notice_txt_index*1 + 100;
+        }
+        that.set_cache("notice_txt_index", notice_txt_index);
+
+        let class_name = "notice_txt_" + notice_txt_index;
+
         // 渲染
-        let div = '<div class="notice_txt-li '+class_name+'" style="display: none;"><div class="notice_txt-show">'+txt+'</div><div class="notice_txt-close click" onclick="$(this).parent().slideUp(400);setTimeout(function(){$(this).parent().remove();}, 400);">x</div></div>';
+        let div = '<div><div class="notice_txt-li '+class_name+'" style="display: none;"><div class="notice_txt-show">'+txt+'</div><div class="notice_txt-close click" onclick="$(this).parent().slideUp(400);let li_out=setTimeout(function(){$(this).parent().remove();clearTimeout(li_out)}, 400);">x</div></div></div>';
         $(".notice_txt-box").prepend(div);
         $("." + class_name).slideDown(400);
 
@@ -527,12 +531,23 @@ let view = {
         }else if (timeout > 1*60*1000){
             timeout = 1*60*1000;
         }
-        setTimeout(function () {
-            $("." + class_name).slideUp(400);
-            setTimeout(function () {
-                $("." + class_name).remove();
-            }, 400);
-        }, timeout);
+
+        let len = $("." + class_name).length;
+        that.log([len, class_name]);
+
+        if (len === 0){
+            that.alert_txt("参数缺失，提醒失败", 1500);
+        }else {
+            let the_out = setTimeout(function () {
+                $("." + class_name).slideUp(400);
+                let a_out = setTimeout(function () {
+                    that.log(['out==', class_name, the_out, a_out]);
+                    $("." + class_name).remove();
+                    clearTimeout(the_out);
+                    clearTimeout(a_out);
+                }, 500);
+            }, timeout);
+        }
 
     },
     "check_phone": function (phone) {

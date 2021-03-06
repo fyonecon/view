@@ -311,7 +311,7 @@ function create_input(pre) { // 渲染模板
 
     document.getElementsByTagName("title")[0].innerText = title;
     let content = document.getElementsByClassName("content")[0];
-    content.innerHTML = '<div class="input-div" id="input-div"><select class="select search-style select-none" id="select"></select><input type="text" value="" maxlength="100" id="input" class="input search-style"  placeholder="'+ pre +'输入内容，按Enter搜索"/><div class="clear"></div></div><div class="search-btn-div" id="search-btn"></div><div class="res-div"></div>';
+    content.innerHTML = '<div class="input-div" id="input-div"><select class="select search-style select-none" id="select"></select><input type="text" value="" maxlength="500" id="input" class="input search-style"  placeholder="'+ pre +'输入内容，按Enter搜索"/><div class="clear"></div></div><div class="search-btn-div" id="search-btn"></div><div class="res-div"></div>';
     let append_tag = [];
     for (let i = 0; i < search.length; i++){
         let tag = '<option class="option option-'+i+'" value="'+i+'">'+ search[i]["name"] +'</option>';
