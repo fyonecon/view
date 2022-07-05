@@ -1,5 +1,5 @@
 ### View-Web单页应用框架
->开源地址：https://bitbucket.org/ggvs/view/
+>开源地址：https://github.com/fyonecon/view/
 > 
 >访问示例：https://html.s3.cn-north-1.jdcloud-oss.com
 > 
