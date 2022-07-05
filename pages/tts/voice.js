@@ -57,6 +57,5 @@ function voice_text(txt, time){
 
     read_txt = txt;
     read_time = time;
-    view.write_js([file_url + "static/js/mplayer.js"], mp3_play());
-
+    view.write_js([file_url + "static/js/mplayer.js"], mp3_play);
 }

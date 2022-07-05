@@ -35,14 +35,17 @@ let refer = [
 // 自定义
 // App验证参数
 let app_class = "view_ggvs";
-let app_version = "v3.0.0";
-let app_name = "GGVS";
+let app_version = "v3.2.0";
+let app_name = "view单页web框架";
 let app_platform = "WebApp";
 
 // 登录用户使用的验证参数
-let app_token = "";
-let user_token = "";
-let user_id = 0;
+let login_token = "";
+let login_id = 0;
+let login_name = "";
+let login_level = 0;
+let login_level_name = "（未知等级）";
+let login_nickname = "（未登录）";
 
 
 

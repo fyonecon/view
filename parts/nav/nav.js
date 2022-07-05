@@ -15,7 +15,7 @@
     };
 
     // 写入组件
-    view.write_htm(page_url + "parts/nav/nav.htm", "depend", function () {
+    view.write_htm(page_url + "parts/nav/nav.html", "depend", function () {
         part.part_init("nav");
     });
     view.write_css([page_url + "parts/nav/nav.css"], function () {

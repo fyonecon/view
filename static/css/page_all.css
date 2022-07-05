@@ -3,18 +3,23 @@
 body, html{
     font-family: "Noto Sans Light" !important; /*默认思源黑体Apache开源协议字体*/
 }
+h1, h2{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+h3, h4, h5, p{
+    margin-top: 0;
+    margin-bottom: 0;
+}
 
 .body{
     margin: 0;
-    font-size: 16px;
-    color: #f5f5f5;
-    line-height: 30px;
-    /*background-color: #333333;*/
+    font-size: 14px;
 }
 
 .page-div{
     width: 100%;
-    margin-top: 0px;
+    margin-top: 0;
 }
 .part-div{
     width: 100%;
@@ -41,16 +46,16 @@ body, html{
 
 /*字体大小*/
 .font-mini{
-    font-size: 14px;
+    font-size: 12px;
 }
 .font-text{
-    font-size: 18px;
+    font-size: 14px;
 }
 .font-title{
-    font-size: 22px;
+    font-size: 18px;
 }
 .font-class{
-    font-size: 26px;
+    font-size: 22px;
 }
 
 /**/
@@ -58,27 +63,27 @@ body, html{
     border-bottom: 1px solid #cccccc;
 }
 .border-bottom:last-child{
-    border-bottom: 0px solid #cccccc;
+    border-bottom: 0 solid #cccccc;
 }
 
 /**/
 .red{
-    color: red;
+    color: red !important;
 }
 .blue{
-    color: blue;
+    color: dodgerblue !important;
 }
 .yellow{
-    color: #EEC900;
+    color: #EEC900 !important;
 }
 .green{
-    color: green;
+    color: lawngreen !important;
 }
 .black{
     color: black;
 }
 .grey{
-    color: grey;
+    color: rgba(0,0,0,0.6) !important;
 }
 
 /**/
@@ -86,7 +91,7 @@ body, html{
     transition: transform 0.5s;
     transform: rotateZ(90deg);
 }
-.transform-180{
+.transform-180{ /*带动画旋转180°*/
     transition: transform 0.5s;
     transform: rotateZ(180deg);
 }
@@ -99,12 +104,13 @@ body, html{
 /**/
 @media only screen and (max-width: 300px) {
     body:after{
-        width: 300px; height: 100%;
-        content:"页面宽度太小";
+        width: 700px; height: 100%;
+        content:"页面宽度太小！";
         position:fixed; top: 0;
-        text-align: center;
+        text-align: left;
+        padding: 0 0 0 20px;
         font-size: 24px; color: white; line-height: 400px;
-        background: rgba(0,0,0,0.5);
+        background: rgba(0,0,0,0.6);
         cursor: not-allowed;
         letter-spacing: 2px;
         z-index: 999900000;
@@ -114,7 +120,7 @@ body, html{
 /**/
 ::selection { /*复制时的选中样式，猛男粉红*/
     color: #FCFCFC;
-    background: #CD5C5C;
+    background: #009688;
     outline: thick solid #FF0000;
 }
 ::-moz-selection {
@@ -132,6 +138,9 @@ li{
 a{
     text-decoration: none;
 }
+img{
+    border: none;
+}
 
 /**/
 .click-none{
@@ -143,14 +152,14 @@ a{
     user-select: none;
 }
 .click:active{
-    opacity: 0.6;
+    opacity: 0.7;
 }
 .click:hover{
-    opacity: 0.8;
+    opacity: 0.7;
 }
 
 .hover:hover{
-    opacity: 0.8;
+    opacity: 0.7;
     cursor: pointer;
 }
 
@@ -174,9 +183,19 @@ a{
     user-select: text;
 }
 
+.page-url-qrcode{
+    text-align: center;
+    padding: 10px 0;
+}
+.qr_img{
+    display: block;
+    margin: 0 auto;
+    border-radius: 5px;
+    width: 120px;
+}
+
 .a-href{
-    padding: 0px 5px;
-    color: deepskyblue;
+    color: dodgerblue;
 }
 .a-href:hover{
     text-decoration: underline;
@@ -184,21 +203,66 @@ a{
 .a-href:active{
     color: skyblue;
 }
-.a-href:visited{
-    color: skyblue;
+.text-center {
+    text-align: center;
+}
+.no-drop{
+    cursor: no-drop;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 
-@media only screen and (max-width: 320px) {
-    .depend{
-        width: 320px;
-        overflow: hidden;
-    }
+/**/
+.card-div{
+    padding: 10px 10px;
+    max-width: 1060px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 5px;
 }
-.depend{
-    min-height: 600px;
+.direct-list-div{
+    font-size: 16px;
+}
+.content-box{
+    padding-top: 60px;
+    width: 100%;
 }
 
-.div{
+
+/**/
+.banner-img-div{
+    width: 100%;
+}
+.banner-img{
+    width: 100%;
+    height: auto;
     display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.swiper-lingo{
+    position: absolute;
+    top: 0;
+    left: 80px;
+    width: 220px;
+    background: white;
+    font-size: 18px;
+    color: black;
+    z-index: 99000;
+    padding: 30px 30px;
+    border-bottom-right-radius: 80px;
+}
+.swiper-lingo-title{
+    font-size: 18px;
+    color: #828282;
+    padding-bottom: 20px;
+}
+.swiper-lingo-p{
+    font-size: 32px;
 }

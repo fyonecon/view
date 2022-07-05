@@ -9,6 +9,9 @@
  * @see <a href="http://www.d-project.com/" target="_blank">http://www.d-project.com/</a>
  * @see <a href="http://jeromeetienne.github.com/jquery-qrcode/" target="_blank">http://jeromeetienne.github.com/jquery-qrcode/</a>
  */
+
+// 教程文档：https://www.runoob.com/w3cnote/javascript-qrcodejs-library.html
+
 var QRCode;
 
 (function () {

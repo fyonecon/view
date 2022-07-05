@@ -10,7 +10,7 @@
     };
 
     // 写入组件
-    view.write_htm(page_url + "parts/foot/foot.htm", "depend", function () {
+    view.write_htm(page_url + "parts/foot/foot.html", "depend", function () {
         part.part_init("foot");
     });
 

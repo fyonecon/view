@@ -7,16 +7,28 @@ const search_debug = false; // 调试日志，false关闭日志，true显示日�
 const title = " 👈 简洁主页"; // 当前页面标题
 const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。自定义。
     {
-        "name": "必应搜索",
-        "m-url": "https://cdnaliyun.oss-cn-hangzhou.aliyuncs.com/index.html?route=search&engine=bing&word=",
-        "pc-url": "https://cdnaliyun.oss-cn-hangzhou.aliyuncs.com/index.html?route=search&engine=bing&word=",
+        "name": "Bing",
+        "m-url": "?route=search&engine=bing&word=",
+        "pc-url": "?route=search&engine=bing&word=",
         "url_right": "",
     },
     {
-        "name": "Google搜索", // 引擎名称，可视5个字
-        "m-url": "https://cdnaliyun.oss-cn-hangzhou.aliyuncs.com/index.html?route=search&engine=google&word=", // 移动端，前缀
-        "pc-url": "https://cdnaliyun.oss-cn-hangzhou.aliyuncs.com/index.html?route=search&engine=google&word=", // PC端，前缀
+        "name": "Baidu",
+        "m-url": "?route=search&engine=baidu&word=",
+        "pc-url": "?route=search&engine=baidu&word=",
+        "url_right": "",
+    },
+    {
+        "name": "Google", // 引擎名称，可视5个字
+        "m-url": "?route=search&engine=google&word=", // 移动端，前缀
+        "pc-url": "?route=search&engine=google&word=", // PC端，前缀
         "url_right": "", // 参数的固顶后缀
+    },
+    {
+        "name": "搜英文电影",
+        "m-url": "?route=search&engine=video&word=",
+        "pc-url": "?route=search&engine=video&word=",
+        "url_right": "",
     },
     {
         "name": "英中翻译",
@@ -30,48 +42,6 @@ const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。�
         "pc-url": "https://fanyi.baidu.com/translate#zh/en/",
         "url_right": "",
     },
-    {
-        "name": "白嫖收费音乐",
-        "m-url": "https://cdnaliyun.oss-cn-hangzhou.aliyuncs.com/index.html?route=search&engine=music&word=",
-        "pc-url": "https://cdnaliyun.oss-cn-hangzhou.aliyuncs.com/index.html?route=search&engine=music&word=",
-        "url_right": "",
-    },
-    {
-        "name": "搜索QQ音乐",
-        "m-url": "https://y.qq.com/portal/search.html#page=1&t=song&w=",
-        "pc-url": "https://y.qq.com/portal/search.html#page=1&t=song&w=",
-        "url_right": "",
-    },
-    {
-        "name": "百度一下",
-        "m-url": "https://cdnaliyun.oss-cn-hangzhou.aliyuncs.com/index.html?route=search&engine=baidu&word=",
-        "pc-url": "https://cdnaliyun.oss-cn-hangzhou.aliyuncs.com/index.html?route=search&engine=baidu&word=",
-        "url_right": "",
-    },
-    {
-        "name": "搜索Github",
-        "m-url": "https://github.com/search?&type=Repositories&q=",
-        "pc-url": "https://github.com/search?&type=Repositories&q=",
-        "url_right": "",
-    },
-    {
-        "name": "搜索电影MP4",
-        "m-url": "https://m.domp4.com/",
-        "pc-url": "https://www.domp4.com/",
-        "url_right": "blank",
-    },
-    // {
-    //     "name": "白嫖我的博文",
-    //     "m-url": "https://so.csdn.net/so/search/s.do?q=",
-    //     "pc-url": "https://so.csdn.net/so/search/s.do?q=",
-    //     "url_right": "&t=blog&u=weixin_41827162",
-    // },
-    // {
-    //     "name": "搜索城市天气",
-    //     "m-url": "http://wthrcdn.etouch.cn/weather_mini?city=",
-    //     "pc-url": "http://wthrcdn.etouch.cn/weather_mini?city=",
-    //     "url_right": "",
-    // },
 
     {
         "name": "查询IPv4",
@@ -80,41 +50,29 @@ const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。�
         "url_right": "",
     },
     {
-        "name": "域名SEO",
-        "m-url": "https://seo.chinaz.com/",
-        "pc-url": "https://seo.chinaz.com/",
-        "url_right": "",
-    },
-    {
-        "name": "域名Whois",
+        "name": "查询Whois",
         "m-url": "http://whois.chinaz.com/",
         "pc-url": "http://whois.chinaz.com/",
         "url_right": "",
     },
-    {
-        "name": "菜鸟教程",
-        "m-url": "http://www.runoob.com/?s=",
-        "pc-url": "http://www.runoob.com/?s=",
-        "url_right": "",
-    },
-    {
-        "name": "微博搜索🧣",
-        "m-url": "http://s.weibo.com/weibo/",
-        "pc-url": "http://s.weibo.com/weibo/",
-        "url_right": "",
-    },
-    {
-        "name": "CSDN博客",
-        "m-url": "https://so.csdn.net/so/search/s.do?q=",
-        "pc-url": "https://so.csdn.net/so/search/s.do?q=",
-        "url_right": "",
-    },
-    {
-        "name": "cnblogs博客",
-        "m-url": "https://zzk.cnblogs.com/s/blogpost?w=",
-        "pc-url": "https://zzk.cnblogs.com/s/blogpost?w=",
-        "url_right": "",
-    },
+    // {
+    //     "name": "菜鸟教程",
+    //     "m-url": "http://www.runoob.com/?s=",
+    //     "pc-url": "http://www.runoob.com/?s=",
+    //     "url_right": "",
+    // },
+    // {
+    //     "name": "CSDN博客",
+    //     "m-url": "https://so.csdn.net/so/search/s.do?q=",
+    //     "pc-url": "https://so.csdn.net/so/search/s.do?q=",
+    //     "url_right": "",
+    // },
+    // {
+    //     "name": "cnblogs博客",
+    //     "m-url": "https://zzk.cnblogs.com/s/blogpost?w=",
+    //     "pc-url": "https://zzk.cnblogs.com/s/blogpost?w=",
+    //     "url_right": "",
+    // },
 
 ];
 
@@ -311,7 +269,7 @@ function create_input(pre) { // 渲染模板
 
     document.getElementsByTagName("title")[0].innerText = title;
     let content = document.getElementsByClassName("content")[0];
-    content.innerHTML = '<div class="input-div" id="input-div"><select class="select search-style select-none" id="select"></select><input type="text" value="" maxlength="500" id="input" class="input search-style"  placeholder="'+ pre +'输入内容，按Enter搜索"/><div class="clear"></div></div><div class="search-btn-div" id="search-btn"></div><div class="res-div"></div>';
+    content.innerHTML = '<div class="input-div" id="input-div"><select class="select search-style select-none" id="select"></select><input type="text" value="" maxlength="500" id="input" class="input search-style"  placeholder="'+ pre +'查找问题 路由为什么404"/><div class="clear"></div></div><div class="search-btn-div" id="search-btn"></div><div class="res-div"></div>';
     let append_tag = [];
     for (let i = 0; i < search.length; i++){
         let tag = '<option class="option option-'+i+'" value="'+i+'">'+ search[i]["name"] +'</option>';
@@ -363,13 +321,13 @@ function run_search(){ // 执行搜索
         return;
     }
 
-    let http_url = _input;
     let reg = /^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)+([A-Za-z0-9-~\/])/; // 至少是 http://a 这种格式
-    if(!reg.test(http_url)){
+    if(!reg.test(_input)){
         console_log("不是网址");
+        _input = encodeURIComponent(_input);
     }else{
         console_log("是网址");
-        window.open(http_url, "_blank"); // 搜索4/4
+        window.open(_input, "_blank"); // 搜索4/4
         return;
     }
 
@@ -428,18 +386,18 @@ function init_404(){
     // 初始化搜索按钮
     document.getElementById("search-btn").innerHTML = '' +
         '<div class="search-btn-center do-btn-center">' +
-        '   <span class="search-btn-style history-btn-span click">🐾·清空</span>' +
+        '   <span class="search-btn-style history-btn-span click">🐾·重输</span>' +
         '   <span class="search-btn-style color-btn-span click">🌓·<span id="change-color-span"></span></span>' +
         '   <span class="search-btn-style search-btn-span click">🔍·Enter</span>' +
         '   <div class="clear"></div>' +
         '</div>' +
-        '<div class="search-btn-center quick-btn-center">' +
+        '<div class="search-btn-center quick-btn-center hide">' +
         '   <span class="search-btn-style href-btn-span click" onclick="href_ext(this)" data-href="https://cdnaliyun.oss-cn-hangzhou.aliyuncs.com/?route=fm">📻·FM</span>' +
         '   <span class="search-btn-style href-btn-span click" onclick="href_ext(this)" data-href="https://wannianrili.51240.com/">万年历</span>' +
         '   <span class="search-btn-style href-btn-span click" onclick="href_ext(this)" data-href="./?route=calc">计算器</span>' +
         '   <div class="clear"></div>' +
         '</div>' +
-        '<div class="search-btn-center quick-btn-center">' +
+        '<div class="search-btn-center quick-btn-center hide">' +
         '   <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) "data-href="https://www.wwei.cn/">二维码</span>' +
         '   <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) "data-href="https://sspai.com/">少数派</span>' +
         '   <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) "data-href="http://www.ruanyifeng.com/blog/">阮一峰</span>' +
@@ -466,7 +424,7 @@ function init_404(){
         // '   <div class="clear"></div>' +
         // '</div>' +
         '<div class="clear"></div>' +
-        '<div class="div-time"></div>' +
+        '<code class="div-time"></code>' +
         '<div class="div-qr hide">' +
         '   <div class="div-qr-box" id="img-show_qr"></div>' +
         '</div>' +
@@ -547,7 +505,13 @@ function init_404(){
 * */
 const bg_cookie = search_cookie_pre + "bg_color";
 function init_color() {
-    let bg_color = getCookie(bg_cookie)*1;
+    let bg_color = getCookie(bg_cookie);
+    if (bg_color === null || bg_color === ""){ // 默认颜色
+        bg_color = 1;
+    }else {
+        bg_color = bg_color * 1;
+    }
+
     let change_color_span = document.getElementById("change-color-span");
     let body = document.getElementsByClassName("body")[0];
     let select = document.getElementsByTagName("select")[0];
@@ -745,9 +709,9 @@ function href_ext(that) {
 function timer() {
     try {
         document.getElementsByClassName('div-time')[0].innerHTML =
-            ""  + view.get_date()[5] +
+            ""  + view.get_date()[2] +
+            "/" + view.get_date()[5] +
             " " + view.get_date()[9] +
-            " " + view.get_date()[8] +
             " " + view.get_date()[7] +
             "";
     }catch (e) {
