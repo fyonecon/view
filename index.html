@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="robots" content="nofollow">
+    <meta http-equiv="Cache-Control" content="max-age=1200">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-touch-fullscreen" content="yes" />
@@ -41,7 +42,8 @@
                 // 不要更改以上顺序
             ];
             // 核心文件每次加载都自动清除缓存
-            var clear_cache =  Math.floor(new Date().getTime()/10000)*10000;
+            var clear_time = 100*1000; // ms
+            var clear_cache =  Math.floor(new Date().getTime()/clear_time)*clear_time;
             var head = document.head || document.getElementsByTagName("head")[0];
             // css
             var link_depend = document.createElement("link");

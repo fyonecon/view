@@ -413,14 +413,14 @@ function init_dom() {
     document.getElementById("search-btn").innerHTML = '' +
         //
         '<div class="search-btn-center do-btn-center must-btn select-none">' +
-        '   <span class="search-btn-style history-btn-span click red" title="清空搜索历史记录">清空历史</span>' +
+        '   <span class="search-btn-style history-btn-span click red" title="清空搜索历史记录" data-clipboard-text=" ">清空历史</span>' +
         '   <span class="search-btn-style refresh-btn-span click green" title="清空输入框">重新输入</span>' +
         '   <span class="search-btn-style search-btn-span click" title="点击搜索">🔍·搜索</span>' +
         '   <div class="clear"></div>' +
         '</div>' +
         //
         '<div class="search-btn-center do-btn-center must-btn select-none timeout-hide hide">' +
-        '   <span class="search-btn-style copy-btn-span click" onclick="clear_copy(this)" data-clipboard-text="+86110">🎲·随机数</span>' +
+        '   <span class="search-btn-style copy-btn-span click" onclick="clear_copy(this, \'copy-btn-span\')" data-clipboard-text="+86110">🎲·随机数</span>' +
         '   <span class="search-btn-style color-btn-span click">🌓·<span id="change-color-span"></span></span>' +
 
         '   <div class="clear"></div>' +
@@ -592,12 +592,11 @@ function init_dom() {
         change_bg_color();
     });
     document.getElementsByClassName("history-btn-span")[0].addEventListener("click", function() {
+        let that = this;
         clear_history();
         document.getElementById("input").value = "";
-        setTimeout(function (){
-            let now_url = window.location.href;
-            window.location.replace(now_url);
-        }, 100);
+        clear_copy(that, "history-btn-span");
+
     });
     document.getElementsByClassName("refresh-btn-span")[0].addEventListener("click", function() {
         document.getElementById("input").value = "";
@@ -972,15 +971,15 @@ function make_swiper(){
 }
 
 //
-function clear_copy(that){
+function clear_copy(that, _class){
     // view.notice_txt(view.read_clipboard());
 
-    let clipboard = new Clipboard(".copy-btn-span");
+    let clipboard = new Clipboard("."+_class);
     clipboard.on('success', function(e) {
         // console.info('Action:', e.action);
         // console.info('Text:', e.text);
         // console.info('Trigger:', e.trigger);
-        view.alert_txt("已生成随机数到粘贴板", 1200);
+        // view.alert_txt("已生成随机数到粘贴板", 1200);
         e.clearSelection();
     });
     clipboard.on('error', function(e) {

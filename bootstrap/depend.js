@@ -47,34 +47,39 @@ const index_load = {
     let the_refer = document.referrer;
 
     try {
-        let check_refer = app_refer[0].check_refer;
-        let jump_site = app_refer[0].jump_site;
-        let white_refer = app_refer[0].white_refer;
+        let check_refer = app_refer.check_refer;
+        let jump_site = app_refer.jump_site;
+        let white_refers = app_refer.white_refer;
         // view.log([the_host, the_refer]);
-
         if (!check_refer){
-            view.log("refer检测已关闭");
+            view.log("refer安全检测已关闭");
         }else {
             if (the_refer){
-                the_refer = the_refer.slice(0, 30);
-                view.log("refer检测已开启，len=30");
-                for (let j=0; j<white_refer.length; j++){
-                    let the_white_refer = white_refer[j];
+                view.log("refer安全检测已开启，url_len=60");
+
+                // 校验refer
+                the_refer = the_refer.slice(0, 60);
+                let has = 0;
+                for (let j=0; j<white_refers.length; j++){
+                    let the_white_refer = white_refers[j];
                     if (view.string_include_string(the_refer, the_white_refer) !== -1){ // 处在白名单
-                        //view.log("白名单refer=" + the_white_refer);
-                    }else {
-                        if (jump_site){
-                            window.location.replace(jump_site);
-                        }
+                        has = j +1;
+                        view.log(["白名单refer = " + the_white_refer, the_refer]);
                         break;
+                    }else {
+                        // view.log([j, the_white_refer, the_refer]);
                     }
+                }
+                // 不符合则跳到目标url
+                if (jump_site && has<1){
+                    window.location.replace(jump_site + "#refer-error");
                 }
             }else {
                 view.log("refer为空时跳过refer校验");
             }
         }
     }catch (e) {
-        view.log([the_host, the_refer, '参数不全，已跳过']);
+        view.log([the_host, the_refer, '参数不全，已跳过', e]);
     }
 
 })();
