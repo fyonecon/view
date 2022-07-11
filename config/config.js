@@ -16,18 +16,21 @@ const file_url        = index_file_url?index_file_url:"./";             // 资�
 const page_url        = index_file_url?index_file_url:"./";             // htm文件的服务器地址，因为使用了ajax请求，不能直接请求本地文件，可以全部放在CDN里面
 
 const cache_time      = 1000*1000; // 缓存时间：ms
-const page_time       =  "" + Math.floor((new Date()).getTime()/cache_time)*cache_time;
+const page_time       = "view-pages-"+Math.floor((new Date()).getTime()/cache_time)*cache_time;
 
 const api_url         = "https://xcx.xxx.cn/chengzi/public/index.php/api/";  // api主地址
 
-// 白名单refer域名
-let app_refer = {
-    'check_refer': true, // 是否开启白名单refer检测
-    'jump_site': 'https://www.bing.com/', // 遇到黑名单refer的落地地址
-    'white_refer': [
-        '127.0.0.1', 'localhost',
+// 白名单host或refer域名
+let app_url = {
+    'check_url': "host", // 是否开启白名单url检测，refer开启refer检测，host开启host检测，any不检测
+    'jump_url': 'https://www.bing.com/', // 遇到黑名单refer的落地地址
+    'white_url': [ // 仅检测主域名，不包括http协议和url路径
+        // '127.0.0.1', 'localhost',
         'html.s3.cn-north-1.jdcloud-oss.com',
         'cdnaliyun.oss-cn-hangzhou.aliyuncs.com',
+        'cdnaliyun.oss-accelerate-overseas.aliyuncs.com',
+        'cdnaliyun.oss-accelerate-overseas.aliyuncs.com',
+        'ginvel.com',
     ],
 };
 

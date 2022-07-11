@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="robots" content="nofollow">
-    <meta http-equiv="Cache-Control" content="max-age=1200">
+    <meta http-equiv="Cache-Control" content="max-age=2400">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-touch-fullscreen" content="yes" />
@@ -21,7 +21,7 @@
     <meta name="description" content="View是一款Web单页应用框架，全框架倾向于原生+CDN，多数数据计算工具拿来即用。" />
     <meta name="author" content="https://github.com/fyonecon" />
     <script id="depend-js" nonce="" data-view="" data-desc="">
-        var time_start  =  Math.floor((new Date()).getTime()); // ms。开始载入外部文件的时间戳
+        var time_start  = Math.floor((new Date()).getTime()); // ms。开始载入外部文件的时间戳
         var time_loaded = 0; // ms。框架载入完成的时间戳
         var time_error  = 0; // ms。框架出错的时间戳
         var index_file_url = "./"; // 自定义CDN地址，./
@@ -43,12 +43,12 @@
             ];
             // 核心文件每次加载都自动清除缓存
             var clear_time = 100*1000; // ms
-            var clear_cache =  Math.floor(new Date().getTime()/clear_time)*clear_time;
+            var clear_cache = "?view-must-" + Math.floor(new Date().getTime()/clear_time)*clear_time;
             var head = document.head || document.getElementsByTagName("head")[0];
             // css
             var link_depend = document.createElement("link");
             link_depend.setAttribute("id", "depend-css");
-            link_depend.setAttribute("href", css_href_array[0] + "?"+clear_cache);
+            link_depend.setAttribute("href", css_href_array[0] + clear_cache);
             link_depend.setAttribute("rel", "stylesheet");
             head.appendChild(link_depend);
             link_depend.onload = function (){

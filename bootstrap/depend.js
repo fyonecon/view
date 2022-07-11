@@ -17,7 +17,7 @@ const index_load = {
 };
 
 // 浏览器环境检查，主要检测是否支持ES6语法
-(function () {
+function depend_es6(){
     try{
         let check = 1;
         new Promise(function(resolve, reject) {
@@ -39,85 +39,74 @@ const index_load = {
         alert("该古老的浏览器不支持ES6语法，需更换浏览器。");
         window.location.replace(index_file_url + "parts/help/help-es6.html");
     }
-})();
+}
 
-// 检测白名单refer
-(function () {
+// 检测白名单url
+function depend_url(){
+    let check_url = app_url.check_url;
     let the_host = window.location.host;
     let the_refer = document.referrer;
+    // view.log(["参数1：", the_host, the_refer]);
 
-    try {
-        let check_refer = app_refer.check_refer;
-        let jump_site = app_refer.jump_site;
-        let white_refers = app_refer.white_refer;
-        // view.log([the_host, the_refer]);
-        if (!check_refer){
-            view.log("refer安全检测已关闭");
-        }else {
-            if (the_refer){
-                view.log("refer安全检测已开启，url_len=60");
-
-                // 校验refer
-                the_refer = the_refer.slice(0, 60);
-                let has = 0;
-                for (let j=0; j<white_refers.length; j++){
-                    let the_white_refer = white_refers[j];
-                    if (view.string_include_string(the_refer, the_white_refer) !== -1){ // 处在白名单
-                        has = j +1;
-                        view.log(["白名单refer = " + the_white_refer, the_refer]);
-                        break;
-                    }else {
-                        // view.log([j, the_white_refer, the_refer]);
-                    }
-                }
-                // 不符合则跳到目标url
-                if (jump_site && has<1){
-                    window.location.replace(jump_site + "#refer-error");
-                }
-            }else {
-                view.log("refer为空时跳过refer校验");
-            }
-        }
-    }catch (e) {
-        view.log([the_host, the_refer, '参数不全，已跳过', e]);
+    // 开关
+    let the_url = "";
+    switch (check_url) {
+        case "refer":
+            the_url = the_refer.slice(0, 60);
+            break;
+        case "host":
+            the_url = "//"+the_host; // 用主域名代替refer，前缀必须//开头
+            the_url = the_url.split("/")[2];
+            break;
+        case "any":
+            the_url = "";
+            break;
+        default:
+            the_url = "";
+            break;
     }
 
-})();
+    //
+    try {
+        let jump_site = app_url.jump_url;
+        let white_urls = app_url.white_url;
 
-// 监听url是否发生变化，确保页面跳转成功
-(function () {
-    let url = window.location.href;
-
-    window.onhashchange = function () {
-        let now_url = window.location.href;
-
-        // 只获取和对比#号之前的网址
-        let index1 = url.lastIndexOf("\#");
-        if (index1>0){
-            url = url.substring(0, index1);
-        }
-
-        let index2 = now_url.lastIndexOf("\#");
-        if (index2>0){
-            now_url = now_url.substring(0, index2);
-        }
-
-        if (url && url !== now_url){
-            // console.log(["url不同：", url, now_url]);
-            window.location.reload();
+        if (the_url){
+            view.log("url安全检测已开启 >>> ");
+            // 校验refer
+            let has = 0;
+            for (let j=0; j<white_urls.length; j++){
+                let the_white_url = white_urls[j];
+                if (view.string_include_string(the_url, the_white_url) !== -1){ // 处在白名单
+                    has = j +1;
+                    view.log(["白名单"+check_url+" = " + the_white_url, the_url]);
+                    break;
+                }else {
+                    // view.log([j, the_white_url, the_url]);
+                    continue;
+                }
+            }
+            // 不符合则跳到目标url
+            if (jump_site && has<1){
+                window.location.replace(jump_site + "#refer-error="+encodeURI(the_url));
+            }else {
+                depend_pages();
+            }
         }else {
-            console.log(["跳过url变化检测（只对比#号之前的）：", url, now_url]);
+            view.log(["url为空时跳过url校验，危险模式运行中 >>> ", the_url]);
+            depend_pages();
         }
 
-    };
-})();
-
+    }catch (e) {
+        view.log([the_host, the_refer, 'url参数报错']);
+        console.error(e);
+    }
+}
 
 // 加载框架模块文件
-(function () {
-
+function depend_pages(){
     const depend = {  // 依赖函数
-        "get_url_param": function (url, key) {  // 获取url中的参数
+        "get_url_param": function (url, key) { // 获取url中的参数
             let url_str = "";
             if(!url){
                 url_str = window.location.href;
@@ -341,8 +330,34 @@ const index_load = {
         });
 
     }
+}
 
+
+// 监听url是否发生变化，确保页面跳转成功
+(function () {
+    let url = window.location.href;
+    window.onhashchange = function () {
+        let now_url = window.location.href;
+        // 只获取和对比#号之前的网址
+        let index1 = url.lastIndexOf("\#");
+        if (index1>0){
+            url = url.substring(0, index1);
+        }
+        let index2 = now_url.lastIndexOf("\#");
+        if (index2>0){
+            now_url = now_url.substring(0, index2);
+        }
+        if (url && url !== now_url){
+            // console.log(["url不同：", url, now_url]);
+            window.location.reload();
+        }else {
+            console.log(["跳过url变化检测（只对比#号之前的）：", url, now_url]);
+        }
+    };
 })();
 
-
-
+//
+(function (){
+    depend_es6();
+    depend_url();
+})();
