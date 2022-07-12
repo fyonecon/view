@@ -769,11 +769,13 @@ const view = {
             return Math.abs(screen_h_foot) > 10;
         }
     },
-    xss_iframe: function (iframe_div, url){ // 加载落地页
+    xss_iframe: function (div_id, url, call_func, call_data1, call_data2){ // 加载内嵌落地页。示例：<div id="iframe-div-1"></div>
         let that = this;
         // 页面需要放置锚点：<div class="iframe-div"></div>
         let iframe = document.createElement("iframe");
-        if (!iframe_div){iframe_div=document.getElementsByClassName("iframe-div")[0];}
+        let iframe_div = document.getElementById(div_id);
+        let href = location.href; href = encodeURIComponent(href);
+        let refer = document.referrer; refer = encodeURIComponent(refer);
         iframe_div.innerHTML = "";
         iframe.setAttribute("width", window.innerWidth);
         iframe.setAttribute("height", window.innerHeight);
@@ -781,13 +783,22 @@ const view = {
         iframe.setAttribute("frameborder", "0");
         iframe.classList.add("iframe-content");
         iframe.classList.add("iframe-content-xss");
+        iframe.setAttribute("id", "iframe_"+div_id);
         iframe.setAttribute("data-src", url);
+        iframe.setAttribute("data-href", href);
+        iframe.setAttribute("data-refer", refer);
         iframe.setAttribute("src", "javascript:(function(){var fs=parent.document.getElementsByTagName('iframe');var src=fs[0].getAttribute('data-src');if(!navigator.webdriver){fs[0].src=src;fs[0].setAttribute('data-src', 'true');}})()");
         iframe_div.appendChild(iframe);
         iframe.onload = function (){
             that.log("iframe落地页加载完毕！url=" + url);
             // 此处可以放置统计代码或其他
+            try {call_func(call_data1, call_data2);}catch (e){}
         };
+    },
+    del_xss_iframe: function(div_id){ // 删除内嵌落地页
+        let that = this;
+        that.log("删除内嵌落地页！div_id=" + div_id);
+        try{document.getElementById(div_id).innerHTML = "";}catch (e){}
     },
     make_app_uid: function (app_class){
         let that = this;
@@ -804,6 +815,63 @@ const view = {
         let pv = that.get_cookie(key)*1;
         that.set_cookie(key, pv + 1, 2*24*60*60*1000);
         return pv < max_pv;
+    },
+    open_full_screen: function (div_id, call_func, call_data1, call_data2){ // 打开全屏（仅支持手动触发），div_id为需要全屏显示的dom区块的id
+        let that = this;
+        let el = document.getElementById(div_id);
+        let rfs = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullScreen;
+        that.log(["打开全屏", div_id, rfs]);
+        // let demo = '<div class="demo"><button id="open_full-btn">打开全屏</button><div id="full_div" style="background:yellow;width:200px;height:300px;"><button id="close_full-btn">关闭全屏</button></div></div><script>;document.getElementById("open_full-btn").onclick = function(){open_full_screen("full_div");};document.getElementById("close_full-btn").onclick = function(){exit_full_screen();};</script> 文档：https://www.jb51.net/article/76695.htm'; // 示例代码
+        // view.log(demo);
+        if(typeof rfs != "undefined" && rfs) {
+            rfs.call(el);
+            return false;
+        }else {
+            if(typeof window.ActiveXObject != "undefined") {
+                let wscript = new ActiveXObject("WScript.Shell");
+                if(wscript) {
+                    wscript.SendKeys("{F11}");
+                    try {call_func(call_data1, call_data2);}catch (e){}
+                    return true;
+                }else {
+                    return false;
+                }
+            }
+        }
+    },
+    exit_full_screen: function (call_func, call_data1, call_data2){ // 手动点击DOM按钮调用此函数退出全屏
+        let that = this;
+        let el= document;
+        let cfs = el.cancelFullScreen || el.webkitCancelFullScreen || el.mozCancelFullScreen || el.exitFullScreen;
+        that.log(["退出全屏", cfs]);
+        if (typeof cfs != "undefined" && cfs) {
+            cfs.call(el);
+            return false;
+        }else {
+            if (typeof window.ActiveXObject != "undefined") {
+                let wscript = new ActiveXObject("WScript.Shell");
+                if (wscript != null) {
+                    wscript.SendKeys("{F11}");
+                    try {call_func(call_data1, call_data2);}catch (e){}
+                    return true;
+                }else {
+                    return false;
+                }
+            }
+        }
+    },
+    close_full_screen: function (call_func, call_data1, call_data2){ // 手动按快捷键（ESC或F11）退出全屏
+        let that = this;
+        function is_full_screen() {
+            let is_full = document.fullscreenEnabled || window.fullScreen || document.webkitIsFullScreen || document.msFullscreenEnabled;
+            if (is_full === undefined) {is_full = false;}
+            return is_full;
+        }
+        window.onresize = function (){
+            if (!is_full_screen){ // 已退出全屏
+                try {call_func(call_data1, call_data2);}catch (e){}
+            }
+        };
     },
 
 };

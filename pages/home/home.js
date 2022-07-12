@@ -509,7 +509,7 @@ function init_dom() {
         '           </div>' +
 
         '           <div class="search-btn-center quick-btn-center">' +
-
+        '              <span class="search-btn-style href-btn-span click"  onclick="show_full_screen(this) ">Win11加载页</span>' +
 
         '              <div class="clear"></div>' +
         '           </div>' +
@@ -990,6 +990,29 @@ function clear_copy(that, _class){
 
 }
 
+// 打开全屏
+function show_full_screen(that){
+    view.open_full_screen("full-div");
+    setTimeout(function (){
+        view.xss_iframe("full-div", "https://didayu.cn/updates/win10/index.htm");
+    }, 100);
+}
+// 关闭全屏
+function close_full_screen(){
+    console.log('退出全屏')
+    view.close_full_screen();
+    setTimeout(function (){
+        view.del_xss_iframe("full-div");
+    }, 100);
+}
+// document.getElementById("full-div").onresize = function() {
+//     if (document.fullscreenElement) {
+//         console.log('进入全屏')
+//     } else {
+//         console.log('退出全屏')
+//     }
+// }
+
 function start_this_page(info) {
     view.log(info);
     // view.log("主框架解析完成，开始渲染模块页面 > >");
@@ -999,5 +1022,5 @@ function start_this_page(info) {
     delete_loading();
 
     show_history();
-
+    close_full_screen();
 }
