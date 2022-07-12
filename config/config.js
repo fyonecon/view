@@ -21,7 +21,7 @@ const page_time       = "view-pages-"+Math.floor((new Date()).getTime()/cache_ti
 const api_url         = "https://xcx.xxx.cn/chengzi/public/index.php/api/";  // api主地址
 
 // 白名单host或refer域名
-let app_url = {
+const app_url = {
     'check_url': "host", // 是否开启白名单url检测，refer开启refer检测，host开启host检测，any不检测
     'jump_url': 'https://www.bing.com/', // 遇到黑名单refer的落地地址
     'white_url': [ // 仅检测主域名，不包括http协议和url路径
@@ -36,10 +36,10 @@ let app_url = {
 
 // 自定义
 // App验证参数
-let app_class = "view_ggvs";
-let app_version = "v3.2.0";
-let app_name = "view单页web框架";
-let app_platform = "WebApp";
+const app_class = "view_ggvs";
+const app_version = "v3.2.0";
+const app_name = "view单页web框架";
+const app_platform = "WebApp";
 
 // 登录用户使用的验证参数
 let login_token = "";
