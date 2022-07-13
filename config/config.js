@@ -25,7 +25,7 @@ const app_url = {
     'check_url': "host", // 是否开启白名单url检测，refer开启refer检测，host开启host检测，any不检测
     'jump_url': 'https://www.bing.com/', // 遇到黑名单refer的落地地址
     'white_url': [ // 仅检测主域名，不包括http协议和url路径
-        // '127.0.0.1', 'localhost',
+        '127.0.0.1', 'localhost',
         'html.s3.cn-north-1.jdcloud-oss.com',
         'cdnaliyun.oss-cn-hangzhou.aliyuncs.com',
         'cdnaliyun.oss-accelerate-overseas.aliyuncs.com',
