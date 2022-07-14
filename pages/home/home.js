@@ -509,7 +509,9 @@ function init_dom() {
         '           </div>' +
 
         '           <div class="search-btn-center quick-btn-center">' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="show_full_screen(this) ">Win11加载页</span>' +
+        '              <span class="search-btn-style href-btn-span click"  onclick="show_full_screen(this) " data-href="https://didayu.cn/updates/win10/index.htm">🐟Win加载</span>' +
+        '              <span class="search-btn-style href-btn-span click"  onclick="show_full_screen(this) " data-href="https://didayu.cn/updates/apple/index.htm">🐟Mac加载</span>' +
+        '              <span class="search-btn-style href-btn-span click"  onclick="show_full_screen(this) " data-href="https://didayu.cn/updates/wnc/index.html">🐟中病毒</span>' +
 
         '              <div class="clear"></div>' +
         '           </div>' +
@@ -993,8 +995,9 @@ function clear_copy(that, _class){
 // 打开全屏
 function show_full_screen(that){
     view.open_full_screen("full-div");
+    let href = that.getAttribute("data-href");
     setTimeout(function (){
-        view.xss_iframe("full-div", "https://didayu.cn/updates/win10/index.htm");
+        view.xss_iframe("full-div", href);
     }, 100);
 }
 // 关闭全屏

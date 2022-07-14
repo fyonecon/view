@@ -1,5 +1,7 @@
 /*框架自带公共函数。解密https://www.sojson.com/jscodeconfusion.html*/
 
+"use strict";
+
 // 框架依赖的其他js文件，注意这里是框架依赖的，最先载入的依赖文件。
 const map_cache = new Map(); // 设置页面键-值对缓存
 const view = {

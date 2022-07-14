@@ -5,6 +5,8 @@
 * 2）不依赖于node但需依赖服务端环境，或者依赖CDN环境。
 * */
 
+"use strict";
+
 const debug = true;                     // 调试模式，统一打印日志，true & false
 
 // 框架渲染的必要参数

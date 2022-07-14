@@ -2,6 +2,8 @@
 /*https://www.sojson.com/aaencode.html*/
 /*2019/9/12/9:55*/
 
+"use strict";
+
 // 原生依赖
 const index_load = {
     "index_js": [
