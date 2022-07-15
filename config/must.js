@@ -1,3 +1,4 @@
+"use strict";
 
 // 推出所有设备
 function all_layout(){

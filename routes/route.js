@@ -1,6 +1,8 @@
 /*页面和模块信息配置*/
 /*路由注册（白名单）*/
 
+"use strict";
+
 // 1. 所有页面公用js、css文件，全局有效
 // 2. 注册全局组件
 const page_static_file = {

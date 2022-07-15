@@ -1,7 +1,7 @@
 /*
 * 局部模块js
 * */
-
+"use strict";
 
 const search_debug = false; // 调试日志，false关闭日志，true显示日志
 const title = " 👈 简洁主页"; // 当前页面标题
