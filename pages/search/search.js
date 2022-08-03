@@ -57,9 +57,7 @@ function jump_location(engine, word, url) {
 
     }
 
-    setTimeout(function () {
-        window.location.replace(url);
-    }, 500);
+    window.location.replace(url);
 }
 
 
