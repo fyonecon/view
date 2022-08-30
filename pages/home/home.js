@@ -396,11 +396,11 @@ function run_search() { // 执行搜索
     setTimeout(function() {
         show_history();
         console_log("打开新标签也买你");
-        window.open(tab_url, "_self");
-    }, 500);
+        window.open(tab_url, "_blank");
+    }, 10);
     setTimeout(function() {
         delete_loading();
-    }, 1200);
+    }, 1000);
 
 }
 
