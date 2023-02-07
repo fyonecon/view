@@ -1,7 +1,7 @@
 /*
  * 局部模块js
  * */
-
+"use strict";
 
 const search_debug = false; // 调试日志，false关闭日志，true显示日志
 const title = " 👈 简洁主页"; // 当前页面标题
@@ -292,7 +292,7 @@ function create_input(pre) { // 渲染模板
 
     document.getElementsByTagName("title")[0].innerText = title;
     let content = document.getElementsByClassName("content")[0];
-    content.innerHTML = '<div class="input-div" id="input-div"><select class="select search-style select-none" id="select"></select><input type="text" value="" maxlength="500" id="input" class="input search-style"  placeholder="' + pre + '输入内容，双击Enter搜索"/><div class="clear"></div></div><div class="input-history-div" id="input-history"></div><div class="clear"></div><div class="search-btn-div" id="search-btn"></div><div class="res-div"></div>';
+    content.innerHTML = '<div class="input-div" id="input-div"><select class="select search-style select-none" id="select"></select><input type="text" value="" maxlength="500" id="input" class="input search-style"  placeholder="' + pre + '输入内容"/><div class="clear"></div></div><div class="input-history-div" id="input-history"></div><div class="clear"></div><div class="search-btn-div" id="search-btn"></div><div class="res-div"></div>';
     let append_tag = [];
     for (let i = 0; i < search.length; i++) {
         let tag = '<option class="option option-' + i + '" value="' + i + '">' + search[i]["name"] + '</option>';
@@ -396,11 +396,11 @@ function run_search() { // 执行搜索
     setTimeout(function() {
         show_history();
         console_log("打开新标签也买你");
-        window.open(tab_url, "_self");
-    }, 500);
+        window.open(tab_url, "_blank");
+    }, 10);
     setTimeout(function() {
         delete_loading();
-    }, 1200);
+    }, 1000);
 
 }
 
@@ -413,14 +413,14 @@ function init_dom() {
     document.getElementById("search-btn").innerHTML = '' +
         //
         '<div class="search-btn-center do-btn-center must-btn select-none">' +
-        '   <span class="search-btn-style history-btn-span click red" title="清空搜索历史记录">清空历史</span>' +
+        '   <span class="search-btn-style history-btn-span click red" title="清空搜索历史记录" data-clipboard-text=" ">清空历史</span>' +
         '   <span class="search-btn-style refresh-btn-span click green" title="清空输入框">重新输入</span>' +
         '   <span class="search-btn-style search-btn-span click" title="点击搜索">🔍·搜索</span>' +
         '   <div class="clear"></div>' +
         '</div>' +
         //
         '<div class="search-btn-center do-btn-center must-btn select-none timeout-hide hide">' +
-        '   <span class="search-btn-style copy-btn-span click" onclick="clear_copy(this)" data-clipboard-text="+86110">🎲·随机数</span>' +
+        '   <span class="search-btn-style copy-btn-span click" onclick="clear_copy(this, \'copy-btn-span\')" data-clipboard-text="+86110">🎲·随机数</span>' +
         '   <span class="search-btn-style color-btn-span click">🌓·<span id="change-color-span"></span></span>' +
 
         '   <div class="clear"></div>' +
@@ -431,12 +431,10 @@ function init_dom() {
 
         //--
         '       <div class="swiper-slide more-btn">' +
-
         '           <div class="div-time select-none"></div>' +
         '           <div class="div-qr hide">' +
         '               <div class="div-qr-box" id="img-show_qr"></div>' +
         '           </div>' +
-
         '       </div>' +
 
         //--
@@ -508,7 +506,7 @@ function init_dom() {
         '           <div class="search-btn-center quick-btn-center ">' +
         '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://www.windy.com/">Windy</span>' +
         '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://finditandzip.ga/">油管视频下载</span>' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://cloudconvert.com/">音视频格式转换</span>' +
+        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://cloudconvert.com/">音乐格式转换</span>' +
         '              <div class="clear"></div>' +
         '           </div>' +
 
@@ -527,6 +525,9 @@ function init_dom() {
         '           </div>' +
 
         '           <div class="search-btn-center quick-btn-center">' +
+        '              <span class="search-btn-style href-btn-span click"  onclick="show_full_screen(this) " data-href="https://didayu.cn/updates/win10/index.htm">🐟Win加载</span>' +
+        '              <span class="search-btn-style href-btn-span click"  onclick="show_full_screen(this) " data-href="https://didayu.cn/updates/apple/index.htm">🐟Mac加载</span>' +
+        '              <span class="search-btn-style href-btn-span click"  onclick="show_full_screen(this) " data-href="https://didayu.cn/updates/wnc/index.html">🐟中病毒</span>' +
 
         '              <div class="clear"></div>' +
         '           </div>' +
@@ -563,11 +564,7 @@ function init_dom() {
 
         //--
         '       <div class="swiper-slide more-btn hide">' +
-
         '           <div class="search-btn-center quick-btn-center">' +
-
-
-
         '              <div class="clear"></div>' +
         '           </div>' +
         '       </div>' +
@@ -637,12 +634,11 @@ function init_dom() {
         change_bg_color();
     });
     document.getElementsByClassName("history-btn-span")[0].addEventListener("click", function() {
+        let that = this;
         clear_history();
         document.getElementById("input").value = "";
-        setTimeout(function (){
-            let now_url = window.location.href;
-            window.location.replace(now_url);
-        }, 100);
+        clear_copy(that, "history-btn-span");
+
     });
     document.getElementsByClassName("refresh-btn-span")[0].addEventListener("click", function() {
         document.getElementById("input").value = "";
@@ -697,11 +693,11 @@ function show_history(){
     let len = 10;
     let array_history = data_string.split(array_key)
     for (let i=0; i<len; i++){
-       let the_history = array_history[i];
-       if (the_history){
-           let span = '<div class="history-span click select-none blue" data-history="'+the_history+'" onclick="click_history(this)" title="'+the_history+'" data-title="'+the_history+'">#'+the_history+'</div>'
-           $("#input-history").append(span);
-       }
+        let the_history = array_history[i];
+        if (the_history){
+            let span = '<div class="history-span click select-none blue" data-history="'+the_history+'" onclick="click_history(this)" title="'+the_history+'" data-title="'+the_history+'">#'+the_history+'</div>'
+            $("#input-history").append(span);
+        }
     }
 }
 function update_history(){
@@ -1017,15 +1013,15 @@ function make_swiper(){
 }
 
 //
-function clear_copy(that){
+function clear_copy(that, _class){
     // view.notice_txt(view.read_clipboard());
 
-    let clipboard = new Clipboard(".copy-btn-span");
+    let clipboard = new Clipboard("."+_class);
     clipboard.on('success', function(e) {
         // console.info('Action:', e.action);
         // console.info('Text:', e.text);
         // console.info('Trigger:', e.trigger);
-        view.alert_txt("已生成随机数到粘贴板", 1200);
+        // view.alert_txt("已生成随机数到粘贴板", 1200);
         e.clearSelection();
     });
     clipboard.on('error', function(e) {
@@ -1036,6 +1032,30 @@ function clear_copy(that){
 
 }
 
+// 打开全屏
+function show_full_screen(that){
+    view.open_full_screen("full-div");
+    let href = that.getAttribute("data-href");
+    setTimeout(function (){
+        view.xss_iframe("full-div", href);
+    }, 100);
+}
+// 关闭全屏
+function close_full_screen(){
+    console.log('退出全屏')
+    view.close_full_screen();
+    setTimeout(function (){
+        view.del_xss_iframe("full-div");
+    }, 100);
+}
+// document.getElementById("full-div").onresize = function() {
+//     if (document.fullscreenElement) {
+//         console.log('进入全屏')
+//     } else {
+//         console.log('退出全屏')
+//     }
+// }
+
 function start_this_page(info) {
     view.log(info);
     // view.log("主框架解析完成，开始渲染模块页面 > >");
@@ -1045,5 +1065,5 @@ function start_this_page(info) {
     delete_loading();
 
     show_history();
-
+    close_full_screen();
 }
