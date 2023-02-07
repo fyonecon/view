@@ -206,6 +206,10 @@
     opacity: 0.8;
 }
 
+.refresh-btn-span, .history-btn-span, .search-btn-span{
+    font-weight: 700 !important;
+}
+
 .tips-div {
     font-size: 16px;
     color: #CD5C5C;
@@ -427,8 +431,4 @@
 .swiper-pagination-bullet-active {
     color: #000;
     background: deepskyblue;
-}
-.full-div{
-    width: 10px;
-    height: 0;
 }
