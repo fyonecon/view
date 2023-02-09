@@ -24,14 +24,15 @@ const api_url         = "https://xcx.xxx.cn/chengzi/public/index.php/api/";  // 
 
 // 白名单host或refer域名
 const app_url = {
-    'check_url': "host", // 是否开启白名单url检测，refer开启refer检测，host开启host检测，any不检测
+    'check_url': "any", // 是否开启白名单url检测，"refer"开启refer检测，"host"开启host检测，"any"不检测
     'jump_url': 'https://www.bing.com/', // 遇到黑名单refer的落地地址
     'white_url': [ // 仅检测主域名，不包括http协议和url路径
-        '127.0.0.1', 'localhost',
+        '127.0.0.1',
         'html.s3.cn-north-1.jdcloud-oss.com',
         'cdnaliyun.oss-cn-hangzhou.aliyuncs.com',
         'cdnaliyun.oss-accelerate-overseas.aliyuncs.com',
-        'cdnaliyun.oss-accelerate-overseas.aliyuncs.com',
+        'cdnaliyun.oss-accelerate.aliyuncs.com',
+        'html.s3.cn-north-1.jdcloud-oss.com',
         'ginvel.com',
     ],
 };

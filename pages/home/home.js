@@ -38,61 +38,55 @@ const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。�
         "url_right": "",
     },
 
-    {
-        "name": "英中翻译",
-        "m-url": "https://fanyi.baidu.com/translate#en/zh/",
-        "pc-url": "https://fanyi.baidu.com/translate#en/zh/",
-        "url_right": "",
-    },
-    {
-        "name": "中英翻译",
-        "m-url": "https://fanyi.baidu.com/translate#zh/en/",
-        "pc-url": "https://fanyi.baidu.com/translate#zh/en/",
-        "url_right": "",
-    },
-    {
-        "name": "搜Github",
-        "m-url": "https://github.com/search?&type=Repositories&q=",
-        "pc-url": "https://github.com/search?&type=Repositories&q=",
-        "url_right": "",
-    },
-    {
-        "name": "搜电影MP4",
-        "m-url": "https://m.domp4.com/",
-        "pc-url": "https://www.domp4.com/",
-        "url_right": "blank",
-    },
-    {
-        "name": "查询IPv4",
-        "m-url": "http://ip.tool.chinaz.com/",
-        "pc-url": "http://ip.tool.chinaz.com/",
-        "url_right": "",
-    },
-    {
-        "name": "查询SEO",
-        "m-url": "https://seo.chinaz.com/",
-        "pc-url": "https://seo.chinaz.com/",
-        "url_right": "",
-    },
-    {
-        "name": "查询Whois",
-        "m-url": "http://whois.chinaz.com/",
-        "pc-url": "http://whois.chinaz.com/",
-        "url_right": "",
-    },
-
-    {
-        "name": "CSDN博客",
-        "m-url": "https://so.csdn.net/so/search/s.do?q=",
-        "pc-url": "https://so.csdn.net/so/search/s.do?q=",
-        "url_right": "",
-    },
-    {
-        "name": "cnblogs博客",
-        "m-url": "https://zzk.cnblogs.com/s/blogpost?w=",
-        "pc-url": "https://zzk.cnblogs.com/s/blogpost?w=",
-        "url_right": "",
-    },
+    // {
+    //     "name": "英中翻译",
+    //     "m-url": "https://fanyi.baidu.com/translate#en/zh/",
+    //     "pc-url": "https://fanyi.baidu.com/translate#en/zh/",
+    //     "url_right": "",
+    // },
+    // {
+    //     "name": "中英翻译",
+    //     "m-url": "https://fanyi.baidu.com/translate#zh/en/",
+    //     "pc-url": "https://fanyi.baidu.com/translate#zh/en/",
+    //     "url_right": "",
+    // },
+    // {
+    //     "name": "搜Github",
+    //     "m-url": "https://github.com/search?&type=Repositories&q=",
+    //     "pc-url": "https://github.com/search?&type=Repositories&q=",
+    //     "url_right": "",
+    // },
+    // {
+    //     "name": "查询IPv4",
+    //     "m-url": "http://ip.tool.chinaz.com/",
+    //     "pc-url": "http://ip.tool.chinaz.com/",
+    //     "url_right": "",
+    // },
+    // {
+    //     "name": "查询SEO",
+    //     "m-url": "https://seo.chinaz.com/",
+    //     "pc-url": "https://seo.chinaz.com/",
+    //     "url_right": "",
+    // },
+    // {
+    //     "name": "查询Whois",
+    //     "m-url": "http://whois.chinaz.com/",
+    //     "pc-url": "http://whois.chinaz.com/",
+    //     "url_right": "",
+    // },
+    //
+    // {
+    //     "name": "CSDN博客",
+    //     "m-url": "https://so.csdn.net/so/search/s.do?q=",
+    //     "pc-url": "https://so.csdn.net/so/search/s.do?q=",
+    //     "url_right": "",
+    // },
+    // {
+    //     "name": "cnblogs博客",
+    //     "m-url": "https://zzk.cnblogs.com/s/blogpost?w=",
+    //     "pc-url": "https://zzk.cnblogs.com/s/blogpost?w=",
+    //     "url_right": "",
+    // },
 
 ];
 
@@ -991,7 +985,7 @@ function make_swiper(){
         keyboard: { // 键盘方向键控制
             enabled: true,
         },
-        mousewheel: true, // 鼠标滚轮控制
+        // mousewheel: true, // 鼠标滚轮控制
         navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
