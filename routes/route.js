@@ -24,7 +24,6 @@ const page_static_file = {
         "static/font-awesome-4.7.0/css/font-awesome.min.css",
         "static/css/jquery.fullPage.css",
         "static/css/page_all.css",
-        "parts/bg_animate/bg_animate.css",
         "static/css/animate.min.css",
         "static/css/media.css",
 

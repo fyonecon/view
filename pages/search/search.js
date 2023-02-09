@@ -14,10 +14,10 @@ function jump_location(engine, word, url) {
     else {
         //let del_fake_news = " -aliyun.com -huaweicloud.com"
         let del_fake_news = " "
-        del_fake_news = decodeURI(del_fake_news)
+        del_fake_news = decodeURIComponent(del_fake_news)
 
         try {
-            _word = decodeURI(word);
+            _word = decodeURIComponent(word);
         }catch (e) {
             _word = word;
         }
@@ -25,7 +25,8 @@ function jump_location(engine, word, url) {
         if (engine === "baidu"){
             url = "https://www.baidu.com/s?ie=utf-8";
             url = url + "&wd=" + _word + del_fake_news + "&page_time=" + page_time;
-        }else if (engine === "bing"){
+        }
+        else if (engine === "bing"){
             url = "https://www.bing.com/?ensearch=1";
             url = url + "&q=" + _word + "&page_time=" + page_time;
         }
@@ -94,6 +95,8 @@ function jump_to_search_engine() {
     }else {
         view.log([engine]);
     }
+
+    view.show_loading();
 
     jump_location(engine, word, url);
 }

@@ -73,7 +73,7 @@ const view = {
             console.error(error);
         });
     },
-    write_css: function (css_src_array, call_func) { // 写入外部js
+    write_css: function (css_src_array, call_func) { // 写入外部css ["xxx.css", "xxx.css"]
         let that = this;
         if (css_src_array.constructor !== Array){
             that.log("css_src_array不是数组。");
@@ -578,6 +578,16 @@ const view = {
             view.log("是手机号：" + phone);
             return true;
         }
+    },
+    show_loading: function (timeout){ // (延迟几秒ms出现)
+        let _timeout = timeout*1;
+        if (_timeout<=0 || _timeout > 1000*1000){_timeout=0;}
+        setTimeout(function (){
+            $(".loading-div").removeClass("hide");
+        }, _timeout);
+    },
+    hide_loading: function (){
+        $(".loading-div").addClass("hide");
     },
     voice: function (read_txt, volume, loop) { // 自动语音朗读文字
         let that = this;

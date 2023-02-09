@@ -566,7 +566,7 @@ function init_dom() {
         //--
         '    </div>' +
 
-        '    <div class="swiper-pagination"></div>' +
+        '    <div class="swiper-pagination hide"></div>' +
         '    <div class="swiper-button-next hide"></div>' +
         '    <div class="swiper-button-prev hide"></div>' +
 
