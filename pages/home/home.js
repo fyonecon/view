@@ -37,19 +37,19 @@ const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。�
         "pc-url": "?route=search&engine=music&word=",
         "url_right": "",
     },
+    {
+        "name": "英中翻译",
+        "m-url": "https://fanyi.baidu.com/translate#en/zh/",
+        "pc-url": "https://fanyi.baidu.com/translate#en/zh/",
+        "url_right": "",
+    },
+    {
+        "name": "中英翻译",
+        "m-url": "https://fanyi.baidu.com/translate#zh/en/",
+        "pc-url": "https://fanyi.baidu.com/translate#zh/en/",
+        "url_right": "",
+    },
 
-    // {
-    //     "name": "英中翻译",
-    //     "m-url": "https://fanyi.baidu.com/translate#en/zh/",
-    //     "pc-url": "https://fanyi.baidu.com/translate#en/zh/",
-    //     "url_right": "",
-    // },
-    // {
-    //     "name": "中英翻译",
-    //     "m-url": "https://fanyi.baidu.com/translate#zh/en/",
-    //     "pc-url": "https://fanyi.baidu.com/translate#zh/en/",
-    //     "url_right": "",
-    // },
     // {
     //     "name": "搜Github",
     //     "m-url": "https://github.com/search?&type=Repositories&q=",
@@ -549,7 +549,7 @@ function init_dom() {
         '           <div class="search-btn-center quick-btn-center ">' +
         '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="http://c.biancheng.net/view/124.html">Go教程C</span>' +
         '              <span class="search-btn-style href-btn-span click" onclick="href_ext(this) " data-href="https://learnku.com/docs/gorm/v2/index/9728">GORM文档</span>' +
-        '              <span class="search-btn-style href-btn-span click" onclick="href_ext(this) " data-href="https://learnku.com/docs/gorm/v2/index/9728">Gin文档</span>' +
+        '              <span class="search-btn-style href-btn-span click" onclick="href_ext(this) " data-href="https://www.tizi365.com/archives/244.html">Gin文档</span>' +
 
         '              <div class="clear"></div>' +
         '           </div>' +

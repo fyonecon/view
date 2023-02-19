@@ -192,6 +192,9 @@
     width: calc(100%/3 - 20px - 1px);
     line-height: 38px;
     height: 38px;
+    overflow: hidden;
+    /*white-space: nowrap;*/
+    /*text-overflow: ellipsis;*/
     text-align: center;
     box-shadow: 0 0 5px rgba(60, 60, 60, 0.5);
     float: left;
