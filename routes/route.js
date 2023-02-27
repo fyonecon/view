@@ -11,11 +11,11 @@ const page_static_file = {
         "static/js/page_all.js", // 自定义的全局调用函数
         "static/js/qrcode.js", // 全局自带生成QR
 
-        // 可选
-        "parts/nav/nav.js",
-        "parts/foot/foot.js",
-        "parts/bg_animate/bg_animate.js",
-        "static/layui/layui.js", // 文档：https://www.layui.com/doc/
+        // 可选，这些资源推荐在各自的路由下按需配置
+        //"parts/nav/nav.js",
+        //"parts/foot/foot.js",
+        //"parts/bg_animate/bg_animate.js",
+        //"static/layui/layui.js", // 文档：https://www.layui.com/doc/
 
 
     ],
@@ -27,10 +27,10 @@ const page_static_file = {
         "static/css/animate.min.css",
         "static/css/media.css",
 
-        // 可选
-        "parts/nav/nav.css",
-        "parts/foot/foot.css",
-        "static/layui/css/layui.css",
+        // 可选，这些资源推荐在各自的路由下按需配置
+        //"parts/nav/nav.css",
+        //"parts/foot/foot.css",
+        //"static/layui/css/layui.css",
 
     ],
 };

@@ -219,6 +219,7 @@ function must_safe_check(e){
             return;
         }
 
+        //
         let route = view.get_url_param("", "route");
         if (route === "login"){
             start_this_page(e);

@@ -475,6 +475,7 @@ const view = {
             hour, // 11
             minutes, // 12
             seconds, // 13
+            hour+":"+minutes, // 14
         ];
 
     },

@@ -4,13 +4,17 @@ function jump_location(engine, word, url) {
     let page_time = view.get_date()[0] + "_" + view.md5(view.get_date()[1]);
     let _word = '';
 
-    if (word === "%s" || word === ""){
-        view.alert_txt("word参数出问题或搜索内容不能为空", 2000);
-        url = "https://www.bing.com/?ensearch=1&q=如何使用搜索";
+    // if (word === "%s" || word === ""){
+    //     view.alert_txt("word参数出问题或搜索内容不能为空", 3000);
+    //     url = "https://www.bing.com/?ensearch=1&q=如何使用搜索引擎";
+    // }
+    if (word === "首页" || word === "home" ){
+        url = "./index.html?route=home";
     }
-    else if (word === "首页" || word === "home" || word === "ggvs"){
-        url = "./";
+    else if (word === "404"){
+        url = "./index.html?route=404";
     }
+
     else {
         //let del_fake_news = " -aliyun.com -huaweicloud.com"
         let del_fake_news = " "
@@ -49,6 +53,10 @@ function jump_location(engine, word, url) {
         else if (engine === "video"){
             url = "https://www.bing.com/search?ensearch=1&q=tokyvideo+";
             url = url + _word + "&page_time=" + page_time;
+        }
+        else if (engine === "ipdomain"){
+            url = "https://ipchaxun.com/";
+            url = url + _word;
         }
         else {
             view.alert_txt("engine参数为空，不能选择跳转的目标地址");

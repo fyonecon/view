@@ -5,36 +5,37 @@
 
 const search_debug = false; // 调试日志，false关闭日志，true显示日志
 const title = " 👈 简洁主页"; // 当前页面标题
+const _search_jump = "";
 const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。自定义。
     {
-        "name": "Bing国际",
-        "m-url": "?route=search&engine=bing&word=",
-        "pc-url": "?route=search&engine=bing&word=",
+        "name": "Bing",
+        "m-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=bing&word=",
+        "pc-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=bing&word=",
         "url_right": "",
     },
     {
-        "name": "Baidu中文",
-        "m-url": "?route=search&engine=baidu&word=",
-        "pc-url": "?route=search&engine=baidu&word=",
+        "name": "Baidu",
+        "m-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=baidu&word=",
+        "pc-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=baidu&word=",
         "url_right": "",
     },
     {
         "name": "Google", // 引擎名称，可视5个字
-        "m-url": "?route=search&engine=google&word=", // 移动端，前缀
-        "pc-url": "?route=search&engine=google&word=", // PC端，前缀
+        "m-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=google&word=", // 移动端，前缀
+        "pc-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=google&word=", // PC端，前缀
         "url_right": "", // 参数的固顶后缀
     },
     {
         "name": "搜英文电影",
-        "m-url": "?route=search&engine=video&word=",
-        "pc-url": "?route=search&engine=video&word=",
+        "m-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=video&word=",
+        "pc-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=video&word=",
         "url_right": "",
     },
 
     {
         "name": "搜收费音乐",
-        "m-url": "?route=search&engine=music&word=",
-        "pc-url": "?route=search&engine=music&word=",
+        "m-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=music&word=",
+        "pc-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=music&word=",
         "url_right": "",
     },
     {
@@ -47,6 +48,13 @@ const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。�
         "name": "中英翻译",
         "m-url": "https://fanyi.baidu.com/translate#zh/en/",
         "pc-url": "https://fanyi.baidu.com/translate#zh/en/",
+        "url_right": "",
+    },
+
+    {
+        "name": "IP、域名",
+        "m-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=ipdomain&word=",
+        "pc-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=ipdomain&word=",
         "url_right": "",
     },
 
@@ -286,7 +294,7 @@ function create_input(pre) { // 渲染模板
 
     document.getElementsByTagName("title")[0].innerText = title;
     let content = document.getElementsByClassName("content")[0];
-    content.innerHTML = '<div class="input-div" id="input-div"><select class="select search-style select-none" id="select"></select><input type="text" value="" maxlength="500" id="input" class="input search-style"  placeholder="' + pre + '输入内容"/><div class="clear"></div></div><div class="input-history-div" id="input-history"></div><div class="clear"></div><div class="search-btn-div" id="search-btn"></div><div class="res-div"></div>';
+    content.innerHTML = '<div class="input-div" id="input-div"><select class="select search-style select-none" id="select"></select><input type="text" value="" maxlength="500" id="input" class="input search-style"  placeholder="' + pre + '输入内容" title="输入内容"/><div class="clear"></div></div><div class="input-history-div" id="input-history"></div><div class="clear"></div><div class="search-btn-div" id="search-btn"></div><div class="res-div"></div>';
     let append_tag = [];
     for (let i = 0; i < search.length; i++) {
         let tag = '<option class="option option-' + i + '" value="' + i + '">' + search[i]["name"] + '</option>';
@@ -332,12 +340,12 @@ function run_search() { // 执行搜索
     let _select = document.getElementById("select");
     let engine = _select.options[_select.selectedIndex].value;
     let _input = document.getElementById("input").value;
+
     if (!_input.trim()) {
         console_log("内容不能为空");
-        // view.alert_txt("搜索内容不能为空", 1500);
-        view.notice_txt("搜索内容不能为空", 1500);
-        change_focus();
-        return;
+        //view.notice_txt("搜索内容不能为空", 1500);
+        //change_focus();
+        //return;
     }
 
     let reg = /^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)+([A-Za-z0-9-~\/])/; // 至少是 http://a 这种格式
@@ -346,7 +354,7 @@ function run_search() { // 执行搜索
         _input = encodeURIComponent(_input);
     } else {
         console_log("是网址");
-        window.open(_input, "_self"); // 搜索4/4
+        window.open(_input, "_blank"); // 搜索4/4
         return;
     }
 
@@ -362,7 +370,7 @@ function run_search() { // 执行搜索
     }
     let tab_url = "";
 
-    if (window.innerWidth > 640) {
+    if (window.innerWidth > 800) {
         write_tips_text("PC模式会自动打开新标签来展示搜索结果");
         tab_url = pc_url;
     } else {
@@ -389,12 +397,13 @@ function run_search() { // 执行搜索
 
     setTimeout(function() {
         show_history();
-        console_log("打开新标签也买你");
+        console_log("打开新标签");
         window.open(tab_url, "_blank");
     }, 10);
     setTimeout(function() {
         delete_loading();
-    }, 1000);
+        document.getElementById("input").value = "";
+    }, 1500);
 
 }
 
@@ -603,7 +612,7 @@ function init_dom() {
     //
     let db_click_time = (new Date()).getTime();
     document.onkeyup = function(event) { // Enter
-        console_log("双击Enter进行搜素");
+        console_log("（双击）Enter进行搜素");
         let now_click_time = (new Date()).getTime();
 
         let _key = event.key;
@@ -611,10 +620,21 @@ function init_dom() {
             let click_time = now_click_time * 1 - db_click_time * 1
             if (click_time <= 500) {
                 db_click_time = 0;
-                run_search();
+                return;
             } else {
                 db_click_time = (new Date()).getTime();
+                // run_search();
             }
+
+            let _input = document.getElementById("input").value;
+            if (!_input.trim()) {
+                console_log("内容不能为空");
+                view.notice_txt("搜索内容不能为空", 1500);
+                change_focus();
+                return;
+            }
+
+            run_search();
         }
     };
     document.getElementsByClassName("search-btn-span")[0].addEventListener("click", function() {
@@ -1026,6 +1046,16 @@ function clear_copy(that, _class){
 
 }
 
+function timer1() {
+    let time_txt =  ""  + view.get_date()[2] +
+        "/" + view.get_date()[5] +
+        " " + view.get_date()[9] +
+        " " + view.get_date()[14] +
+        "";
+    document.getElementById("input").placeholder = time_txt;
+    setTimeout(function (){document.getElementById("input").placeholder = "输入内容"; }, 2000);
+}
+
 // 打开全屏
 function show_full_screen(that){
     view.open_full_screen("full-div");
@@ -1060,4 +1090,10 @@ function start_this_page(info) {
 
     show_history();
     close_full_screen();
+
+    setInterval(function () {
+        timer1();
+    }, 4000);
+
+    view.write_js(["parts/bg_animate/bg_animate.js"]);
 }
