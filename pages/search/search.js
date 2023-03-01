@@ -14,6 +14,9 @@ function jump_location(engine, word, url) {
     else if (word === "404"){
         url = "./index.html?route=404";
     }
+    else if (word === "hei123"){
+        url = "./index.html?route=hei123";
+    }
 
     else {
         //let del_fake_news = " -aliyun.com -huaweicloud.com"
@@ -37,6 +40,10 @@ function jump_location(engine, word, url) {
         else if (engine === "google"){
             url = "https://www.google.com/search?q=";
             url = url + _word + "&page_time=" + page_time;
+        }
+        else if (engine === "duckduckgo"){
+            url = "https://duckduckgo.com/?ia=web";
+            url = url + "&q=" + _word + "&page_time=" + page_time;
         }
         else if (engine === "m-toutiao"){
             url = "https://m.toutiao.com/search/?keyword=";

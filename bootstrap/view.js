@@ -44,7 +44,7 @@ const view = {
         });
 
     },
-    write_js: function (js_src_array, call_func) { // 写入外部js
+    write_js: function (js_src_array, call_func) { // 写入外部js，["xxx1.js","xxx2.js"]
         let that = this;
         if (js_src_array.constructor !== Array){
             that.log("js_src_array不是数组。");
@@ -73,7 +73,7 @@ const view = {
             console.error(error);
         });
     },
-    write_css: function (css_src_array, call_func) { // 写入外部css ["xxx.css", "xxx.css"]
+    write_css: function (css_src_array, call_func) { // 写入外部css，["xxx1.css", "xxx2.css"]
         let that = this;
         if (css_src_array.constructor !== Array){
             that.log("css_src_array不是数组。");

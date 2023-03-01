@@ -8,13 +8,13 @@ const title = " 👈 简洁主页"; // 当前页面标题
 const _search_jump = "";
 const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。自定义。
     {
-        "name": "Bing",
+        "name": "Bing（英）",
         "m-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=bing&word=",
         "pc-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=bing&word=",
         "url_right": "",
     },
     {
-        "name": "Baidu",
+        "name": "百度一下",
         "m-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=baidu&word=",
         "pc-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=baidu&word=",
         "url_right": "",
@@ -23,6 +23,12 @@ const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。�
         "name": "Google", // 引擎名称，可视5个字
         "m-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=google&word=", // 移动端，前缀
         "pc-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=google&word=", // PC端，前缀
+        "url_right": "", // 参数的固顶后缀
+    },
+    {
+        "name": "DuckGo", // 引擎名称，可视5个字
+        "m-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=duckduckgo&word=", // 移动端，前缀
+        "pc-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=duckduckgo&word=", // PC端，前缀
         "url_right": "", // 参数的固顶后缀
     },
     {
@@ -52,7 +58,7 @@ const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。�
     },
 
     {
-        "name": "IP、域名",
+        "name": "查IP、域名",
         "m-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=ipdomain&word=",
         "pc-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=ipdomain&word=",
         "url_right": "",
@@ -497,6 +503,7 @@ function init_dom() {
         '           <div class="search-btn-center quick-btn-center">' +
         '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://weibo.com/">Weibo</span>' +
         '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://sspai.com/">少数派</span>' +
+        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://www.macupdate.com/">Mac软件下载</span>' +
 
         '              <div class="clear"></div>' +
         '           </div>' +

@@ -236,7 +236,7 @@ function timestamp() {
 
 
 
-const search_cookie_pre = "search_";
+const search_cookie_pre = "hei123_";
 const search_eq = search_cookie_pre+"_eq";
 let search_time_style = 0; // 自动校正iframe
 let focus_time = 3*60*60*1000; // 保护用户输入框隐私，3h不聚焦删一次
@@ -258,7 +258,7 @@ function create_input(pre) { // 渲染模板
 
     document.getElementsByTagName("title")[0].innerText = title;
     let content = document.getElementsByClassName("content")[0];
-    content.innerHTML = '<div class="input-div" id="input-div"><select class="select search-style select-none" id="select"></select><input type="text" value="" maxlength="500" id="input" class="input search-style"  placeholder="'+ pre +'查找问题 路由为什么404"/><div class="clear"></div></div><div class="search-btn-div" id="search-btn"></div><div class="res-div"></div>';
+    content.innerHTML = '<div class="input-div" id="input-div"><select class="select search-style select-none" id="select"></select><input type="text" value="" maxlength="500" id="input" class="input search-style"  placeholder="'+ pre +'输入关键词"/><div class="clear"></div></div><div class="search-btn-div" id="search-btn"></div><div class="res-div"></div>';
     let append_tag = [];
     for (let i = 0; i < search.length; i++){
         let tag = '<option class="option option-'+i+'" value="'+i+'">'+ search[i]["name"] +'</option>';
@@ -380,6 +380,7 @@ function init_404(){
         '   <span class="search-btn-style search-btn-span click">🔍·Enter</span>' +
         '   <div class="clear"></div>' +
         '</div>' +
+
 
         '<div class="clear"></div>' +
         '<code class="div-time"></code>' +
