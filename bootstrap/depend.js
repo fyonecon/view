@@ -8,12 +8,8 @@
 const index_load = {
     "index_js": [
         "routes/route.js",
-        "bootstrap/md5.js",
-        "bootstrap/clipboard.js",
-        "static/js/swiper-bundle.min.js",
-        "static/js/jquery.fullPage.js",
         // 以上文件不需要更改位置
-        "config/must.js", // 根据路由加载模块页面，并启动全局安全校验
+        "common/must.js", // 根据路由加载模块页面，并启动全局安全校验
 
     ],
 };

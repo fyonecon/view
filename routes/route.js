@@ -7,30 +7,23 @@
 // 2. 注册全局组件
 const page_static_file = {
     "js": [
-        "static/js/page_assist.js",  // 框架援救。帮助框架可以在多种苛刻条件下正常使用
         "static/js/page_all.js", // 自定义的全局调用函数
-        "static/js/qrcode.js", // 全局自带生成QR
+        "static/js/swiper-bundle.min.js",
 
         // 可选，这些资源推荐在各自的路由下按需配置
         //"parts/nav/nav.js",
         //"parts/foot/foot.js",
-        //"parts/bg_animate/bg_animate.js",
-        //"static/layui/layui.js", // 文档：https://www.layui.com/doc/
 
 
     ],
     "css": [
-        "static/css/swiper-bundle.min.css",
+        "bootstrap/plugins.css",
         "static/font-awesome-4.7.0/css/font-awesome.min.css",
-        "static/css/jquery.fullPage.css",
         "static/css/page_all.css",
-        "static/css/animate.min.css",
-        "static/css/media.css",
 
         // 可选，这些资源推荐在各自的路由下按需配置
         //"parts/nav/nav.css",
         //"parts/foot/foot.css",
-        //"static/layui/css/layui.css",
 
     ],
 };
@@ -117,55 +110,6 @@ const pages = [
             },
         ],
     }, //
-
-    { // 页面模块-FM
-        "route"     : "fm",
-        "file_path" : "pages/fm/fm.html",
-        "title"     : "红杏出墙FM",
-        "file"      : [
-            {
-                "js": [
-                    "pages/fm/fm.js",
-                ],
-                "css": [
-                    "pages/fm/fm.css",
-                ],
-            },
-        ],
-    },
-
-    { // 页面模块-富文本
-        "route"     : "touchscale",
-        "file_path" : "pages/touchscale/touchscale.html",
-        "title"     : "屏幕称重",
-        "file"      : [
-            {
-                "js": [
-                    "pages/touchscale/touchscale.js",
-                ],
-                "css": [
-                    "pages/touchscale/touchscale.css",
-                ],
-            },
-        ],
-    },
-
-    { // 页面模块-隐藏referrer
-        "route"     : "jump-referrer",
-        "file_path" : "pages/jump-referrer/jump-referrer.html",
-        "title"     : "检测跳转...",
-        "file"      : [
-            {
-                "js": [
-                    "pages/jump-referrer/jump-referrer.js",
-                ],
-                "css": [
-                    "pages/jump-referrer/jump-referrer.css",
-                ],
-            },
-        ],
-    },
-
 
 
     //

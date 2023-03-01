@@ -9,3 +9,27 @@
 
     <div class="clear"></div>
 </div>
+<script>
+    let news_id = "20230301"; //
+    let route_name = "home"; // 当前路由名
+    let route_domain = "http://127.0.0.1/view-github/"; // 跳转到主网址
+    (function (){
+        function get_url_param(url, key) { // 获取url中的参数
+            let url_str = "";
+            if(!url){ url_str = window.location.href; } else {url_str = url; }
+            let regExp = new RegExp("([?]|&|#)" + key + "=([^&|^#]*)(&|$|#)");
+            let result = url_str.match(regExp);
+            if (result) {
+                return decodeURIComponent(result[2]);
+            }else {
+                return "";
+            }
+        }
+        let _route = get_url_param("", "route");
+        if (_route !== route_name){
+            window.open(route_domain+"/index.html?route=home&news_id="+news_id, "_self");
+        }else {
+            console.log(route_name);
+        }
+    })();
+</script>
