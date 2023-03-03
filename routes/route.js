@@ -8,17 +8,14 @@
 const page_static_file = {
     "js": [
         "static/js/page_all.js", // 自定义的全局调用函数
-        "static/js/swiper-bundle.min.js",
 
         // 可选，这些资源推荐在各自的路由下按需配置
         //"parts/nav/nav.js",
         //"parts/foot/foot.js",
 
-
     ],
     "css": [
-        "bootstrap/plugins.css",
-        "static/font-awesome-4.7.0/css/font-awesome.min.css",
+        // "static/font-awesome-4.7.0/css/font-awesome.min.css",
         "static/css/page_all.css",
 
         // 可选，这些资源推荐在各自的路由下按需配置
@@ -31,7 +28,22 @@ const page_static_file = {
 
 // pages模块页面白名单配置
 const pages = [
-    // 开始-其他页面模块
+    // 开始-必要路由
+    { // 页面模块-默认
+        "route"     : "",
+        "file_path" : "pages/home/home.html",
+        "title"     :  "简洁主页" + " - " +app_name,
+        "file"      : [
+            {
+                "js": [
+                    "pages/home/home.js",
+                ],
+                "css": [
+                    "pages/home/home.css",
+                ],
+            },
+        ],
+    }, //
     { // 页面模块-404
         "route"     : "404",  // url中#route=xxx，便于定位页面
         "file_path" : "pages/404/404.html", // 实际文件路径+文件名，为了方便起见，文件后缀统一用“htm”
@@ -47,6 +59,8 @@ const pages = [
             },
         ],
     },
+    // 结束-必要路由
+
     { // 页面模块
         "route"     : "login",
         "file_path" : "pages/login/login.html",
@@ -62,23 +76,6 @@ const pages = [
             },
         ],
     }, //
-
-    { // 页面模块
-        "route"     : "home",
-        "file_path" : "pages/home/home.html",
-        "title"     :  "简洁主页" + " - " +app_name,
-        "file"      : [
-            {
-                "js": [
-                    "pages/home/home.js",
-                ],
-                "css": [
-                    "pages/home/home.css",
-                ],
-            },
-        ],
-    }, //
-
     { // 页面模块
         "route"     : "search",
         "file_path" : "pages/search/search.html",
@@ -94,7 +91,6 @@ const pages = [
             },
         ],
     }, //
-
     { // 页面模块
         "route"     : "hei123",
         "file_path" : "pages/hei123/hei123.html",

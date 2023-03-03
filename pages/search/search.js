@@ -1,7 +1,7 @@
 
 
 function jump_location(engine, word, url) {
-    let page_time = view.get_date()[0] + "_" + view.md5(view.get_date()[1]);
+    let page_time = view.get_date()[0];
     let _word = '';
 
     // if (word === "%s" || word === ""){
@@ -9,13 +9,13 @@ function jump_location(engine, word, url) {
     //     url = "https://www.bing.com/?ensearch=1&q=如何使用搜索引擎";
     // }
     if (word === "首页" || word === "home" ){
-        url = "./index.html?route=home";
+        url = "./";
     }
     else if (word === "404"){
-        url = "./index.html?route=404";
+        url = "./?route=404";
     }
     else if (word === "hei123"){
-        url = "./index.html?route=hei123";
+        url = "./?route=hei123";
     }
 
     else {

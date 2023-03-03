@@ -7,12 +7,11 @@
 
 "use strict";
 
-const debug = true;                     // 调试模式，统一打印日志，true & false
+const debug = false;                     // 调试模式，统一打印日志，true & false
 
 // 框架渲染的必要参数
 const cookie_prefix   = "view_ggvs_";   // cookie前缀
 const route_404       = "?route=404";   // 404
-const route_default   = "?route=home";  // 页面进入默认页
 
 const file_url        = index_file_url?index_file_url:"./";             // 资源文件CDN主域名（js、css、img、font等资源文件）//cdnaliyun.oss-cn-hangzhou.aliyuncs.com/view-ggvs/
 const page_url        = index_file_url?index_file_url:"./";             // htm文件的服务器地址，因为使用了ajax请求，不能直接请求本地文件，可以全部放在CDN里面
@@ -24,16 +23,14 @@ const api_url         = "https://xcx.xxx.cn/chengzi/public/index.php/api/";  // 
 
 // 白名单host或refer域名
 const app_url = {
-    'check_url': "any", // 是否开启白名单url检测，"refer"开启refer检测，"host"开启host检测，"any"不检测
+    'check_url': "host", // 是否开启白名单url检测，"refer"开启refer检测，"host"开启host检测，"any"不检测
     'jump_url': 'https://www.bing.com/', // 遇到黑名单refer的落地地址
     'white_url': [ // 仅检测主域名，不包括http协议和url路径
-        '127.0.0.1',
-        'html.s3.cn-north-1.jdcloud-oss.com',
+        '0.0.0.0', '127.0.0.1', 'localhost',
         'cdnaliyun.oss-cn-hangzhou.aliyuncs.com',
         'cdnaliyun.oss-accelerate-overseas.aliyuncs.com',
-        'cdnaliyun.oss-accelerate.aliyuncs.com',
-        'html.s3.cn-north-1.jdcloud-oss.com',
         'ginvel.com',
+        'ggvs.net',
     ],
 };
 

@@ -8,40 +8,40 @@ const title = " 👈 简洁主页"; // 当前页面标题
 const _search_jump = "";
 const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。自定义。
     {
-        "name": "Bing（英）",
-        "m-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=bing&word=",
-        "pc-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=bing&word=",
+        "name": "百度一下",
+        "m-url": "./?route=search&engine=baidu&word=",
+        "pc-url": "./?route=search&engine=baidu&word=",
         "url_right": "",
     },
     {
-        "name": "百度一下",
-        "m-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=baidu&word=",
-        "pc-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=baidu&word=",
+        "name": "必应搜索",
+        "m-url": "./?route=search&engine=bing&word=",
+        "pc-url": "./?route=search&engine=bing&word=",
         "url_right": "",
     },
     {
         "name": "Google", // 引擎名称，可视5个字
-        "m-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=google&word=", // 移动端，前缀
-        "pc-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=google&word=", // PC端，前缀
+        "m-url": "./?route=search&engine=google&word=", // 移动端，前缀
+        "pc-url": "./?route=search&engine=google&word=", // PC端，前缀
         "url_right": "", // 参数的固顶后缀
     },
     {
         "name": "DuckGo", // 引擎名称，可视5个字
-        "m-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=duckduckgo&word=", // 移动端，前缀
-        "pc-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=duckduckgo&word=", // PC端，前缀
+        "m-url": "./?route=search&engine=duckduckgo&word=", // 移动端，前缀
+        "pc-url": "./?route=search&engine=duckduckgo&word=", // PC端，前缀
         "url_right": "", // 参数的固顶后缀
     },
     {
         "name": "搜英文电影",
-        "m-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=video&word=",
-        "pc-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=video&word=",
+        "m-url": "./?route=search&engine=video&word=",
+        "pc-url": "./?route=search&engine=video&word=",
         "url_right": "",
     },
 
     {
         "name": "搜收费音乐",
-        "m-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=music&word=",
-        "pc-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=music&word=",
+        "m-url": "./?route=search&engine=music&word=",
+        "pc-url": "./?route=search&engine=music&word=",
         "url_right": "",
     },
     {
@@ -59,8 +59,8 @@ const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。�
 
     {
         "name": "查IP、域名",
-        "m-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=ipdomain&word=",
-        "pc-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=ipdomain&word=",
+        "m-url": "./?route=search&engine=ipdomain&word=",
+        "pc-url": "./?route=search&engine=ipdomain&word=",
         "url_right": "",
     },
 
@@ -501,9 +501,9 @@ function init_dom() {
         '           </div>' +
 
         '           <div class="search-btn-center quick-btn-center">' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://weibo.com/">Weibo</span>' +
+        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="http://bbs.tianya.cn/list-free-1.shtml">天涯杂谈</span>' +
         '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://sspai.com/">少数派</span>' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://www.macupdate.com/">Mac软件下载</span>' +
+        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://weibo.com/">微博</span>' +
 
         '              <div class="clear"></div>' +
         '           </div>' +
@@ -512,9 +512,8 @@ function init_dom() {
 
         //--
         '       <div class="swiper-slide more-btn">' +
-
-        '           <div class="search-btn-center quick-btn-center ">' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://www.windy.com/">Windy</span>' +
+        '           <div class="search-btn-center quick-btn-center">' +
+        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://www.macupdate.com/">Mac软件下载</span>' +
         '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://finditandzip.ga/">油管视频下载</span>' +
         '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://cloudconvert.com/">音乐格式转换</span>' +
         '              <div class="clear"></div>' +
@@ -530,14 +529,14 @@ function init_dom() {
         '           <div class="search-btn-center quick-btn-center ">' +
         '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://onedrive.live.com/">OneDrive</span>' +
         '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://beta.icloud.com/">iCloud+</span>' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://drive.google.com/">GoogleDrive</span>' +
+        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://www.windy.com/">Windy</span>' +
         '              <div class="clear"></div>' +
         '           </div>' +
 
         '           <div class="search-btn-center quick-btn-center">' +
         '              <span class="search-btn-style href-btn-span click"  onclick="show_full_screen(this) " data-href="https://didayu.cn/updates/win10/index.htm">🐟Win加载</span>' +
         '              <span class="search-btn-style href-btn-span click"  onclick="show_full_screen(this) " data-href="https://didayu.cn/updates/apple/index.htm">🐟Mac加载</span>' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="show_full_screen(this) " data-href="https://didayu.cn/updates/wnc/index.html">🐟中病毒</span>' +
+
 
         '              <div class="clear"></div>' +
         '           </div>' +
@@ -711,7 +710,7 @@ function show_history(){
 
     let data_string = view.get_data(data_key)
     // 限制历史记录长度
-    let len = 10;
+    let len = 15;
     let array_history = data_string.split(array_key)
     for (let i=0; i<len; i++){
         let the_history = array_history[i];

@@ -7,40 +7,40 @@ const search_debug = false; // 调试日志，false关闭日志，true显示日�
 const title = " 👈 简洁主页"; // 当前页面标题
 const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。自定义。
     {
-        "name": "Bing（英）",
-        "m-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=bing&word=",
-        "pc-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=bing&word=",
+        "name": "百度一下",
+        "m-url": "./?route=search&engine=baidu&word=",
+        "pc-url": "./?route=search&engine=baidu&word=",
         "url_right": "",
     },
     {
-        "name": "百度一下",
-        "m-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=baidu&word=",
-        "pc-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=baidu&word=",
+        "name": "Bing",
+        "m-url": "./?route=search&engine=bing&word=",
+        "pc-url": "./?route=search&engine=bing&word=",
         "url_right": "",
     },
     {
         "name": "Google", // 引擎名称，可视5个字
-        "m-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=google&word=", // 移动端，前缀
-        "pc-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=google&word=", // PC端，前缀
+        "m-url": "./?route=search&engine=google&word=", // 移动端，前缀
+        "pc-url": "./?route=search&engine=google&word=", // PC端，前缀
         "url_right": "", // 参数的固顶后缀
     },
     {
         "name": "DuckGo", // 引擎名称，可视5个字
-        "m-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=duckduckgo&word=", // 移动端，前缀
-        "pc-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=duckduckgo&word=", // PC端，前缀
+        "m-url": "./?route=search&engine=duckduckgo&word=", // 移动端，前缀
+        "pc-url": "./?route=search&engine=duckduckgo&word=", // PC端，前缀
         "url_right": "", // 参数的固顶后缀
     },
     {
         "name": "搜英文电影",
-        "m-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=video&word=",
-        "pc-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=video&word=",
+        "m-url": "./?route=search&engine=video&word=",
+        "pc-url": "./?route=search&engine=video&word=",
         "url_right": "",
     },
 
     {
         "name": "搜收费音乐",
-        "m-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=music&word=",
-        "pc-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=music&word=",
+        "m-url": "./?route=search&engine=music&word=",
+        "pc-url": "./?route=search&engine=music&word=",
         "url_right": "",
     },
     {
@@ -58,13 +58,50 @@ const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。�
 
     {
         "name": "查IP、域名",
-        "m-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=ipdomain&word=",
-        "pc-url": "https://cdnaliyun.oss-accelerate-overseas.aliyuncs.com/view-ggvs/index.html?route=search&engine=ipdomain&word=",
+        "m-url": "./?route=search&engine=ipdomain&word=",
+        "pc-url": "./?route=search&engine=ipdomain&word=",
         "url_right": "",
     },
 
-];
+    // {
+    //     "name": "搜Github",
+    //     "m-url": "https://github.com/search?&type=Repositories&q=",
+    //     "pc-url": "https://github.com/search?&type=Repositories&q=",
+    //     "url_right": "",
+    // },
+    // {
+    //     "name": "查询IPv4",
+    //     "m-url": "http://ip.tool.chinaz.com/",
+    //     "pc-url": "http://ip.tool.chinaz.com/",
+    //     "url_right": "",
+    // },
+    // {
+    //     "name": "查询SEO",
+    //     "m-url": "https://seo.chinaz.com/",
+    //     "pc-url": "https://seo.chinaz.com/",
+    //     "url_right": "",
+    // },
+    // {
+    //     "name": "查询Whois",
+    //     "m-url": "http://whois.chinaz.com/",
+    //     "pc-url": "http://whois.chinaz.com/",
+    //     "url_right": "",
+    // },
+    //
+    // {
+    //     "name": "CSDN博客",
+    //     "m-url": "https://so.csdn.net/so/search/s.do?q=",
+    //     "pc-url": "https://so.csdn.net/so/search/s.do?q=",
+    //     "url_right": "",
+    // },
+    // {
+    //     "name": "cnblogs博客",
+    //     "m-url": "https://zzk.cnblogs.com/s/blogpost?w=",
+    //     "pc-url": "https://zzk.cnblogs.com/s/blogpost?w=",
+    //     "url_right": "",
+    // },
 
+];
 
 
 // 调试日志

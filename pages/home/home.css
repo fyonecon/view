@@ -48,11 +48,11 @@
     padding: 0 20px 0 8px;
     float: left;
     outline: none;
-    border: 2px solid rgba(0, 120, 254, 0.3);
+    border: 2px solid rgba(0, 120, 254, 0.5);
     border-radius: 42px;
     background-color: rgba(255, 255, 255, 0.8);
     text-indent: 0px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     text-align: center;
     appearance: none;
     -webkit-appearance: none;
@@ -72,9 +72,9 @@
     float: left;
     border-radius: 42px;
     background: rgba(255, 255, 255, 0.8);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     outline: none;
-    border: 2px solid rgba(0, 120, 254, 0.3);
+    border: 2px solid rgba(0, 120, 254, 0.5);
 }
 
 .search-style {
@@ -196,7 +196,7 @@
     /*white-space: nowrap;*/
     /*text-overflow: ellipsis;*/
     text-align: center;
-    box-shadow: 0 0 5px rgba(60, 60, 60, 0.5);
+    box-shadow: 0 0 5px rgba(60, 60, 60, 0.8);
     float: left;
     margin-left: 10px;
     margin-right: 10px;

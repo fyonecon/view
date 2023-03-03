@@ -159,7 +159,6 @@ function depend_pages(){
         "page_all_js_has": function () {  // 页面全部js加载完后执行
             view.log("Files Cache_time = "+cache_time +"s");
 
-            document.getElementById("loading-div").classList.add("hide");
             time_loaded = Math.floor((new Date()).getTime());
             let view_loaded_time = time_loaded - time_start;
 
@@ -169,6 +168,7 @@ function depend_pages(){
                 script.setAttribute("src", file_url + "static/js/page_loaded.js?"+page_time);
                 head.appendChild(script);
                 script.onload = function () {
+                    document.getElementById("loading-div").classList.add("hide");
                     view.log('page_loaded');
                 };
             }catch (e) {
@@ -211,9 +211,8 @@ function depend_pages(){
 
             // 处理路由页面名
             let p2 = new Promise((resolve, reject) => {
-                if (page_name === ""){ // 空路由
-                    window.location.replace(route_default);  // 则进入默认页
-                    resolve('默认页');
+                if (page_name === ""){ // 空路由或是默认路由
+                    resolve('进入默认页');
                 }else {
                     if (pages_index === null){ // 未匹配路由
                         console.error("页面没有正确路由?route=xxx，将进入默认页面。");
