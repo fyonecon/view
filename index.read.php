@@ -8,10 +8,10 @@ function replace_string($old_txt, $new_txt, $string){
     return str_replace($old_txt, $new_txt, $string);
 }
 // 读取文件内容
-function read_html($old_txt, $new_txt, $file){
-    $fp = fopen($file, 'r');
+function read_html($old_txt, $new_txt, $html_file){
+    $fp = fopen($html_file, 'r');
     if (!feof($fp)){ // 文件存在
-        $contents = fread($fp, filesize($file));
+        $contents = fread($fp, filesize($html_file));
         $contents = replace_string($old_txt, $new_txt, $contents);
     }else{
         $contents = 'null file';
@@ -21,8 +21,8 @@ function read_html($old_txt, $new_txt, $file){
 }
 
 // 输出内容
-$file = './built/index.html';
-$old_txt = '="./';
-$new_txt = '="./built/';
-echo read_html($old_txt, $new_txt, $file);
+$html_file = './view/view.html';
+$old_txt = '"./"';
+$new_txt = '"./view/"';
+echo read_html($old_txt, $new_txt, $html_file);
 exit();

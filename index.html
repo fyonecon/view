@@ -24,8 +24,8 @@
         let time_start  = Math.floor((new Date()).getTime()); // ms。开始载入外部文件的时间戳
         let time_loaded = 0; // ms。框架载入完成的时间戳
         let time_error  = 0; // ms。框架出错的时间戳
-        let index_file_url = "./"; // 自定义CDN地址，./
-        let index_depend_file = "./"; // 自定义CDN地址，./
+        let index_file_url = "./"; // 自定义pages CDN地址，./
+        let index_depend_file = "./"; // 自定义核心依赖CDN地址，./
 
         ;function AppRun () {
             // 核心解析依赖
@@ -41,7 +41,7 @@
 
             // 核心文件每次加载都自动清除缓存
             let clear_time = 100*1000; // ms
-            let clear_cache = "?view-must-" + Math.floor(new Date().getTime()/clear_time)*clear_time;
+            let clear_cache = "?view-depend-" + Math.floor(new Date().getTime()/clear_time)*clear_time;
             let head = document.head || document.getElementsByTagName("head")[0];
 
             // css

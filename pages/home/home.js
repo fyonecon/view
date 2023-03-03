@@ -1101,5 +1101,5 @@ function start_this_page(info) {
         timer1();
     }, 4000);
 
-    view.write_js(["parts/bg_animate/bg_animate.js"]);
+    view.write_js([index_file_url+"parts/bg_animate/bg_animate.js"]);
 }
