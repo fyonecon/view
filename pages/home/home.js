@@ -1124,15 +1124,16 @@ function on_hour(){
     if (_state === "Off"){
         view.log("整点报时已跳过");
     }else {
-        let minutes = view.time_date("i")*1;
-        if (minutes === 0){
+        let minute = view.time_date("i")*1;
+        let second = view.time_date("s")*1;
+        if (minute === 0 && second < 30){ // 注意此处的重复引用的问题
             view.log("整点报时");
             speak_time();
         }
     }
 }
 
-// 语音报时，隔3s才能运行下一次
+// 语音报时，隔8s才能运行下一次
 let speak_time_num = 0;
 let speak_time_out;
 function speak_time(){
@@ -1144,13 +1145,13 @@ function speak_time(){
         speak_time_num = 1;
         speak_time_out = setTimeout(function (){
             speak_time_num = 0;
-            view.log("整点报时=0");
-        }, 3000);
+            view.log("整点报时=+0");
+        }, 8000);
     }else{
         speak_time_out = setTimeout(function (){
             speak_time_num = 0;
-            view.log("整点报时=0");
-        }, 3000);
+            view.log("整点报时=-0");
+        }, 8000);
     }
 }
 
