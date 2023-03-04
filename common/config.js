@@ -13,7 +13,7 @@ const debug = true;                     // 调试模式，统一打印日志，t
 // 框架渲染的必要参数
 const cookie_prefix   = "view_ggvs_";   // cookie前缀
 const route_404       = "?route=404";   // 404
-const page_time       = "cache=" + MakeDate("YmdHi");
+const page_time       = "cache=" + MakeDate("YmdH");
 
 const api_url         = "https://xcx.xxx.cn/chengzi/public/index.php/api/";  // api主地址
 
