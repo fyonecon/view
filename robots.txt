@@ -1,4 +1,3 @@
 User-agent: *
 Disallow: /pages/*
 Disallow: /parts/*
-Disallow: *
