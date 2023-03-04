@@ -1087,7 +1087,7 @@ function close_full_screen(){
 
 // 节能模式
 function battery_model(){
-    if (view.get_battery_state() === "Off"){
+    if (view.get_switch_state("battery_state") === "Off"){
         view.log("当前节能模式：关闭");
         $(".switch-battery_state").html("🪫"+"节能：已关");
         view.write_js([cdn_page_file+"parts/bg_animate/bg_animate.js"+"?"+page_time]);
@@ -1099,9 +1099,59 @@ function battery_model(){
 
 // 手动切换节能模式
 function switch_battery_state(){
-    let msg = view.switch_battery_state();
+    let msg = view.set_switch_state("battery_state");
     // view.alert_txt("节能模式："+msg, 3000);
     view.refresh_page(100);
+}
+
+// 整点报时开关
+function switch_hour_state(){
+    let msg = view.set_switch_state("hour_state");
+    hour_model();
+}
+// 初始化整点按钮显示
+function hour_model(){
+    let msg = view.get_switch_state("hour_state");
+    if (msg === "Off"){
+        $(".switch-hour_state").html("⏰"+"整点报时：已关");
+    }else {
+        $(".switch-hour_state").html("⏰"+"整点报时：已开");
+    }
+}
+// 整点报时，仅每小时
+function on_hour(){
+    let _state = view.get_switch_state("hour_state");
+    if (_state === "Off"){
+        view.log("整点报时已跳过");
+    }else {
+        let minutes = view.time_date("i")*1;
+        if (minutes === 0){
+            view.log("整点报时");
+            speak_time();
+        }
+    }
+}
+
+// 语音报时，隔3s才能运行下一次
+let speak_time_num = 0;
+let speak_time_out;
+function speak_time(){
+    let txt = view.time_date("现在时间，H点i分");
+    clearTimeout(speak_time_out);
+    if (speak_time_num === 0){
+        view.voice(txt);
+        view.log("整点报时1");
+        speak_time_num = 1;
+        speak_time_out = setTimeout(function (){
+            speak_time_num = 0;
+            view.log("整点报时=0");
+        }, 3000);
+    }else{
+        speak_time_out = setTimeout(function (){
+            speak_time_num = 0;
+            view.log("整点报时=0");
+        }, 3000);
+    }
 }
 
 function start_page(info) {
@@ -1110,6 +1160,7 @@ function start_page(info) {
 
     if (screen.width > 640){
         $(".timer-div").removeClass("hide");
+        $(".on-hour-div").removeClass("hide");
     }
     $(".battery-model-div").removeClass("hide");
     $(".change-color-div").removeClass("hide");
@@ -1124,8 +1175,10 @@ function start_page(info) {
     timer1();
     setInterval(function () {
         timer1();
+        on_hour();
     }, 1000);
 
     battery_model();
+    hour_model();
 
 }

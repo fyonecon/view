@@ -624,30 +624,32 @@ const view = {
             loop = false;
         }
 
-        that.write_js([file_url + "static/js/mplayer.js"], function () {
-            // 文字生成语音源
-            let make_mp3 = "https://tts.baidu.com/text2audio?cuid=baike&lan=zh&ctp=1&spd=3&pdt=301&vol=9&rate=32&per=0&tex=" + encodeURI(read_txt);
+        // 文字生成语音源
+        let make_mp3 = "https://tts.baidu.com/text2audio?cuid=baike&lan=zh&ctp=1&spd=5&pdt=301&vol=9&rate=32&per=0&tex=" + encodeURI(read_txt);
 
-            // 文档https://github.com/haima16/MPlayer
-            let player = new MPlayer(make_mp3, {
-                loop: loop, // 循环 true or false
-                volume: volume, // 音量 [0, 1]
-                auto: true,
-                index: 1,
-                analyser: {
-                    size: 1024,
-                }
-            });
-            player.onload = function() {
-                let the = this;
-                that.log("=开始播放=");
-                the.play();
-            };
-            player.onended = function() {
-                let the = this;
-                that.log("=播放完成=");
-            };
+        // 文档https://github.com/haima16/MPlayer
+        let player = new MPlayer(make_mp3, {
+            loop: loop, // 循环 true or false
+            volume: volume, // 音量 [0, 1]
+            auto: true,
+            index: 1,
+            analyser: {
+                size: 1024,
+            }
         });
+        player.onload = function() {
+            let the = this;
+            that.log("=开始播放=");
+            the.play();
+        };
+        player.onended = function() {
+            let the = this;
+            that.log("=播放完成=");
+        };
+
+        // that.write_js([cdn_page_file + "static/js/mplayer.js"], function () {
+        //
+        // });
     },
     string_include_string: function (big_string, small_string) { // 判断大字符串是否包含小字符串
         let that = this;
@@ -849,20 +851,20 @@ const view = {
         that.set_cookie(key, pv + 1, 2*24*60*60*1000);
         return pv < max_pv;
     },
-    get_battery_state: function (){ // 获取节能模式状态
+    get_switch_state: function (name){ // 获取节能模式状态
         let that = this;
-        let battery_state = that.get_cookie("battery_state");
-        return battery_state?battery_state:"Off";
+        let _state = that.get_cookie(name);
+        return _state?_state:"Off";
     },
-    switch_battery_state: function (){ // 设置节能模式状态
+    set_switch_state: function (name){ // 设置节能模式状态
         let that = this;
         let time = 2*365*24*60*60*1000;
-        let battery_state = that.get_cookie("battery_state");
-        if (!battery_state || battery_state === "Off"){
-            that.set_cookie("battery_state", "On", time);
+        let _state = that.get_cookie(name);
+        if (!_state || _state === "Off"){
+            that.set_cookie(name, "On", time);
             return "On";
         }else {
-            that.set_cookie("battery_state", "Off", time);
+            that.set_cookie(name, "Off", time);
             return "Off";
         }
     },

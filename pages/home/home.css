@@ -439,6 +439,22 @@
 .timer-div{
     position: fixed;
     z-index: 20230304;
+    bottom: calc(20px + 30px + 30px + 30px);
+    right: 0px;
+    padding-right: 20px;
+    padding-left: 10px;
+    line-height: 30px;
+    height: 30px;
+    overflow: hidden;
+    width: 260px;
+    text-align: right;
+    font-size: 14px;
+    opacity: 0.6;
+}
+
+.on-hour-div{
+    position: fixed;
+    z-index: 20230304;
     bottom: calc(20px + 30px + 30px);
     right: 0px;
     padding-right: 20px;
