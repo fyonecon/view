@@ -7,10 +7,9 @@
 // 原生依赖
 const index_load = {
     "index_js": [
-        "routes/route.js",
-        // 以上文件不需要更改位置
-        "common/must.js", // 根据路由加载模块页面，并启动全局安全校验
-
+        "routes/route.js", // 路由文件
+        "common/page_init.js", // 解析完路由后的操作
+        "common/page_safe.js", // 用户全局安全校验
     ],
 };
 
@@ -135,7 +134,7 @@ function depend_pages(){
             // css不需要异步
             for (let i=0; i<file.css.length; i++){
                 let link = document.createElement('link');
-                link.setAttribute("href", file_url + file.css[i] +"?"+ page_time);
+                link.setAttribute("href", index_file_url + file.css[i] +"?"+ page_time);
                 link.setAttribute("rel", "stylesheet");
                 head.appendChild(link);
             }
@@ -144,7 +143,7 @@ function depend_pages(){
             for (let i=0; i<file.js.length; i++){
                 let the_p = new Promise((resolve, reject) => {
                     let script = document.createElement("script");
-                    script.setAttribute("src", file_url + file.js[i] +"?"+ page_time);
+                    script.setAttribute("src", index_file_url + file.js[i] +"?"+ page_time);
                     head.appendChild(script);
                     script.onload = function () {resolve(i); };
                 });
@@ -159,31 +158,28 @@ function depend_pages(){
         "page_all_js_has": function () {  // 页面全部js加载完后执行
             view.log("Files Cache_time = "+cache_time +"s");
 
+            document.getElementById("loading-div").classList.add("hide");
+
+            let route = depend.get_url_param("", "route");
             time_loaded = Math.floor((new Date()).getTime());
             let view_loaded_time = time_loaded - time_start;
 
             try {
-                let head = document.head || document.getElementsByTagName("head")[0];
-                let script = document.createElement("script");
-                script.setAttribute("src", file_url + "static/js/page_loaded.js?"+page_time);
-                head.appendChild(script);
-                script.onload = function () {
-                    document.getElementById("loading-div").classList.add("hide");
-                    view.log('page_loaded');
-                };
+                page_loaded([
+                    view_loaded_time
+                ], route);
             }catch (e) {
                 console.error(e);
                 console.log("=error=page_loaded=");
             }
 
-            let page = depend.get_url_param("", "route");
             try {
-                must_safe_check([
+                page_init([
                     view_loaded_time,
-                    "框架解析完成，用时"+view_loaded_time+"ms", "开始执行"+page+"页面数据>>",
+                    "框架解析完成，用时"+view_loaded_time+"ms", "开始执行"+route+"页面数据>>",
                     index_file_url,
                     index_depend_file,
-                ]);
+                ], route);
             }catch (e) {
                 console.error("错误提示：情况1：【可忽略】must_safe_check()" + "页面起始模块函数未定义，但是此函数可忽略。情况2：must_safe_check()函数缺失，请参考如下报错：");
                 console.error(e);
@@ -199,7 +195,7 @@ function depend_pages(){
                 page_name = depend.get_url_param("", "route");
                 for (let i=0; i<pages.length; i++){ // 获取真正文件路径名
                     if (pages[i].route === page_name){
-                        _file = page_url + "" + pages[i].file_path + "?"+page_time;
+                        _file = index_file_url + "" + pages[i].file_path + "?"+page_time;
                         document.getElementsByTagName("title")[0].innerHTML = pages[i].title;
                         pages_index = i;
                         resolve('找到值');
@@ -228,23 +224,24 @@ function depend_pages(){
             });
 
             // 获取页面txt
+            let view_cache = view.js_rand(1000000000000, 99999999999999);
             let p3 = new Promise((resolve, reject) =>{
                 $.ajax({ // 利用ajax的get请求获取文本内容
                     url: _file,
                     async: true,
                     success: function (data) {
                         let div = document.createElement("div");
-                        div.classList.add("app-page");
+                        div.classList.add("route-page");
                         div.classList.add("page-div");
                         div.classList.add("clear");
-                        div.setAttribute("id", "app-page");
-                        div.setAttribute("data-view", ""+view.js_rand(1000000000000, 99999999999999));
-                        div.classList.add("page-div-" + view.js_rand(1000000000000, 99999999999999));
+                        div.setAttribute("id", "route-page");
+                        div.setAttribute("data-view", ""+view_cache);
+                        div.classList.add("page-div-" + view_cache);
                         div.innerHTML = data;
 
                         let depend = document.getElementById("depend");
-                        depend.classList.add("depend-div-" + view.js_rand(1000000000000, 99999999999999));
-                        depend.setAttribute("data-view", ""+view.js_rand(1000000000000, 99999999999999));
+                        depend.classList.add("depend-div-" + view_cache);
+                        depend.setAttribute("data-view", ""+view_cache);
 
                         depend.appendChild(div); // 将模块渲染入主文件
 
@@ -270,7 +267,7 @@ function depend_pages(){
                 // 页面渲染完毕，开始执行公共css、js引入
                 for (let i=0; i<page_static_file.css.length; i++){
                     let link = document.createElement('link');
-                    link.setAttribute("href", file_url + page_static_file.css[i] + "?" + page_time);
+                    link.setAttribute("href", index_file_url + page_static_file.css[i] + "?" + page_time);
                     link.setAttribute("rel", "stylesheet");
                     head.appendChild(link);
                 }
@@ -279,7 +276,7 @@ function depend_pages(){
                 for (let i=0; i<page_static_file.js.length; i++){
                     let the_p = new Promise((resolve, reject) => {
                         let script = document.createElement("script");
-                        script.setAttribute("src", file_url + page_static_file.js[i] + "?" + page_time);
+                        script.setAttribute("src", index_file_url + page_static_file.js[i] + "?" + page_time);
                         head.appendChild(script);
                         script.onload = function () {resolve(i); };
                     });
@@ -301,8 +298,8 @@ function depend_pages(){
     };
 
     // 校验文件引入参数是否已经存在，不存在就不需要解析框架
-    if( typeof time_start === "undefined" || typeof file_url === "undefined" || typeof page_url === "undefined" || typeof page_time === "undefined" ){
-        console.error("参数未定义：%s，框架产生了异步时差，需要决解框架Bug。5s秒后将重试网页。", [time_start, file_url, page_url, page_time]);
+    if( typeof time_start === "undefined" || typeof index_file_url === "undefined" || typeof index_file_url === "undefined" || typeof page_time === "undefined" ){
+        console.error("参数未定义：%s，框架产生了异步时差，需要决解框架Bug。5s秒后将重试网页。", [time_start, index_file_url, index_file_url, page_time]);
         setTimeout(function () {
             window.location.reload();
         }, 5000);
@@ -313,7 +310,7 @@ function depend_pages(){
         for (let i=0; i<index_load.index_js.length; i++){
             let the_p = new Promise((resolve, reject) => {
                 let pages_script = document.createElement("script");
-                pages_script.setAttribute("src", file_url + index_load.index_js[i]+"?" + page_time);
+                pages_script.setAttribute("src", index_file_url + index_load.index_js[i]+"?" + page_time);
                 head.appendChild(pages_script);
                 pages_script.onload = function () {resolve(i); };
             });

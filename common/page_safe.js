@@ -119,7 +119,10 @@ function show_state(level){
 
 //
 // 检查admin_token
-function check_admin_token(){
+function check_admin_token(e, route){
+
+    start_page(e);
+    return;
 
     /*开始-请求数据*/
     $.ajax({
@@ -162,19 +165,19 @@ function check_admin_token(){
                     level_dom(the_level);
                     show_state(the_level);
                     if (the_level === 1){
-                        start_this_page(the_level);
+                        start_page(the_level);
                         try {start_foot();}catch (e){view.error(e);}
                     }
                     else if (the_level === 2){
-                        start_this_page(the_level);
+                        start_page(the_level);
                         try {start_foot();}catch (e){view.error(e);}
                     }
                     else if (the_level === 3){
-                        start_this_page(the_level);
+                        start_page(the_level);
                         try {start_foot();}catch (e){view.error(e);}
                     }
                     else if (the_level === 4){
-                        start_this_page(the_level);
+                        start_page(the_level);
                         try {start_foot();}catch (e){view.error(e);}
                     }
                     else {
@@ -204,30 +207,5 @@ function check_admin_token(){
         }
     });
     /*结束-请求数据*/
-
-}
-
-
-
-// 页面必要安全参数校验
-function must_safe_check(e){
-    if(!navigator.webdriver){
-
-        if (debug === false && view.is_user_screen() === false){ // 生产状态
-            $(".depend").addClass("hide");
-            view.alert_txt("不符合生产状态下的设备要求，页面停止解析。", "long", "clear");
-            return;
-        }
-
-        //
-        let route = view.get_url_param("", "route");
-        if (route === "login"){
-            start_this_page(e);
-        } else { // 不是login的话就直接检查是否已经登录
-            start_this_page(e);
-        }
-    }else {
-        view.alert_txt("请不要使用模拟浏览器操作页面信息！", "long", "clear");
-    }
 
 }

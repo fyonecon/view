@@ -15,10 +15,10 @@
     };
 
     // 写入组件
-    view.write_htm(page_url + "parts/nav/nav.html", "depend", function () {
+    view.write_htm(index_file_url + "parts/nav/nav.html", "depend", function () {
         part.part_init("nav");
     });
-    view.write_css([page_url + "parts/nav/nav.css"], function () {
+    view.write_css([index_file_url + "parts/nav/nav.css"], function () {
         view.log("css");
     });
 

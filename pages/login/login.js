@@ -264,7 +264,7 @@ function make_num() {
 // 页面数据入口
 let num_res = 0;
 let login_state = 0;
-function start_this_page() {
+function start_page() {
     $(".user-login-name").val("576");
     $(".user-login-pwd").val("789");
     login_state = 1;

@@ -8,11 +8,10 @@ function replace_string($old_txt, $new_txt, $string){
     return str_replace($old_txt, $new_txt, $string);
 }
 // 读取文件内容
-function read_html($old_txt, $new_txt, $html_file){
+function read_html($html_file){
     $fp = fopen($html_file, 'r');
     if (!feof($fp)){ // 文件存在
         $contents = fread($fp, filesize($html_file));
-        $contents = replace_string($old_txt, $new_txt, $contents);
     }else{
         $contents = 'null file';
     }
@@ -21,8 +20,6 @@ function read_html($old_txt, $new_txt, $html_file){
 }
 
 // 输出内容
-$html_file = './view/view.html';
-$old_txt = '"./"';
-$new_txt = '"./view/"';
-echo read_html($old_txt, $new_txt, $html_file);
+$html_file = './index.html';
+echo read_html($html_file);
 exit();

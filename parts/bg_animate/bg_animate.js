@@ -10,7 +10,7 @@
 
 
     // 写入组件
-    view.write_css([page_url + "parts/bg_animate/bg_animate.css"])
-    view.write_htm(page_url + "parts/bg_animate/bg_animate.html", "depend");
+    view.write_css([index_file_url + "parts/bg_animate/bg_animate.css"])
+    view.write_htm(index_file_url + "parts/bg_animate/bg_animate.html", "depend");
 
 })();

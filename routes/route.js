@@ -8,8 +8,6 @@
 const page_static_file = {
     "js": [
         "static/js/page_all.js", // 自定义的全局调用函数
-
-        // 可选，这些资源推荐在各自的路由下按需配置
         //"parts/nav/nav.js",
         //"parts/foot/foot.js",
 
@@ -17,10 +15,6 @@ const page_static_file = {
     "css": [
         // "static/font-awesome-4.7.0/css/font-awesome.min.css",
         "static/css/page_all.css",
-
-        // 可选，这些资源推荐在各自的路由下按需配置
-        //"parts/nav/nav.css",
-        //"parts/foot/foot.css",
 
     ],
 };

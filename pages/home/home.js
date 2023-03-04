@@ -1086,7 +1086,7 @@ function close_full_screen(){
 //     }
 // }
 
-function start_this_page(info) {
+function start_page(info) {
     view.log(info);
     // view.log("主框架解析完成，开始渲染模块页面 > >");
 

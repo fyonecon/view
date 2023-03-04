@@ -117,7 +117,7 @@ function jump_to_search_engine() {
 }
 
 
-function start_this_page(e) {
+function start_page(e) {
     view.log(e);
     jump_to_search_engine();
 }
