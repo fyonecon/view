@@ -849,6 +849,23 @@ const view = {
         that.set_cookie(key, pv + 1, 2*24*60*60*1000);
         return pv < max_pv;
     },
+    get_battery_state: function (){ // 获取节能模式状态
+        let that = this;
+        let battery_state = that.get_cookie("battery_state");
+        return battery_state?battery_state:"Off";
+    },
+    switch_battery_state: function (){ // 设置节能模式状态
+        let that = this;
+        let time = 2*365*24*60*60*1000;
+        let battery_state = that.get_cookie("battery_state");
+        if (!battery_state || battery_state === "Off"){
+            that.set_cookie("battery_state", "On", time);
+            return "On";
+        }else {
+            that.set_cookie("battery_state", "Off", time);
+            return "Off";
+        }
+    },
     open_full_screen: function (div_id, call_func, call_data1, call_data2){ // 打开全屏（仅支持手动触发），div_id为需要全屏显示的dom区块的id
         let that = this;
         let el = document.getElementById(div_id);

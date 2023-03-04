@@ -1085,10 +1085,33 @@ function close_full_screen(){
 //     }
 // }
 
+// 节能模式
+function battery_model(){
+    if (view.get_battery_state() === "Off"){
+        view.log("当前节能模式：关闭");
+        $(".switch-battery_state").html("🪫"+"节能：已关");
+        view.write_js([cdn_page_file+"parts/bg_animate/bg_animate.js"+"?"+page_time]);
+    }else {
+        view.log("当前节能模式：打开");
+        $(".switch-battery_state").html("🔋"+"节能：已开");
+    }
+}
+
+// 手动切换节能模式
+function switch_battery_state(){
+    let msg = view.switch_battery_state();
+    // view.alert_txt("节能模式："+msg, 3000);
+    view.refresh_page(100);
+}
+
 function start_page(info) {
     view.log(info);
     // view.log("主框架解析完成，开始渲染模块页面 > >");
-    $(".timer-div").removeClass("hide");
+
+    if (screen.width > 640){
+        $(".timer-div").removeClass("hide");
+    }
+    $(".battery-model-div").removeClass("hide");
     $(".change-color-div").removeClass("hide");
 
     init_dom();
@@ -1103,5 +1126,6 @@ function start_page(info) {
         timer1();
     }, 1000);
 
-    view.write_js([cdn_page_file+"parts/bg_animate/bg_animate.js"+"?"+page_time]);
+    battery_model();
+
 }
