@@ -20,6 +20,6 @@ function read_html($html_file){
 }
 
 // 输出内容
-$html_file = './index.html';
+$html_file = './view.html';
 echo read_html($html_file);
 exit();

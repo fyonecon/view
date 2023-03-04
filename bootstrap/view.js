@@ -337,12 +337,32 @@ const view = {
             return false;
         }
     },
-    time: function () {
+    time_s: function () {
         return Math.floor((new Date()).getTime()/1000);
     }, // 秒时间戳，s
     time_ms: function(){
         return (new Date()).getTime();
     }, // 毫秒时间戳，ms
+     time_date: function(format){ // YmdHisW，日期周
+        let t = new Date();
+        let seconds = t.getSeconds(); if (seconds<10){seconds = "0"+seconds;}
+        let minutes = t.getMinutes(); if (minutes<10){minutes = "0"+minutes;}
+        let hour = t.getHours(); if (hour<10){hour = "0"+hour;}
+        let day = t.getDate(); if (day<10){day = "0"+day;}
+        let month = t.getMonth() + 1; if (month<10){month = "0"+month;}
+        let year = t.getFullYear();
+        let week = ["7", "1", "2", "3", "4", "5", "6"][t.getDay()]; // 周
+
+         format = format.replaceAll("Y", year);
+         format = format.replaceAll("m", month);
+         format = format.replaceAll("d", day);
+         format = format.replaceAll("H", hour);
+         format = format.replaceAll("i", minutes);
+         format = format.replaceAll("s", seconds);
+         format = format.replaceAll("W", week);
+
+        return format;
+    },
     get_date: function () {
         let that = this;
 

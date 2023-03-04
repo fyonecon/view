@@ -1,8 +1,9 @@
 /*自定义配置页面的一些全局参数*/
 
 /*
-* 1）页面生命周期（index.html--config.js--框架解析index.js--公共all.js/css文件--执行wifi广告劫持严重和清除--pages.htm--pages.js--page_init.js）。
-* 2）不依赖于node但需依赖服务端环境，或者依赖CDN环境。
+* 1）页面生命周期（index.html--config.js等插件--depend.js--公共js/css文件--解析路由--page_init.js--pages.html、pages.js--start_page()函数 ）。
+* 2）不依赖node，但需依赖服务端环境，或者需要CDN环境。
+* 3）一般运行到start_page()函数会花费900ms左右。
 * */
 
 "use strict";
@@ -12,9 +13,7 @@ const debug = true;                     // 调试模式，统一打印日志，t
 // 框架渲染的必要参数
 const cookie_prefix   = "view_ggvs_";   // cookie前缀
 const route_404       = "?route=404";   // 404
-
-const cache_time      = 100*1000; // 缓存时间：ms
-const page_time       = "view-pages-"+Math.floor((new Date()).getTime()/cache_time)*cache_time;
+const page_time       = "cache=" + MakeDate("YmdHi");
 
 const api_url         = "https://xcx.xxx.cn/chengzi/public/index.php/api/";  // api主地址
 
@@ -45,6 +44,3 @@ let login_name = "";
 let login_level = 0;
 let login_level_name = "（未知等级）";
 let login_nickname = "（未登录）";
-
-
-

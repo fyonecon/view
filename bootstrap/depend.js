@@ -34,7 +34,7 @@ function depend_es6(){
     }catch (e) {
         console.error(e);
         alert("该古老的浏览器不支持ES6语法，需更换浏览器。");
-        window.location.replace(index_file_url + "parts/help/help-es6.html");
+        window.location.replace(cdn_page_file + "parts/help/help-es6.html");
     }
 }
 
@@ -134,7 +134,7 @@ function depend_pages(){
             // css不需要异步
             for (let i=0; i<file.css.length; i++){
                 let link = document.createElement('link');
-                link.setAttribute("href", index_file_url + file.css[i] +"?"+ page_time);
+                link.setAttribute("href", cdn_page_file + file.css[i] +"?"+ page_time);
                 link.setAttribute("rel", "stylesheet");
                 head.appendChild(link);
             }
@@ -143,7 +143,7 @@ function depend_pages(){
             for (let i=0; i<file.js.length; i++){
                 let the_p = new Promise((resolve, reject) => {
                     let script = document.createElement("script");
-                    script.setAttribute("src", index_file_url + file.js[i] +"?"+ page_time);
+                    script.setAttribute("src", cdn_page_file + file.js[i] +"?"+ page_time);
                     head.appendChild(script);
                     script.onload = function () {resolve(i); };
                 });
@@ -156,7 +156,7 @@ function depend_pages(){
             });
         },
         "page_all_js_has": function () {  // 页面全部js加载完后执行
-            view.log("Files Cache_time = "+cache_time +"s");
+            view.log("Files Cache_time = "+page_time +"s");
 
             document.getElementById("loading-div").classList.add("hide");
 
@@ -177,8 +177,8 @@ function depend_pages(){
                 page_init([
                     view_loaded_time,
                     "框架解析完成，用时"+view_loaded_time+"ms", "开始执行"+route+"页面数据>>",
-                    index_file_url,
-                    index_depend_file,
+                    cdn_page_file,
+                    cdn_depend_file,
                 ], route);
             }catch (e) {
                 console.error("错误提示：情况1：【可忽略】must_safe_check()" + "页面起始模块函数未定义，但是此函数可忽略。情况2：must_safe_check()函数缺失，请参考如下报错：");
@@ -195,7 +195,7 @@ function depend_pages(){
                 page_name = depend.get_url_param("", "route");
                 for (let i=0; i<pages.length; i++){ // 获取真正文件路径名
                     if (pages[i].route === page_name){
-                        _file = index_file_url + "" + pages[i].file_path + "?"+page_time;
+                        _file = cdn_page_file + "" + pages[i].file_path + "?"+page_time;
                         document.getElementsByTagName("title")[0].innerHTML = pages[i].title;
                         pages_index = i;
                         resolve('找到值');
@@ -252,7 +252,7 @@ function depend_pages(){
                         console.error("1.非同源政策限制模块文件的拉取；2.本应用需要服务器环境（网络环境）；3.htm组件文件404。");
                         time_error = Math.floor((new Date()).getTime());
                         setTimeout(function () {
-                            window.location.replace(index_file_url + "parts/help/help-html.html");
+                            window.location.replace(cdn_page_file + "parts/help/help-html.html");
                         },1000);
 
                         resolve('缺失模块html文件');
@@ -267,7 +267,7 @@ function depend_pages(){
                 // 页面渲染完毕，开始执行公共css、js引入
                 for (let i=0; i<page_static_file.css.length; i++){
                     let link = document.createElement('link');
-                    link.setAttribute("href", index_file_url + page_static_file.css[i] + "?" + page_time);
+                    link.setAttribute("href", cdn_page_file + page_static_file.css[i] + "?" + page_time);
                     link.setAttribute("rel", "stylesheet");
                     head.appendChild(link);
                 }
@@ -276,7 +276,7 @@ function depend_pages(){
                 for (let i=0; i<page_static_file.js.length; i++){
                     let the_p = new Promise((resolve, reject) => {
                         let script = document.createElement("script");
-                        script.setAttribute("src", index_file_url + page_static_file.js[i] + "?" + page_time);
+                        script.setAttribute("src", cdn_page_file + page_static_file.js[i] + "?" + page_time);
                         head.appendChild(script);
                         script.onload = function () {resolve(i); };
                     });
@@ -298,8 +298,8 @@ function depend_pages(){
     };
 
     // 校验文件引入参数是否已经存在，不存在就不需要解析框架
-    if( typeof time_start === "undefined" || typeof index_file_url === "undefined" || typeof index_file_url === "undefined" || typeof page_time === "undefined" ){
-        console.error("参数未定义：%s，框架产生了异步时差，需要决解框架Bug。5s秒后将重试网页。", [time_start, index_file_url, index_file_url, page_time]);
+    if( typeof time_start === "undefined" || typeof cdn_page_file === "undefined" || typeof cdn_page_file === "undefined" || typeof page_time === "undefined" ){
+        console.error("参数未定义：%s，框架产生了异步时差，需要决解框架Bug。5s秒后将重试网页。", [time_start, cdn_page_file, cdn_page_file, page_time]);
         setTimeout(function () {
             window.location.reload();
         }, 5000);
@@ -310,7 +310,7 @@ function depend_pages(){
         for (let i=0; i<index_load.index_js.length; i++){
             let the_p = new Promise((resolve, reject) => {
                 let pages_script = document.createElement("script");
-                pages_script.setAttribute("src", index_file_url + index_load.index_js[i]+"?" + page_time);
+                pages_script.setAttribute("src", cdn_page_file + index_load.index_js[i]+"?" + page_time);
                 head.appendChild(pages_script);
                 pages_script.onload = function () {resolve(i); };
             });

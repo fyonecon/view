@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="robots" content="nofollow">
-  <meta http-equiv="Cache-Control" content="max-age=2400">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-touch-fullscreen" content="yes" />
@@ -14,7 +13,7 @@
   <link rel="apple-touch-icon" href="./static/img/launcher.png">
   <link rel="shortcut icon" href="./static/img/favicon.ico" type="image/x-icon" />
   <meta name="referrer" content="unsafe-url">
-  <!--pwa-->
+  <!--PWA-->
   <!--    <link rel="manifest" href="./static/json/manifest.json"  type="application/manifest+json"/>-->
   <title>Loading..</title>
   <meta name="keywords" content="ViewJS,Web单页应用框架" />
@@ -24,24 +23,23 @@
     let time_start  = Math.floor((new Date()).getTime()); // ms。开始载入外部文件的时间戳
     let time_loaded = 0; // ms。框架载入完成的时间戳
     let time_error  = 0; // ms。框架出错的时间戳
-    let index_file_url = "./"; // 自定义pages CDN地址，./
-    let index_depend_file = "./"; // 自定义核心依赖CDN地址，./
+    let cdn_page_file = "./"; // 自定义pages CDN地址，./
+    let cdn_depend_file = "./"; // 自定义核心依赖CDN地址，./
 
     ;function AppRun () {
       // 核心解析依赖
       let css_href_array = [
-        index_depend_file + "bootstrap/depend.css",
-        index_depend_file + "bootstrap/plugins.css",
+        cdn_depend_file + "bootstrap/depend.css",
+        cdn_depend_file + "bootstrap/plugins.css",
       ];
       let js_src_array = [
-        index_file_url + "common/config.js",
-        index_depend_file + "bootstrap/plugins.js",
-        index_depend_file + "bootstrap/view.js",
+        cdn_page_file + "common/config.js",
+        cdn_depend_file + "bootstrap/plugins.js",
+        cdn_depend_file + "bootstrap/view.js",
       ];
 
       // 核心文件每次加载都自动清除缓存
-      let clear_time = 100*1000; // ms
-      let clear_cache = "?view-depend-" + Math.floor(new Date().getTime()/clear_time)*clear_time;
+      let clear_cache = "?cache=" + MakeDate("YmdHi");
       let head = document.head || document.getElementsByTagName("head")[0];
 
       // css
@@ -80,15 +78,34 @@
       Promise.all(js_all).then((result) => {
         let depend_script = document.createElement("script");
         depend_script.setAttribute("class", "write-js");
-        depend_script.setAttribute("src", index_depend_file + "bootstrap/depend.js"+"?" + clear_cache);
+        depend_script.setAttribute("src", cdn_depend_file + "bootstrap/depend.js"+"?" + clear_cache);
         head.appendChild(depend_script);
         depend_script.onload = function () {
-          //
           // console.log("depend");
         };
       }).catch((error) => {
         console.error(error);
       });
+    }
+    function MakeDate(date_time){ // YmdHisW，日期周
+      let t = new Date();
+      let seconds = t.getSeconds(); if (seconds<10){seconds = "0"+seconds;}
+      let minutes = t.getMinutes(); if (minutes<10){minutes = "0"+minutes;}
+      let hour = t.getHours(); if (hour<10){hour = "0"+hour;}
+      let day = t.getDate(); if (day<10){day = "0"+day;}
+      let month = t.getMonth() + 1; if (month<10){month = "0"+month;}
+      let year = t.getFullYear();
+      let week = ["7", "1", "2", "3", "4", "5", "6"][t.getDay()]; // 周
+
+      date_time = date_time.replaceAll("Y", year);
+      date_time = date_time.replaceAll("m", month);
+      date_time = date_time.replaceAll("d", day);
+      date_time = date_time.replaceAll("H", hour);
+      date_time = date_time.replaceAll("i", minutes);
+      date_time = date_time.replaceAll("s", seconds);
+      date_time = date_time.replaceAll("W", week);
+
+      return date_time;
     }
     ;(function (){
       let inner_w = window.innerWidth;

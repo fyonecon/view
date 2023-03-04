@@ -428,12 +428,12 @@ function init_dom() {
         '   <div class="clear"></div>' +
         '</div>' +
         //
-        '<div class="search-btn-center do-btn-center must-btn select-none timeout-hide hide">' +
-        '   <span class="search-btn-style copy-btn-span click" onclick="clear_copy(this, \'copy-btn-span\')" data-clipboard-text="+86110">🎲·随机数</span>' +
-        '   <span class="search-btn-style color-btn-span click">🌓·<span id="change-color-span"></span></span>' +
-
-        '   <div class="clear"></div>' +
-        '</div>' +
+        // '<div class="search-btn-center do-btn-center must-btn select-none timeout-hide hide">' +
+        // '   <span class="search-btn-style copy-btn-span click" onclick="clear_copy(this, \'copy-btn-span\')" data-clipboard-text="+86110">🎲·随机数</span>' +
+        // '   <span class="search-btn-style color-btn-span click">🌓·<span id="change-color-span"></span></span>' +
+        //
+        // '   <div class="clear"></div>' +
+        // '</div>' +
         //
         '<div class="swiper-container select-none">' +
         '    <div class="swiper-wrapper">' +
@@ -1101,5 +1101,5 @@ function start_page(info) {
         timer1();
     }, 4000);
 
-    view.write_js([index_file_url+"parts/bg_animate/bg_animate.js"]);
+    view.write_js([cdn_page_file+"parts/bg_animate/bg_animate.js"+"?"+page_time]);
 }
