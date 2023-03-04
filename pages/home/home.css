@@ -449,7 +449,7 @@
     width: 260px;
     text-align: right;
     font-size: 14px;
-    opacity: 0.6;
+    opacity: 0.5;
 }
 
 .on-hour-div{
@@ -465,7 +465,7 @@
     width: 260px;
     text-align: right;
     font-size: 14px;
-    opacity: 0.6;
+    opacity: 0.2;
 }
 
 .battery-model-div{
@@ -481,7 +481,7 @@
     width: 260px;
     text-align: right;
     font-size: 14px;
-    opacity: 0.6;
+    opacity: 0.2;
 }
 
 .change-color-div{
@@ -497,5 +497,5 @@
     width: 260px;
     text-align: right;
     font-size: 14px;
-    opacity: 0.6;
+    opacity: 0.2;
 }
