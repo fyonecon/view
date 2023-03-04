@@ -423,7 +423,7 @@ function init_dom() {
         //
         '<div class="search-btn-center do-btn-center must-btn select-none">' +
         '   <span class="search-btn-style history-btn-span click red" title="清空搜索历史记录" data-clipboard-text=" ">清空历史</span>' +
-        '   <span class="search-btn-style refresh-btn-span click green" title="清空输入框">重新输入</span>' +
+        '   <span class="search-btn-style refresh-btn-span click " title="清空输入框">重新输入</span>' +
         '   <span class="search-btn-style search-btn-span click" title="点击搜索">🔍·搜索</span>' +
         '   <div class="clear"></div>' +
         '</div>' +
@@ -1055,11 +1055,10 @@ function clear_copy(that, _class){
 function timer1() {
     let time_txt =  ""  + view.get_date()[2] +
         "/" + view.get_date()[5] +
+        " " + view.get_date()[7] +
         " " + view.get_date()[9] +
-        " " + view.get_date()[14] +
         "";
-    document.getElementById("input").placeholder = time_txt;
-    setTimeout(function (){document.getElementById("input").placeholder = "输入内容"; }, 2000);
+    document.getElementsByClassName("timer-span")[0].innerHTML = time_txt;
 }
 
 // 打开全屏
@@ -1089,6 +1088,8 @@ function close_full_screen(){
 function start_page(info) {
     view.log(info);
     // view.log("主框架解析完成，开始渲染模块页面 > >");
+    $(".timer-div").removeClass("hide");
+    $(".change-color-div").removeClass("hide");
 
     init_dom();
     init_color();
@@ -1097,9 +1098,10 @@ function start_page(info) {
     show_history();
     close_full_screen();
 
+    timer1();
     setInterval(function () {
         timer1();
-    }, 4000);
+    }, 1000);
 
     view.write_js([cdn_page_file+"parts/bg_animate/bg_animate.js"+"?"+page_time]);
 }
