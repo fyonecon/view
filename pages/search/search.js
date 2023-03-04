@@ -45,6 +45,10 @@ function jump_location(engine, word, url) {
             url = "https://duckduckgo.com/?ia=web";
             url = url + "&q=" + _word + "&page_time=" + page_time;
         }
+        else if (engine === "yandex"){
+            url = "https://yandex.com/search/?text=";
+            url = url+ _word + "&page_time=" + page_time;
+        }
         else if (engine === "m-toutiao"){
             url = "https://m.toutiao.com/search/?keyword=";
             url = url + _word + "&page_time=" + page_time;
