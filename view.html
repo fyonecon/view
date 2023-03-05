@@ -112,9 +112,7 @@
       let inner_h = window.innerHeight;
       let screen_w = window.screen.width;
       let screen_h = window.screen.height;
-      let screen_w_foot = screen_w - inner_w;
-      let screen_h_foot = screen_h - inner_h;
-      if (Math.abs(screen_h_foot)<1 || inner_w<200 || inner_h<200 || screen_w<200 || screen_h<200 || navigator.webdriver){}else {AppRun ();}
+      if (inner_w<200 || inner_h<200 || screen_w<200 || screen_h<200 || navigator.webdriver){}else {AppRun ();}
     })();
   </script>
 

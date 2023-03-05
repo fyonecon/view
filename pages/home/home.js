@@ -32,7 +32,7 @@ const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。�
         "url_right": "", // 参数的固顶后缀
     },
     {
-        "name": "DuckGo", // 引擎名称，可视5个字
+        "name": "DuckDuckGo", // 引擎名称，可视5个字
         "m-url": "./?route=search&engine=duckduckgo&word=", // 移动端，前缀
         "pc-url": "./?route=search&engine=duckduckgo&word=", // PC端，前缀
         "url_right": "", // 参数的固顶后缀
@@ -44,14 +44,14 @@ const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。�
         "url_right": "", // 参数的固顶后缀
     },
     {
-        "name": "搜英文电影",
+        "name": "英文电影",
         "m-url": "./?route=search&engine=video&word=",
         "pc-url": "./?route=search&engine=video&word=",
         "url_right": "",
     },
 
     {
-        "name": "搜收费音乐",
+        "name": "收费音乐",
         "m-url": "./?route=search&engine=music&word=",
         "pc-url": "./?route=search&engine=music&word=",
         "url_right": "",

@@ -46,7 +46,7 @@ function page_loaded(e, route){
 // 初始化当前路由
 function page_init(e, route){
     if(!navigator.webdriver){
-        if (route === "login" || route === "404" || route === "help"){
+        if (route === "login" || route === "404" || route === "help" || route === ""){
             start_page(e);
         } else { // 不是login的话就直接检查是否已经登录
             check_admin_token(e, route);
