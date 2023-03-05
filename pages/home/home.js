@@ -8,21 +8,27 @@ const title = " 👈 GG简单主页"; // 当前页面标题
 const _search_jump = "";
 const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。自定义。
     {
-        "name": "百度一下",
-        "m-url": "./?route=search&engine=baidu&word=",
-        "pc-url": "./?route=search&engine=baidu&word=",
-        "url_right": "",
-    },
-    {
         "name": "必应搜索",
         "m-url": "./?route=search&engine=bing&word=",
         "pc-url": "./?route=search&engine=bing&word=",
         "url_right": "",
     },
     {
+        "name": "百度一下",
+        "m-url": "./?route=search&engine=baidu&word=",
+        "pc-url": "./?route=search&engine=baidu&word=",
+        "url_right": "",
+    },
+    {
         "name": "头条搜索", // 引擎名称，可视5个字
         "m-url": "./?route=search&engine=m-toutiao&word=", // 移动端，前缀
         "pc-url": "./?route=search&engine=toutiao&word=", // PC端，前缀
+        "url_right": "", // 参数的固顶后缀
+    },
+    {
+        "name": "微信文章", // 引擎名称，可视5个字
+        "m-url": "./?route=search&engine=weixin&word=", // 移动端，前缀
+        "pc-url": "./?route=search&engine=weixin&word=", // PC端，前缀
         "url_right": "", // 参数的固顶后缀
     },
     {

@@ -78,6 +78,10 @@ function jump_location(engine, word, url) {
             url = "https://www.toutiao.com/search/?keyword=";
             url = url + _word + "&page_time=" + page_time;
         }
+        else if (engine === "weixin"){
+            url = "https://weixin.sogou.com/weixin?type=2&s_from=input&ie=utf8&query=";
+            url = url + _word + "&page_time=" + page_time;
+        }
         else if (engine === "music"){
             url = "https://www.hifini.com/search-";
             url = url + _word + "-1-1-1.htm?page_time=" + page_time;
