@@ -339,71 +339,68 @@ function run_search() { // 执行搜索
     let _select = document.getElementById("select");
     let engine = _select.options[_select.selectedIndex].value;
     let _input = document.getElementById("input").value;
+    let tab_url = "";
 
     if (!_input.trim()) {
         console_log("内容不能为空");
-        //view.notice_txt("搜索内容不能为空", 1500);
-        //change_focus();
-        //return;
+        view.notice_txt("搜索内容不能为空", 1500);
+        change_focus();
+        // return;
     }
 
     let reg = /^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)+([A-Za-z0-9-~\/])/; // 至少是 http://a 这种格式
     if (!reg.test(_input)) {
         console_log("不是网址");
+
         _input = encodeURIComponent(_input);
+        let url_right = search[engine]["url_right"].trim(); // 参数固定后缀
+        let m_url = "";
+        let pc_url = "";
+        if (url_right === "blank") { // 对于有些网站，只能打开主页
+            m_url = search[engine]["m-url"]; // get，移动端
+            pc_url = search[engine]["pc-url"]; // get，PC端
+        } else { // 正常搜索
+            m_url = search[engine]["m-url"] + _input + url_right; // get，移动端
+            pc_url = search[engine]["pc-url"] + _input + url_right; // get，PC端
+        }
+
+        if (window.innerWidth > 800) {
+            write_tips_text("PC模式会自动打开新标签来展示搜索结果");
+            tab_url = pc_url;
+        } else {
+            // 操作iOS设备Bug情况
+            let u = navigator.userAgent;
+            let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
+            let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+            if (isAndroid === true || isiOS === false) { // android
+                tab_url = m_url;
+                console_log("Android");
+            } else if (isAndroid === false || isiOS === true) { // ios
+                console_log("iOS");
+                write_tips_text("iOS移动设备会自动打开新标签来展示搜索结果");
+                tab_url = m_url;
+            } else { // pc
+                tab_url = pc_url;
+                console_log("PC");
+            }
+        }
+
     } else {
         console_log("是网址");
-        window.open(_input, "_blank"); // 搜索4/4
-        return;
-    }
 
-    let url_right = search[engine]["url_right"].trim(); // 参数固定后缀
-    let m_url = "";
-    let pc_url = "";
-    if (url_right === "blank") { // 对于有些网站，只能打开主页
-        m_url = search[engine]["m-url"]; // get，移动端
-        pc_url = search[engine]["pc-url"]; // get，PC端
-    } else { // 正常搜索
-        m_url = search[engine]["m-url"] + _input + url_right; // get，移动端
-        pc_url = search[engine]["pc-url"] + _input + url_right; // get，PC端
-    }
-    let tab_url = "";
-
-    if (window.innerWidth > 800) {
-        write_tips_text("PC模式会自动打开新标签来展示搜索结果");
-        tab_url = pc_url;
-    } else {
-        // 操作iOS设备Bug情况
-        let u = navigator.userAgent;
-        let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
-        let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
-        if (isAndroid === true || isiOS === false) { // android
-            tab_url = m_url;
-            console_log("Android");
-        } else if (isAndroid === false || isiOS === true) { // ios
-            console_log("iOS");
-            write_tips_text("iOS移动设备会自动打开新标签来展示搜索结果");
-            tab_url = m_url;
-        } else { // pc
-            tab_url = pc_url;
-            console_log("PC");
-        }
+        tab_url = _input;
     }
 
     show_loading();
     write_tips_text('已经在新标签打开了本次搜索结果');
     change_blur(); // 主动退去键盘
-
-    setTimeout(function() {
-        show_history();
-        console_log("打开新标签");
-        window.open(tab_url, "_blank");
-    }, 10);
+    show_history();
     setTimeout(function() {
         delete_loading();
         document.getElementById("input").value = "";
     }, 1500);
 
+    window.open(tab_url, "_blank");
 }
 
 function init_dom() {
@@ -1151,7 +1148,8 @@ function start_page(info) {
 
     if (screen.width > 780){
         $(".timer-div").removeClass("hide");
-        $(".on-hour-div").removeClass("hide");
+        // $(".on-hour-div").removeClass("hide");
+        $(".rights-div").removeClass("hide");
     }
     $(".battery-model-div").removeClass("hide");
     $(".change-color-div").removeClass("hide");
@@ -1177,5 +1175,7 @@ function start_page(info) {
         let src = $(".qr_img").attr("src");
         if (src){$(".new-qr-img").attr("src", src);}
     }, "qr-div");
+
+    $(".rights-date").html(view.time_date("Y"));
 
 }
