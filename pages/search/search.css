@@ -1,0 +1,19 @@
+.search-content{
+    padding: 20px 20px;
+}
+.match-kw-div{
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: white;
+    line-height: 30px;
+    width: 100%;
+}
+.match-kw-span-msg{
+
+}
+.match-kw-span-txt{
+    padding: 10px 0px;
+}
+.back-a{
+    padding: 20px 0;
+}

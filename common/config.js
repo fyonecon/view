@@ -8,7 +8,7 @@
 
 "use strict";
 
-const debug = false;                     // 调试模式，统一打印日志，true & false
+const debug = true;                     // 调试模式，统一打印日志，true & false
 
 // 框架渲染的必要参数
 const cookie_prefix   = "view_ggvs_";   // cookie前缀

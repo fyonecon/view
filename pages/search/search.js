@@ -4,22 +4,43 @@ function jump_location(engine, word, url) {
     let page_time = view.get_date()[0];
     let _word = '';
 
-    // if (word === "%s" || word === ""){
-    //     view.alert_txt("word参数出问题或搜索内容不能为空", 3000);
-    //     url = "https://www.bing.com/?ensearch=1&q=如何使用搜索引擎";
-    // }
-    if (word === "首页" || word === "home" ){
+    // 1-匹配跳转
+    if (word === "kw@首页" || word === "kw@home" ){
         url = "./";
     }
-    else if (word === "404"){
+    else if (word === "kw@404"){
         url = "./?route=404";
     }
-    else if (word === "hei123"){
+    else if (word === "kw@hei123"){
         url = "./?route=hei123";
     }
 
+    // 2-匹配展示文字
+    else if (word === "kw@bing"){
+        view.hide_loading();
+        $(".back-a").removeClass("hide");
+
+        let show_txt = "https://so.ggvs.net/?route=search&engine=bing&word=%s";
+        $(".match-kw-span-msg").html("自定义必应搜索引擎（点击可复制）：");
+        $(".match-kw-span-txt").html(show_txt).attr("data-clipboard-text", show_txt);
+
+        return;
+    }
+    else if (word === "kw@baidu"){
+        view.hide_loading();
+        $(".back-a").removeClass("hide");
+
+        let show_txt = "https://so.ggvs.net/?route=search&engine=baidu&word=%s";
+        $(".match-kw-span-msg").html("自定义百度搜索引擎（点击可复制）：");
+        $(".match-kw-span-txt").html(show_txt).attr("data-clipboard-text", show_txt);
+
+        return;
+    }
+
+    // 3-匹配搜索引擎
     else {
-        //let del_fake_news = " -aliyun.com -huaweicloud.com"
+        view.show_loading(0);
+
         let del_fake_news = " "
         del_fake_news = decodeURIComponent(del_fake_news)
 
@@ -100,13 +121,20 @@ function jump_to_search_engine() {
 
         if (search_eq === 0){
             engine = "bing";
-        }else if (search_eq === 1){
-            engine = "google";
-        }else if (search_eq === 2){
+        }
+        else if (search_eq === 1){
             engine = "baidu";
-        }else if (search_eq === 3){
+        }
+        else if (search_eq === 2){
             engine = "toutiao";
-        }else {
+        }
+        else if (search_eq === 3){
+            engine = "google";
+        }
+        else if (search_eq === 4){
+            engine = "duckduckgo";
+        }
+        else {
             engine = "bing";
         }
 
@@ -115,10 +143,24 @@ function jump_to_search_engine() {
         view.log([engine]);
     }
 
-    view.show_loading();
-
     jump_location(engine, word, url);
 }
+
+// 复制文字
+let clipboard = new Clipboard('.copy-txt-btn');
+clipboard.on('success', function(e) {
+    view.info('Action:', e.action);
+    view.info('Text:', e.text);
+    view.info('Trigger:', e.trigger);
+    view.notice_txt("已复制");
+    e.clearSelection();
+});
+clipboard.on('error', function(e) {
+    view.error('Action:', e.action);
+    view.error('Trigger:', e.trigger);
+    view.notice_txt("复制失败！");
+    try {call_func();}catch (e){}
+});
 
 
 function start_page(e) {

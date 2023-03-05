@@ -5,12 +5,17 @@
 // 框架依赖的其他js文件，注意这里是框架依赖的，最先载入的依赖文件。
 const map_cache = new Map(); // 设置页面键-值对缓存
 const view = {
-    log: function (txt) { // 日志打印统一函数
+    log: function (txt, info) { // 日志打印统一函数
         if (txt === 0 || txt === "0") {}else {if (!txt){txt = "空txt，-log";} }
-        debug === true ? console.log(JSON.stringify(txt)): "";
+        debug === true ? console.log(JSON.stringify(txt), JSON.stringify(info)): "";
     },
-    error: function (txt) { // 日志打印统一函数
-        console.error(JSON.stringify(txt));
+    info: function (txt, info){
+        if (txt === 0 || txt === "0") {}else {if (!txt){txt = "空txt，-info";} }
+        debug === true ? console.info(JSON.stringify(txt), info): "";
+    },
+    error: function (txt, info) { // 日志打印统一函数
+        if (txt === 0 || txt === "0") {}else {if (!txt){txt = "空txt，-error";} }
+        console.error(JSON.stringify(txt), info);
     },
     write_htm: function (file_path, by_id, call_func, class_name) {  // 注射文件 | 写入htm
         let that = this;

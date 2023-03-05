@@ -212,14 +212,15 @@ function delCookie(name) {
 }
 
 // 二维码图位置<img class="qr_img" id="qr-img" />
+// 使用call_func来获取<img class="qr_img" id="qr-img" />中src的值即可
 function make_new_qr(content, width, height, call_func, id) {
     let _content = content ? content : "没有设置二维码参数";
-    let _width = width ? width : 120;
-    let _height = height ? height : 120;
+    let _width = width ? width : 200;
+    let _height = height ? height : 200;
     try {
         document.getElementById("qrcode").remove(); // 每次都移除老的
     } catch (e) {
-        console_log("不存在qrcode-div节点");
+        console_log("不存在qrcode-div节点，无法移除老QR");
     }
     let div = document.createElement("div");
     div.classList.add("qrcode");
@@ -242,32 +243,6 @@ function make_new_qr(content, width, height, call_func, id) {
             console_log([call_func, id]);
         }
     }, 100);
-
-}
-
-function show_qr(num, id) {
-    let el = document.getElementById(id);
-    let img = document.getElementsByClassName("qr_img")[0].getAttribute("src");
-
-    console_log([num, el]);
-
-    if (!img) {
-        try {
-            document.getElementsByClassName("div-qr")[0].classList.add("hide");
-        } catch (e) {
-            console_log("img空=1=");
-        }
-    } else {
-        console_log(img);
-
-        // el.setAttribute("src", img);
-        el.style.backgroundImage = "url('" + img + "')";
-
-        let _width = window.innerWidth;
-        let _screen_width = screen.width;
-        resize_width(_width, _screen_width);
-
-    }
 
 }
 
@@ -627,21 +602,49 @@ function init_dom() {
         dead_input(blur_time);
     };
 
-    //
+    /*判断用户输入完成后按Enter可执行搜索*/
+    // 判断用户输入框是否已经输入完成
+    // 参考：https://www.lmlphp.com/user/57788/article/item/2030617/
+    let input_doing = 1; // 1直接完成输入，2预选词输入完成，-1开始输入，0词预选状态。1和2都是输入完成，请区分具体数值。
+    document.getElementsByClassName("input")[0].addEventListener('compositionstart',function(e){
+        input_doing = -1;
+        view.info(input_doing);
+    },false);
+    document.getElementsByClassName("input")[0].addEventListener('input',function(e){
+        if (input_doing === -1){ // 词预选状态
+            input_doing = 0;
+        }
+        else if (input_doing === 1 || input_doing === 2) { // 直接输入状态，顺便初始化input_doing
+            input_doing = 1;
+        }
+        else {
+            input_doing = 0;
+        }
+        view.info(input_doing);
+    },false);
+    document.getElementsByClassName("input")[0].addEventListener('compositionend',function(e){
+        if (input_doing === 0){ // 预选词已确定时触发
+            input_doing = 2;
+        }else if (input_doing === 1) { // 输入完成时触发
+            input_doing = 1;
+        }else {
+            input_doing = 0;
+        }
+        view.info(input_doing);
+    },false);
     let db_click_time = (new Date()).getTime();
     document.onkeyup = function(event) { // Enter
-        console_log("（双击）Enter进行搜素");
+        console_log("Enter搜素");
         let now_click_time = (new Date()).getTime();
 
         let _key = event.key;
         if (_key === "Enter") {
-            let click_time = now_click_time * 1 - db_click_time * 1
-            if (click_time <= 500) {
+            let click_time = now_click_time*1 - db_click_time*1
+            if (click_time <= 100) {
                 db_click_time = 0;
                 return;
             } else {
                 db_click_time = (new Date()).getTime();
-                // run_search();
             }
 
             let _input = document.getElementById("input").value;
@@ -652,12 +655,31 @@ function init_dom() {
                 return;
             }
 
-            run_search();
+            // 判断输入框是否已经完成输入，避免词还没选择完就触发enter键搜索
+            if (input_doing === 1){
+                view.log("输入词完成状态触发enter键搜索："+input_doing);
+                // 输出状态判断完成，执行搜索
+                run_search();
+            }else if (input_doing === 2) {
+                view.log("连续输入词预选状态不触发enter键搜索："+input_doing);
+                input_doing = 1; // 不输入就初始化输入状态值
+            }else {
+                view.log("未知输入状态1："+input_doing);
+            }
+        }else{
+            if (input_doing === 2){
+                input_doing = 1;
+            }else {
+                view.log("未知输入状态2："+input_doing);
+            }
         }
     };
+    /**********/
+
     document.getElementsByClassName("search-btn-span")[0].addEventListener("click", function() {
         run_search();
     });
+
     document.getElementById("content-bg").addEventListener("click", function() {
         many_click(4, change_bg_color());
     });
@@ -770,18 +792,6 @@ function clear_history(){
     let data_key = "input_history";
     return view.del_data(data_key);
 }
-
-// $(document).on("mouseenter", ".history-span", function (){
-//     let that = $(this);
-//     let title = that.data("title");
-//     $("#input").val(title);
-// });
-//
-// $(document).on("mouseleave", ".history-span", function (){
-//     let that = $(this);
-//     let title = that.data("title");
-//     $("#input").val("");
-// });
 
 /*
  *  个性化颜色
@@ -974,39 +984,6 @@ function href_ext(that) {
     }
 }
 
-// 时间
-function timer() {
-    return;
-    try {
-        // 报时
-        if (view.get_date()[11] == "00" && view.get_date()[12] == "01"){
-            let txt = view.get_date()[10]+"点整";
-            view.notice_txt(txt, 5000);
-            view.voice(txt, 0.7, false)
-        }
-        // view.get_date()[11] == "30" &&
-        if (view.get_date()[11] == "30" && view.get_date()[12] == "01"){
-            let txt = view.get_date()[10]+"点"+view.get_date()[11]+"分";
-            view.notice_txt(txt, 5000);
-            view.voice(txt, 0.5, false)
-        }
-
-        // dom
-        document.getElementsByClassName('div-time')[0].innerHTML =
-            '<div class="div-time-hour">' +
-            "  " + view.get_date()[7] + // 时刻
-            '</div>' +
-            '<div class="div-time-date">' +
-            '   <span class="div-time-span">' + view.get_date()[2] + '/' + view.get_date()[5] + '</span>' +
-            // '   <span class="div-time-span">' + view.get_date()[9] + '</span>' +
-            '   <span class="div-time-span">' + view.get_date()[9] + '</span>' +
-            '</div>' +
-            "";
-    } catch (e) {
-        view.log("跳过");
-    }
-}
-
 //
 function make_swiper(){
     let swiper = new Swiper('.swiper-container', {
@@ -1029,13 +1006,6 @@ function make_swiper(){
             prevEl: '.swiper-button-prev',
         },
     });
-
-    setTimeout(function (){
-        timer();
-        setInterval(function() {
-            timer();
-        }, 1000);
-    }, 100);
 
     setTimeout(function (){
         $(".swiper-pagination").addClass("hide");
@@ -1083,19 +1053,12 @@ function show_full_screen(that){
 }
 // 关闭全屏
 function close_full_screen(){
-    console.log('退出全屏')
+    view.log('退出全屏')
     view.close_full_screen();
     setTimeout(function (){
         view.del_xss_iframe("full-div");
     }, 100);
 }
-// document.getElementById("full-div").onresize = function() {
-//     if (document.fullscreenElement) {
-//         console.log('进入全屏')
-//     } else {
-//         console.log('退出全屏')
-//     }
-// }
 
 // 节能模式
 function battery_model(){
@@ -1167,16 +1130,26 @@ function speak_time(){
     }
 }
 
+$(document).on("click", ".qr-div", function (){
+    let that = $(this);
+    if (that.hasClass("qr-60")){
+        that.removeClass("qr-60").addClass("qr-20");
+    }else if (that.hasClass("qr-20")) {
+        that.removeClass("qr-20").addClass("qr-60");
+    }
+});
+
 function start_page(info) {
     view.log(info);
     // view.log("主框架解析完成，开始渲染模块页面 > >");
 
-    if (screen.width > 640){
+    if (screen.width > 780){
         $(".timer-div").removeClass("hide");
         $(".on-hour-div").removeClass("hide");
     }
     $(".battery-model-div").removeClass("hide");
     $(".change-color-div").removeClass("hide");
+    $(".qr-div").removeClass("hide");
 
     init_dom();
     init_color();
@@ -1193,5 +1166,10 @@ function start_page(info) {
 
     battery_model();
     hour_model();
+
+    make_new_qr(window.location.href, 200, 200, function (){
+        let src = $(".qr_img").attr("src");
+        if (src){$(".new-qr-img").attr("src", src);}
+    }, "qr-div");
 
 }
