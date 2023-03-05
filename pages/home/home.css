@@ -105,7 +105,7 @@
 
 .input-div:after {
     position: absolute;
-    left: 96px;
+    left: 95px;
     top: 0;
     z-index: 1;
     height: 44px;
