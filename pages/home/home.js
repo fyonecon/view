@@ -345,7 +345,7 @@ function run_search() { // 执行搜索
         console_log("内容不能为空");
         view.notice_txt("搜索内容不能为空", 1500);
         change_focus();
-        // return;
+        return;
     }
 
     let reg = /^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)+([A-Za-z0-9-~\/])/; // 至少是 http://a 这种格式
@@ -1148,7 +1148,7 @@ function start_page(info) {
 
     if (screen.width > 780){
         $(".timer-div").removeClass("hide");
-        // $(".on-hour-div").removeClass("hide");
+        $(".on-hour-div").removeClass("hide");
         $(".rights-div").removeClass("hide");
     }
     $(".battery-model-div").removeClass("hide");
