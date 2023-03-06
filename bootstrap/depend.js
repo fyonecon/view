@@ -13,31 +13,6 @@ const index_load = {
     ],
 };
 
-// 浏览器环境检查，主要检测是否支持ES6语法
-function depend_es6(){
-    try{
-        let check = 1;
-        new Promise(function(resolve, reject) {
-            if (check === 1){
-                check++;
-                resolve();
-            } else {
-                check--;
-                reject();
-            }
-        }).then(function () {
-            const map = new Map([
-                ["check", check],
-            ]);
-            map.get("check");
-        });
-    }catch (e) {
-        console.error(e);
-        alert("该古老的浏览器不支持ES6语法，需更换浏览器。");
-        window.location.replace(cdn_page_file + "parts/help/help-es6.html");
-    }
-}
-
 // 检测白名单url
 function depend_url(){
     let check_url = app_url.check_url;
@@ -251,11 +226,13 @@ function depend_pages(){
                         console.error("缺失模块html文件=" + error);
                         console.error("1.非同源政策限制模块文件的拉取；2.本应用需要服务器环境（网络环境）；3.htm组件文件404。");
                         time_error = Math.floor((new Date()).getTime());
-                        setTimeout(function () {
-                            window.location.replace(cdn_page_file + "parts/help/help-html.html");
-                        },1000);
+                        // setTimeout(function () {
+                        //     window.location.replace(cdn_page_file + "parts/help/help-html.html");
+                        // },1000);
 
-                        resolve('缺失模块html文件');
+                        view.alert_txt("缺失模块html文件！<br/>网页载入终止。", "long");
+
+                        reject('缺失模块html文件');
                     }
                 });
             });
@@ -352,6 +329,9 @@ function depend_pages(){
 
 //
 (function (){
-    depend_es6();
-    depend_url();
+    if (block_wechat && view.is_weixin()){
+        view.alert_txt("本网站禁止在微信中打开。<br/>请使用外部浏览器。", "long");
+    }else {
+        depend_url();
+    }
 })();

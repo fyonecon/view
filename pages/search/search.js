@@ -20,7 +20,7 @@ function jump_location(engine, word, url) {
         view.hide_loading();
         $(".back-a").removeClass("hide");
 
-        let show_txt = "https://ggvs.cc/?route=search&engine=bing&word=%s";
+        let show_txt = "https://so.ggvs.net/?route=search&engine=bing&word=%s";
         $(".match-kw-span-msg").html("自定义必应搜索引擎（点击可复制）：");
         $(".match-kw-span-txt").html(show_txt).attr("data-clipboard-text", show_txt);
 
@@ -30,7 +30,7 @@ function jump_location(engine, word, url) {
         view.hide_loading();
         $(".back-a").removeClass("hide");
 
-        let show_txt = "https://ggvs.cc/?route=search&engine=baidu&word=%s";
+        let show_txt = "https://so.ggvs.net/?route=search&engine=baidu&word=%s";
         $(".match-kw-span-msg").html("自定义百度搜索引擎（点击可复制）：");
         $(".match-kw-span-txt").html(show_txt).attr("data-clipboard-text", show_txt);
 
