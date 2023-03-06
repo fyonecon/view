@@ -13,7 +13,7 @@
 }
 
 .content {
-    min-height: 900px;
+    /*min-height: 900px;*/
     position: absolute;
     z-index: 100;
     left: 0;
