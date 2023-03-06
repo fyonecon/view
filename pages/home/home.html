@@ -25,20 +25,23 @@
         <!--时钟-->
         <div class="timer-div hide">
             <code>
-                <span class="timer-span click" onclick="speak_time()" title="点击播报当前时间"></span>
+                <span class="timer-span click fixed-span-style" onclick="speak_time()" title="点击播报当前时间"></span>
             </code>
         </div>
         <!--报时-->
         <div class="on-hour-div hide">
-            <span class="switch-hour_state click" onclick="switch_hour_state()" title="点击切换网页整点报时">整点报时</span>
+            <span class="switch-hour_state click fixed-span-style" onclick="switch_hour_state()" title="点击切换网页整点报时">整点报时</span>
         </div>
         <!--节能模式-->
         <div class="battery-model-div hide">
-            <span class="switch-battery_state click" onclick="switch_battery_state()" title="点击切换网页节能模式">节能模式</span>
+            <span class="switch-battery_state click fixed-span-style" onclick="switch_battery_state()" title="点击切换网页节能模式">节能模式</span>
         </div>
         <!--切换颜色-->
         <div class="change-color-div hide">
-            <span class=" color-btn-span click" title="点击切换网页主题颜色">🌓主题：<span id="change-color-span">昏黑</span></span>
+            <span class=" color-btn-span click fixed-span-style" onclick="change_color_state()" title="点击切换网页主题颜色">
+                🌓主题：<span id="change-color-span">昏黑</span>
+            </span>
+
             <div class="clear"></div>
         </div>
 

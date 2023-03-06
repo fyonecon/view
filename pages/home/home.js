@@ -683,13 +683,9 @@ function init_dom() {
         run_search();
     });
 
-    document.getElementById("content-bg").addEventListener("click", function() {
-        many_click(4, change_bg_color());
-    });
-    document.getElementsByClassName("color-btn-span")[0].addEventListener("click", function() {
-        console_log("color-btn-span");
-        change_bg_color();
-    });
+    // document.getElementById("content-bg").addEventListener("click", function() {
+    //     many_click(4, change_bg_color());
+    // });
     document.getElementsByClassName("history-btn-span")[0].addEventListener("click", function() {
         let that = this;
         clear_history();
@@ -1061,6 +1057,10 @@ function close_full_screen(){
     setTimeout(function (){
         view.del_xss_iframe("full-div");
     }, 100);
+}
+
+function change_color_state(){
+    change_bg_color();
 }
 
 // 节能模式

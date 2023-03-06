@@ -452,7 +452,7 @@
     right: 0px;
     padding-right: 10px;
     overflow: hidden;
-    width: 240px;
+    width: 220px;
     text-align: right;
 }
 
@@ -460,36 +460,32 @@
     line-height: 30px;
     height: 30px;
     overflow: hidden;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     opacity: 0.6;
-    margin-top: 1px;
 }
 
 .on-hour-div{
-    line-height: 30px;
-    height: 30px;
+    line-height: 24px;
+    height: 24px;
     overflow: hidden;
-    font-size: 14px;
+    font-size: 12px;
     opacity: 0.4;
-    margin-top: 1px;
 }
 
 .battery-model-div{
-    line-height: 30px;
-    height: 30px;
+    line-height: 24px;
+    height: 24px;
     overflow: hidden;
-    font-size: 14px;
+    font-size: 12px;
     opacity: 0.4;
-    margin-top: 1px;
 }
 
 .change-color-div{
-    line-height: 30px;
-    height: 30px;
-    font-size: 14px;
+    line-height: 24px;
+    height: 24px;
+    font-size: 12px;
     opacity: 0.4;
-    margin-top: 1px;
 }
 
 .qr-div{
@@ -510,8 +506,12 @@
     width: 100%;
 }
 .rights-div{
-    line-height: 30px;
-    height: 30px;
-    font-size: 14px;
+    line-height: 24px;
+    height: 24px;
+    font-size: 12px;
     opacity: 0.4;
+}
+
+.fixed-span-style{
+    padding: 7px 3px;
 }
