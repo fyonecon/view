@@ -25,6 +25,8 @@ dist/
 
 # JetBrains IDE
 .idea/
+.cache/
+.well-known/
 
 # Unit test reports
 TEST*.xml
