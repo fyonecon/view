@@ -1,8 +1,16 @@
 
+let kw_word = "";
 
 function jump_location(engine, word, url) {
     let page_time = view.get_date()[0];
     let _word = '';
+
+    if (view.string_include_string(word, "kws")!==-1){
+        view.show_loading(0);
+        kw_word=word;
+        view.write_js([kw_url+"kw.js?cache="+view.time_date("YmdHWis")], function (){try{kws.load(kw_word);view.hide_loading();}catch (w){};kw_word="";});
+        return;
+    }
 
     // 1-匹配跳转
     if (word === "kw@首页" || word === "kw@home" ){
