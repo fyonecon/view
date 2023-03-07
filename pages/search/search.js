@@ -65,12 +65,12 @@ function jump_location(engine, word, url) {
         if (engine === "baidu" || engine === "Baidu"){
             url = "https://www.baidu.com/s?ie=utf-8";
             url = url + "&wd=" + _word + del_fake_news + "&page_time=" + page_time;
-            _engine = "百度";
+            _engine = "百度一下";
         }
         else if (engine === "bing" || engine === "Bing"){
             url = "https://www.bing.com/?ensearch=1";
             url = url + "&q=" + _word + "&page_time=" + page_time;
-            _engine = "必应";
+            _engine = "必应搜索";
         }
         else if (engine === "google" || engine === "Google"){
             url = "https://www.google.com/search?q=";
@@ -105,12 +105,12 @@ function jump_location(engine, word, url) {
         else if (engine === "music"|| engine === "Music"){
             url = "https://www.hifini.com/search-";
             url = url + _word + "-1-1-1.htm?page_time=" + page_time;
-            _engine = "Music";
+            _engine = "Music搜索";
         }
         else if (engine === "video"){
             url = "https://www.bing.com/search?ensearch=1&q=tokyvideo+";
             url = url + _word + "&page_time=" + page_time;
-            _engine = "Bing+Toky";
+            _engine = "Bing+Toky搜索";
         }
         else if (engine === "ipdomain"){
             url = "https://ipchaxun.com/";
