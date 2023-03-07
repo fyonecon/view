@@ -172,7 +172,7 @@ function depend_pages(){
                 for (let i=0; i<pages.length; i++){ // 获取真正文件路径名
                     if (pages[i].route === page_name){
                         _file = cdn_page_file + "" + pages[i].file_path + "?"+page_time;
-                        document.getElementsByTagName("title")[0].innerHTML = pages[i].title;
+                        view.title(pages[i].title);
                         pages_index = i;
                         resolve('找到值');
                     }else if (pages.length-1 === i) {

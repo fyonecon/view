@@ -16,6 +16,9 @@ const view = {
         if (txt === 0 || txt === "0") {}else {if (!txt){txt = "空txt，-error";} }
         console.error(JSON.stringify(txt), info);
     },
+    title: function (txt){ // 改写title标签内容
+        document.getElementsByTagName("title")[0].innerText = txt;
+    },
     write_htm: function (file_path, by_id, call_func, class_name) {  // 注射文件 | 写入htm
         let that = this;
         $.ajax({ // 利用ajax的get请求获取文本内容

@@ -32,6 +32,7 @@ function jump_location(engine, word, url) {
         $(".match-kw-span-msg").html("自定义必应搜索引擎（点击可复制）：");
         $(".match-kw-span-txt").html(show_txt).attr("data-clipboard-text", show_txt);
 
+        view.title("请查看kw对应的内容");
         return;
     }
     else if (word === "kw@baidu"){
@@ -42,6 +43,7 @@ function jump_location(engine, word, url) {
         $(".match-kw-span-msg").html("自定义百度搜索引擎（点击可复制）：");
         $(".match-kw-span-txt").html(show_txt).attr("data-clipboard-text", show_txt);
 
+        view.title("请查看kw对应的内容");
         return;
     }
 
@@ -52,61 +54,76 @@ function jump_location(engine, word, url) {
         let del_fake_news = " "
         del_fake_news = decodeURIComponent(del_fake_news)
 
+        let _engine = "";
+
         try {
             _word = decodeURIComponent(word);
         }catch (e) {
             _word = word;
         }
 
-        if (engine === "baidu"){
+        if (engine === "baidu" || engine === "Baidu"){
             url = "https://www.baidu.com/s?ie=utf-8";
             url = url + "&wd=" + _word + del_fake_news + "&page_time=" + page_time;
+            _engine = "百度";
         }
-        else if (engine === "bing"){
+        else if (engine === "bing" || engine === "Bing"){
             url = "https://www.bing.com/?ensearch=1";
             url = url + "&q=" + _word + "&page_time=" + page_time;
+            _engine = "必应";
         }
-        else if (engine === "google"){
+        else if (engine === "google" || engine === "Google"){
             url = "https://www.google.com/search?q=";
             url = url + _word + "&page_time=" + page_time;
+            _engine = "Google";
         }
-        else if (engine === "duckduckgo"){
+        else if (engine === "duckduckgo" || engine === "DuckDuckGo"){
             url = "https://duckduckgo.com/?ia=web";
             url = url + "&q=" + _word + "&page_time=" + page_time;
+            _engine = "DuckDuckGo";
         }
-        else if (engine === "yandex"){
+        else if (engine === "yandex" || engine === "Yandex"){
             url = "https://yandex.com/search/?text=";
             url = url+ _word + "&page_time=" + page_time;
+            _engine = "Yandex";
         }
-        else if (engine === "m-toutiao"){
+        else if (engine === "m-toutiao" || engine === "Toutiao"){
             url = "https://m.toutiao.com/search/?keyword=";
             url = url + _word + "&page_time=" + page_time;
+            _engine = "头条搜索";
         }
-        else if (engine === "toutiao"){
+        else if (engine === "toutiao" || engine === "Toutiao"){
             url = "https://www.toutiao.com/search/?keyword=";
             url = url + _word + "&page_time=" + page_time;
+            _engine = "头条搜索";
         }
-        else if (engine === "weixin"){
+        else if (engine === "weixin" || engine === "Weixin"){
             url = "https://weixin.sogou.com/weixin?type=2&s_from=input&ie=utf8&query=";
             url = url + _word + "&page_time=" + page_time;
+            _engine = "微信文章搜索";
         }
-        else if (engine === "music"){
+        else if (engine === "music"|| engine === "Music"){
             url = "https://www.hifini.com/search-";
             url = url + _word + "-1-1-1.htm?page_time=" + page_time;
+            _engine = "Music";
         }
         else if (engine === "video"){
             url = "https://www.bing.com/search?ensearch=1&q=tokyvideo+";
             url = url + _word + "&page_time=" + page_time;
+            _engine = "Bing+Toky";
         }
         else if (engine === "ipdomain"){
             url = "https://ipchaxun.com/";
             url = url + _word;
+            _engine = "IP&网址";
         }
         else {
             view.alert_txt("engine参数为空，不能选择跳转的目标地址");
             view.log("/?route=search&engine=&word=");
             return;
         }
+
+        view.title("正在使用"+_engine+"打开 "+_word+"");
 
     }
 

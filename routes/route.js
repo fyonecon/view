@@ -26,7 +26,7 @@ const pages = [
     { // 页面模块-默认
         "route"     : "",
         "file_path" : "pages/home/home.html",
-        "title"     :  "简洁主页" + " - " +app_name,
+        "title"     :  "GG简单主页" + " - " +app_name,
         "file"      : [
             {
                 "js": [
@@ -41,7 +41,7 @@ const pages = [
     { // 页面模块-404
         "route"     : "404",  // url中#route=xxx，便于定位页面
         "file_path" : "pages/404/404.html", // 实际文件路径+文件名，为了方便起见，文件后缀统一用“htm”
-        "title"     : "404 - 页面没找到",  // 页面title
+        "title"     : "页面404 - 页面没找到路由地址",  // 页面title
         "file"      : [  // 本页面需要引入的局部资源文件
             {
                 "js": [
