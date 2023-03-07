@@ -2,7 +2,7 @@
 let kw_word = "";
 
 function jump_location(engine, word, url) {
-    let page_time = view.get_date()[0];
+    let page_time = view.time_date("YmdWHis");
     let _word = '';
 
     if (view.string_include_string(word, "kws")!==-1){
