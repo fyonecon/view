@@ -1,11 +1,9 @@
 /*自定义配置页面的一些全局参数*/
-
 /*
 * 1）页面生命周期（index.html--config.js等插件--depend.js--公共js/css文件--解析路由--page_init.js--pages.html、pages.js--start_page()函数 ）。
 * 2）不依赖node，但需依赖服务端环境，或者需要CDN环境。
 * 3）一般运行到start_page()函数会花费900ms左右。
 * */
-
 "use strict";
 
 const debug = false; // 调试模式，统一打印日志，true & false

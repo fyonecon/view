@@ -1,7 +1,8 @@
 /*主入口js，下面一般不要做修改。**/
-/*https://www.sojson.com/aaencode.html*/
 /*2019/9/12/9:55*/
-
+/*
+*版本版权：v3.5（2023-03-07）；Apache2.0。
+* */
 "use strict";
 
 // 原生依赖
