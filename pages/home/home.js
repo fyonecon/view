@@ -293,7 +293,7 @@ function create_input(pre) { // 渲染模板
 
     document.getElementsByTagName("title")[0].innerText = title;
     let content = document.getElementsByClassName("content")[0];
-    content.innerHTML = '<div class="input-div" id="input-div"><select class="select search-style select-none" id="select"></select><input type="text" value="" maxlength="500" id="input" class="input search-style"  placeholder="' + pre + '输入内容" title="输入内容"/><div class="clear"></div></div><div class="input-history-div" id="input-history"></div><div class="clear"></div><div class="search-btn-div" id="search-btn"></div><div class="res-div"></div>';
+    content.innerHTML = '<div class="input-div" id="input-div"><select class="select search-style select-none" id="select"></select><input type="text" value="" maxlength="500" id="input" class="input search-style"  placeholder="' + pre + '输入内容（支持kw@命令）" title="输入搜索内容（支持kw@命令）"/><div class="clear"></div></div><div class="input-history-div" id="input-history"></div><div class="clear"></div><div class="search-btn-div" id="search-btn"></div><div class="res-div"></div>';
     let append_tag = [];
     for (let i = 0; i < search.length; i++) {
         let tag = '<option class="option option-' + i + '" value="' + i + '">' + search[i]["name"] + '</option>';
@@ -1146,14 +1146,19 @@ function start_page(info) {
     view.log(info);
     // view.log("主框架解析完成，开始渲染模块页面 > >");
 
-    if (screen.width > 780){
-        $(".timer-div").removeClass("hide");
-        $(".on-hour-div").removeClass("hide");
-        $(".rights-div").removeClass("hide");
-    }
+    $(".rights-div").removeClass("hide");
     $(".battery-model-div").removeClass("hide");
     $(".change-color-div").removeClass("hide");
     $(".qr-div").removeClass("hide");
+    if (screen.width > 780){ // PC
+        $(".timer-div").removeClass("hide");
+        $(".on-hour-div").removeClass("hide");
+        setTimeout(function (){
+            $(".swiper-container").addClass("hide");
+        },200);
+    }else { // m
+
+    }
 
     init_dom();
     init_color();
