@@ -39,10 +39,16 @@ const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。�
     // },
     // {
     //     "name": "头条搜索", // 引擎名称，可视5个字
-    //     "m-url": "./?route=search&engine=m-toutiao&word=", // 移动端，前缀
+    //     "m-url": "./?route=search&engine=m_toutiao&word=", // 移动端，前缀
     //     "pc-url": "./?route=search&engine=toutiao&word=", // PC端，前缀
     //     "url_right": "", // 参数的固顶后缀
     // },
+    {
+        "name": "搜狗搜索", // 引擎名称，可视5个字
+        "m-url": "./?route=search&engine=m_sogou&word=", // 移动端，前缀
+        "pc-url": "./?route=search&engine=sogou&word=", // PC端，前缀
+        "url_right": "", // 参数的固顶后缀
+    },
     {
         "name": "微信文章", // 引擎名称，可视5个字
         "m-url": "./?route=search&engine=weixin&word=", // 移动端，前缀

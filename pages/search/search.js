@@ -76,47 +76,57 @@ function jump_location(engine, word, url) {
             _word = word;
         }
 
-        if (engine === "baidu" || engine === "Baidu"){
+        if (engine === "baidu"){
             url = "https://www.baidu.com/s?ie=utf-8";
             url = url + "&wd=" + _word + del_fake_news + "&page_time=" + page_time;
             _engine = "百度一下";
         }
-        else if (engine === "bing" || engine === "Bing"){
+        else if (engine === "bing"){
             url = "https://www.bing.com/?ensearch=1";
             url = url + "&q=" + _word + "&page_time=" + page_time;
             _engine = "必应搜索";
         }
-        else if (engine === "google" || engine === "Google"){
+        else if (engine === "google"){
             url = "https://www.google.com/search?q=";
             url = url + _word + "&page_time=" + page_time;
             _engine = "Google";
         }
-        else if (engine === "duckduckgo" || engine === "DuckDuckGo"){
+        else if (engine === "duckduckgo"){
             url = "https://duckduckgo.com/?ia=web";
             url = url + "&q=" + _word + "&page_time=" + page_time;
             _engine = "DuckDuckGo";
         }
-        else if (engine === "yandex" || engine === "Yandex"){
+        else if (engine === "yandex"){
             url = "https://yandex.com/search/?text=";
             url = url+ _word + "&page_time=" + page_time;
             _engine = "Yandex";
         }
-        else if (engine === "m-toutiao" || engine === "Toutiao"){
+        else if (engine === "m_toutiao"){
             url = "https://m.toutiao.com/search/?keyword=";
             url = url + _word + "&page_time=" + page_time;
             _engine = "头条搜索";
         }
-        else if (engine === "toutiao" || engine === "Toutiao"){
+        else if (engine === "toutiao"){
             url = "https://www.toutiao.com/search/?keyword=";
             url = url + _word + "&page_time=" + page_time;
             _engine = "头条搜索";
         }
-        else if (engine === "weixin" || engine === "Weixin"){
+        else if (engine === "m_sogou"){
+            url = "https://wap.sogou.com/web/searchList.jsp?from=index&keyword=";
+            url = url + _word + "&page_time=" + page_time;
+            _engine = "搜狗搜索";
+        }
+        else if (engine === "sogou"){
+            url = "https://sogou.com/web?query=";
+            url = url + _word + "&page_time=" + page_time;
+            _engine = "搜狗搜索";
+        }
+        else if (engine === "weixin"){
             url = "https://weixin.sogou.com/weixin?type=2&s_from=input&ie=utf8&query=";
             url = url + _word + "&page_time=" + page_time;
             _engine = "微信文章搜索";
         }
-        else if (engine === "music"|| engine === "Music"){
+        else if (engine === "music"){
             url = "https://www.hifini.com/search-";
             url = url + _word + "-1-1-1.htm?page_time=" + page_time;
             _engine = "Music搜索";
@@ -131,7 +141,7 @@ function jump_location(engine, word, url) {
             url = url + _word;
             _engine = "IP&网址";
         }
-        else if (engine === "whois" || engine === "Whois"){
+        else if (engine === "whois"){
             url = "https://who.is/whois/";
             url = url + _word;
             _engine = "域名Whois";
