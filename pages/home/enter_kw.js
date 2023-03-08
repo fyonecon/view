@@ -20,9 +20,13 @@ function enter_kw(_word){
         url = "./?route=hei123";
         window.open(url, "_blank");
     }
-    else if (word === "kw@keep"){
+    else if (word === "kw@show"){
         view.notice_txt("已打开隐藏的标签列表", 3000);
         $(".swiper-container").removeClass("hide");
+    }
+    else if (word === "kw@hide"){
+        view.notice_txt("已隐藏标签列表", 3000);
+        $(".swiper-container").addClass("hide");
     }
 
     else { // 未匹配
