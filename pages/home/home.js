@@ -1130,7 +1130,7 @@ function hour_model(){
 function on_hour(){
     let _state = view.get_switch_state("hour_state");
     if (_state === "Off"){
-        view.log("整点报时已跳过");
+        view.log("已跳过整点报时");
     }else {
         let minute = view.time_date("i")*1;
         let second = view.time_date("s")*1;
@@ -1172,6 +1172,8 @@ $(document).on("click", ".qr-div", function (){
     }
 });
 
+let timer1_interval;
+
 function start_page(info) {
     view.log(info);
     // view.log("主框架解析完成，开始渲染模块页面 > >");
@@ -1197,8 +1199,9 @@ function start_page(info) {
     show_history();
     close_full_screen();
 
+    clearInterval(timer1_interval);
     timer1();
-    setInterval(function () {
+    timer1_interval = setInterval(function () {
         timer1();
         on_hour();
     }, 1000);
@@ -1213,4 +1216,18 @@ function start_page(info) {
 
     $(".rights-date").html(view.time_date("Y"));
 
+}
+
+function hide_page(){
+    view.log("后台状态，清除定时器");
+    clearInterval(timer1_interval);
+}
+
+function show_page(){
+    view.log("前台状态，重新开启定时器");
+    timer1();
+    timer1_interval = setInterval(function () {
+        timer1();
+        on_hour();
+    }, 1000);
 }

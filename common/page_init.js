@@ -6,8 +6,8 @@ function frame_loaded(e, route){
     view.hide_loading();
 
     // 组件加载时间
-    view.log("框架解析用时=" + (time_loaded - time_start) + "ms");
-    view.log("框架报错时间=" + time_error);
+    console.info("框架解析用时：" + (time_loaded - time_start) + "ms");
+    view.log("框架报错时间：" + time_error);
 
     // 监听页面尺寸改变
     window.onresize = function (){
@@ -34,12 +34,12 @@ function frame_loaded(e, route){
     document.addEventListener("visibilitychange",function(){
         // 进入前台（已经在前台不触发，仅在有动作后触发））
         if(document.visibilityState === "visible"){
-            view.log("切换到前台："+view.get_date()[0]);
+            view.log("切换到前台："+view.time_date("YmdHis"));
             try {show_page(["可选初始切换到前台函数"]);}catch (e){view.log("show_page()：可忽略的可选初始切换到前台函数");}
         }
         // 进入后台
         if(document.visibilityState === "hidden"){
-            view.log("切换到后台："+view.get_date()[0]);
+            view.log("切换到后台："+view.time_date("YmdHis"));
             try {hide_page(["可选初始切换到后台函数"]);}catch (e){view.log("hide_page()：可忽略的可选初始切换到后台函数");}
         }
     });

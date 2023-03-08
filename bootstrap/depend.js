@@ -52,7 +52,7 @@ function depend_url(){
                 let the_white_url = white_urls[j];
                 if (view.string_include_string(the_url, the_white_url) !== -1){ // 处在白名单
                     has = j +1;
-                    view.log(["白名单"+check_url+" = " + the_white_url, the_url]);
+                    view.log(["白名单："+check_url+" = " + the_white_url, the_url]);
                     break;
                 }else {
                     // view.log([j, the_white_url, the_url]);
@@ -222,7 +222,6 @@ function depend_pages(){
             });
         },
         all_files_loaded: function () {  // 页面全部html、css、js加载完后执行
-            view.log("Files Cache_time = "+page_time +"s");
             let route = depend.get_url_param("", "route");
             time_loaded = Math.floor((new Date()).getTime());
             let view_loaded_time = time_loaded - time_start;
