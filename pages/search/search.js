@@ -5,7 +5,7 @@ function jump_location(engine, word, url) {
     let page_time = view.time_date("YmdWHis");
     let _word = '';
 
-    // 0-匹配到外网
+    // 1-匹配到外部链接
     if (view.string_include_string(word, "kws")!==-1){
         view.show_loading(0);
         kw_word=word;
@@ -21,20 +21,6 @@ function jump_location(engine, word, url) {
                 kw_word="";
             });
         return;
-    }
-
-    // 1-匹配跳转本网站
-    if (word === "kw@首页" || word === "kw@home" || word === "kw@"){
-        url = "./";
-    }
-    else if (word === "kw@404"){
-        url = "./?route=404";
-    }
-    else if (word === "kw@help"){
-        url = "./?route=help";
-    }
-    else if (word === "kw@hei123"){
-        url = "./?route=hei123";
     }
 
     // 2-匹配展示本网站文字

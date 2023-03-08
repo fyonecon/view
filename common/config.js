@@ -6,7 +6,7 @@
 * */
 "use strict";
 
-const debug = false; // 调试模式，统一打印日志，true & false
+const debug = true; // 调试模式，统一打印日志，true & false
 const block_wechat = true; // 是否禁止在微信中打开，true & false
 
 // 框架渲染的必要参数
@@ -25,9 +25,7 @@ const app_url = {
         '0.0.0.0', '127.0.0.1', 'localhost',
         'cdnaliyun.oss-cn-hangzhou.aliyuncs.com',
         'cdnaliyun.oss-accelerate-overseas.aliyuncs.com',
-        'ginvel.com',
         'ggvs.net',
-        'ggvs.cc',
         'ggvs.fit',
     ],
 };

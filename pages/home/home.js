@@ -418,7 +418,19 @@ function run_search() { // 执行搜索
         document.getElementById("input").value = "";
     }, 1500);
 
-    window.open(tab_url, "_blank");
+    // 校验关键词
+    try{
+        let kw_state = enter_kw(_input);
+        if (kw_state){
+            view.log("匹配到了关键词", _input);
+        }else {
+            window.open(tab_url, "_blank");
+        }
+    }catch (e){
+        view.error(e);
+        window.open(tab_url, "_blank");
+    }
+
 }
 
 function init_dom() {
