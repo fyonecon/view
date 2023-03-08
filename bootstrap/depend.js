@@ -194,8 +194,6 @@ function depend_pages(){
                 });
             });
 
-            console.log([1, head, page_file, pages_index]);
-
             // 渲染最后页面的资源
             Promise.all([p1, p2, p3, route_js_all]).then((result) => {
                 depend.load_page(head, page_file, pages_index);
@@ -205,7 +203,6 @@ function depend_pages(){
 
         },
         load_page: function (head, page_file, pages_index){ // 处理最后的page js文件
-            console.log([2, head, page_file, pages_index]);
             // page js（必须异步）
             let page_js_all = [];
             for (let i=0; i<page_file.js.length; i++){
@@ -225,25 +222,20 @@ function depend_pages(){
             });
         },
         all_files_loaded: function () {  // 页面全部html、css、js加载完后执行
-            console.log([3]);
             view.log("Files Cache_time = "+page_time +"s");
-
-            document.getElementById("loading-div").classList.add("hide");
-
             let route = depend.get_url_param("", "route");
             time_loaded = Math.floor((new Date()).getTime());
             let view_loaded_time = time_loaded - time_start;
 
-            try {
-                page_loaded([
+            try { // 初始化页面所有路由文件后，负责框架事件
+                frame_loaded([
                     view_loaded_time
                 ], route);
             }catch (e) {
                 console.error(e);
                 console.log("=error=page_loaded=");
             }
-
-            try {
+            try { // 初始化page页面的开始函数，负责page事件
                 page_init([
                     view_loaded_time,
                     "框架解析完成，用时"+view_loaded_time+"ms", "开始执行"+route+"页面数据>>",
