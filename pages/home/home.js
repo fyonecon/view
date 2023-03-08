@@ -204,7 +204,7 @@ function long_press(_id, call_func) {
 // time = 1*24*60*60*1000;
 function setCookie(name, value, time) {
     if (!time) {
-        time = 100 * 24 * 60 * 60 * 1000; // 默认100天
+        time = 365 * 24 * 60 * 60 * 1000; // 默认1年
     }
     var exp = new Date();
     exp.setTime(exp.getTime() + time);
