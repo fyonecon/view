@@ -5,25 +5,39 @@ function jump_location(engine, word, url) {
     let page_time = view.time_date("YmdWHis");
     let _word = '';
 
+    // 0-匹配到外网
     if (view.string_include_string(word, "kws")!==-1){
         view.show_loading(0);
         kw_word=word;
-        view.write_js([kw_url+"kw.js?cache="+view.time_date("YmdHWis")], function (){try{kws.load(kw_word);view.hide_loading();}catch (w){};kw_word="";});
+        view.title("正在打开kws对应的内容");
+        view.write_js(
+            [kws_url+"kws.js?cache="+view.time_date("YmdHWis")], function (){
+                try{
+                    kws.load(kw_word);
+                }catch (w){
+                    view.notice_txt("外部js资源加载错误！", 10000);
+                    view.title("外部js源加载错误！");
+                };
+                kw_word="";
+            });
         return;
     }
 
-    // 1-匹配跳转
-    if (word === "kw@首页" || word === "kw@home" ){
+    // 1-匹配跳转本网站
+    if (word === "kw@首页" || word === "kw@home" || word === "kw@"){
         url = "./";
     }
     else if (word === "kw@404"){
         url = "./?route=404";
     }
+    else if (word === "kw@help"){
+        url = "./?route=help";
+    }
     else if (word === "kw@hei123"){
         url = "./?route=hei123";
     }
 
-    // 2-匹配展示文字
+    // 2-匹配展示本网站文字
     else if (word === "kw@bing"){
         view.hide_loading();
         $(".back-a").removeClass("hide");
@@ -116,6 +130,16 @@ function jump_location(engine, word, url) {
             url = "https://ipchaxun.com/";
             url = url + _word;
             _engine = "IP&网址";
+        }
+        else if (engine === "whois" || engine === "Whois"){
+            url = "https://who.is/whois/";
+            url = url + _word;
+            _engine = "域名Whois";
+        }
+        else if (engine === "dpxz_download"){
+            url = "http://s.uzzf.com/sousuo/pc/?k=";
+            url = url + _word;
+            _engine = "东坡下载";
         }
         else {
             view.alert_txt("engine参数为空，不能选择跳转的目标地址");

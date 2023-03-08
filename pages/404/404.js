@@ -25,24 +25,24 @@ const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。�
         "url_right": "", // 参数的固顶后缀
     },
     {
-        "name": "DuckGo", // 引擎名称，可视5个字
+        "name": "DuckDuckGo", // 引擎名称，可视5个字
         "m-url": "./?route=search&engine=duckduckgo&word=", // 移动端，前缀
         "pc-url": "./?route=search&engine=duckduckgo&word=", // PC端，前缀
         "url_right": "", // 参数的固顶后缀
     },
-    {
-        "name": "搜英文电影",
-        "m-url": "./?route=search&engine=video&word=",
-        "pc-url": "./?route=search&engine=video&word=",
-        "url_right": "",
-    },
-
-    {
-        "name": "搜收费音乐",
-        "m-url": "./?route=search&engine=music&word=",
-        "pc-url": "./?route=search&engine=music&word=",
-        "url_right": "",
-    },
+    // {
+    //     "name": "搜英文电影",
+    //     "m-url": "./?route=search&engine=video&word=",
+    //     "pc-url": "./?route=search&engine=video&word=",
+    //     "url_right": "",
+    // },
+    //
+    // {
+    //     "name": "搜收费音乐",
+    //     "m-url": "./?route=search&engine=music&word=",
+    //     "pc-url": "./?route=search&engine=music&word=",
+    //     "url_right": "",
+    // },
     {
         "name": "英中翻译",
         "m-url": "https://fanyi.baidu.com/translate#en/zh/",
@@ -273,7 +273,7 @@ function timestamp() {
 
 
 
-const search_cookie_pre = "search_";
+const search_cookie_pre = "search_404_";
 const search_eq = search_cookie_pre+"_eq";
 let search_time_style = 0; // 自动校正iframe
 let focus_time = 3*60*60*1000; // 保护用户输入框隐私，3h不聚焦删一次

@@ -20,18 +20,6 @@ const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。�
         "url_right": "",
     },
     {
-        "name": "头条搜索", // 引擎名称，可视5个字
-        "m-url": "./?route=search&engine=m-toutiao&word=", // 移动端，前缀
-        "pc-url": "./?route=search&engine=toutiao&word=", // PC端，前缀
-        "url_right": "", // 参数的固顶后缀
-    },
-    {
-        "name": "微信文章", // 引擎名称，可视5个字
-        "m-url": "./?route=search&engine=weixin&word=", // 移动端，前缀
-        "pc-url": "./?route=search&engine=weixin&word=", // PC端，前缀
-        "url_right": "", // 参数的固顶后缀
-    },
-    {
         "name": "Google", // 引擎名称，可视5个字
         "m-url": "./?route=search&engine=google&word=", // 移动端，前缀
         "pc-url": "./?route=search&engine=google&word=", // PC端，前缀
@@ -43,10 +31,22 @@ const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。�
         "pc-url": "./?route=search&engine=duckduckgo&word=", // PC端，前缀
         "url_right": "", // 参数的固顶后缀
     },
+    // {
+    //     "name": "Yandex", // 引擎名称，可视5个字
+    //     "m-url": "./?route=search&engine=yandex&word=", // 移动端，前缀
+    //     "pc-url": "./?route=search&engine=yandex&word=", // PC端，前缀
+    //     "url_right": "", // 参数的固顶后缀
+    // },
+    // {
+    //     "name": "头条搜索", // 引擎名称，可视5个字
+    //     "m-url": "./?route=search&engine=m-toutiao&word=", // 移动端，前缀
+    //     "pc-url": "./?route=search&engine=toutiao&word=", // PC端，前缀
+    //     "url_right": "", // 参数的固顶后缀
+    // },
     {
-        "name": "Yandex", // 引擎名称，可视5个字
-        "m-url": "./?route=search&engine=yandex&word=", // 移动端，前缀
-        "pc-url": "./?route=search&engine=yandex&word=", // PC端，前缀
+        "name": "微信文章", // 引擎名称，可视5个字
+        "m-url": "./?route=search&engine=weixin&word=", // 移动端，前缀
+        "pc-url": "./?route=search&engine=weixin&word=", // PC端，前缀
         "url_right": "", // 参数的固顶后缀
     },
     {
@@ -76,9 +76,21 @@ const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。�
     },
 
     {
+        "name": "东坡下载",
+        "m-url": "./?route=search&engine=dpxz_download&word=",
+        "pc-url": "./?route=search&engine=dpxz_download&word=",
+        "url_right": "",
+    },
+    {
         "name": "查IP、域名",
         "m-url": "./?route=search&engine=ipdomain&word=",
         "pc-url": "./?route=search&engine=ipdomain&word=",
+        "url_right": "",
+    },
+    {
+        "name": "域名Whois",
+        "m-url": "./?route=search&engine=whois&word=",
+        "pc-url": "./?route=search&engine=whois&word=",
         "url_right": "",
     },
 

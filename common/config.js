@@ -15,7 +15,7 @@ const route_404       = "?route=404";   // 404
 const page_time       = "cache=" + MakeDate("YmdH");
 
 const api_url         = "https://xcx.xxx.cn/chengzi/public/index.php/api/";  // api主地址
-const kw_url          = "https://buf.ggvs.fit/.cache/js/"; // 额外关键词
+const kws_url          = "https://buf.ggvs.fit/.cache/js/"; // 额外关键词
 
 // 白名单host或refer域名
 const app_url = {
