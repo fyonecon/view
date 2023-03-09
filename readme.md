@@ -1,7 +1,7 @@
 ### ViewJS-Web单页应用框架
 >框架开源：https://github.com/fyonecon/view/
 > 
->访问示例：https://so.ggvs.net （GG简单主页）
+>访问示例：https://23so.net （23搜主页）
 > 
 >简单介绍：
 >
