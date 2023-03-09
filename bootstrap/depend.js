@@ -183,13 +183,13 @@ function depend_pages(){
                         resolve('文本已请求');
                     },
                     error: function (error) {
-                        console.error("缺失模块html文件=" + error);
-                        console.error("1.非同源政策限制模块文件的拉取；2.本应用需要服务器环境（网络环境）；3.htm组件文件404。");
+                        console.error("缺失html模块文件：", error);
+                        console.error("可能原因：", "1.非同源政策限制模块文件的拉取；2.本应用需要服务器环境（网络环境）；3.html组件文件404。");
                         time_error = Math.floor((new Date()).getTime());
 
-                        view.alert_txt("缺失模块html文件！<br/>网页载入终止。", "long");
+                        view.alert_txt("缺失html模块文件！<br/>页面载入终止。", "long");
 
-                        reject('缺失模块html文件');
+                        reject('缺失html模块文件');
                     }
                 });
             });

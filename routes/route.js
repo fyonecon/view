@@ -87,16 +87,16 @@ const pages = [
         ],
     }, //
     { // 页面模块
-        "route"     : "hei123",
-        "file_path" : "pages/hei123/hei123.html",
-        "title"     :  "私密学习网址导航" + " - " +app_name,
+        "route"     : "chatgpt",
+        "file_path" : "pages/chatgpt/chatgpt.html",
+        "title"     :  "chatGPT聊天" + " - " +app_name,
         "file"      : [
             {
                 "js": [
-                    "pages/hei123/hei123.js",
+                    "pages/chatgpt/chatgpt.js",
                 ],
                 "css": [
-                    "pages/hei123/hei123.css",
+
                 ],
             },
         ],

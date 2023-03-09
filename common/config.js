@@ -26,7 +26,6 @@ const app_url = {
         'cdnaliyun.oss-cn-hangzhou.aliyuncs.com',
         'cdnaliyun.oss-accelerate-overseas.aliyuncs.com',
         'ggvs.net',
-        '23so.net',
     ],
 };
 

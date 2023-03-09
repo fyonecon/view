@@ -16,8 +16,8 @@ function enter_kw(_word){
         url = "./?route=help";
         window.open(url, "_blank");
     }
-    else if (word === "kw@hei123"){
-        url = "./?route=hei123";
+    else if (word === "kw@chatgpt" || word === "kw@chat"){
+        url = "./?route=chatgpt";
         window.open(url, "_blank");
     }
     else if (word === "kw@show"){
