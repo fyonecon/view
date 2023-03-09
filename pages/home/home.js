@@ -4,68 +4,68 @@
 "use strict";
 
 const search_debug = false; // 调试日志，false关闭日志，true显示日志
-const page_title = " 👈 GG简单主页"; // 当前页面标题
+const page_title = " 👈 简单主页"; // 当前页面标题
 const _search_jump = "";
 const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。自定义。
     {
         "name": "必应搜索",
-        "m-url": "./?route=search&engine=bing&word=",
-        "pc-url": "./?route=search&engine=bing&word=",
+        "m-url": "./?route=search&engine=bing&cache=_page_time_&word=",
+        "pc-url": "./?route=search&engine=bing&cache=_page_time_&word=",
         "url_right": "",
     },
     {
         "name": "百度一下",
-        "m-url": "./?route=search&engine=baidu&word=",
-        "pc-url": "./?route=search&engine=baidu&word=",
+        "m-url": "./?route=search&engine=baidu&cache=_page_time_&word=",
+        "pc-url": "./?route=search&engine=baidu&cache=_page_time_&word=",
         "url_right": "",
     },
     {
         "name": "Google", // 引擎名称，可视5个字
-        "m-url": "./?route=search&engine=google&word=", // 移动端，前缀
-        "pc-url": "./?route=search&engine=google&word=", // PC端，前缀
+        "m-url": "./?route=search&engine=google&cache=_page_time_&word=", // 移动端，前缀
+        "pc-url": "./?route=search&engine=google&cache=_page_time_&word=", // PC端，前缀
         "url_right": "", // 参数的固顶后缀
     },
     {
         "name": "DuckDuckGo", // 引擎名称，可视5个字
-        "m-url": "./?route=search&engine=duckduckgo&word=", // 移动端，前缀
-        "pc-url": "./?route=search&engine=duckduckgo&word=", // PC端，前缀
+        "m-url": "./?route=search&engine=duckduckgo&cache=_page_time_&word=", // 移动端，前缀
+        "pc-url": "./?route=search&engine=duckduckgo&cache=_page_time_&word=", // PC端，前缀
         "url_right": "", // 参数的固顶后缀
     },
     // {
     //     "name": "Yandex", // 引擎名称，可视5个字
-    //     "m-url": "./?route=search&engine=yandex&word=", // 移动端，前缀
-    //     "pc-url": "./?route=search&engine=yandex&word=", // PC端，前缀
+    //     "m-url": "./?route=search&engine=yandex&cache=_page_time_&word=", // 移动端，前缀
+    //     "pc-url": "./?route=search&engine=yandex&cache=_page_time_&word=", // PC端，前缀
     //     "url_right": "", // 参数的固顶后缀
     // },
     // {
     //     "name": "头条搜索", // 引擎名称，可视5个字
-    //     "m-url": "./?route=search&engine=m_toutiao&word=", // 移动端，前缀
-    //     "pc-url": "./?route=search&engine=toutiao&word=", // PC端，前缀
+    //     "m-url": "./?route=search&engine=m_toutiao&cache=_page_time_&word=", // 移动端，前缀
+    //     "pc-url": "./?route=search&engine=toutiao&cache=_page_time_&word=", // PC端，前缀
     //     "url_right": "", // 参数的固顶后缀
     // },
     {
         "name": "搜狗搜索", // 引擎名称，可视5个字
-        "m-url": "./?route=search&engine=m_sogou&word=", // 移动端，前缀
-        "pc-url": "./?route=search&engine=sogou&word=", // PC端，前缀
+        "m-url": "./?route=search&engine=m_sogou&cache=_page_time_&word=", // 移动端，前缀
+        "pc-url": "./?route=search&engine=sogou&cache=_page_time_&word=", // PC端，前缀
         "url_right": "", // 参数的固顶后缀
     },
     {
         "name": "微信文章", // 引擎名称，可视5个字
-        "m-url": "./?route=search&engine=weixin&word=", // 移动端，前缀
-        "pc-url": "./?route=search&engine=weixin&word=", // PC端，前缀
+        "m-url": "./?route=search&engine=weixin&cache=_page_time_&word=", // 移动端，前缀
+        "pc-url": "./?route=search&engine=weixin&cache=_page_time_&word=", // PC端，前缀
         "url_right": "", // 参数的固顶后缀
     },
     {
         "name": "英文电影",
-        "m-url": "./?route=search&engine=video&word=",
-        "pc-url": "./?route=search&engine=video&word=",
+        "m-url": "./?route=search&engine=video&cache=_page_time_&word=",
+        "pc-url": "./?route=search&engine=video&cache=_page_time_&word=",
         "url_right": "",
     },
 
     {
         "name": "收费音乐",
-        "m-url": "./?route=search&engine=music&word=",
-        "pc-url": "./?route=search&engine=music&word=",
+        "m-url": "./?route=search&engine=music&cache=_page_time_&word=",
+        "pc-url": "./?route=search&engine=music&cache=_page_time_&word=",
         "url_right": "",
     },
     {
@@ -83,27 +83,27 @@ const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。�
 
     {
         "name": "东坡下载",
-        "m-url": "./?route=search&engine=dpxz_download&word=",
-        "pc-url": "./?route=search&engine=dpxz_download&word=",
+        "m-url": "./?route=search&engine=dpxz_download&cache=_page_time_&word=",
+        "pc-url": "./?route=search&engine=dpxz_download&cache=_page_time_&word=",
         "url_right": "",
     },
     {
         "name": "查IP、域名",
-        "m-url": "./?route=search&engine=ipdomain&word=",
-        "pc-url": "./?route=search&engine=ipdomain&word=",
+        "m-url": "./?route=search&engine=ipdomain&cache=_page_time_&word=",
+        "pc-url": "./?route=search&engine=ipdomain&cache=_page_time_&word=",
         "url_right": "",
     },
     {
         "name": "域名Whois",
-        "m-url": "./?route=search&engine=whois&word=",
-        "pc-url": "./?route=search&engine=whois&word=",
+        "m-url": "./?route=search&engine=whois&cache=_page_time_&word=",
+        "pc-url": "./?route=search&engine=whois&cache=_page_time_&word=",
         "url_right": "",
     },
 
     // {
     //     "name": "搜Github",
-    //     "m-url": "https://github.com/search?&type=Repositories&q=",
-    //     "pc-url": "https://github.com/search?&type=Repositories&q=",
+    //     "m-url": "https://github.com/search?&type=Repositories&cache=_page_time_&q=",
+    //     "pc-url": "https://github.com/search?&type=Repositories&cache=_page_time_&q=",
     //     "url_right": "",
     // },
     // {
@@ -127,14 +127,14 @@ const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。�
     //
     // {
     //     "name": "CSDN博客",
-    //     "m-url": "https://so.csdn.net/so/search/s.do?q=",
-    //     "pc-url": "https://so.csdn.net/so/search/s.do?q=",
+    //     "m-url": "https://so.csdn.net/so/search/s.do?cache=_page_time_&q=",
+    //     "pc-url": "https://so.csdn.net/so/search/s.do?cache=_page_time_&q=",
     //     "url_right": "",
     // },
     // {
     //     "name": "cnblogs博客",
-    //     "m-url": "https://zzk.cnblogs.com/s/blogpost?w=",
-    //     "pc-url": "https://zzk.cnblogs.com/s/blogpost?w=",
+    //     "m-url": "https://zzk.cnblogs.com/s/blogpost?cache=_page_time_&w=",
+    //     "pc-url": "https://zzk.cnblogs.com/s/blogpost?cache=_page_time_&w=",
     //     "url_right": "",
     // },
 
@@ -311,7 +311,7 @@ function create_input(pre) { // 渲染模板
 
     document.getElementsByTagName("title")[0].innerText = page_title;
     let content = document.getElementsByClassName("content")[0];
-    content.innerHTML = '<div class="input-div" id="input-div"><select class="select search-style select-none" id="select"></select><input type="text" value="" maxlength="500" id="input" class="input search-style"  placeholder="' + pre + '输入内容（支持kw@命令）" title="输入搜索内容（支持kw@命令）"/><div class="clear"></div></div><div class="input-history-div" id="input-history"></div><div class="clear"></div><div class="search-btn-div" id="search-btn"></div><div class="res-div"></div>';
+    content.innerHTML = '<div class="input-div" id="input-div"><select class="select search-style select-none" id="select"></select><input type="text" value="" maxlength="500" id="input" class="input search-style"  placeholder="' + pre + '输入搜索内容" title="输入搜索内容（支持kw@命令）"/><div class="clear"></div></div><div class="input-history-div" id="input-history"></div><div class="clear"></div><div class="search-btn-div" id="search-btn"></div><div class="res-div"></div>';
     let append_tag = [];
     for (let i = 0; i < search.length; i++) {
         let tag = '<option class="option option-' + i + '" value="' + i + '">' + search[i]["name"] + '</option>';
@@ -402,6 +402,9 @@ function run_search() { // 执行搜索
                 console_log("PC");
             }
         }
+
+        // 替换时间戳
+        tab_url = tab_url.replaceAll("_page_time_", view.time_date("YmdHisW"));
 
     } else {
         console_log("是网址");
