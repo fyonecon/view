@@ -33,7 +33,7 @@ const app_url = {
 // App验证参数
 const app_class = "view_ggvs";
 const app_version = "v1";
-const app_name = "ViewJS单页Web应用框架";
+const app_name = "GG简单主页";
 const app_platform = "WebApp";
 
 // 登录用户使用的验证参数

@@ -442,7 +442,7 @@
     left: 0px;
     padding-left: 10px;
     overflow: hidden;
-    width: 150px;
+    width: 220px;
     text-align: left;
 }
 .right-fixed{
@@ -513,5 +513,8 @@
 }
 
 .fixed-span-style{
-    padding: 7px 3px;
+    padding: 3px 3px;
+}
+.right-span{
+    margin-right: 10px;
 }

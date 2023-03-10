@@ -4,7 +4,7 @@
 "use strict";
 
 const search_debug = false; // 调试日志，false关闭日志，true显示日志
-const page_title = " 👈 简单主页"; // 当前页面标题
+const page_title = " 👈 "+app_name; // 当前页面标题
 const _search_jump = "";
 const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。自定义。
     {
@@ -1217,6 +1217,8 @@ function start_page(info) {
         if (src){$(".new-qr-img").attr("src", src);}
     }, "qr-div");
 
+    $(".icp-a-show").html($(".icp-a").text()).attr("href", $(".icp-a").attr("href"));
+    $(".rights-a").html("©️ "+app_name).attr("title", "版权："+app_name);
     $(".rights-date").html(view.time_date("Y"));
 
 }

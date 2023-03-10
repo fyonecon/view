@@ -28,22 +28,26 @@ function jump_location(engine, word, url) {
         view.hide_loading();
         $(".back-a").removeClass("hide");
 
-        let show_txt = "https://so.ggvs.net/?route=search&engine=bing&word=%s";
+        let domain = window.location.host;
+
+        let show_txt = "https://"+domain+"/?route=search&engine=bing&word=%s";
         $(".match-kw-span-msg").html("自定义必应搜索引擎（点击可复制）：");
         $(".match-kw-span-txt").html(show_txt).attr("data-clipboard-text", show_txt);
 
-        view.title("请查看kw对应的内容");
+        view.title("请查看 kw 对应的内容");
         return;
     }
     else if (word === "kw@baidu"){
         view.hide_loading();
         $(".back-a").removeClass("hide");
 
-        let show_txt = "https://so.ggvs.net/?route=search&engine=baidu&word=%s";
+        let domain = window.location.host;
+
+        let show_txt = "https://"+domain+"/?route=search&engine=baidu&word=%s";
         $(".match-kw-span-msg").html("自定义百度搜索引擎（点击可复制）：");
         $(".match-kw-span-txt").html(show_txt).attr("data-clipboard-text", show_txt);
 
-        view.title("请查看kw对应的内容");
+        view.title("请查看 kw 对应的内容");
         return;
     }
 
@@ -143,7 +147,7 @@ function jump_location(engine, word, url) {
             return;
         }
 
-        view.title("正在使用"+_engine+"打开 "+_word+"");
+        view.title("正在使用 "+_engine+" 打开 "+_word+"");
 
     }
 
