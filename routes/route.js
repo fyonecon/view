@@ -101,6 +101,21 @@ const pages = [
             },
         ],
     }, //
+    { // 页面模块
+        "route"     : "test",
+        "file_path" : "pages/test/test.html",
+        "title"     :  "Test" + " - " +app_name,
+        "file"      : [
+            {
+                "js": [
+                    "pages/test/test.js",
+                ],
+                "css": [
+
+                ],
+            },
+        ],
+    }, //
 
 
     //

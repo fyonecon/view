@@ -316,11 +316,7 @@ const view = {
             return false;
         }
     },
-    get_data: function (key, test) {
-        if (test || test === 0){
-            console.log("注意，你使用了get_data函数。。");
-            return false;
-        }
+    get_data: function (key) {
         let value = localStorage.getItem(key);
         if (value){
             return value;
@@ -329,19 +325,46 @@ const view = {
         }
     },
     del_data: function (key) {
-        let del = localStorage.removeItem(key);
-        if (del){
-            return true;
-        }else {
-            return false;
-        }
+        return localStorage.removeItem(key);
     },
     clear_data: function () {
-        let clear = localStorage.clear();
-        if (clear){
-            return true;
+        return localStorage.clear();
+    },
+    cache_file: function (cache_key, file_url, del_old_state, call_func){ // 缓存css，js文件到本地localstorage
+        let that = this;
+        file_url = file_url + "?" + that.time_date("YmdHis");
+        let cache_js = "";
+        if (del_old_state){
+            that.del_data(cache_key);
+            that.log("已清除缓存cache_key=", cache_key);
         }else {
-            return false;
+            cache_js = that.get_data(cache_key);
+        }
+        if (!cache_js){ // 本地没有缓存就请求新的
+            $.ajax({ // 利用ajax的get请求获取文本内容
+                url: file_url,
+                async: true,
+                success: function (data) {
+                    that.log(["本地写入缓存", cache_key, file_url]);
+                    that.set_data(cache_key, data);
+                    try {
+                        call_func(cache_key, file_url);
+                    }catch (e) {
+                        that.log("可选的call_func不存在，可忽略，1");
+                    }
+                },
+                error: function (error) {
+                    console.error(error);
+                    console.error("缺失文件：", file_url);
+                }
+            });
+        }else { // 本地有js缓存
+            that.log(["本地已有缓存", cache_key, file_url]);
+            try {
+                call_func(cache_key, file_url);
+            }catch (e) {
+                that.log("可选的call_func不存在，可忽略，2");
+            }
         }
     },
     time_s: function () {

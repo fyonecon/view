@@ -12,7 +12,7 @@ const block_wechat = true; // 是否禁止在微信中打开，true & false
 // 框架渲染的必要参数
 const cookie_prefix   = "view_ggvs_";   // cookie前缀
 const route_404       = "?route=404";   // 404
-const page_time       = "cache=" + MakeDate("YmdH");
+const page_time       = "cache=" + index_func.MakeDate("YmdH");
 
 const api_url         = "https://xcx.xxx.cn/chengzi/public/index.php/api/";  // api主地址
 const kws_url          = "https://buf.ggvs.fit/.cache/js/"; // 额外关键词

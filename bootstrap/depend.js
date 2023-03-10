@@ -1,7 +1,7 @@
 /*主入口js，下面一般不要做修改。**/
 /*2019/9/12/9:55*/
 /*
-*版本版权：v3.6（2023-03-08）；Apache2.0。
+*版本版权：v3.7（2023-03-10）；Apache2.0。
 * */
 "use strict";
 
@@ -130,6 +130,7 @@ function depend_pages(){
             // route公共css
             for (let i=0; i<page_static_file.css.length; i++){
                 let link = document.createElement('link');
+                link.setAttribute("class", "public-css");
                 link.setAttribute("href", cdn_page_file + page_static_file.css[i] + "?" + page_time);
                 link.setAttribute("rel", "stylesheet");
                 head.appendChild(link);
@@ -140,6 +141,7 @@ function depend_pages(){
             for (let i=0; i<page_static_file.js.length; i++){
                 let the_p = new Promise((resolve, reject) => {
                     let script = document.createElement("script");
+                    script.setAttribute("class", "public-js");
                     script.setAttribute("src", cdn_page_file + page_static_file.js[i] + "?" + page_time);
                     head.appendChild(script);
                     script.onload = function () {resolve(i); };
@@ -153,6 +155,7 @@ function depend_pages(){
             // page css（不需要异步）
             for (let i=0; i<page_file.css.length; i++){
                 let link = document.createElement('link');
+                link.setAttribute("class", "page-css");
                 link.setAttribute("href", cdn_page_file + page_file.css[i] +"?"+ page_time);
                 link.setAttribute("rel", "stylesheet");
                 head.appendChild(link);
@@ -208,6 +211,7 @@ function depend_pages(){
             for (let i=0; i<page_file.js.length; i++){
                 let the_p = new Promise((resolve, reject) => {
                     let script = document.createElement("script");
+                    script.setAttribute("class", "page-js");
                     script.setAttribute("src", cdn_page_file + page_file.js[i] +"?"+ page_time);
                     head.appendChild(script);
                     script.onload = function () {resolve(i); };

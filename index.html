@@ -19,99 +19,172 @@
     <meta name="description" content='"GG简单主页"是适用于手机和PC的极简浏览器主页，帮助浏览器搜索跳转。PWA应用，可以将简单主页添加至桌面，不收集任何用户隐私。使用ViewJS框架编写。so.ggvs.net。' />
     <meta name="author" content="https://github.com/fyonecon" />
     <script id="depend-js" nonce="" data-view="" data-desc="">
-        let time_start  = Math.floor((new Date()).getTime()); // ms。开始载入外部文件的时间戳
+        const time_start = Math.floor((new Date()).getTime()); // ms。开始载入文件的时间戳
         let time_loaded = 0; // ms。框架载入完成的时间戳
-        let time_error  = 0; // ms。框架出错的时间戳
-        let cdn_page_file = "./"; // 自定义pages CDN地址，./
-        let cdn_depend_file = "./"; // 自定义核心依赖CDN地址，./
+        let time_error = 0; // ms。框架出错的时间戳
+        const index_prefix = "index_"; // index文件中的参数前缀
+        const cdn_page_file = "./"; // 自定义pages CDN地址，./
+        const cdn_depend_file = "./"; // 自定义核心依赖CDN地址，./
 
-        ;function AppRun () {
-            // 核心解析依赖
-            let css_href_array = [
-                cdn_depend_file + "bootstrap/depend.css",
-                cdn_depend_file + "bootstrap/plugins.css",
-            ];
-            let js_src_array = [
-                cdn_page_file + "common/config.js",
-                cdn_depend_file + "bootstrap/plugins.js",
-                cdn_depend_file + "bootstrap/view.js",
-            ];
+        const css_href_array = [
+            cdn_depend_file + "bootstrap/depend.css",
+            cdn_depend_file + "bootstrap/plugins.css",
+        ];
+        const js_src_array = [
+            cdn_page_file + "common/config.js",
+            cdn_depend_file + "bootstrap/plugins.js",
+            cdn_depend_file + "bootstrap/view.js",
+        ];
 
-            // 核心文件每次加载都自动清除缓存
-            let clear_cache = "?cache=" + MakeDate("YmdH");
-            let head = document.head || document.getElementsByTagName("head")[0];
+        const index_func = {
+            AppRun: function  () { // 核心解析依赖
+                let that = this;
 
-            // css
-            let css_all = [];
-            for (let i=0; i<css_href_array.length; i++){
-                let the_p = new Promise((resolve, reject) => {
-                    let link_depend = document.createElement("link");
-                    link_depend.setAttribute("id", "depend-css");
-                    link_depend.setAttribute("href", css_href_array[i] + clear_cache);
-                    link_depend.setAttribute("rel", "stylesheet");
-                    head.appendChild(link_depend);
-                    link_depend.onload = function () {resolve(i); };
+                // 核心文件每次加载都自动清除缓存
+                let clear_cache = "?cache=" + that.MakeDate("YmdH");
+                let head = document.head || document.getElementsByTagName("head")[0];
+
+                // 检查是否需要清除缓存
+                let cache_file_key = "cache_file_state";
+                let cache_file_time = 6*24*60*60*1000; // 文件缓存的过期时间
+                let cache_file_state = that.GetCookie(cache_file_key);
+                if (!cache_file_state){ // 没有就全部清除cache_file
+                    console.log("清除所有cache_file");
+                    that.SetCookie(cache_file_key, "Has", cache_file_time);
+                    that.ClearData();
+                }
+
+                // css
+                let css_all = [];
+                for (let i=0; i<css_href_array.length; i++){
+                    let the_p = new Promise((resolve, reject) => {
+                        let cache_key = index_prefix+"css_"+i;
+                        let cache_css = that.GetData(cache_key);
+                        let link_depend = document.createElement("link");
+                        link_depend.setAttribute("class", "depend-css");
+                        if (cache_css){ // 存在缓存
+                            // console.log("读缓存css-"+i);
+                            link_depend.innerHTML = cache_css;
+                            head.appendChild(link_depend);
+                            resolve(i);
+                        }else {
+                            // console.log("写缓存css-"+i);
+                            link_depend.setAttribute("href", css_href_array[i] + clear_cache);
+                            link_depend.setAttribute("rel", "stylesheet");
+                            head.appendChild(link_depend);
+                            link_depend.onload = function () {
+                                resolve(i);
+                            };
+                        }
+                    });
+                    css_all.push(the_p);
+                }
+                Promise.all(css_all).then((result) => {
+                    //
+                }).catch((error) => {
+                    console.error(error);
                 });
-                css_all.push(the_p);
-            }
-            Promise.all(css_all).then((result) => {
-                //
-            }).catch((error) => {
-                console.error(error);
-            });
 
-            // js
-            let js_all = [];
-            for (let j=0; j<js_src_array.length; j++){
-                let the_q = new Promise((resolve, reject) => {
-                    let pages_script = document.createElement("script");
-                    pages_script.setAttribute("class", "write-js");
-                    pages_script.setAttribute("src", js_src_array[j] + clear_cache);
-                    head.appendChild(pages_script);
-                    pages_script.onload = function () {
-                        resolve(j);
-                    };
+                // js
+                let js_all = [];
+                for (let j=0; j<js_src_array.length; j++){
+                    let the_q = new Promise((resolve, reject) => {
+                        let cache_key = index_prefix+"js_"+j;
+                        let cache_js = that.GetData(cache_key);
+                        let pages_script = document.createElement("script");
+                        pages_script.setAttribute("class", "depend-js");
+                        // console.log(cache_key, cache_js);
+                        if (cache_js){ // 存在缓存
+                            // console.log("读缓存js-"+j);
+                            pages_script.innerHTML = cache_js;
+                            head.appendChild(pages_script);
+                            resolve(j);
+                        }else {
+                            // console.log("写标签js-"+j);
+                            pages_script.setAttribute("src", js_src_array[j] + clear_cache);
+                            head.appendChild(pages_script);
+                            pages_script.onload = function () {
+                                resolve(j);
+                            };
+                        }
+                    });
+                    js_all.push(the_q);
+                }
+                Promise.all(js_all).then((result) => {
+                    let cache_key = index_prefix+"js_depend";
+                    let cache_js = that.GetData(cache_key);
+                    let depend_script = document.createElement("script");
+                    depend_script.setAttribute("class", "depend-js");
+                    if (cache_js){ // 存在缓存
+                        // console.log("读缓存js-depend");
+                        depend_script.innerHTML = cache_js;
+                        head.appendChild(depend_script);
+                    }else {
+                        // console.log("写标签js-depend");
+                        depend_script.setAttribute("src", cdn_depend_file + "bootstrap/depend.js"+"?" + clear_cache);
+                        head.appendChild(depend_script);
+                        depend_script.onload = function () {
+                            // console.log("depend");
+                        };
+                    }
+                }).catch((error) => {
+                    console.error(error);
                 });
-                js_all.push(the_q);
+            },
+            SetCookie: function (name, value, time) {
+                name = index_prefix + name;
+                if (!time){
+                    time = 1*24*60*60*1000; // 默认1天
+                }
+                let exp = new Date();
+                exp.setTime(exp.getTime() + time);
+                document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+            },
+            GetCookie: function (name) {
+                name = index_prefix + name;
+                let arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+                if(arr=document.cookie.match(reg)){
+                    return unescape(arr[2]);
+                } else{
+                    return "";
+                }
+            },
+            GetData: function (key){ // 获取本地localstorage
+                return localStorage.getItem(key);
+            },
+            DelData: function (key){ // 删除本地localstorage
+                return localStorage.removeItem(key);
+            },
+            ClearData: function () {
+                return localStorage.clear();
+            },
+            MakeDate: function (date_time){ // YmdHisW，日期周
+                let t = new Date();
+                let seconds = t.getSeconds(); if (seconds<10){seconds = "0"+seconds;}
+                let minutes = t.getMinutes(); if (minutes<10){minutes = "0"+minutes;}
+                let hour = t.getHours(); if (hour<10){hour = "0"+hour;}
+                let day = t.getDate(); if (day<10){day = "0"+day;}
+                let month = t.getMonth() + 1; if (month<10){month = "0"+month;}
+                let year = t.getFullYear();
+                let week = ["7", "1", "2", "3", "4", "5", "6"][t.getDay()]; // 周
+
+                date_time = date_time.replaceAll("Y", year);
+                date_time = date_time.replaceAll("m", month);
+                date_time = date_time.replaceAll("d", day);
+                date_time = date_time.replaceAll("H", hour);
+                date_time = date_time.replaceAll("i", minutes);
+                date_time = date_time.replaceAll("s", seconds);
+                date_time = date_time.replaceAll("W", week);
+
+                return date_time;
             }
-            Promise.all(js_all).then((result) => {
-                let depend_script = document.createElement("script");
-                depend_script.setAttribute("class", "write-js");
-                depend_script.setAttribute("src", cdn_depend_file + "bootstrap/depend.js"+"?" + clear_cache);
-                head.appendChild(depend_script);
-                depend_script.onload = function () {
-                    // console.log("depend");
-                };
-            }).catch((error) => {
-                console.error(error);
-            });
-        }
-        function MakeDate(date_time){ // YmdHisW，日期周
-            let t = new Date();
-            let seconds = t.getSeconds(); if (seconds<10){seconds = "0"+seconds;}
-            let minutes = t.getMinutes(); if (minutes<10){minutes = "0"+minutes;}
-            let hour = t.getHours(); if (hour<10){hour = "0"+hour;}
-            let day = t.getDate(); if (day<10){day = "0"+day;}
-            let month = t.getMonth() + 1; if (month<10){month = "0"+month;}
-            let year = t.getFullYear();
-            let week = ["7", "1", "2", "3", "4", "5", "6"][t.getDay()]; // 周
-
-            date_time = date_time.replaceAll("Y", year);
-            date_time = date_time.replaceAll("m", month);
-            date_time = date_time.replaceAll("d", day);
-            date_time = date_time.replaceAll("H", hour);
-            date_time = date_time.replaceAll("i", minutes);
-            date_time = date_time.replaceAll("s", seconds);
-            date_time = date_time.replaceAll("W", week);
-
-            return date_time;
-        }
-		;(function (){
+        };
+		(function (){
             let inner_w = window.innerWidth;
             let inner_h = window.innerHeight;
             let screen_w = window.screen.width;
             let screen_h = window.screen.height;
-			if (inner_w<200 || inner_h<200 || screen_w<200 || screen_h<200 || navigator.webdriver){}else {AppRun ();}
+			if (inner_w<200 || inner_h<200 || screen_w<200 || screen_h<200 || navigator.webdriver){}else {index_func.AppRun ();}
 		})();
     </script>
 
