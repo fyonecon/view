@@ -449,7 +449,7 @@ function init_dom() {
         '<div class="search-btn-center do-btn-center must-btn select-none">' +
         '   <span class="search-btn-style history-btn-span click red" title="清空搜索历史记录" data-clipboard-text=" ">清空历史</span>' +
         '   <span class="search-btn-style refresh-btn-span click " title="清空输入框">重新输入</span>' +
-        '   <span class="search-btn-style search-btn-span click" title="点击搜索">🔍·搜索</span>' +
+        '   <span class="search-btn-style search-btn-span click" title="点击搜索">🔍 搜 索</span>' +
         '   <div class="clear"></div>' +
         '</div>' +
         //

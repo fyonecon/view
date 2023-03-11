@@ -193,16 +193,14 @@
     line-height: 38px;
     height: 38px;
     overflow: hidden;
-    /*white-space: nowrap;*/
-    /*text-overflow: ellipsis;*/
     text-align: center;
     /*box-shadow: 0 0 10px rgba(0, 120, 254, 0.3);*/
+    /*border: 2px solid rgba(0, 120, 254, 0.2);*/
+    border: 2px solid rgba(0, 120, 254, 0.2);
     float: left;
     margin-left: 10px;
     margin-right: 10px;
-    border: 2px solid rgba(0, 120, 254, 0.2);
     letter-spacing: 1px;
-    /*background: rgba(20, 20, 20, 0.8);*/
 }
 
 .search-btn-style:hover {

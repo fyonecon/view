@@ -23,6 +23,7 @@
         let time_loaded = 0; // ms。框架载入完成的时间戳
         let time_error = 0; // ms。框架出错的时间戳
         const index_prefix = "index_"; // index文件中的参数前缀
+        const cache_version = "202303111807"; // 没发布一次就对比此值是否匹配，不匹配就自动更新缓存
         const cdn_page_file = "./"; // 自定义pages CDN地址，./
         const cdn_depend_file = "./"; // 自定义核心依赖CDN地址，./
 
