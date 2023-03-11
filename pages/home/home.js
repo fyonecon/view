@@ -425,12 +425,14 @@ function run_search() { // 执行搜索
     try{
         let kw_state = enter_kw(_input);
         if (kw_state){
-            view.log("匹配到了关键词", _input);
+            view.log("匹配到了关键词："+kw_state, _input);
         }else {
+            view.log("未匹配到关键词："+kw_state, _input);
             window.open(tab_url, "_blank");
         }
     }catch (e){
-        view.error(e);
+        console.error(e);
+        console.error("匹配关键词运行时报错", _input);
         window.open(tab_url, "_blank");
     }
 
@@ -1112,7 +1114,7 @@ function hour_model(){
 function on_hour(){
     let _state = view.get_switch_state("hour_state");
     if (_state === "Off"){
-        view.log("已跳过整点报时");
+        // view.log("已跳过整点报时");
     }else {
         let minute = view.time_date("i")*1;
         let second = view.time_date("s")*1;

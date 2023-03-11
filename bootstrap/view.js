@@ -10,11 +10,11 @@ const view = {
     },
     info: function (txt, info){
         if (txt === 0 || txt === "0") {}else {if (!txt){txt = "空txt，-info";} }
-        debug === true ? console.info(JSON.stringify(txt), info): "";
+        debug === true ? console.info(txt, info): "";
     },
     error: function (txt, info) { // 日志打印统一函数
         if (txt === 0 || txt === "0") {}else {if (!txt){txt = "空txt，-error";} }
-        console.error(JSON.stringify(txt), info);
+        console.error(txt, info);
     },
     title: function (txt){ // 改写title标签内容
         document.getElementsByTagName("title")[0].innerText = txt;
