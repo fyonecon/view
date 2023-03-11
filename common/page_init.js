@@ -49,7 +49,7 @@ function auto_clear_cache_files(){
     }
     // load
     let cache_load_file_key = index_prefix+"cache_load_file_state";
-    let cache_load_file_time = 2*60*60*1000; // 文件缓存的过期时间
+    let cache_load_file_time = 15*60*60*1000; // 文件缓存的过期时间
     let cache_load_file_state = view.get_cookie(cache_load_file_key);
     if (!cache_load_file_state){ // 没有就全部清除cache_file
         view.log("清除所有前缀cache_load_file");
@@ -62,7 +62,7 @@ function auto_clear_cache_files(){
     }
     // public
     let cache_public_file_key = index_prefix+"cache_public_file_state";
-    let cache_public_file_time = 2*60*60*1000; // 文件缓存的过期时间
+    let cache_public_file_time = 15*60*60*1000; // 文件缓存的过期时间
     let cache_public_file_state = view.get_cookie(cache_public_file_key);
     if (!cache_public_file_state){ // 没有就全部清除cache_file
         view.log("清除所有前缀cache_public_file");
@@ -75,7 +75,7 @@ function auto_clear_cache_files(){
     }
     // page
     let cache_page_file_key = index_prefix+"cache_page_file_state";
-    let cache_page_file_time = 2*60*60*1000; // 文件缓存的过期时间
+    let cache_page_file_time = 15*60*60*1000; // 文件缓存的过期时间
     let cache_page_file_state = view.get_cookie(cache_page_file_key);
     if (!cache_page_file_state){ // 没有就全部清除cache_file
         view.log("清除所有前缀cache_page_file");

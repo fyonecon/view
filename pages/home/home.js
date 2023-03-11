@@ -847,6 +847,7 @@ function init_color() {
 
         body.classList.add("bg-light");
         body.classList.remove("bg-black");
+        body.classList.remove("bg-grey");
         body.classList.remove("bg-yellow");
         body.classList.remove("bg-ivory");
 
@@ -854,15 +855,19 @@ function init_color() {
         input.classList.add("input-color-light");
         select.classList.remove("select-color-black");
         input.classList.remove("input-color-black");
+        select.classList.remove("select-color-grey");
+        input.classList.remove("input-color-grey");
         select.classList.remove("select-color-yellow");
         input.classList.remove("input-color-yellow");
         select.classList.remove("select-color-ivory");
         input.classList.remove("input-color-ivory");
-    } else if (bg_color === 1) { // 暗
+    }
+    else if (bg_color === 1) { // 暗
         change_color_span.innerHTML = "昏黑";
 
         body.classList.remove("bg-light");
         body.classList.add("bg-black");
+        body.classList.remove("bg-grey");
         body.classList.remove("bg-yellow");
         body.classList.remove("bg-ivory");
 
@@ -870,15 +875,40 @@ function init_color() {
         input.classList.remove("input-color-light");
         select.classList.add("select-color-black");
         input.classList.add("input-color-black");
+        select.classList.remove("select-color-grey");
+        input.classList.remove("input-color-grey");
         select.classList.remove("select-color-yellow");
         input.classList.remove("input-color-yellow");
         select.classList.remove("select-color-ivory");
         input.classList.remove("input-color-ivory");
-    } else if (bg_color === 2) { // 黄
+    }
+    else if (bg_color === 2) { // 灰
+        change_color_span.innerHTML = "岩灰";
+
+        body.classList.remove("bg-light");
+        body.classList.remove("bg-black");
+        body.classList.add("bg-grey");
+        body.classList.remove("bg-yellow");
+        body.classList.remove("bg-ivory");
+
+        select.classList.remove("select-color-light");
+        input.classList.remove("input-color-light");
+        select.classList.remove("select-color-black");
+        input.classList.remove("input-color-black");
+        select.classList.add("select-color-grey");
+        input.classList.add("input-color-grey");
+        select.classList.remove("select-color-yellow");
+        input.classList.remove("input-color-yellow");
+        select.classList.remove("select-color-ivory");
+        input.classList.remove("input-color-ivory");
+    }
+
+    else if (bg_color === 3) { // 黄
         change_color_span.innerHTML = "夕黄";
 
         body.classList.remove("bg-light");
         body.classList.remove("bg-black");
+        body.classList.remove("bg-grey");
         body.classList.add("bg-yellow");
         body.classList.remove("bg-ivory");
 
@@ -886,15 +916,19 @@ function init_color() {
         input.classList.remove("input-color-light");
         select.classList.remove("select-color-black");
         input.classList.remove("input-color-black");
+        select.classList.remove("select-color-grey");
+        input.classList.remove("input-color-grey");
         select.classList.add("select-color-yellow");
         input.classList.add("input-color-yellow");
         select.classList.remove("select-color-ivory");
         input.classList.remove("input-color-ivory");
-    } else if (bg_color === 3) { // 象牙
+    }
+    else if (bg_color === 4) { // 象牙
         change_color_span.innerHTML = "牙白";
 
         body.classList.remove("bg-light");
         body.classList.remove("bg-black");
+        body.classList.remove("bg-grey");
         body.classList.remove("bg-yellow");
         body.classList.add("bg-ivory");
 
@@ -902,6 +936,8 @@ function init_color() {
         input.classList.remove("input-color-light");
         select.classList.remove("select-color-black");
         input.classList.remove("input-color-black");
+        select.classList.remove("select-color-grey");
+        input.classList.remove("input-color-grey");
         select.classList.remove("select-color-yellow");
         input.classList.remove("input-color-yellow");
         select.classList.add("select-color-ivory");
@@ -922,13 +958,20 @@ function change_bg_color() {
     // 0=bg-light；1=bg-black；2=bg-yellow；
     if (bg_color === 0) { // 切换到第二个
         setCookie(bg_cookie, (bg_color + 1));
-    } else if (bg_color === 1) { // 切换到第三个
+    }
+    else if (bg_color === 1) { // 切换到第三个
         setCookie(bg_cookie, (bg_color + 1));
-    } else if (bg_color === 2) { // 切换到第四个
+    }
+    else if (bg_color === 2) { // 切换到第四个
         setCookie(bg_cookie, (bg_color + 1));
-    } else if (bg_color === (bg_color + 1)) { //  // 切换到第一个
+    }
+    else if (bg_color === 3) { // 切换到第5个
+        setCookie(bg_cookie, (bg_color + 1));
+    }
+    else if (bg_color === (bg_color + 1)) { //  // 切换到第一个
         setCookie(bg_cookie, 0);
-    } else { // 默认为0
+    }
+    else { // 默认为0
         setCookie(bg_cookie, 0);
     }
 
