@@ -35,7 +35,7 @@ function clear_cache_files(){
 function auto_clear_cache_files(){
     let old_cache_version = view.get_cookie("cache_version");
     if (old_cache_version !== cache_version){
-        console.log("缓存版本不匹配，需要清空老缓存。");
+        console.log("缓存版本不匹配，自动清空老缓存。");
         clear_cache_files();
         let time = 6*24*60*60*1000;
         view.set_cookie("cache_version", cache_version, time);
