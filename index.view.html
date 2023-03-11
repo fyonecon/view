@@ -19,12 +19,12 @@
   <meta name="keywords" content="Web单页应用框架" />
   <meta name="description" content="Web单页应用框架，全框架倾向于原生+CDN。" />
   <meta name="author" content="" />
-  <script id="depend-js" nonce="" data-view="" data-desc="">
+  <script id="depend-js" data-view="" data-desc="">
+    const cache_version = "202303112112"; // 没发布一次就对比此值是否匹配，不匹配就自动更新缓存
     const time_start = Math.floor((new Date()).getTime()); // ms。开始载入文件的时间戳
     let time_loaded = 0; // ms。框架载入完成的时间戳
     let time_error = 0; // ms。框架出错的时间戳
     const index_prefix = "index_"; // index文件中的参数前缀
-    const cache_version = "202303111807"; // 没发布一次就对比此值是否匹配，不匹配就自动更新缓存
     const cdn_page_file = "./"; // 自定义pages CDN地址，./
     const cdn_depend_file = "./"; // 自定义核心依赖CDN地址，./
 
@@ -37,15 +37,11 @@
       cdn_depend_file + "bootstrap/plugins.js",
       cdn_depend_file + "bootstrap/view.js",
     ];
-
     const index_func = {
       AppRun: function  () { // 核心解析依赖
         let that = this;
-
-        // 核心文件每次加载都自动清除缓存
-        let clear_cache = "?cache=" + that.MakeDate("YmdH");
+        let clear_cache = "?cache=" + that.MakeDate("Ym000000");
         let head = document.head || document.getElementsByTagName("head")[0];
-
         // css
         let css_all = [];
         for (let i=0; i<depend_css_array.length; i++){
@@ -66,7 +62,6 @@
         }).catch((error) => {
           console.error(error);
         });
-
         // js
         let js_all = [];
         for (let j=0; j<depend_js_array.length; j++){
@@ -78,12 +73,10 @@
             script.setAttribute("class", "depend-js");
             // console.log(cache_key, cache_js);
             if (cache_js){ // 存在缓存
-              // console.log("读缓存js-"+j);
               script.innerHTML = cache_js;
               head.appendChild(script);
               resolve(j);
             }else {
-              // console.log("写标签js-"+j);
               script.setAttribute("src", file + clear_cache);
               head.appendChild(script);
               script.onload = function () {
@@ -100,11 +93,9 @@
           let script = document.createElement("script");
           script.setAttribute("class", "depend-js");
           if (cache_js){ // 存在缓存
-            // console.log("读缓存js-depend");
             script.innerHTML = cache_js;
             head.appendChild(script);
           }else {
-            // console.log("写标签js-depend");
             script.setAttribute("src", file + clear_cache);
             head.appendChild(script);
             script.onload = function () {
@@ -149,7 +140,6 @@
         let month = t.getMonth() + 1; if (month<10){month = "0"+month;}
         let year = t.getFullYear();
         let week = ["7", "1", "2", "3", "4", "5", "6"][t.getDay()]; // 周
-
         date_time = date_time.replaceAll("Y", year);
         date_time = date_time.replaceAll("m", month);
         date_time = date_time.replaceAll("d", day);
@@ -157,7 +147,6 @@
         date_time = date_time.replaceAll("i", minutes);
         date_time = date_time.replaceAll("s", seconds);
         date_time = date_time.replaceAll("W", week);
-
         return date_time;
       }
     };

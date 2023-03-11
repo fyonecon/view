@@ -37,12 +37,12 @@ function auto_clear_cache_files(){
     if (old_cache_version !== cache_version){
         console.log("缓存版本不匹配，自动清空老缓存。");
         clear_cache_files();
-        let time = 6*24*60*60*1000;
+        let time = 6*30*24*60*60*1000;
         view.set_cookie("cache_version", cache_version, time);
     }else {
         // depend
         let cache_depend_file_key = index_prefix+"cache_depend_file_state";
-        let cache_depend_file_time = 15*60*60*1000; // 文件缓存的过期时间
+        let cache_depend_file_time = 3*30*24*60*60*1000; // 文件缓存的过期时间
         let cache_depend_file_state = view.get_cookie(cache_depend_file_key);
         if (!cache_depend_file_state){ // 没有就全部清除cache_file
             view.log("清除所有前缀cache_depend_file");
@@ -56,7 +56,7 @@ function auto_clear_cache_files(){
         }
         // load
         let cache_load_file_key = index_prefix+"cache_load_file_state";
-        let cache_load_file_time = 15*60*60*1000; // 文件缓存的过期时间
+        let cache_load_file_time = 3*30*24*60*60*1000; // 文件缓存的过期时间
         let cache_load_file_state = view.get_cookie(cache_load_file_key);
         if (!cache_load_file_state){ // 没有就全部清除cache_file
             view.log("清除所有前缀cache_load_file");
@@ -69,7 +69,7 @@ function auto_clear_cache_files(){
         }
         // public
         let cache_public_file_key = index_prefix+"cache_public_file_state";
-        let cache_public_file_time = 15*60*60*1000; // 文件缓存的过期时间
+        let cache_public_file_time = 3*30*24*60*60*1000; // 文件缓存的过期时间
         let cache_public_file_state = view.get_cookie(cache_public_file_key);
         if (!cache_public_file_state){ // 没有就全部清除cache_file
             view.log("清除所有前缀cache_public_file");
@@ -82,7 +82,7 @@ function auto_clear_cache_files(){
         }
         // page
         let cache_page_file_key = index_prefix+"cache_page_file_state";
-        let cache_page_file_time = 15*60*60*1000; // 文件缓存的过期时间
+        let cache_page_file_time = 3*30*24*60*60*1000; // 文件缓存的过期时间
         let cache_page_file_state = view.get_cookie(cache_page_file_key);
         if (!cache_page_file_state){ // 没有就全部清除cache_file
             view.log("清除所有前缀cache_page_file");

@@ -21,8 +21,12 @@ function enter_kw(_word){
         window.open(url, "_blank");
     }
     else if (word === "kw@clear_cache"){
-        view.notice_txt("已清除文件缓存", 3000);
+        view.notice_txt("已清除部分文件缓存", 3000);
         clear_cache_files();
+    }
+    else if (word === "kw@clear_all_cache"){
+        view.notice_txt("已清除全部文件缓存", 3000);
+        view.clear_data();
     }
     else if (word === "kw@show"){
         view.notice_txt("已打开隐藏的标签列表", 3000);
