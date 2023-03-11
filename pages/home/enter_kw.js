@@ -20,6 +20,13 @@ function enter_kw(_word){
         url = "./?route=chatgpt";
         window.open(url, "_blank");
     }
+    else if (word === "kw@clear_cache_file"){
+        view.notice_txt("已清除文件缓存", 3000);
+        for (let d=0;d<js_src_array.length;d++){
+            view.del_data(index_prefix+"js_"+d);
+        }
+        view.del_data(index_prefix+"js_depend");
+    }
     else if (word === "kw@show"){
         view.notice_txt("已打开隐藏的标签列表", 3000);
         $(".swiper-container").removeClass("hide");
