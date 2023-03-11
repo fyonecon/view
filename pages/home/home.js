@@ -463,10 +463,6 @@ function init_dom() {
 
         //--
         '       <div class="swiper-slide more-btn">' +
-        '           <div class="div-time select-none"></div>' +
-        '           <div class="div-qr hide">' +
-        '               <div class="div-qr-box" id="img-show_qr"></div>' +
-        '           </div>' +
         '       </div>' +
 
         //--
@@ -966,23 +962,6 @@ function resize_width(width, screen_width) {
         }
     } catch (e) {
         console_log("跳过，-1");
-    }
-
-
-    if (screen_width < 600) {
-        let img = "";
-        try {
-            img = document.getElementsByClassName("qr_img")[0].getAttribute("src");
-        } catch (e) {
-            img = "";
-        }
-        if (img) {
-            document.getElementsByClassName("div-qr")[0].classList.remove("hide");
-        } else {
-            console_log("img为空则跳过");
-        }
-    } else {
-        document.getElementsByClassName("div-qr")[0].classList.add("hide");
     }
 
 }

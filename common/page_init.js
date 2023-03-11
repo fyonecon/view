@@ -2,12 +2,6 @@
 
 // 处理主动文件缓存
 function cache_files(){
-    // 缓存插件-css
-    for (let i=0; i<css_href_array.length; i++){
-        let key = index_prefix+"css_"+i;
-        let file = css_href_array[i];
-        view.cache_file(key, file, false);
-    }
     // 缓存插件-js
     for (let j=0; j<js_src_array.length; j++){
         let key = index_prefix+"js_"+j;

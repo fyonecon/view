@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cmn-Hans">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -59,24 +59,14 @@
         let css_all = [];
         for (let i=0; i<css_href_array.length; i++){
           let the_p = new Promise((resolve, reject) => {
-            let cache_key = index_prefix+"css_"+i;
-            let cache_css = that.GetData(cache_key);
             let link_depend = document.createElement("link");
             link_depend.setAttribute("class", "depend-css");
-            if (cache_css){ // 存在缓存
-              // console.log("读缓存css-"+i);
-              link_depend.innerHTML = cache_css;
-              head.appendChild(link_depend);
+            link_depend.setAttribute("href", css_href_array[i] + clear_cache);
+            link_depend.setAttribute("rel", "stylesheet");
+            head.appendChild(link_depend);
+            link_depend.onload = function () {
               resolve(i);
-            }else {
-              // console.log("写缓存css-"+i);
-              link_depend.setAttribute("href", css_href_array[i] + clear_cache);
-              link_depend.setAttribute("rel", "stylesheet");
-              head.appendChild(link_depend);
-              link_depend.onload = function () {
-                resolve(i);
-              };
-            }
+            };
           });
           css_all.push(the_p);
         }
@@ -93,7 +83,7 @@
             let cache_key = index_prefix+"js_"+j;
             let cache_js = that.GetData(cache_key);
             let pages_script = document.createElement("script");
-            pages_script.setAttribute("class", "write-js");
+            pages_script.setAttribute("class", "depend-js");
             // console.log(cache_key, cache_js);
             if (cache_js){ // 存在缓存
               // console.log("读缓存js-"+j);
@@ -115,7 +105,7 @@
           let cache_key = index_prefix+"js_depend";
           let cache_js = that.GetData(cache_key);
           let depend_script = document.createElement("script");
-          depend_script.setAttribute("class", "write-js");
+          depend_script.setAttribute("class", "depend-js");
           if (cache_js){ // 存在缓存
             // console.log("读缓存js-depend");
             depend_script.innerHTML = cache_js;

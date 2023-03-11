@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cmn-Hans">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -45,7 +45,7 @@
                 let head = document.head || document.getElementsByTagName("head")[0];
 
                 // 检查是否需要清除缓存
-                let cache_file_key = "cache_file_state";
+                let cache_file_key = index_prefix+"cache_file_state";
                 let cache_file_time = 6*24*60*60*1000; // 文件缓存的过期时间
                 let cache_file_state = that.GetCookie(cache_file_key);
                 if (!cache_file_state){ // 没有就全部清除cache_file
@@ -58,24 +58,14 @@
                 let css_all = [];
                 for (let i=0; i<css_href_array.length; i++){
                     let the_p = new Promise((resolve, reject) => {
-                        let cache_key = index_prefix+"css_"+i;
-                        let cache_css = that.GetData(cache_key);
                         let link_depend = document.createElement("link");
                         link_depend.setAttribute("class", "depend-css");
-                        if (cache_css){ // 存在缓存
-                            // console.log("读缓存css-"+i);
-                            link_depend.innerHTML = cache_css;
-                            head.appendChild(link_depend);
+                        link_depend.setAttribute("href", css_href_array[i] + clear_cache);
+                        link_depend.setAttribute("rel", "stylesheet");
+                        head.appendChild(link_depend);
+                        link_depend.onload = function () {
                             resolve(i);
-                        }else {
-                            // console.log("写缓存css-"+i);
-                            link_depend.setAttribute("href", css_href_array[i] + clear_cache);
-                            link_depend.setAttribute("rel", "stylesheet");
-                            head.appendChild(link_depend);
-                            link_depend.onload = function () {
-                                resolve(i);
-                            };
-                        }
+                        };
                     });
                     css_all.push(the_p);
                 }
@@ -132,16 +122,14 @@
                 });
             },
             SetCookie: function (name, value, time) {
-                name = index_prefix + name;
                 if (!time){
-                    time = 1*24*60*60*1000; // 默认1天
+                    time = 24*60*60*1000; // 默认1天
                 }
                 let exp = new Date();
                 exp.setTime(exp.getTime() + time);
                 document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
             },
             GetCookie: function (name) {
-                name = index_prefix + name;
                 let arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
                 if(arr=document.cookie.match(reg)){
                     return unescape(arr[2]);
