@@ -46,7 +46,7 @@
 
                 // 检查是否需要自动清除缓存
                 let cache_file_key = index_prefix+"cache_file_state";
-                let cache_file_time = 2*60*60*1000; // 文件缓存的过期时间
+                let cache_file_time = 15*60*60*1000; // 文件缓存的过期时间
                 let cache_file_state = that.GetCookie(cache_file_key);
                 if (!cache_file_state){ // 没有就全部清除cache_file
                     console.log("清除所有前缀cache_file");
