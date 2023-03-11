@@ -19,7 +19,7 @@ function frame_loaded(e, route){
     view.hide_loading();
 
     // 组件加载时间
-    console.info("框架解析用时：" + (time_loaded - time_start) + "ms");
+    console.info("框架解析用时：" + (time_loaded - time_start) + "ms。", "总耗时还需要+第一个document耗时。");
     view.log("框架报错时间：" + time_error);
 
     // 监听页面尺寸改变

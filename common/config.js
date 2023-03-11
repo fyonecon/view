@@ -14,8 +14,8 @@ const cookie_prefix   = "view_ggvs_";   // cookie前缀
 const route_404       = "?route=404";   // 404
 const page_time       = "cache=" + index_func.MakeDate("YmdH");
 
-const api_url         = "https://xcx.xxx.cn/chengzi/public/index.php/api/";  // api主地址
-const kws_url          = "https://buf.ggvs.fit/.cache/js/"; // 额外关键词
+const api_url         = "https://xcx.xxx.cn/aaa/public/index.php/api/";  // api主地址
+const kws_url          = "./.cache/js/"; // 额外关键词
 
 // 白名单host或refer域名
 const app_url = {
