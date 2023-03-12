@@ -96,7 +96,7 @@ function auto_clear_cache_files(){
     }
 }
 
-// 主动缓存文件
+// 主动添加缓存
 function make_cache_files(){
     view.log("自动更新缓存。已有就跳过，没有就重新缓存。");
     // 缓存depend-index-js

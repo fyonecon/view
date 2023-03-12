@@ -447,7 +447,7 @@
 }
 .left-fixed{
     position: fixed;
-    z-index: 20230304;
+    z-index: 20230306;
     bottom: calc(10px);
     left: 0px;
     padding-left: 10px;

@@ -87,6 +87,21 @@ const pages = [
         ],
     }, //
     { // 页面模块
+        "route"     : "help",
+        "file_path" : "pages/help/help.html",
+        "title"     :  "使用帮助" + " - " +app_name,
+        "file"      : [
+            {
+                "js": [
+                    "pages/help/help.js",
+                ],
+                "css": [
+                    "pages/help/help.css",
+                ],
+            },
+        ],
+    }, //
+    { // 页面模块
         "route"     : "chatgpt",
         "file_path" : "pages/chatgpt/chatgpt.html",
         "title"     :  "chatGPT聊天" + " - " +app_name,
