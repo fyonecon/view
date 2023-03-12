@@ -10,7 +10,7 @@ const debug = false; // 调试模式，统一打印日志，true & false
 const block_wechat = true; // 是否禁止在微信中打开，true & false
 
 // 框架渲染的必要参数
-const cookie_prefix   = "view_ggvs_";   // cookie前缀
+const cookie_prefix   = "view_23so_";   // cookie前缀
 const route_404       = "?route=404";   // 404
 const page_time       = "cache=" + index_func.MakeDate("Ym000000");
 
@@ -25,15 +25,15 @@ const app_url = {
         '0.0.0.0', '127.0.0.1', 'localhost',
         'cdnaliyun.oss-cn-hangzhou.aliyuncs.com',
         'cdnaliyun.oss-accelerate-overseas.aliyuncs.com',
-        'ggvs.net',
+        '23so.cn',
     ],
 };
 
 // 自定义
 // App验证参数
-const app_class = "view_ggvs";
+const app_class = "view_23so";
 const app_version = "v1";
-const app_name = "GG简单主页";
+const app_name = "二三搜，极简主页";
 const app_platform = "WebApp";
 
 // 登录用户使用的验证参数

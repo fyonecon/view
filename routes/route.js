@@ -26,7 +26,7 @@ const pages = [
     { // 页面模块-默认
         "route"     : "",
         "file_path" : "pages/home/home.html",
-        "title"     :  "GG简单主页" + " - " +app_name,
+        "title"     : app_name,
         "file"      : [
             {
                 "js": [
