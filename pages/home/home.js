@@ -9,26 +9,26 @@ const _search_jump = "";
 const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。自定义。
     {
         "name": "必应搜索",
-        "m-url": "./?route=search&engine=bing&cache=_page_time_&word=",
-        "pc-url": "./?route=search&engine=bing&cache=_page_time_&word=",
+        "m-url": "https://23so.cn/?route=search&engine=bing&cache=_page_time_&word=",
+        "pc-url": "https://23so.cn/?route=search&engine=bing&cache=_page_time_&word=",
         "url_right": "",
     },
     {
         "name": "百度一下",
-        "m-url": "./?route=search&engine=baidu&cache=_page_time_&word=",
-        "pc-url": "./?route=search&engine=baidu&cache=_page_time_&word=",
+        "m-url": "https://23so.cn/?route=search&engine=baidu&cache=_page_time_&word=",
+        "pc-url": "https://23so.cn/?route=search&engine=baidu&cache=_page_time_&word=",
         "url_right": "",
     },
     {
         "name": "Google", // 引擎名称，可视5个字
-        "m-url": "./?route=search&engine=google&cache=_page_time_&word=", // 移动端，前缀
-        "pc-url": "./?route=search&engine=google&cache=_page_time_&word=", // PC端，前缀
+        "m-url": "https://23so.cn/?route=search&engine=google&cache=_page_time_&word=", // 移动端，前缀
+        "pc-url": "https://23so.cn/?route=search&engine=google&cache=_page_time_&word=", // PC端，前缀
         "url_right": "", // 参数的固顶后缀
     },
     {
         "name": "DuckDuckGo", // 引擎名称，可视5个字
-        "m-url": "./?route=search&engine=duckduckgo&cache=_page_time_&word=", // 移动端，前缀
-        "pc-url": "./?route=search&engine=duckduckgo&cache=_page_time_&word=", // PC端，前缀
+        "m-url": "https://23so.cn/?route=search&engine=duckduckgo&cache=_page_time_&word=", // 移动端，前缀
+        "pc-url": "https://23so.cn/?route=search&engine=duckduckgo&cache=_page_time_&word=", // PC端，前缀
         "url_right": "", // 参数的固顶后缀
     },
     // {
@@ -45,27 +45,27 @@ const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。�
     // },
     {
         "name": "搜狗搜索", // 引擎名称，可视5个字
-        "m-url": "./?route=search&engine=m_sogou&cache=_page_time_&word=", // 移动端，前缀
-        "pc-url": "./?route=search&engine=sogou&cache=_page_time_&word=", // PC端，前缀
+        "m-url": "https://23so.cn/?route=search&engine=m_sogou&cache=_page_time_&word=", // 移动端，前缀
+        "pc-url": "https://23so.cn/?route=search&engine=sogou&cache=_page_time_&word=", // PC端，前缀
         "url_right": "", // 参数的固顶后缀
     },
     {
         "name": "微信文章", // 引擎名称，可视5个字
-        "m-url": "./?route=search&engine=weixin&cache=_page_time_&word=", // 移动端，前缀
-        "pc-url": "./?route=search&engine=weixin&cache=_page_time_&word=", // PC端，前缀
+        "m-url": "https://23so.cn/?route=search&engine=weixin&cache=_page_time_&word=", // 移动端，前缀
+        "pc-url": "https://23so.cn/?route=search&engine=weixin&cache=_page_time_&word=", // PC端，前缀
         "url_right": "", // 参数的固顶后缀
     },
     {
         "name": "英文电影",
-        "m-url": "./?route=search&engine=video&cache=_page_time_&word=",
-        "pc-url": "./?route=search&engine=video&cache=_page_time_&word=",
+        "m-url": "https://23so.cn/?route=search&engine=video&cache=_page_time_&word=",
+        "pc-url": "https://23so.cn/?route=search&engine=video&cache=_page_time_&word=",
         "url_right": "",
     },
 
     {
         "name": "收费音乐",
-        "m-url": "./?route=search&engine=music&cache=_page_time_&word=",
-        "pc-url": "./?route=search&engine=music&cache=_page_time_&word=",
+        "m-url": "https://23so.cn/?route=search&engine=music&cache=_page_time_&word=",
+        "pc-url": "https://23so.cn/?route=search&engine=music&cache=_page_time_&word=",
         "url_right": "",
     },
     {
@@ -83,20 +83,20 @@ const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。�
 
     {
         "name": "东坡下载",
-        "m-url": "./?route=search&engine=dpxz_download&cache=_page_time_&word=",
-        "pc-url": "./?route=search&engine=dpxz_download&cache=_page_time_&word=",
+        "m-url": "https://23so.cn/?route=search&engine=dpxz_download&cache=_page_time_&word=",
+        "pc-url": "https://23so.cn/?route=search&engine=dpxz_download&cache=_page_time_&word=",
         "url_right": "",
     },
     {
         "name": "查IP、域名",
-        "m-url": "./?route=search&engine=ipdomain&cache=_page_time_&word=",
-        "pc-url": "./?route=search&engine=ipdomain&cache=_page_time_&word=",
+        "m-url": "https://23so.cn/?route=search&engine=ipdomain&cache=_page_time_&word=",
+        "pc-url": "https://23so.cn/?route=search&engine=ipdomain&cache=_page_time_&word=",
         "url_right": "",
     },
     {
         "name": "域名Whois",
-        "m-url": "./?route=search&engine=whois&cache=_page_time_&word=",
-        "pc-url": "./?route=search&engine=whois&cache=_page_time_&word=",
+        "m-url": "https://23so.cn/?route=search&engine=whois&cache=_page_time_&word=",
+        "pc-url": "https://23so.cn/?route=search&engine=whois&cache=_page_time_&word=",
         "url_right": "",
     },
 
@@ -471,25 +471,25 @@ function init_dom() {
         '       <div class="swiper-slide more-btn">' +
 
         '           <div class="search-btn-center quick-btn-center">' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://cn.investing.com/rates-bonds/china-10-year-bond-yield">CN十年国债</span>' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://cn.investing.com/rates-bonds/u.s.-10-year-bond-yield">US十年国债</span>' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://cn.investing.com/indices/volatility-s-p-500">VIX恐慌</span>' +
+        '              <span class="search-btn-style href-btn-span click"  data-href="https://cn.investing.com/rates-bonds/china-10-year-bond-yield">CN十年国债</span>' +
+        '              <span class="search-btn-style href-btn-span click"  data-href="https://cn.investing.com/rates-bonds/u.s.-10-year-bond-yield">US十年国债</span>' +
+        '              <span class="search-btn-style href-btn-span click"  data-href="https://cn.investing.com/indices/volatility-s-p-500">VIX恐慌</span>' +
 
         '              <div class="clear"></div>' +
         '           </div>' +
 
         '           <div class="search-btn-center quick-btn-center">' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://cn.investing.com/commodities/crude-oil">WTI原油</span>' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://cn.investing.com/currencies/us-dollar-index">美元指数</span>' +
-        '               <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://danjuanapp.com/valuation-table/jiucai">股债利差</span>' +
+        '              <span class="search-btn-style href-btn-span click"  data-href="https://cn.investing.com/commodities/crude-oil">WTI原油</span>' +
+        '              <span class="search-btn-style href-btn-span click"  data-href="https://cn.investing.com/currencies/us-dollar-index">美元指数</span>' +
+        '               <span class="search-btn-style href-btn-span click"  data-href="https://danjuanapp.com/valuation-table/jiucai">股债利差</span>' +
 
         '              <div class="clear"></div>' +
         '           </div>' +
 
         '           <div class="search-btn-center quick-btn-center ">' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://www.huxiu.com/moment/">虎嗅7x24</span>' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="http://finance.sina.com.cn/7x24/">新浪7x24</span>' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="http://finance.sina.com.cn/stock/sl/#industry_1">新浪行业股</span>' +
+        '              <span class="search-btn-style href-btn-span click"  data-href="https://www.huxiu.com/moment/">虎嗅7x24</span>' +
+        '              <span class="search-btn-style href-btn-span click"  data-href="http://finance.sina.com.cn/7x24/">新浪7x24</span>' +
+        '              <span class="search-btn-style href-btn-span click"  data-href="http://finance.sina.com.cn/stock/sl/#industry_1">新浪行业股</span>' +
         '              <div class="clear"></div>' +
         '           </div>' +
 
@@ -499,32 +499,32 @@ function init_dom() {
         '       <div class="swiper-slide more-btn">' +
 
         '           <div class="search-btn-center quick-btn-center ">' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://www.youtube.com/">YouTube</span>' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://www.reddit.com/">Reddit</span>' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://twitter.com/">Twitter</span>' +
+        '              <span class="search-btn-style href-btn-span click"  data-href="https://www.youtube.com/">YouTube</span>' +
+        '              <span class="search-btn-style href-btn-span click"  data-href="https://www.reddit.com/">Reddit</span>' +
+        '              <span class="search-btn-style href-btn-span click"  data-href="https://twitter.com/">Twitter</span>' +
         '              <div class="clear"></div>' +
         '           </div>' +
 
         '           <div class="search-btn-center quick-btn-center">' +
-        '               <span class="search-btn-style href-btn-span click" onclick="href_ext(this) " data-href="//t.bilibili.com">哔哩哔哩</span>' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://tv.cctv.com/epg/">CCTV节目单</span>' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://www.instagram.com/">Instagram</span>' +
+        '               <span class="search-btn-style href-btn-span click" data-href="//t.bilibili.com">哔哩哔哩</span>' +
+        '              <span class="search-btn-style href-btn-span click"  data-href="https://tv.cctv.com/epg/">CCTV节目单</span>' +
+        '              <span class="search-btn-style href-btn-span click"  data-href="https://www.instagram.com/">Instagram</span>' +
 
         '              <div class="clear"></div>' +
         '           </div>' +
 
         '           <div class="search-btn-center quick-btn-center ">' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://m.ithome.com">IT之家</span>' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://www.v2ex.com/">V2EX</span>' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="http://www.ruanyifeng.com/blog/">阮一峰周刊</span>' +
+        '              <span class="search-btn-style href-btn-span click"  data-href="https://m.ithome.com">IT之家</span>' +
+        '              <span class="search-btn-style href-btn-span click"  data-href="https://www.v2ex.com/">V2EX</span>' +
+        '              <span class="search-btn-style href-btn-span click"  data-href="http://www.ruanyifeng.com/blog/">阮一峰周刊</span>' +
 
         '              <div class="clear"></div>' +
         '           </div>' +
 
         '           <div class="search-btn-center quick-btn-center">' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="http://bbs.tianya.cn/list-free-1.shtml">天涯杂谈</span>' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://sspai.com/">少数派</span>' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://weibo.com/">微博</span>' +
+        '              <span class="search-btn-style href-btn-span click"  data-href="http://bbs.tianya.cn/list-free-1.shtml">天涯杂谈</span>' +
+        '              <span class="search-btn-style href-btn-span click"  data-href="https://sspai.com/">少数派</span>' +
+        '              <span class="search-btn-style href-btn-span click"  data-href="https://weibo.com/">微博</span>' +
 
         '              <div class="clear"></div>' +
         '           </div>' +
@@ -534,23 +534,23 @@ function init_dom() {
         //--
         '       <div class="swiper-slide more-btn">' +
         '           <div class="search-btn-center quick-btn-center">' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://www.macupdate.com/">Mac软件下载</span>' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://finditandzip.ga/">油管视频下载</span>' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://cloudconvert.com/">音乐格式转换</span>' +
+        '              <span class="search-btn-style href-btn-span click"  data-href="https://www.macupdate.com/">Mac软件下载</span>' +
+        '              <span class="search-btn-style href-btn-span click"  data-href="https://finditandzip.ga/">油管视频下载</span>' +
+        '              <span class="search-btn-style href-btn-span click"  data-href="https://cloudconvert.com/">音乐格式转换</span>' +
         '              <div class="clear"></div>' +
         '           </div>' +
 
         '           <div class="search-btn-center quick-btn-center">' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://outlook.live.com/mail/0/">Outlook</span>' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://mail.google.com/">Gmail</span>' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://mail.yahoo.com/">Yahoo！</span>' +
+        '              <span class="search-btn-style href-btn-span click"  data-href="https://outlook.live.com/mail/0/">Outlook</span>' +
+        '              <span class="search-btn-style href-btn-span click"  data-href="https://mail.google.com/">Gmail</span>' +
+        '              <span class="search-btn-style href-btn-span click"  data-href="https://mail.yahoo.com/">Yahoo！</span>' +
         '              <div class="clear"></div>' +
         '           </div>' +
 
         '           <div class="search-btn-center quick-btn-center ">' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://onedrive.live.com/">OneDrive</span>' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://beta.icloud.com/">iCloud+</span>' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://www.windy.com/">Windy</span>' +
+        '              <span class="search-btn-style href-btn-span click"  data-href="https://onedrive.live.com/">OneDrive</span>' +
+        '              <span class="search-btn-style href-btn-span click"  data-href="https://beta.icloud.com/">iCloud+</span>' +
+        '              <span class="search-btn-style href-btn-span click"  data-href="https://www.windy.com/">Windy</span>' +
         '              <div class="clear"></div>' +
         '           </div>' +
 
@@ -568,24 +568,24 @@ function init_dom() {
         '       <div class="swiper-slide more-btn">' +
 
         '           <div class="search-btn-center quick-btn-center ">' +
-        '              <span class="search-btn-style href-btn-span click" onclick="href_ext(this) " data-href="https://m.ximalaya.com/waiyu/44962493/">越语入门</span>' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://active.clewm.net/FwC95g?qrurl=http://qr35.cn/FwC95g&gtype=1&key=2fba516c7fe81e21f08824a04e2676d2f8043b2870">越语基础</span>' +
+        '              <span class="search-btn-style href-btn-span click" data-href="https://m.ximalaya.com/waiyu/44962493/">越语入门</span>' +
+        '              <span class="search-btn-style href-btn-span click"  data-href="https://active.clewm.net/FwC95g?qrurl=http://qr35.cn/FwC95g&gtype=1&key=2fba516c7fe81e21f08824a04e2676d2f8043b2870">越语基础</span>' +
 
         '              <div class="clear"></div>' +
         '           </div>' +
 
         '           <div class="search-btn-center quick-btn-center ">' +
-        '              <span class="search-btn-style href-btn-span click" onclick="href_ext(this) " data-href="https://learnku.com/docs/the-way-to-go/187-file/3736">Go入门指南L</span>' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://www.kancloud.cn/kancloud/the-way-to-go/81390">Go入门指南K</span>' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="https://learnku.com/docs/effective-go/2020/introduction/6236">Go高效编程</span>' +
+        '              <span class="search-btn-style href-btn-span click" data-href="https://learnku.com/docs/the-way-to-go/187-file/3736">Go入门指南L</span>' +
+        '              <span class="search-btn-style href-btn-span click"  data-href="https://www.kancloud.cn/kancloud/the-way-to-go/81390">Go入门指南K</span>' +
+        '              <span class="search-btn-style href-btn-span click"  data-href="https://learnku.com/docs/effective-go/2020/introduction/6236">Go高效编程</span>' +
 
         '              <div class="clear"></div>' +
         '           </div>' +
 
         '           <div class="search-btn-center quick-btn-center ">' +
-        '              <span class="search-btn-style href-btn-span click"  onclick="href_ext(this) " data-href="http://c.biancheng.net/view/124.html">Go教程C</span>' +
-        '              <span class="search-btn-style href-btn-span click" onclick="href_ext(this) " data-href="https://learnku.com/docs/gorm/v2/index/9728">GORM文档</span>' +
-        '              <span class="search-btn-style href-btn-span click" onclick="href_ext(this) " data-href="https://www.tizi365.com/archives/244.html">Gin文档</span>' +
+        '              <span class="search-btn-style href-btn-span click"  data-href="http://c.biancheng.net/view/124.html">Go教程C</span>' +
+        '              <span class="search-btn-style href-btn-span click" data-href="https://learnku.com/docs/gorm/v2/index/9728">GORM文档</span>' +
+        '              <span class="search-btn-style href-btn-span click" data-href="https://www.tizi365.com/archives/244.html">Gin文档</span>' +
 
         '              <div class="clear"></div>' +
         '           </div>' +
@@ -761,11 +761,13 @@ function init_dom() {
 /*
 *  处理历史记录
 * */
-function click_history(that){
-    let data = that.getAttribute("data-history");
+$(document).on("click", ".history-span", function (){
+    let that = $(this);
+    let data = that.attr("data-history");
     document.getElementById("input").value = data;
     // run_search();
-}
+});
+
 function show_history(){
     let data_key = "input_history";
     let array_key = "@=history=@";
@@ -779,7 +781,7 @@ function show_history(){
     for (let i=0; i<len; i++){
         let the_history = array_history[i];
         if (the_history){
-            let span = '<div class="history-span click select-none blue" data-history="'+the_history+'" onclick="click_history(this)" title="'+the_history+'" data-title="'+the_history+'">#'+the_history+'</div>'
+            let span = '<div class="history-span click select-none blue" data-history="'+the_history+'" title="'+the_history+'" data-title="'+the_history+'">#'+the_history+'</div>'
             $("#input-history").append(span);
         }
     }
@@ -833,7 +835,7 @@ function init_color() {
     if (bg_color === null || bg_color === ""){ // 默认颜色（根据浏览器主题默认颜色）
         let color_model = view.scheme_model();
         if (color_model === "light"){ // light
-            bg_color = 0;
+            bg_color = 4;
         }else { // dark
             bg_color = 2;
         }
@@ -958,7 +960,7 @@ function change_bg_color() {
     if (bg_color === null || bg_color === ""){ // 默认颜色
         let color_model = view.scheme_model();
         if (color_model === "light"){ // light
-            bg_color = 0;
+            bg_color = 4;
         }else { // dark
             bg_color = 2;
         }
@@ -1041,7 +1043,7 @@ function delete_loading() {
 }
 
 function href_ext(that) {
-    let el_href = that.getAttribute("data-href");
+    let el_href = that.attr("data-href");
     console_log(el_href);
 
     if (el_href) {
@@ -1202,6 +1204,10 @@ function speak_time(){
     }
 }
 
+$(document).on("click", ".href-btn-span", function (){
+    let that = $(this);
+    href_ext(that);
+});
 $(document).on("click", ".qr-div", function (){
     let that = $(this);
     if (that.hasClass("qr-60")){
@@ -1210,6 +1216,23 @@ $(document).on("click", ".qr-div", function (){
         that.removeClass("qr-20").addClass("qr-60");
     }
 });
+$(document).on("click", ".color-btn-span", function (){
+    let that = $(this);
+    change_color_state();
+});
+$(document).on("click", ".switch-battery_state", function (){
+    let that = $(this);
+    switch_battery_state();
+});
+$(document).on("click", ".switch-hour_state", function (){
+    let that = $(this);
+    switch_hour_state();
+});
+$(document).on("click", ".timer-span", function (){
+    let that = $(this);
+    speak_time();
+});
+
 
 let timer1_interval;
 
@@ -1247,7 +1270,7 @@ function start_page(info) {
     battery_model();
     hour_model();
 
-    make_new_qr(window.location.href, 200, 200, function (){
+    make_new_qr("https://23so.cn/", 200, 200, function (){
         let src = $(".qr_img").attr("src");
         if (src){$(".new-qr-img").attr("src", src);}
     }, "qr-div");
