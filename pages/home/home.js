@@ -1244,9 +1244,9 @@ function start_page(info) {
     $(".battery-model-div").removeClass("hide");
     if (screen.width > 780){ // PC
         $(".qr-div").removeClass("hide");
-        $(".change-color-div").removeClass("hide");
+        // $(".change-color-div").removeClass("hide");
         $(".timer-div").removeClass("hide");
-        $(".on-hour-div").removeClass("hide");
+        // $(".on-hour-div").removeClass("hide");
         setTimeout(function (){
             $(".swiper-container").addClass("hide");
         },200);
