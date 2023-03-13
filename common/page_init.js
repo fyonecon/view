@@ -141,7 +141,7 @@ function make_cache_files(){
             view.cache_file(key, file, false);
         }
         // 缓存page-js
-        for (let i=0; i<route_page_file.js.length; i++){ // page文件会重复，必须按文件名区分
+        for (let i=0; i<route_page_file.js.length; i++){ // page文件会重复，必须按文件名区分。仅缓存当前在访问的页面。
             let file = route_page_file.js[i];
             let key = index_prefix+"js_page_"+view.md5(file);
             view.cache_file(key, file, false);
