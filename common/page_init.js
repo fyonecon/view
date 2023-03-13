@@ -44,6 +44,17 @@ function frame_loaded(e, route){
         }
     });
 
+    // 监听切换主题色
+    let scheme = window.matchMedia('(prefers-color-scheme: light)');
+    scheme.addEventListener('change', (event) => { // if (event.matches){}。// 监听主题色，切换浏览器主题色时会触发此函数
+        console.log("切换到主题色：", view.scheme_model());
+        try {
+            page_color(view.scheme_model());
+        }catch (e){
+            view.log("无对接主题色page_color(color_model)函数，可忽略，2。");
+        }
+    });
+
     // 自动清除缓存
     auto_clear_cache_files();
     // 主动缓存文件

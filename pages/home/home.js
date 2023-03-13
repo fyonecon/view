@@ -1271,3 +1271,7 @@ function show_page(){
         on_hour();
     }, 1000);
 }
+
+function page_color(e){
+    init_color();
+}
