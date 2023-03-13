@@ -210,7 +210,7 @@ function long_press(_id, call_func) {
 // time = 1*24*60*60*1000;
 function setCookie(name, value, time) {
     if (!time) {
-        time = 365 * 24 * 60 * 60 * 1000; // 默认1年
+        time = 2*365 * 24 * 60 * 60 * 1000; // 默认1年
     }
     var exp = new Date();
     exp.setTime(exp.getTime() + time);
@@ -830,8 +830,14 @@ const bg_cookie = search_cookie_pre + "bg_color";
 
 function init_color() {
     let bg_color = getCookie(bg_cookie);
-    if (bg_color === null || bg_color === ""){ // 默认颜色
-        bg_color = 1;
+    if (bg_color === null || bg_color === ""){ // 默认颜色（根据浏览器主题默认颜色）
+        let color_model = view.scheme_model();
+        if (color_model === "light"){ // light
+            bg_color = 0;
+        }else { // dark
+            bg_color = 2;
+        }
+        // setCookie(bg_cookie, bg_color);
     }else {
         bg_color = bg_color * 1;
     }
@@ -950,7 +956,13 @@ function init_color() {
 function change_bg_color() {
     let bg_color = getCookie(bg_cookie);
     if (bg_color === null || bg_color === ""){ // 默认颜色
-        bg_color = 1;
+        let color_model = view.scheme_model();
+        if (color_model === "light"){ // light
+            bg_color = 0;
+        }else { // dark
+            bg_color = 2;
+        }
+        // setCookie(bg_cookie, bg_color);
     }else {
         bg_color = bg_color * 1;
     }
@@ -1207,16 +1219,15 @@ function start_page(info) {
 
     $(".rights-div").removeClass("hide");
     $(".battery-model-div").removeClass("hide");
-    $(".change-color-div").removeClass("hide");
-    $(".qr-div").removeClass("hide");
     if (screen.width > 780){ // PC
+        $(".qr-div").removeClass("hide");
+        $(".change-color-div").removeClass("hide");
         $(".timer-div").removeClass("hide");
         $(".on-hour-div").removeClass("hide");
         setTimeout(function (){
             $(".swiper-container").addClass("hide");
         },200);
     }else { // m
-
     }
 
     init_dom();
@@ -1242,7 +1253,7 @@ function start_page(info) {
     }, "qr-div");
 
     $(".icp-a-show").html($(".icp-a").text()).attr("href", $(".icp-a").attr("href"));
-    $(".rights-a").html("©️ "+app_name).attr("title", "版权："+app_name);
+    $(".rights-a").html("©️"+app_name).attr("title", "版权："+app_name);
     $(".rights-date").html(view.time_date("Y"));
 
 }

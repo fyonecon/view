@@ -9,6 +9,7 @@
 const depend_load_file = {
     "js": [
         "routes/route.js", // 路由文件
+        "common/page_cache_file.js", // 设置页面文件缓存
         "common/page_init.js", // 解析完路由后的操作
         "common/page_safe.js", // 用户全局安全校验
     ],
@@ -256,7 +257,8 @@ function depend_pages(){
             time_loaded = Math.floor((new Date()).getTime());
             let view_loaded_time = time_loaded - time_start;
 
-            try { // 初始化页面所有路由文件后，负责框架事件
+            // 初始化页面所有路由文件后，负责框架事件
+            try {
                 frame_loaded([
                     view_loaded_time
                 ], route);
@@ -264,7 +266,9 @@ function depend_pages(){
                 console.error(e);
                 console.log("=error=page_loaded=");
             }
-            try { // 初始化page页面的开始函数，负责page事件
+
+            // 初始化page页面的开始函数，负责page事件
+            try {
                 page_init([
                     view_loaded_time,
                     "框架解析完成，用时"+view_loaded_time+"ms", "开始执行"+route+"页面数据>>",
@@ -275,6 +279,23 @@ function depend_pages(){
                 console.error("错误提示：情况1：【可忽略】must_safe_check()" + "页面起始模块函数未定义，但是此函数可忽略。情况2：must_safe_check()函数缺失，请参考如下报错：");
                 console.error(e);
             }
+
+            // 处理主题色
+            try { // 获取主题色
+                page_color(view.scheme_model());
+            }catch (e){
+                view.log("无对接主题色page_color(color_model)函数，可忽略，1。");
+            }
+            let scheme = window.matchMedia('(prefers-color-scheme: light)');
+            scheme.addEventListener('change', (event) => { // if (event.matches){}。// 监听主题色，切换浏览器主题色时会触发此函数
+                console.log("切换到主题色：", view.scheme_model());
+                try {
+                    page_color(view.scheme_model());
+                }catch (e){
+                    view.log("无对接主题色page_color(color_model)函数，可忽略，2。");
+                }
+            });
+            //
         },
 
     };

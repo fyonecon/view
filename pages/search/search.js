@@ -26,7 +26,7 @@ function jump_location(engine, word, url) {
     // 2-匹配展示本网站文字
     else if (word === "kw@bing"){
         view.hide_loading();
-        $(".back-a").removeClass("hide");
+        $(".back-div").removeClass("hide");
 
         let domain = window.location.host;
 

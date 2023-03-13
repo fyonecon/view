@@ -33,7 +33,7 @@ const app_url = {
 // App验证参数
 const app_class = "view_23so";
 const app_version = "v1";
-const app_name = "二三搜，极简主页";
+const app_name = "二三搜";
 const app_platform = "WebApp";
 
 // 登录用户使用的验证参数

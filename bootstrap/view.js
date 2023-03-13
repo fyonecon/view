@@ -955,6 +955,14 @@ const view = {
             }
         };
     },
+    scheme_model: function (){ // 获取浏览器当前处于light还是dark
+        let light = window.matchMedia('(prefers-color-scheme: light)').matches;
+        if (light){
+            return "light";
+        }else {
+            return "dark";
+        }
+    }
 
 };
 
