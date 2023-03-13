@@ -9,26 +9,26 @@ const _search_jump = "";
 const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。自定义。
     {
         "name": "必应搜索",
-        "m-url": "https://23so.cn/?route=search&engine=bing&cache=_page_time_&word=",
-        "pc-url": "https://23so.cn/?route=search&engine=bing&cache=_page_time_&word=",
+        "m-url": "./?route=search&engine=bing&cache=_page_time_&word=",
+        "pc-url": "./?route=search&engine=bing&cache=_page_time_&word=",
         "url_right": "",
     },
     {
         "name": "百度一下",
-        "m-url": "https://23so.cn/?route=search&engine=baidu&cache=_page_time_&word=",
-        "pc-url": "https://23so.cn/?route=search&engine=baidu&cache=_page_time_&word=",
+        "m-url": "./?route=search&engine=baidu&cache=_page_time_&word=",
+        "pc-url": "./?route=search&engine=baidu&cache=_page_time_&word=",
         "url_right": "",
     },
     {
         "name": "Google", // 引擎名称，可视5个字
-        "m-url": "https://23so.cn/?route=search&engine=google&cache=_page_time_&word=", // 移动端，前缀
-        "pc-url": "https://23so.cn/?route=search&engine=google&cache=_page_time_&word=", // PC端，前缀
+        "m-url": "./?route=search&engine=google&cache=_page_time_&word=", // 移动端，前缀
+        "pc-url": "./?route=search&engine=google&cache=_page_time_&word=", // PC端，前缀
         "url_right": "", // 参数的固顶后缀
     },
     {
         "name": "DuckDuckGo", // 引擎名称，可视5个字
-        "m-url": "https://23so.cn/?route=search&engine=duckduckgo&cache=_page_time_&word=", // 移动端，前缀
-        "pc-url": "https://23so.cn/?route=search&engine=duckduckgo&cache=_page_time_&word=", // PC端，前缀
+        "m-url": "./?route=search&engine=duckduckgo&cache=_page_time_&word=", // 移动端，前缀
+        "pc-url": "./?route=search&engine=duckduckgo&cache=_page_time_&word=", // PC端，前缀
         "url_right": "", // 参数的固顶后缀
     },
     // {
@@ -45,27 +45,27 @@ const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。�
     // },
     {
         "name": "搜狗搜索", // 引擎名称，可视5个字
-        "m-url": "https://23so.cn/?route=search&engine=m_sogou&cache=_page_time_&word=", // 移动端，前缀
-        "pc-url": "https://23so.cn/?route=search&engine=sogou&cache=_page_time_&word=", // PC端，前缀
+        "m-url": "./?route=search&engine=m_sogou&cache=_page_time_&word=", // 移动端，前缀
+        "pc-url": "./?route=search&engine=sogou&cache=_page_time_&word=", // PC端，前缀
         "url_right": "", // 参数的固顶后缀
     },
     {
         "name": "微信文章", // 引擎名称，可视5个字
-        "m-url": "https://23so.cn/?route=search&engine=weixin&cache=_page_time_&word=", // 移动端，前缀
-        "pc-url": "https://23so.cn/?route=search&engine=weixin&cache=_page_time_&word=", // PC端，前缀
+        "m-url": "./?route=search&engine=weixin&cache=_page_time_&word=", // 移动端，前缀
+        "pc-url": "./?route=search&engine=weixin&cache=_page_time_&word=", // PC端，前缀
         "url_right": "", // 参数的固顶后缀
     },
     {
         "name": "英文电影",
-        "m-url": "https://23so.cn/?route=search&engine=video&cache=_page_time_&word=",
-        "pc-url": "https://23so.cn/?route=search&engine=video&cache=_page_time_&word=",
+        "m-url": "./?route=search&engine=video&cache=_page_time_&word=",
+        "pc-url": "./?route=search&engine=video&cache=_page_time_&word=",
         "url_right": "",
     },
 
     {
         "name": "收费音乐",
-        "m-url": "https://23so.cn/?route=search&engine=music&cache=_page_time_&word=",
-        "pc-url": "https://23so.cn/?route=search&engine=music&cache=_page_time_&word=",
+        "m-url": "./?route=search&engine=music&cache=_page_time_&word=",
+        "pc-url": "./?route=search&engine=music&cache=_page_time_&word=",
         "url_right": "",
     },
     {
@@ -83,20 +83,20 @@ const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。�
 
     {
         "name": "东坡下载",
-        "m-url": "https://23so.cn/?route=search&engine=dpxz_download&cache=_page_time_&word=",
-        "pc-url": "https://23so.cn/?route=search&engine=dpxz_download&cache=_page_time_&word=",
+        "m-url": "./?route=search&engine=dpxz_download&cache=_page_time_&word=",
+        "pc-url": "./?route=search&engine=dpxz_download&cache=_page_time_&word=",
         "url_right": "",
     },
     {
         "name": "查IP、域名",
-        "m-url": "https://23so.cn/?route=search&engine=ipdomain&cache=_page_time_&word=",
-        "pc-url": "https://23so.cn/?route=search&engine=ipdomain&cache=_page_time_&word=",
+        "m-url": "./?route=search&engine=ipdomain&cache=_page_time_&word=",
+        "pc-url": "./?route=search&engine=ipdomain&cache=_page_time_&word=",
         "url_right": "",
     },
     {
         "name": "域名Whois",
-        "m-url": "https://23so.cn/?route=search&engine=whois&cache=_page_time_&word=",
-        "pc-url": "https://23so.cn/?route=search&engine=whois&cache=_page_time_&word=",
+        "m-url": "./?route=search&engine=whois&cache=_page_time_&word=",
+        "pc-url": "./?route=search&engine=whois&cache=_page_time_&word=",
         "url_right": "",
     },
 
@@ -1270,7 +1270,7 @@ function start_page(info) {
     battery_model();
     hour_model();
 
-    make_new_qr("https://23so.cn/", 200, 200, function (){
+    make_new_qr(window.location.href, 200, 200, function (){
         let src = $(".qr_img").attr("src");
         if (src){$(".new-qr-img").attr("src", src);}
     }, "qr-div");
