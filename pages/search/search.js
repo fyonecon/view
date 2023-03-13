@@ -2,7 +2,7 @@
 let kw_word = "";
 
 function jump_location(engine, word, url) {
-    let page_time = view.time_date("YmdWHis");
+    let page_time = view.time_date("mdWHis_")+encodeURIComponent(window.location.host);
     let _word = '';
 
     // 1-匹配到外部链接
