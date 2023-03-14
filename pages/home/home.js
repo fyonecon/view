@@ -423,7 +423,7 @@ function run_search() { // 执行搜索
 
     // 校验关键词
     try{
-        let kw_state = enter_kw(_input);
+        let kw_state = home_kw(_input);
         if (kw_state){
             view.log("匹配到了关键词："+kw_state, _input);
         }else {

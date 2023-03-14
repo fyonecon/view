@@ -30,8 +30,8 @@ const pages = [
         "file"      : [
             {
                 "js": [
+                    "pages/home/home_kw.js",
                     "pages/home/home.js",
-                    "pages/home/enter_kw.js",
                 ],
                 "css": [
                     "pages/home/home.css",

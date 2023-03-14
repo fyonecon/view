@@ -37,7 +37,7 @@ const view = {
                 try {
                     call_func(true);
                 }catch (e) {
-                    that.log("可选回调函数没有设置。");
+                    that.log("可选回调函数没有设置。1");
                 }
             },
             error: function (error) {
@@ -45,7 +45,7 @@ const view = {
                 try {
                     call_func(false);
                 }catch (e) {
-                    that.log("可选回调函数没有设置。");
+                    that.log("可选回调函数没有设置。2");
                 }
             }
         });
@@ -65,8 +65,13 @@ const view = {
                 script.setAttribute("class", "write-js");
                 script.setAttribute("src", js_src_array[i]);
                 script.setAttribute("nonce", ""+that.js_rand(100000000, 9999999999));
-                head.appendChild(script);
-                script.onload = function () {resolve(i); };
+                try {
+                    head.appendChild(script);
+                    script.onload = function () {resolve(i); };
+                }catch (e){
+                    console.log("js文件拉取错误：", e);
+                    resolve(i);
+                }
             });
             js_all.push(the_p);
         }
@@ -74,10 +79,15 @@ const view = {
             try {
                 call_func(true);
             }catch (e) {
-                that.log("可选回调函数没有设置。");
+                that.log("可选回调函数没有设置。1");
             }
         }).catch((error) => {
             console.error(error);
+            try {
+                call_func(false);
+            }catch (e) {
+                that.log("可选回调函数没有设置。2");
+            }
         });
     },
     write_css: function (css_src_array, call_func) { // 写入外部css，["xxx1.css", "xxx2.css"]

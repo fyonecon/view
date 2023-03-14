@@ -11,7 +11,7 @@ function jump_location(engine, word, url) {
         kw_word=word;
         view.title("正在打开kws对应的内容");
         view.write_js(
-            [kws_url+"kws.js?cache="+view.time_date("YmdHWis")], function (){
+            [kws_url+"kws.js?cache="+view.time_date("YmdHWis")], function (bool){
                 try{
                     kws.load(kw_word);
                 }catch (w){
@@ -39,12 +39,25 @@ function jump_location(engine, word, url) {
     }
     else if (word === "kw@baidu"){
         view.hide_loading();
-        $(".back-a").removeClass("hide");
+        $(".back-div").removeClass("hide");
 
         let domain = window.location.host;
 
         let show_txt = "https://"+domain+"/?route=search&engine=baidu&word=%s";
         $(".match-kw-span-msg").html("自定义百度搜索引擎（点击可复制）：");
+        $(".match-kw-span-txt").html(show_txt).attr("data-clipboard-text", show_txt);
+
+        view.title("请查看 kw 对应的内容");
+        return;
+    }
+    else if (word === "kw@google"){
+        view.hide_loading();
+        $(".back-div").removeClass("hide");
+
+        let domain = window.location.host;
+
+        let show_txt = "https://"+domain+"/?route=search&engine=google&word=%s";
+        $(".match-kw-span-msg").html("自定义Google搜索引擎（点击可复制）：");
         $(".match-kw-span-txt").html(show_txt).attr("data-clipboard-text", show_txt);
 
         view.title("请查看 kw 对应的内容");
@@ -155,7 +168,8 @@ function jump_location(engine, word, url) {
 }
 
 
-function jump_to_search_engine() {
+function jump_to_search_engine(state) {
+    view.log(state);
     let engine = ""; // 哪个搜索引擎
     let word = ""; // 搜索的关键词
     let url = "";
@@ -218,7 +232,14 @@ clipboard.on('error', function(e) {
 
 function start_page(e) {
     view.log(e);
-    jump_to_search_engine();
+    let kw_safe_timeout = 0;
+    kw_safe_timeout = setTimeout(function (){
+        jump_to_search_engine(1);
+    }, 1200);
+    view.write_js([kws_url+"kw_safe.js?cache="+view.time_date("YmdHis")], function (bool){
+        clearTimeout(kw_safe_timeout);
+        jump_to_search_engine(2);
+    });
 }
 
 function show_page(){
