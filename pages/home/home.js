@@ -693,7 +693,7 @@ function init_dom() {
             if (input_doing === 1){
                 view.log("输入词完成状态触发enter键搜索："+input_doing);
                 // 输出状态判断完成，执行搜索
-                view.show_mask(500);
+                view.show_mask(200);
                 run_search();
             }else if (input_doing === 2) {
                 view.log("连续输入词预选状态不触发enter键搜索："+input_doing);
@@ -712,7 +712,7 @@ function init_dom() {
     /**********/
 
     document.getElementsByClassName("search-btn-span")[0].addEventListener("click", function() {
-        view.show_mask(500);
+        view.show_mask(200);
         run_search();
     });
 
@@ -721,14 +721,14 @@ function init_dom() {
     // });
     document.getElementsByClassName("history-btn-span")[0].addEventListener("click", function() {
         let that = this;
-        view.show_mask(500);
+        view.show_mask(200);
         clear_history();
         document.getElementById("input").value = "";
         clear_copy(that, "history-btn-span");
 
     });
     document.getElementsByClassName("refresh-btn-span")[0].addEventListener("click", function() {
-        view.show_mask(500);
+        view.show_mask(200);
         document.getElementById("input").value = "";
         // view.notice_txt("已清空输入框", 600);
         change_focus();
@@ -1210,7 +1210,7 @@ function speak_time(){
 
 $(document).on("click", ".href-btn-span", function (){
     let that = $(this);
-    view.show_mask(500);
+    view.show_mask(200);
     href_ext(that);
 });
 $(document).on("click", ".qr-div", function (){
@@ -1223,22 +1223,22 @@ $(document).on("click", ".qr-div", function (){
 });
 $(document).on("click", ".color-btn-span", function (){
     let that = $(this);
-    view.show_mask(500);
+    view.show_mask(200);
     change_color_state();
 });
 $(document).on("click", ".switch-battery_state", function (){
     let that = $(this);
-    view.show_mask(500);
+    view.show_mask(200);
     switch_battery_state();
 });
 $(document).on("click", ".switch-hour_state", function (){
     let that = $(this);
-    view.show_mask(500);
+    view.show_mask(200);
     switch_hour_state();
 });
 $(document).on("click", ".timer-span", function (){
     let that = $(this);
-    view.show_mask(500);
+    view.show_mask(200);
     speak_time();
 });
 
