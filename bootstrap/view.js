@@ -972,7 +972,24 @@ const view = {
         }else {
             return "dark";
         }
-    }
+    },
+    show_mask: function (timeout){
+        if (timeout<100){timeout=100;}
+        let div =  document.createElement("div");
+        div.setAttribute("id", "mask-div");
+        div.classList.add("mask-div");
+        div.style.position = "fixed";
+        div.style.zIndex = "20230315";
+        div.style.left = "0px";
+        div.style.top = "0px";
+        div.style.width = "100%";
+        div.style.height = window.innerHeight + "px";
+        div.style.backgroundColor = "rgba(0,0,0,0)";
+        document.getElementById("depend").appendChild(div);
+        setTimeout(function (){
+            div.remove();
+        }, timeout);
+    },
 
 };
 
