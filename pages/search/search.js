@@ -232,14 +232,7 @@ clipboard.on('error', function(e) {
 
 function start_page(e) {
     view.log(e);
-    let kw_safe_timeout = 0;
-    kw_safe_timeout = setTimeout(function (){
-        jump_to_search_engine(1);
-    }, 1200);
-    view.write_js([kws_url+"kw_safe.js?cache="+view.time_date("YmdHis")], function (bool){
-        clearTimeout(kw_safe_timeout);
-        jump_to_search_engine(2);
-    });
+    jump_to_search_engine(1);
 }
 
 function show_page(){
