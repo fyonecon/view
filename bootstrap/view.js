@@ -562,7 +562,7 @@ const view = {
         $("body").append(div);
 
         if (!timeout || timeout < 200 || timeout > 60*60*1000){ // 默认
-            timeout = 2000;
+            timeout = 3000;
             setTimeout(function () {
                 $("." + class_name).remove();
             }, timeout);
@@ -605,7 +605,7 @@ const view = {
 
         // 清除
         if (!timeout || timeout < 200){ // 默认
-            timeout = 2000;
+            timeout = 3000;
         }else if (timeout > 1*60*1000){
             timeout = 1*60*1000;
         }
