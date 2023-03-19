@@ -1,6 +1,7 @@
 /*
     局部模块css
 */
+@charset "UTF-8";
 
 .body {
     width: 100%;
@@ -27,8 +28,8 @@
     background: transparent;
     border-radius: 40px;
     width: calc(100% - 20px);
-    margin-top: calc(3% + 50px);
-    height: 50px;
+    margin-top: calc(3% + 55px);
+    height: 48px;
     min-width: 300px;
     max-width: 680px;
     margin-left: auto;
@@ -37,40 +38,36 @@
 }
 
 .select {
-    height: calc(42px + 2px);
-    width: 134px;
-    font-size: 15px;
+    height: 48px;
+    width: 117px;
+    font-size: 16px;
+    border-radius: 44px;
     color: #0078fe;
-    letter-spacing: 0px;
+    letter-spacing: 0;
     cursor: pointer;
     font-weight: 600;
-    overflow: hidden;
-    padding: 0 20px 0 8px;
+    padding: 0 14px 0 10px;
     float: left;
     outline: none;
     border: 2px solid rgba(0, 120, 254, 0.4);
-    border-radius: 42px;
     background-color: rgba(255, 255, 255, 0.8);
-    text-indent: 0px;
+    text-indent: 0;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
     text-align: center;
     appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
     text-align-last: center;
 }
 
 .input {
-    height: 42px;
-    line-height: 42px;
-    width: calc(100% - 134px - 30px - 4px - 5px);
+    height: 44px;
+    line-height: 44px;
+    width: calc(100% - 117px - 30px - 4px - 5px);
     letter-spacing: 1px;
-    /*margin-left: 5px;*/
     font-size: 16px;
     color: #000000;
     padding: 0 15px;
     float: right;
-    border-radius: 42px;
+    border-radius: 44px;
     background: rgba(255, 255, 255, 0.8);
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
     outline: none;
@@ -78,18 +75,6 @@
 }
 
 .search-style {
-    display: block;
-}
-
-.clear {
-    clear: both;
-}
-
-.hide {
-    display: none !important;
-}
-
-.show {
     display: block;
 }
 
@@ -105,30 +90,35 @@
 
 .input-div:after {
     position: absolute;
-    left: 95px;
-    top: 0;
+    left: 80px;
+    top: 0px;
     z-index: 1;
-    height: 44px;
-    width: 44px;
-    line-height: 47px;
+    content: "▼";
+    height: 47px;
+    width: 47px;
+    line-height: 49px;
     pointer-events: none;
     box-sizing: border-box;
-    font-size: 12px;
+    font-size: 14px;
     text-align: center;
     border-radius: 44px;
     background: transparent;
+    color: rgba(0, 120, 254, 0.4);
+    /*border: 2px solid black;*/
 }
 
 .input-div-blur:after {
     content: "▼";
     transition: transform 0.5s;
     transform: rotateZ(0deg);
+    color: rgba(0, 120, 254, 0.4);
 }
 
 .input-div-focus:after {
     content: "▼";
     transition: transform 0.5s;
     transform: rotateZ(90deg);
+    color: rgba(0, 120, 254, 1);
 }
 
 .liner-color {
@@ -181,7 +171,7 @@
 }
 
 .search-btn-center {
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 .search-btn-style {
@@ -366,7 +356,7 @@
 
 @media screen and (max-width: 480px) {
     .input-div{
-        margin-top: calc(3% + 20px);
+        margin-top: calc(3% + 25px);
     }
     .content {
         zoom: 0.95;
@@ -377,14 +367,14 @@
 }
 
 .input-history-div{
-    padding: 10px 30px;
+    padding: 15px 20px;
     max-width: 640px;
     margin-left: auto;
     margin-right: auto;
-    min-height: 29px;
+    min-height: 24px;
 }
 .history-span{
-    font-size: 15px;
+    font-size: 16px;
     border-radius: 20px;
     line-height: 24px;
     margin-right: 20px;

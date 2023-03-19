@@ -1,4 +1,5 @@
 /*自定义全局css，公用css*/
+@charset "UTF-8";
 
 body, html{
     font-family: "Noto Sans Light" !important; /*默认思源黑体Apache开源协议字体*/
