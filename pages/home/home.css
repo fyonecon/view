@@ -170,8 +170,8 @@
     margin-right: auto;
 }
 
-.search-btn-center {
-    margin-top: 10px;
+.quick-btn-center {
+    margin-bottom: 15px;
 }
 
 .search-btn-style {
@@ -367,11 +367,11 @@
 }
 
 .input-history-div{
-    padding: 15px 20px;
+    padding: 15px 15px 15px 15px;
     max-width: 640px;
     margin-left: auto;
     margin-right: auto;
-    min-height: 24px;
+    min-height: 28px;
 }
 .history-span{
     font-size: 16px;
@@ -379,9 +379,13 @@
     line-height: 24px;
     margin-right: 20px;
     display: inline-block;
-    max-width: 240px;
-    max-height: 24px;
+    max-width: 260px;
+    height: 24px;
+    /*overflow: hidden;*/
+    white-space: nowrap;
+    text-overflow: ellipsis;
     overflow: hidden;
+    word-break: break-all;
 }
 .history-span:active{
     text-decoration: underline;
@@ -392,7 +396,8 @@
 }
 
 .swiper-container{
-    padding-bottom: 55px;
+    padding-bottom: 50px;
+    padding-top: 25px;
     opacity: 0.8;
 }
 .swiper-slide{
