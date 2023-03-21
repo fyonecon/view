@@ -347,7 +347,8 @@ function dead_input(del_time) { // 处理清空用户输入的情况
 }
 
 function run_search() { // 执行搜索
-    update_history();
+    let _input = document.getElementById("input").value;
+    update_history(_input);
     change_blur();
     try {
         clearInterval(search_time_style);
@@ -356,7 +357,6 @@ function run_search() { // 执行搜索
     }
     let _select = document.getElementById("select");
     let engine = _select.options[_select.selectedIndex].value;
-    let _input = document.getElementById("input").value;
     let tab_url = "";
 
     if (!_input.trim()) {
@@ -790,13 +790,12 @@ function show_history(){
         }
     }
 }
-function update_history(){
+function update_history(input_value){
     // let input_history = document.getElementById("input-history");
-    let input = document.getElementById("input");
+    // let input_value = document.getElementById("input").value;
 
     let data_key = "input_history";
     let array_key = "@=history=@";
-    let input_value = input.value;
 
     if (input_value){
         let data_string = view.get_data(data_key)

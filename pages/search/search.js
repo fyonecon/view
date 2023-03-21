@@ -167,6 +167,35 @@ function jump_location(engine, word, url) {
     window.location.replace(url);
 }
 
+function update_history(input_value){
+    let data_key = "input_history";
+    let array_key = "@=history=@";
+
+    if (input_value){
+        let data_string = view.get_data(data_key)
+        // 去重历史记录
+        if (view.string_include_string(data_string, input_value+"@=") !== -1){
+            view.log("已存在历史记录：" + input_value);
+        }else {
+            // 限制历史记录长度
+            let len = 30;
+            let array_history = data_string.split(array_key)
+            let new_data_string = "";
+            for (let i=0; i<array_history.length; i++){
+                let the_history = array_history[i];
+                if (i<len){
+                    new_data_string = the_history + array_key;
+                    let new_data = input_value + array_key + data_string;
+                    view.set_data(data_key, new_data)
+                }
+            }
+        }
+
+    }else {
+        view.log("input_value不能为空")
+    }
+
+}
 
 function jump_to_search_engine(state) {
     view.log(state);
@@ -181,6 +210,7 @@ function jump_to_search_engine(state) {
         view.error(["可忽略的错误", e]);
         word = "";
     }
+    update_history(word); // 更新历史
 
     if (!engine){
         let search_eq = view.get_cookie("search__eq");
@@ -209,9 +239,9 @@ function jump_to_search_engine(state) {
     }else {
         view.log([engine]);
     }
-
     jump_location(engine, word, url);
 }
+
 
 // 复制文字
 let clipboard = new Clipboard('.copy-txt-btn');
