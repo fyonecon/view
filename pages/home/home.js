@@ -780,7 +780,7 @@ function show_history(){
 
     let data_string = view.get_data(data_key)
     // 限制历史记录长度
-    let len = 15;
+    let len = 32;
     let array_history = data_string.split(array_key)
     for (let i=0; i<len; i++){
         let the_history = array_history[i];
