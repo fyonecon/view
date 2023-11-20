@@ -2,7 +2,7 @@
 let kw_word = "";
 
 function jump_location(engine, word, url) {
-    let page_time = view.time_date("mdWHis_")+encodeURIComponent(window.location.host);
+    let page_time = view.time_date("WHis");
     let _word = '';
 
     // 1-匹配到外部链接
@@ -25,12 +25,13 @@ function jump_location(engine, word, url) {
 
     // 2-匹配展示本网站文字
     else if (word === "kw@bing"){
+        $(".body").addClass("bg-white");
         view.hide_loading();
         $(".back-div").removeClass("hide");
 
         let domain = window.location.host;
 
-        let show_txt = "https://"+domain+"/?route=search&engine=bing&word=%s";
+        let show_txt = "http://"+domain+"/view/?route=search&engine=bing&word=%s";
         $(".match-kw-span-msg").html("自定义必应搜索引擎（点击可复制）：");
         $(".match-kw-span-txt").html(show_txt).attr("data-clipboard-text", show_txt);
 
@@ -38,12 +39,13 @@ function jump_location(engine, word, url) {
         return;
     }
     else if (word === "kw@baidu"){
+        $(".body").addClass("bg-white");
         view.hide_loading();
         $(".back-div").removeClass("hide");
 
         let domain = window.location.host;
 
-        let show_txt = "https://"+domain+"/?route=search&engine=baidu&word=%s";
+        let show_txt = "http://"+domain+"/view/?route=search&engine=baidu&word=%s";
         $(".match-kw-span-msg").html("自定义百度搜索引擎（点击可复制）：");
         $(".match-kw-span-txt").html(show_txt).attr("data-clipboard-text", show_txt);
 
@@ -51,12 +53,13 @@ function jump_location(engine, word, url) {
         return;
     }
     else if (word === "kw@google"){
+        $(".body").addClass("bg-white");
         view.hide_loading();
         $(".back-div").removeClass("hide");
 
         let domain = window.location.host;
 
-        let show_txt = "https://"+domain+"/?route=search&engine=google&word=%s";
+        let show_txt = "http://"+domain+"/view/?route=search&engine=google&word=%s";
         $(".match-kw-span-msg").html("自定义Google搜索引擎（点击可复制）：");
         $(".match-kw-span-txt").html(show_txt).attr("data-clipboard-text", show_txt);
 
@@ -145,7 +148,7 @@ function jump_location(engine, word, url) {
             _engine = "IP&网址";
         }
         else if (engine === "whois"){
-            url = "https://who.is/whois/";
+            url = "https://www.whois.com/whois/";
             url = url + _word;
             _engine = "域名Whois";
         }

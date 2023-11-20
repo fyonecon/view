@@ -4,13 +4,16 @@
 .match-kw-div{
     padding: 10px 10px;
     letter-spacing: 1px;
-    color: white;
     width: 100%;
 }
 .match-kw-span-msg{
-    font-size: 18px;
+    /*font-size: 18px;*/
 }
 .match-kw-span-txt{
     padding: 10px 0px;
-    font-size: 14px;
+    /*font-size: 14px;*/
+}
+
+.back-div{
+    padding: 10px 10px;
 }

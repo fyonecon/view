@@ -1,0 +1,23 @@
+.back-div{
+    padding: 10px 10px;
+}
+
+.cmd-ul{
+    padding: 10px 10px 0 10px;
+}
+.cmd-group{
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 30px;
+}
+.cmd-li-title{
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+}
+.cmd-li-explain{
+    font-size: 14px;
+    margin-bottom: 10px;
+    line-height: 24px;
+    color: grey;
+}
