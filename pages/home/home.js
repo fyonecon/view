@@ -14,7 +14,7 @@ const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。�
         "url_right": "",
     },
     {
-        "name": "百度一下",
+        "name": "Baidu",
         "m-url": "./?route=search&engine=baidu&cache=_page_time_&word=",
         "pc-url": "./?route=search&engine=baidu&cache=_page_time_&word=",
         "url_right": "",
@@ -283,7 +283,7 @@ function create_input(pre) { // 渲染模板
 
     document.getElementsByTagName("title")[0].innerText = page_title;
     let content = document.getElementsByClassName("content")[0];
-    content.innerHTML = '<div class="input-div" id="input-div"><select class="select search-style select-none" id="select"></select><input type="text" value="" maxlength="500" autocomplete="off" id="input" class="input search-style"  placeholder="' + pre + '输入搜索内容" title="输入搜索内容（支持kw@命令）"/><div class="clear"></div></div><div class="input-history-div" id="input-history"></div><div class="clear"></div><div class="search-btn-div" id="search-btn"></div><div class="res-div"></div>';
+    content.innerHTML = '<div class="input-div" id="input-div"><select class="select search-style select-none" id="select"></select><input type="text" value="" maxlength="500" autocomplete="off" id="input" class="input search-style"  placeholder="' + pre + txt_translate.input_placeholder[sys_lang] + '" title="输入搜索内容（支持kw@命令）"/><div class="clear"></div></div><div class="input-history-div" id="input-history"></div><div class="clear"></div><div class="search-btn-div" id="search-btn"></div><div class="res-div"></div>';
     let append_tag = [];
     for (let i = 0; i < search.length; i++) {
         let tag = '<option class="option option-' + i + '" value="' + i + '">' + search[i]["name"] + '</option>';
@@ -333,7 +333,7 @@ function run_search() { // 执行搜索
 
     if (!_input.trim()) {
         console_log("内容不能为空");
-        view.notice_txt("搜索内容不能为空", 1500);
+        view.notice_txt(txt_translate.keywords_null[sys_lang], 1500);
         change_focus();
         return;
     }
@@ -419,9 +419,9 @@ function init_dom() {
     document.getElementById("search-btn").innerHTML = '' +
         //
         '<div class="search-btn-center do-btn-center must-btn select-none">' +
-        '   <div class="search-btn-style history-btn-span click red" title="清空搜索历史记录" data-clipboard-text=" ">清空历史</div>' +
-        '   <div class="search-btn-style refresh-btn-span click " title="清空输入框">重新输入</div>' +
-        '   <div class="search-btn-style search-btn-span click" title="点击搜索">🔍 搜 索</div>' +
+        '   <div class="search-btn-style history-btn-span click red" title="清空搜索历史记录" data-clipboard-text=" ">'+txt_translate.clear_history[sys_lang]+'</div>' +
+        '   <div class="search-btn-style refresh-btn-span click " title="重新输入内容">'+txt_translate.reenter[sys_lang]+'</div>' +
+        '   <div class="search-btn-style search-btn-span click" title="点击搜索">🔍'+txt_translate.search[sys_lang]+'</div>' +
         '   <div class="clear"></div>' +
         '</div>' +
         //
@@ -656,7 +656,7 @@ function init_dom() {
             let _input = document.getElementById("input").value;
             if (!_input.trim()) {
                 console_log("内容不能为空");
-                view.notice_txt("搜索内容不能为空", 1500);
+                view.notice_txt(txt_translate.keywords_null[sys_lang], 1500);
                 change_focus();
                 return;
             }
@@ -693,14 +693,14 @@ function init_dom() {
     // });
     document.getElementsByClassName("history-btn-span")[0].addEventListener("click", function() {
         let that = this;
-        let ok= window.confirm("\n ⚠清空历史记录？ \n");
+        let ok= window.confirm("\n ⚠ "+txt_translate.clear_history_alert[sys_lang]+" \n");
         if (ok === true){ // OK
             view.show_mask(400);
             clear_history();
             document.getElementById("input").value = "";
             clear_copy(that, "history-btn-span");
         } else { // 取消
-            view.alert_txt("已取消操作", 1200);
+            view.alert_txt(txt_translate.cancel_doing[sys_lang], 1000);
             clear_copy(that, "history-btn-span");
         }
     });
@@ -1085,11 +1085,7 @@ function clear_copy(that, _class){
 }
 
 function timer1() {
-    let time_txt =  ""  + view.get_date()[2] +
-        "/" + view.get_date()[5] +
-        " " + view.get_date()[7] +
-        " " + view.get_date()[9] +
-        "";
+    let time_txt = view.time_date('Y-m-d W H:i:s');
     document.getElementsByClassName("timer-span")[0].innerHTML = time_txt;
 }
 
@@ -1119,15 +1115,15 @@ function battery_model(){
     if (window.innerWidth < 640){
         //
         view.log("当前节能模式：「移动端跳过」");
-        $(".switch-battery_state").removeClass("hide").html("🪫"+"节能：已开");
+        $(".switch-battery_state").removeClass("hide").html("🔋"+txt_translate.battery_on[sys_lang]);
     }else{
         if (view.get_switch_state("battery_state") === "Off"){
             view.log("当前节能模式：关闭");
-            $(".switch-battery_state").removeClass("hide").html("🪫"+"节能：已关");
+            $(".switch-battery_state").removeClass("hide").html("🪫"+txt_translate.battery_off[sys_lang]);
             view.write_js([cdn_page_file+"parts/bg_animate/bg_animate.js"+"?"+page_time]);
         }else {
             view.log("当前节能模式：打开");
-            $(".switch-battery_state").removeClass("hide").html("🔋"+"节能：已开");
+            $(".switch-battery_state").removeClass("hide").html("🔋"+txt_translate.battery_on[sys_lang]);
         }
     }
 }
@@ -1226,6 +1222,26 @@ $(document).on("click", ".timer-span", function (){
 
 
 let timer1_interval;
+
+// 中英翻译
+let sys_lang = 0;
+let bLang =(navigator.language).toLowerCase();
+if(bLang.indexOf('zh') !== -1) {
+    sys_lang = 0;
+}else if(bLang.indexOf('en') !== -1) {
+    sys_lang = 1;
+}
+const txt_translate = {
+    clear_history_alert: [ "清空历史记录 ？", "Clear All History ? "],
+    clear_history: ["清空历史", "Clear"],
+    reenter:  ["重新输入", "Rewrite"],
+    search:  ["搜 索", "Search"],
+    input_placeholder:  ["输入搜索关键词", "Enter Search Keywords"],
+    keywords_null:  ["搜索内容不能为空", "The Search Content Cannot Be Empty"],
+    cancel_doing:  ["已取消操作", "Operation Canceled"],
+    battery_on:  ["节能：已开", "Energy Conservation: ON"],
+    battery_off:  ["节能：已关", "Energy Conservation: OFF"],
+}
 
 function start_page(info) {
     view.log(info);

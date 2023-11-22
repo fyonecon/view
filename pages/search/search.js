@@ -85,12 +85,12 @@ function jump_location(engine, word, url) {
         if (engine === "baidu"){
             url = "https://www.baidu.com/s?ie=utf-8";
             url = url + "&wd=" + _word + del_fake_news + "&page_time=" + page_time;
-            _engine = "百度一下";
+            _engine = "Baidu";
         }
         else if (engine === "bing"){
             url = "https://www.bing.com/?ensearch=1";
             url = url + "&q=" + _word + "&page_time=" + page_time;
-            _engine = "必应搜索";
+            _engine = "Bing";
         }
         else if (engine === "google"){
             url = "https://www.google.com/search?q=";
@@ -163,7 +163,7 @@ function jump_location(engine, word, url) {
             return;
         }
 
-        view.title("正在使用 "+_engine+" 打开 "+_word+"");
+        view.title("Opening "+_word+ " " + " Using "+_engine);
 
     }
 

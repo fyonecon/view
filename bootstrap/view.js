@@ -391,7 +391,7 @@ const view = {
         let day = t.getDate(); if (day<10){day = "0"+day;}
         let month = t.getMonth() + 1; if (month<10){month = "0"+month;}
         let year = t.getFullYear();
-        let week = ["7", "1", "2", "3", "4", "5", "6"][t.getDay()]; // 周
+         let week = ["Seven", "One", "Two", "Three", "Four", "Five", "Six"][t.getDay()]; // 周
 
          format = format.replaceAll("Y", year);
          format = format.replaceAll("m", month);
