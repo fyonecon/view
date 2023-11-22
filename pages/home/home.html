@@ -1,4 +1,4 @@
-<div class="content-404" style="position: relative;">
+<div class="home-content" style="position: relative;">
 
     <!--code标签设置等宽字-->
     <code>
@@ -12,46 +12,52 @@
         <!--QR-->
         <div class="qr-div hide qr-20 click" id="qr-div">
             <img class="new-qr-img" src="" alt="QR" title="点击可放大二维码，扫描二维码可访问本页面">
+            <div class="clear"></div>
         </div>
 
         <!--网站信息-->
         <div class="rights-div hide">
-            <span class="right-span">
+            <span class="right-span click">
                 <a class="rights-a" href="./" target="_self" style="color: inherit;" title="版权"></a>
             </span>
             <span class="right-span rights-date hide" title="2019年至今"></span>
             <span class="right-span icp-span hide">
                 <a class="icp-a-show" target="_blank" style="color: inherit;" title="ICP备案"></a>
             </span>
+            <span class="right-span click hide">
+                <a class="help-a" href="./?route=home_help" target="_self" style="color: inherit;" title="使用帮助">帮助</a>
+            </span>
+        </div>
+
+        <div class="contact-div hide">
             <span class="right-span">
-                <a class="help-a" href="./?route=help" target="_self" style="color: inherit;" title="使用帮助">帮助</a>
+                <a class="email-a" target="_self" style="color: inherit;" title="Email"></a>
             </span>
         </div>
 
     </div>
 
     <div class="right-fixed">
-        <!--时钟-->
-        <div class="timer-div hide">
-            <code>
-                <span class="timer-span click fixed-span-style" title="点击播报当前时间"></span>
-            </code>
-        </div>
-        <!--报时-->
-        <div class="on-hour-div hide">
-            <span class="switch-hour_state click fixed-span-style" title="点击切换网页整点报时">整点报时</span>
-        </div>
         <!--节能模式-->
         <div class="battery-model-div hide">
-            <span class="switch-battery_state click fixed-span-style" title="点击切换网页节能模式">节能模式</span>
+            <span class="switch-battery_state click fixed-span-style" title="点击切换网页节能模式"></span>
         </div>
         <!--切换颜色-->
         <div class="change-color-div hide">
             <span class=" color-btn-span click fixed-span-style" title="点击切换网页主题颜色">
                 🌓主题：<span id="change-color-span">昏黑</span>
             </span>
-
             <div class="clear"></div>
+        </div>
+        <!--报时-->
+        <div class="on-hour-div hide">
+            <span class="switch-hour_state click fixed-span-style" title="点击切换网页整点报时">整点报时</span>
+        </div>
+        <!--时钟-->
+        <div class="timer-div hide">
+            <code>
+                <span class="timer-span fixed-span-style" title="点击播报当前时间"></span>
+            </code>
         </div>
 
     </div>

@@ -43,12 +43,12 @@ const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。�
     //     "pc-url": "./?route=search&engine=toutiao&cache=_page_time_&word=", // PC端，前缀
     //     "url_right": "", // 参数的固顶后缀
     // },
-    {
-        "name": "搜狗搜索", // 引擎名称，可视5个字
-        "m-url": "./?route=search&engine=m_sogou&cache=_page_time_&word=", // 移动端，前缀
-        "pc-url": "./?route=search&engine=sogou&cache=_page_time_&word=", // PC端，前缀
-        "url_right": "", // 参数的固顶后缀
-    },
+    // {
+    //     "name": "搜狗搜索", // 引擎名称，可视5个字
+    //     "m-url": "./?route=search&engine=m_sogou&cache=_page_time_&word=", // 移动端，前缀
+    //     "pc-url": "./?route=search&engine=sogou&cache=_page_time_&word=", // PC端，前缀
+    //     "url_right": "", // 参数的固顶后缀
+    // },
     {
         "name": "微信文章", // 引擎名称，可视5个字
         "m-url": "./?route=search&engine=weixin&cache=_page_time_&word=", // 移动端，前缀
@@ -206,35 +206,6 @@ function long_press(_id, call_func) {
     });
 }
 
-//写入cookies
-// time = 1*24*60*60*1000;
-function setCookie(name, value, time) {
-    if (!time) {
-        time = 2*365 * 24 * 60 * 60 * 1000; // 默认1年
-    }
-    var exp = new Date();
-    exp.setTime(exp.getTime() + time);
-    document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
-}
-//读取cookies
-function getCookie(name) {
-    var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
-    if (arr = document.cookie.match(reg)) {
-        return unescape(arr[2]);
-    } else {
-        return null;
-    }
-}
-//删除cookies
-function delCookie(name) {
-    var exp = new Date();
-    exp.setTime(exp.getTime() - 1);
-    var cval = getCookie(name);
-    if (cval != null) {
-        document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
-    }
-}
-
 // 二维码图位置<img class="qr_img" id="qr-img" />
 // 使用call_func来获取<img class="qr_img" id="qr-img" />中src的值即可
 function make_new_qr(content, width, height, call_func, id) {
@@ -298,7 +269,7 @@ let dead_input_num = 0; // 自动初始化输入框
 
 function set_search(val) { // 配置当前的搜索引擎
     console_log("配置当前搜索引擎");
-    setCookie(search_eq, val, 30 * 24 * 60 * 60 * 1000);
+    view.set_data(search_eq, val);
     for (let i = 0; i < document.getElementsByClassName("option").length; i++) {
         document.getElementsByClassName("option")[i].removeAttribute("selected");
     }
@@ -321,7 +292,7 @@ function create_input(pre) { // 渲染模板
 
     document.getElementById("input-div").classList.add("input-div-blur");
 
-    let _eq = getCookie(search_eq);
+    let _eq = view.get_data(search_eq);
     if (_eq) { set_search(_eq); } else { set_search(0); }
 
     setTimeout(function() {
@@ -447,9 +418,9 @@ function init_dom() {
     document.getElementById("search-btn").innerHTML = '' +
         //
         '<div class="search-btn-center do-btn-center must-btn select-none">' +
-        '   <span class="search-btn-style history-btn-span click red" title="清空搜索历史记录" data-clipboard-text=" ">清空历史</span>' +
-        '   <span class="search-btn-style refresh-btn-span click " title="清空输入框">重新输入</span>' +
-        '   <span class="search-btn-style search-btn-span click" title="点击搜索">🔍 搜 索</span>' +
+        '   <div class="search-btn-style history-btn-span click red" title="清空搜索历史记录" data-clipboard-text=" ">清空历史</div>' +
+        '   <div class="search-btn-style refresh-btn-span click " title="清空输入框">重新输入</div>' +
+        '   <div class="search-btn-style search-btn-span click" title="点击搜索">🔍 搜 索</div>' +
         '   <div class="clear"></div>' +
         '</div>' +
         //
@@ -493,6 +464,14 @@ function init_dom() {
         '              <div class="clear"></div>' +
         '           </div>' +
 
+        '           <div class="search-btn-center quick-btn-center ">' +
+        '              <span class="search-btn-style href-btn-span click"  data-href="https://m.ithome.com">IT之家</span>' +
+        '              <span class="search-btn-style href-btn-span click"  data-href="https://www.v2ex.com/">V2EX</span>' +
+        '              <span class="search-btn-style href-btn-span click"  data-href="http://www.ruanyifeng.com/blog/">阮一峰周刊</span>' +
+
+        '              <div class="clear"></div>' +
+        '           </div>' +
+
         '       </div>' +
 
         //--
@@ -509,14 +488,6 @@ function init_dom() {
         '               <span class="search-btn-style href-btn-span click" data-href="//t.bilibili.com">哔哩哔哩</span>' +
         '              <span class="search-btn-style href-btn-span click"  data-href="https://tv.cctv.com/epg/">CCTV节目单</span>' +
         '              <span class="search-btn-style href-btn-span click"  data-href="https://www.instagram.com/">Instagram</span>' +
-
-        '              <div class="clear"></div>' +
-        '           </div>' +
-
-        '           <div class="search-btn-center quick-btn-center ">' +
-        '              <span class="search-btn-style href-btn-span click"  data-href="https://m.ithome.com">IT之家</span>' +
-        '              <span class="search-btn-style href-btn-span click"  data-href="https://www.v2ex.com/">V2EX</span>' +
-        '              <span class="search-btn-style href-btn-span click"  data-href="http://www.ruanyifeng.com/blog/">阮一峰周刊</span>' +
 
         '              <div class="clear"></div>' +
         '           </div>' +
@@ -721,11 +692,16 @@ function init_dom() {
     // });
     document.getElementsByClassName("history-btn-span")[0].addEventListener("click", function() {
         let that = this;
-        view.show_mask(200);
-        clear_history();
-        document.getElementById("input").value = "";
-        clear_copy(that, "history-btn-span");
-
+        let ok= window.confirm("\n ⚠清空历史记录？ \n");
+        if (ok === true){ // OK
+            view.show_mask(400);
+            clear_history();
+            document.getElementById("input").value = "";
+            clear_copy(that, "history-btn-span");
+        } else { // 取消
+            view.alert_txt("已取消操作", 1200);
+            clear_copy(that, "history-btn-span");
+        }
     });
     document.getElementsByClassName("refresh-btn-span")[0].addEventListener("click", function() {
         view.show_mask(200);
@@ -780,12 +756,12 @@ function show_history(){
 
     let data_string = view.get_data(data_key)
     // 限制历史记录长度
-    let len = 24;
+    let len = 30;
     let array_history = data_string.split(array_key)
     for (let i=0; i<len; i++){
         let the_history = array_history[i];
         if (the_history){
-            let span = '<div class="history-span click select-none blue" data-history="'+the_history+'" title="'+the_history+'" data-title="'+the_history+'">#'+the_history+'</div>'
+            let span = '<div class="history-span click select-none blue" data-history="'+the_history+'" title="'+the_history+'" data-title="'+the_history+'">'+(array_history.length-1-i)+'#'+the_history+'</div>'
             $("#input-history").append(span);
         }
     }
@@ -834,15 +810,15 @@ function clear_history(){
 const bg_cookie = search_cookie_pre + "bg_color";
 
 function init_color() {
-    let bg_color = getCookie(bg_cookie);
+    let bg_color = view.get_data(bg_cookie);
     if (bg_color === null || bg_color === ""){ // 默认颜色（根据浏览器主题默认颜色）
         let color_model = view.scheme_model();
         if (color_model === "light"){ // light
-            bg_color = 4;
+            bg_color = 0; // 默认色
         }else { // dark
             bg_color = 2;
         }
-        // setCookie(bg_cookie, bg_color);
+        // view.set_data(bg_cookie, bg_color);
     }else {
         bg_color = bg_color * 1;
     }
@@ -959,7 +935,7 @@ function init_color() {
 }
 
 function change_bg_color() {
-    let bg_color = getCookie(bg_cookie);
+    let bg_color = view.get_data(bg_cookie);
     if (bg_color === null || bg_color === ""){ // 默认颜色
         let color_model = view.scheme_model();
         if (color_model === "light"){ // light
@@ -967,29 +943,29 @@ function change_bg_color() {
         }else { // dark
             bg_color = 2;
         }
-        // setCookie(bg_cookie, bg_color);
+        // view.set_data(bg_cookie, bg_color);
     }else {
         bg_color = bg_color * 1;
     }
 
     // 0=bg-light；1=bg-black；2=bg-yellow；
     if (bg_color === 0) { // 切换到第二个
-        setCookie(bg_cookie, (bg_color + 1));
+        view.set_data(bg_cookie, (bg_color + 1));
     }
     else if (bg_color === 1) { // 切换到第三个
-        setCookie(bg_cookie, (bg_color + 1));
+        view.set_data(bg_cookie, (bg_color + 1));
     }
     else if (bg_color === 2) { // 切换到第四个
-        setCookie(bg_cookie, (bg_color + 1));
+        view.set_data(bg_cookie, (bg_color + 1));
     }
     else if (bg_color === 3) { // 切换到第5个
-        setCookie(bg_cookie, (bg_color + 1));
+        view.set_data(bg_cookie, (bg_color + 1));
     }
     else if (bg_color === (bg_color + 1)) { //  // 切换到第一个
-        setCookie(bg_cookie, 0);
+        view.set_data(bg_cookie, 0);
     }
     else { // 默认为0
-        setCookie(bg_cookie, 0);
+        view.set_data(bg_cookie, 0);
     }
 
     init_color();
@@ -1102,7 +1078,7 @@ function clear_copy(that, _class){
     clipboard.on('error', function(e) {
         // console.error('Action:', e.action);
         // console.error('Trigger:', e.trigger);
-        view.alert_txt("粘贴板操作失败", 800);
+        // view.alert_txt("粘贴板操作失败", 800);
     });
 
 }
@@ -1139,13 +1115,19 @@ function change_color_state(){
 
 // 节能模式
 function battery_model(){
-    if (view.get_switch_state("battery_state") === "Off"){
-        view.log("当前节能模式：关闭");
-        $(".switch-battery_state").html("🪫"+"节能：已关");
-        view.write_js([cdn_page_file+"parts/bg_animate/bg_animate.js"+"?"+page_time]);
-    }else {
-        view.log("当前节能模式：打开");
-        $(".switch-battery_state").html("🔋"+"节能：已开");
+    if (window.innerWidth < 640){
+        //
+        view.log("当前节能模式：「移动端跳过」");
+        $(".switch-battery_state").removeClass("hide").html("🪫"+"节能：已开");
+    }else{
+        if (view.get_switch_state("battery_state") === "Off"){
+            view.log("当前节能模式：关闭");
+            $(".switch-battery_state").removeClass("hide").html("🪫"+"节能：已关");
+            view.write_js([cdn_page_file+"parts/bg_animate/bg_animate.js"+"?"+page_time]);
+        }else {
+            view.log("当前节能模式：打开");
+            $(".switch-battery_state").removeClass("hide").html("🔋"+"节能：已开");
+        }
     }
 }
 
@@ -1237,8 +1219,8 @@ $(document).on("click", ".switch-hour_state", function (){
 });
 $(document).on("click", ".timer-span", function (){
     let that = $(this);
-    view.show_mask(200);
-    speak_time();
+    // view.show_mask(200);
+    // speak_time();
 });
 
 
@@ -1248,17 +1230,20 @@ function start_page(info) {
     view.log(info);
     // view.log("主框架解析完成，开始渲染模块页面 > >");
 
-    $(".rights-div").removeClass("hide");
-    $(".battery-model-div").removeClass("hide");
-    if (screen.width > 780){ // PC
+    // $(".rights-div").removeClass("hide");
+    $(".timer-div").removeClass("hide");
+    if (screen.width > 640){ // PC
         $(".qr-div").removeClass("hide");
         // $(".change-color-div").removeClass("hide");
-        $(".timer-div").removeClass("hide");
         // $(".on-hour-div").removeClass("hide");
         // setTimeout(function (){
         //     $(".swiper-container").addClass("hide");
         // },200);
+        // $(".contact-div").removeClass("hide");
+        $(".battery-model-div").removeClass("hide");
     }else { // m
+        $(".qr-div").removeClass("hide");
+        // $(".timer-div").removeClass("hide");
     }
 
     init_dom();
@@ -1284,8 +1269,19 @@ function start_page(info) {
     }, "qr-div");
 
     $(".icp-a-show").html($(".icp-a").text()).attr("href", $(".icp-a").attr("href"));
-    $(".rights-a").html("©️"+app_name).attr("title", "版权："+app_name);
+    $(".rights-a").html("© "+app_name);
     $(".rights-date").html(view.time_date("Y"));
+    $(".email-a").html("📮 "+app_email);
+
+    // dom重新渲染
+    setTimeout(function (){
+        let swiper_container_show = view.get_data("swiper_container_show");
+        if (swiper_container_show === "show"){ // show
+            $(".swiper-container").removeClass("hide");
+        }else { // hide
+            $(".swiper-container").addClass("hide");
+        }
+    }, 200);
 
 }
 

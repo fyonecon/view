@@ -4,20 +4,28 @@ function home_kw(_word){
     view.log([_word, word]);
     let state = true;
     let url = "";
-    if (word === "kw@首页" || word === "kw@home" || word === "kw@"){
+    if (word === "kw@首页" || word === "kw@home" || word === "kw@" || word === "kw@fresh"){
         url = "./";
         window.open(url, "_self");
     }
+    else if (word === "kw@login"){
+        url = "./?route=login";
+        window.open(url, "_self");
+    }
     else if (word === "kw@help"){
-        url = "./?route=help";
+        url = "./?route=home_help";
+        window.open(url, "_self");
+    }
+    else if (word === "kw@test"){
+        url = "./?route=test";
         window.open(url, "_self");
     }
     else if (word === "kw@404"){
         url = "./?route=404";
-        window.open(url, "_blank");
+        window.open(url, "_self");
     }
-    else if (word === "kw@chatgpt" || word === "kw@chat" || word === "chat"){
-        url = "./?route=chatgpt";
+    else if (word === "kw@chatgpt" || word === "kw@chat" || word === "chat" || word === "poe"){
+        url = "https://poe.com";
         window.open(url, "_blank");
     }
     else if (word === "kw@bing"){
@@ -43,10 +51,12 @@ function home_kw(_word){
     else if (word === "kw@show"){
         view.notice_txt("已打开隐藏的标签列表", 2000);
         $(".swiper-container").removeClass("hide");
+        view.set_data("swiper_container_show", "show");
     }
     else if (word === "kw@hide"){
         view.notice_txt("已隐藏标签列表", 2000);
         $(".swiper-container").addClass("hide");
+        view.set_data("swiper_container_show", "hide");
     }
     else if (word === "kw@show_color"){
         view.notice_txt("已打开主题切换按钮", 2000);
