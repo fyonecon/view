@@ -1,62 +1,15 @@
 {
-  "name":"二三搜",
-  "short_name":"二三搜",
-  "start_url":"https://23so.cn/",
-  "display":"standalone",
-  "orientation":"any",
-  "background_color":"#606060",
-  "theme_color":"#101010",
-  "icons":[
+  "name": "简单主页",
+  "short_name": "简单主页",
+  "start_url": "./?utm_source=pwa",
+  "display": "standalone",
+  "background_color": "#000",
+  "description": "简单主页，PWA应用",
+  "icons": [
     {
-      "src":"./static/img/launcher.png",
-      "type":"image/png",
-      "sizes":"1024x1024"
-    },
-    {
-      "src":"./static/img/launcher.png",
-      "type":"image/png",
-      "sizes":"1024x1024",
-      "purpose":"maskable"
-    }
-  ],
-  "description":"View",
-  "lang":"zh-CN",
-  "categories":["hao123","home page","tools"],
-  "screenshots":[
-    {
-      "src":"./static/img/launcher.png",
-      "type":"image/png",
-      "sizes":"540x720"
-    },
-    {
-      "src":"./static/img/launcher.png",
-      "type":"image/jpeg",
-      "sizes":"540x720"
-    },
-    {
-      "src":"./static/img/launcher.png",
-      "type":"image/jpeg",
-      "sizes":"540x720"
-    }
-  ],
-  "share_target":{
-    "action":"https://23so.cn/",
-    "method":"POST",
-    "enctype":"multipart/form-data",
-    "params":{
-      "files":[
-        {
-          "name":"file",
-          "accept":["image/*"]
-        }
-      ]
-    }
-  },
-  "content_scripts": [
-    {
-      "matches": ["https://23so.cn/*"],
-      "css": [],
-      "js": ["./static/js/content_script.js"]
+      "src": "./static/img/launcher.png",
+      "type": "image/png",
+      "sizes": "192x192"
     }
   ]
 }

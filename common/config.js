@@ -10,7 +10,7 @@ const debug = false; // 调试模式，统一打印日志，true & false
 const block_wechat = true; // 是否禁止在微信中打开，true & false
 
 // 框架渲染的必要参数
-const cookie_prefix = "view_23so_"; // cookie前缀
+const cookie_prefix = "view_"; // cookie前缀
 const route_404 = "?route=404"; // 404
 const page_time = "cache=" + index_func.MakeDate("Ym000000");
 
@@ -23,8 +23,8 @@ const app_url = {
     'jump_url': 'https://www.bing.com/', // 遇到黑名单refer的落地地址
     'white_url': [ // 仅检测主域名，不包括http协议和url路径
         '0.0.0.0', '127.0.0.1', 'localhost',
-        'cdnaliyun.oss-cn-hangzhou.aliyuncs.com',
-        'cdnaliyun.oss-accelerate-overseas.aliyuncs.com',
+        'aliyuncs.com',
+        'myqcloud.com',
         'so', 'vs',
     ],
 };

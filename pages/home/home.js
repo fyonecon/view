@@ -1219,6 +1219,10 @@ $(document).on("click", ".timer-span", function (){
     // view.show_mask(200);
     // speak_time();
 });
+$(document).on("click", ".rights-pwa", function (){
+    let that = $(this);
+    window.open("https://cdnaliyun.oss-cn-hangzhou.aliyuncs.com", "_blank"); // 必须是https
+});
 
 
 let timer1_interval;

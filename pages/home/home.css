@@ -444,12 +444,10 @@
 }
 
 .timer-div{
-    line-height: 30px;
-    height: 30px;
+    line-height: 24px;
+    height: 24px;
     overflow: hidden;
-    font-size: 14px;
-    font-weight: 600;
-    opacity: 0.7;
+    font-size: 12px;
 }
 
 .on-hour-div{
@@ -480,7 +478,7 @@
     border-radius: 3px;
     padding: 3px 3px;
     background: white;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 }
 .qr-60{
     width: 60px;
