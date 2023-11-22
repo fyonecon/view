@@ -8,7 +8,7 @@ const page_title = " 👈 "+app_name; // 当前页面标题
 const _search_jump = "";
 const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。自定义。
     {
-        "name": "必应搜索",
+        "name": "Bing",
         "m-url": "./?route=search&engine=bing&cache=_page_time_&word=",
         "pc-url": "./?route=search&engine=bing&cache=_page_time_&word=",
         "url_right": "",
@@ -31,6 +31,13 @@ const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。�
         "pc-url": "./?route=search&engine=duckduckgo&cache=_page_time_&word=", // PC端，前缀
         "url_right": "", // 参数的固顶后缀
     },
+    {
+        "name": "Github",
+        "m-url": "https://github.com/search?&type=Repositories&cache=_page_time_&q=",
+        "pc-url": "https://github.com/search?&type=Repositories&cache=_page_time_&q=",
+        "url_right": "",
+    },
+
     // {
     //     "name": "Yandex", // 引擎名称，可视5个字
     //     "m-url": "./?route=search&engine=yandex&cache=_page_time_&word=", // 移动端，前缀
@@ -100,12 +107,6 @@ const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。�
         "url_right": "",
     },
 
-    // {
-    //     "name": "搜Github",
-    //     "m-url": "https://github.com/search?&type=Repositories&cache=_page_time_&q=",
-    //     "pc-url": "https://github.com/search?&type=Repositories&cache=_page_time_&q=",
-    //     "url_right": "",
-    // },
     // {
     //     "name": "查询IPv4",
     //     "m-url": "http://ip.tool.chinaz.com/",
