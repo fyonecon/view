@@ -1254,7 +1254,7 @@ function start_page(info) {
     // $(".rights-div").removeClass("hide");
     $(".timer-div").removeClass("hide");
     if (screen.width > 640){ // PC
-        $(".qr-div").removeClass("hide");
+        // $(".qr-div").removeClass("hide");
         // $(".change-color-div").removeClass("hide");
         // $(".on-hour-div").removeClass("hide");
         // setTimeout(function (){

@@ -4,7 +4,7 @@ function home_kw(_word){
     view.log([_word, word]);
     let state = true;
     let url = "";
-    if (word === "kw@首页" || word === "kw@home" || word === "kw@" || word === "kw@fresh"){
+    if (word === "kw@首页" || word === "kw@home" || word === "kw@" || word === "kw@fresh" || word === "kw@refresh"){
         url = "./";
         window.open(url, "_self");
     }
