@@ -16,6 +16,10 @@ function home_kw(_word){
         url = "./?route=home_help";
         window.open(url, "_self");
     }
+    else if (word === "kw@pwa"){
+        view.notice_txt("已打开PWA按钮", 2000);
+        $(".rights-pwa").removeClass("hide");
+    }
     else if (word === "kw@test"){
         url = "./?route=test";
         window.open(url, "_self");
