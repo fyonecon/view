@@ -24,7 +24,6 @@ const app_url = {
     'white_url': [ // 仅检测主域名，不包括http协议和url路径
         '0.0.0.0', '127.0.0.1', 'localhost',
         'aliyuncs.com',
-        'myqcloud.com',
         'so', 'vs',
     ],
 };

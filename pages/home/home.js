@@ -391,7 +391,7 @@ function run_search() { // 执行搜索
     setTimeout(function() {
         delete_loading();
         document.getElementById("input").value = "";
-    }, 1500);
+    }, 3000);
 
     // 校验关键词
     try{

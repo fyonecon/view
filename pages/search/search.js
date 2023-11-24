@@ -2,7 +2,7 @@
 let kw_word = "";
 
 function jump_location(engine, word, url) {
-    let page_time = view.time_date("WHis");
+    let page_time = view.time_date("YmdWHis");
     let _word = '';
 
     // 1-匹配到外部链接
@@ -31,7 +31,7 @@ function jump_location(engine, word, url) {
 
         let domain = window.location.host;
 
-        let show_txt = "http://"+domain+"/view/?route=search&engine=bing&word=%s";
+        let show_txt = "http://"+domain+"/view/so.html?route=search&engine=bing&word=%s";
         $(".match-kw-span-msg").html("自定义必应搜索引擎（点击可复制）：");
         $(".match-kw-span-txt").html(show_txt).attr("data-clipboard-text", show_txt);
 
@@ -45,7 +45,7 @@ function jump_location(engine, word, url) {
 
         let domain = window.location.host;
 
-        let show_txt = "http://"+domain+"/view/?route=search&engine=baidu&word=%s";
+        let show_txt = "http://"+domain+"/view/so.html?route=search&engine=baidu&word=%s";
         $(".match-kw-span-msg").html("自定义百度搜索引擎（点击可复制）：");
         $(".match-kw-span-txt").html(show_txt).attr("data-clipboard-text", show_txt);
 
@@ -59,7 +59,7 @@ function jump_location(engine, word, url) {
 
         let domain = window.location.host;
 
-        let show_txt = "http://"+domain+"/view/?route=search&engine=google&word=%s";
+        let show_txt = "http://"+domain+"/view/so.html?route=search&engine=google&word=%s";
         $(".match-kw-span-msg").html("自定义Google搜索引擎（点击可复制）：");
         $(".match-kw-span-txt").html(show_txt).attr("data-clipboard-text", show_txt);
 
