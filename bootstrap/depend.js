@@ -178,7 +178,7 @@ function depend_pages(){
             }
 
             // page html
-            let view_cache = view.js_rand(1000000000000, 99999999999999);
+            let view_cache = view.time_ms();
             let p3 = new Promise((resolve, reject) =>{
                 $.ajax({ // 利用ajax的get请求获取文本内容
                     url: _file,
@@ -350,9 +350,15 @@ function depend_pages(){
 
 // 入口
 (function (){
-    if (block_wechat && view.is_weixin()){
-        view.alert_txt("本网站禁止在微信中打开。<br/>请使用外部浏览器。", "long");
+    if (block_wechat && (view.is_weixin() || view.is_qq() || view.is_dingding())){
+        view.title("😅");
+        view.alert_txt("本网站禁止在 微信、QQ、钉钉 中打开。<br/>请使用外部浏览器。", "long");
     }else {
-        depend_url();
+        if (!window.localStorage){
+            view.title("😅");
+            view.log("浏览器特性支持不完整：", ["localStorage"]);
+        }else{
+            depend_url();
+        }
     }
 })();

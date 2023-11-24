@@ -46,6 +46,8 @@ function admin_login() {
 		dataType: "json",
 		async: true,
 		data: { // 字典数据
+			app_class: app_class,
+			app_version: app_version,
             app_token: app_token,
             app_uid: app_uid,
 			login_name: name,
@@ -86,13 +88,12 @@ function admin_login() {
 
 				let href = res.content.jump_url;
 
-				let time = 30*24*60*60*1000; // 30天过期
-
-				view.set_cookie("login_name", login_name, time);
-				view.set_cookie("login_token", login_token, time);
-				view.set_cookie("login_id", login_id, time);
-				view.set_cookie("login_level", login_level, time);
-				view.set_cookie("login_nickname", login_nickname, time);
+				view.set_data("login_time", view.time_s()); // 写入登录的时间戳
+				view.set_data("login_name", login_name);
+				view.set_data("login_token", login_token);
+				view.set_data("login_id", login_id);
+				view.set_data("login_level", login_level);
+				view.set_data("login_nickname", login_nickname);
 
 				setTimeout(function () {
 					if (back_url){
@@ -107,9 +108,17 @@ function admin_login() {
 					window.location.replace(href);
 				}, 500);
 
-			}else if (res.state === 2){
+			}
+			else if (res.state === 2){
 				view.alert_txt(res.msg, 2000, "clear");
-			}else {
+			}
+			else if (res.state === 302){
+				view.alert_txt(res.msg, 2000, "clear");
+			}
+			else if (res.state === 403){
+				view.alert_txt(res.msg, 2000, "clear");
+			}
+			else {
 				view.alert_txt("超范围的state", 3000, "clear");
 			}
 		},
@@ -178,7 +187,8 @@ function app_action(){ // 每次重新生成即可，不限次数，但限制频
                 app_uid = the_app_uid;
 
                 // 其他
-                $(".user-title-span").html(app_name);
+                // $(".user-title-span").html(app_name);
+				view.set_txt_logo("user-title-div", "二三", "搜");
                 make_num();
 
             }else if (res.state === 2){
@@ -269,4 +279,6 @@ function start_page() {
     $(".user-login-pwd").val("789");
     login_state = 1;
     app_action();
+	//
+	$(".body").addClass("bg-grey");
 }

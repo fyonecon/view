@@ -1,3 +1,10 @@
 User-agent: *
+
 Disallow: /pages/*
 Disallow: /parts/*
+Disallow: /static/*
+Disallow: /view/*
+Disallow: /view/cache/*
+Disallow: /view/.cache/*
+Disallow: /cache/*
+Disallow: /.cache/*

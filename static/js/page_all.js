@@ -30,5 +30,22 @@ function make_paging(id, total, limit, page, page_hash, call_func){
 
 }
 
+// 绑定跳转
+$(document).on("click", ".a-click", function (){
+    let that = $(this);
+    view.show_mask(800);
+    let href = that.attr("data-href");
+    let target = that.attr("data-target");
+    target = target?target:"_self";
+    if (href){
+        window.open(href, target);
+    }else {
+        view.notice_txt("未设置data-href", 2000);
+    }
+});
 
-
+//txt-logo-div
+$(document).on("click", ".txt-logo-div", function (){
+    let that = $(this);
+    window.open("./", "_self");
+});

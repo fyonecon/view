@@ -12,6 +12,7 @@ function all_layout(){
         async: true,
         data: { // 字典数据
             app_class: app_class,
+            app_version: app_version,
             login_name: login_name,
             login_token: login_token,
             login_id: login_id,
@@ -68,9 +69,11 @@ function that_layout(){
 function must_login(msg){
     if (!msg){msg="请先登录..";}
     view.alert_txt(msg, "long");
-    view.del_cookie("login_token");
-    view.del_cookie("login_id");
-    view.del_cookie("login_level");
+
+    view.del_data("login_name");
+    view.del_data("login_id");
+    view.del_data("login_token");
+    view.del_data("login_level");
 
     setTimeout(function (){
         window.location.replace("./?route=login&back_url=" + encodeURIComponent(window.location.href));
@@ -78,51 +81,11 @@ function must_login(msg){
 }
 
 //
-function level_dom(level){
-    // level-dom hide level-2 level-3
-    let level_hide_txt = "";
-    if (level === 1){
-        $(".level-dom").removeClass("hide");
-        $(".level-"+level+"-hide").html(level_hide_txt).addClass("hide");
-    }else if (level === 2){
-        $(".level-dom").removeClass("hide");
-        $(".level-"+level+"-hide").html(level_hide_txt).addClass("hide");
-    }else if (level === 3){
-        $(".level-dom").removeClass("hide");
-        $(".level-"+level+"-hide").html(level_hide_txt).addClass("hide");
-    } else if (level === 4){
-        $(".level-dom").removeClass("hide");
-        $(".level-"+level+"-hide").html(level_hide_txt).addClass("hide");
-    }else {
-        $(".level-dom").html("<h3>null-level</h3>");
-    }
-
-}
-
-// 开发状态时dom展示，生产环境时dom隐藏。class=show_state_dev
-function show_state(level){
-    // 判断是否是生产状态
-    let host = window.location.host;
-    for (let i=0; i<app_domain.length; i++){
-        let the_domain = app_domain[i];
-        //view.log([the_domain, host]);
-        if (the_domain){
-            if (view.string_include_string(host, the_domain) !== -1){
-                //
-                $(".show-state-dev").addClass("hide");
-                //
-                break;
-            }
-        }
-    }
-}
-
-//
 // 检查admin_token
 function check_admin_token(e, route){
 
-    start_page(e);
-    return;
+    // start_page(e);
+    // return;
 
     /*开始-请求数据*/
     $.ajax({
@@ -132,6 +95,7 @@ function check_admin_token(e, route){
         async: true,
         data: { // 字典数据
             app_class: app_class,
+            app_version: app_version,
             url: window.location.href,
             login_name: login_name,
             login_token: login_token,
@@ -162,30 +126,26 @@ function check_admin_token(e, route){
                     login_level_name = the_level_name;
 
                     // 1超级管理员，2组管理员，3普通管理员，4仅查看数据
-                    level_dom(the_level);
-                    show_state(the_level);
+                    level_dom(the_level); // s
                     if (the_level === 1){
                         start_page(the_level);
-                        try {start_foot();}catch (e){view.error(e);}
+                        // try {start_foot();}catch (e){view.error(e);}
                     }
                     else if (the_level === 2){
                         start_page(the_level);
-                        try {start_foot();}catch (e){view.error(e);}
+                        // try {start_foot();}catch (e){view.error(e);}
                     }
                     else if (the_level === 3){
                         start_page(the_level);
-                        try {start_foot();}catch (e){view.error(e);}
+                        // try {start_foot();}catch (e){view.error(e);}
                     }
                     else if (the_level === 4){
                         start_page(the_level);
-                        try {start_foot();}catch (e){view.error(e);}
+                        // try {start_foot();}catch (e){view.error(e);}
                     }
                     else {
                         view.alert_txt(data.msg, "long", "clear");
                     }
-
-                    // 其他
-                    $(".mine-login_name").html(login_level_name + "（"+login_nickname+"）");
 
                 }else if (data.state === 302){ // 需要重新登录或初始化数据
                     must_login(data.msg);
@@ -207,5 +167,28 @@ function check_admin_token(e, route){
         }
     });
     /*结束-请求数据*/
+
+}
+
+
+//
+function level_dom(level){
+    // level-dom hide level-2 level-3
+    let level_hide_txt = "";
+    if (level === 1){
+        $(".level-dom").removeClass("hide");
+        $(".level-"+level+"-hide").html(level_hide_txt).addClass("hide");
+    }else if (level === 2){
+        $(".level-dom").removeClass("hide");
+        $(".level-"+level+"-hide").html(level_hide_txt).addClass("hide");
+    }else if (level === 3){
+        $(".level-dom").removeClass("hide");
+        $(".level-"+level+"-hide").html(level_hide_txt).addClass("hide");
+    } else if (level === 4){
+        $(".level-dom").removeClass("hide");
+        $(".level-"+level+"-hide").html(level_hide_txt).addClass("hide");
+    }else {
+        $(".level-dom").html("<h3>null-level</h3>");
+    }
 
 }

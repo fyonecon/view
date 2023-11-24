@@ -1,3 +1,4 @@
+
 .user-login{
     width: 320px;
     min-height: 220px;
@@ -11,7 +12,7 @@
     margin: auto;
     background-color: white;
     box-shadow: 0 0 15px rgba(0,0,0,0.3);
-    border-radius: 3px;
+    border-radius: 5px;
     background-image: url(../../static/img/login-bg-img.svg);
     background-position: bottom center;
     background-repeat: no-repeat;
@@ -63,10 +64,14 @@
 .center{
     text-align: center;
 }
-.user-title-span{
-    font-size: 14px;
-    letter-spacing: 1px;
-    opacity: 0.8;
+.login-title-div{
+    display: inline-block;
+}
+.user-title-div{
+    display: inline-block;
+    /*font-size: 14px;*/
+    /*letter-spacing: 1px;*/
+    /*opacity: 0.8;*/
 }
 .user-login-time{
     font-size: 12px;

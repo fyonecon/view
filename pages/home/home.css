@@ -445,28 +445,28 @@
 
 .timer-div{
     line-height: 24px;
-    height: 24px;
     overflow: hidden;
     font-size: 12px;
 }
 
 .on-hour-div{
     line-height: 24px;
-    height: 24px;
     overflow: hidden;
     font-size: 12px;
 }
 
+.qr-div-div{
+    line-height: 24px;
+    overflow: hidden;
+}
 .battery-model-div{
     line-height: 24px;
-    height: 24px;
     overflow: hidden;
     font-size: 12px;
 }
 
 .change-color-div{
     line-height: 24px;
-    height: 24px;
     font-size: 12px;
 }
 
@@ -474,7 +474,8 @@
     border-radius: 3px;
     padding: 3px 3px;
     background: white;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
+    float: right;
 }
 .qr-60{
     width: 60px;
@@ -486,7 +487,6 @@
 }
 .new-qr-img{
     width: 100%;
-    float: left;
 }
 .rights-div{
     line-height: 24px;
@@ -495,7 +495,6 @@
 }
 .contact-div{
     line-height: 24px;
-    height: 24px;
     font-size: 12px;
 }
 

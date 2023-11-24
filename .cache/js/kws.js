@@ -9,10 +9,16 @@ const kws = {
             case "kws8x":
                 url = "aHR0cHM6Ly84MXhha3IudG9wLw==";
                 break;
+            case "kwsbyy":
+                url = "aHR0cHM6Ly9iYmh1by50b3Av";
+                break;
             case "kwshl":
                 url = "aHR0cHM6Ly96enR0MTUuY29t";
                 break;
             case "kws9p":
+                url = "aHR0cHM6Ly85MXBvcm4uY29t";
+                break;
+            case "kwsqp":
                 url = "aHR0cHM6Ly85MXBvcm4uY29t";
                 break;
             default:

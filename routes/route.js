@@ -8,14 +8,12 @@
 const page_public_file = {
     "js": [
         "static/js/page_all.js", // 自定义的全局调用函数
-        //"parts/nav/nav.js",
-        //"parts/foot/foot.js",
-
+        //"static/layui/layui.js", // 文档：https://www.layui.com/doc/
     ],
     "css": [
         // "static/font-awesome-4.7.0/css/font-awesome.min.css",
         "static/css/page_all.css",
-
+        //"static/layui/css/layui.css",
     ],
 };
 
@@ -25,7 +23,7 @@ const pages = [
     // 开始-必要路由
     { // 页面模块-默认
         "route"     : "",
-        "file_path" : "pages/home/home.html",
+        "file_path" : "pages/home/home.view",
         "title"     : app_name,
         "file"      : [
             {
@@ -41,7 +39,7 @@ const pages = [
     }, //
     { // 页面模块-404
         "route"     : "404",  // url中#route=xxx，便于定位页面
-        "file_path" : "pages/404/404.html", // 实际文件路径+文件名，为了方便起见，文件后缀统一用“htm”
+        "file_path" : "pages/404/404.view", // 实际文件路径+文件名，为了方便起见，文件后缀统一用“htm”
         "title"     : "页面404 - 页面没找到路由地址",  // 页面title
         "file"      : [  // 本页面需要引入的局部资源文件
             {
@@ -58,7 +56,7 @@ const pages = [
 
     { // 页面模块
         "route"     : "login",
-        "file_path" : "pages/login/login.html",
+        "file_path" : "pages/login/login.view",
         "title"     : "请登录..." + " - " +app_name,
         "file"      : [
             {
@@ -71,9 +69,25 @@ const pages = [
             },
         ],
     }, //
+
+    { // 页面模块
+        "route"     : "home_help",
+        "file_path" : "pages/home/help/help.view",
+        "title"     :  "使用帮助" + " - " +app_name,
+        "file"      : [
+            {
+                "js": [
+                    "pages/home/help/help.js",
+                ],
+                "css": [
+                    "pages/home/help/help.css",
+                ],
+            },
+        ],
+    }, //
     { // 页面模块
         "route"     : "search",
-        "file_path" : "pages/search/search.html",
+        "file_path" : "pages/search/search.view",
         "title"     :  "搜索辅助跳转" + " - " +app_name,
         "file"      : [
             {
@@ -82,51 +96,6 @@ const pages = [
                 ],
                 "css": [
                     "pages/search/search.css",
-                ],
-            },
-        ],
-    }, //
-    { // 页面模块
-        "route"     : "help",
-        "file_path" : "pages/help/help.html",
-        "title"     :  "使用帮助" + " - " +app_name,
-        "file"      : [
-            {
-                "js": [
-                    "pages/help/help.js",
-                ],
-                "css": [
-                    "pages/help/help.css",
-                ],
-            },
-        ],
-    }, //
-    { // 页面模块
-        "route"     : "chatgpt",
-        "file_path" : "pages/chatgpt/chatgpt.html",
-        "title"     :  "chatGPT聊天" + " - " +app_name,
-        "file"      : [
-            {
-                "js": [
-                    "pages/chatgpt/chatgpt.js",
-                ],
-                "css": [
-
-                ],
-            },
-        ],
-    }, //
-    { // 页面模块
-        "route"     : "test",
-        "file_path" : "pages/test/test.html",
-        "title"     :  "Test" + " - " +app_name,
-        "file"      : [
-            {
-                "js": [
-                    "pages/test/test.js",
-                ],
-                "css": [
-
                 ],
             },
         ],

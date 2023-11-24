@@ -19,20 +19,26 @@ const view = {
     title: function (txt){ // 改写title标签内容
         document.getElementsByTagName("title")[0].innerText = txt;
     },
-    write_htm: function (file_path, by_id, call_func, class_name) {  // 注射文件 | 写入htm
+    write_html: function (file_path, by_id, call_func, class_name) {  // 注射文件 | 写入htm
         let that = this;
         $.ajax({ // 利用ajax的get请求获取文本内容
             url: file_path + "?" + page_time,
             async: true,
             success: function (data) {
-                let div = document.createElement("div");
-                if(class_name){div.classList.add(class_name);}
-                div.classList.add("part-div");
-                div.classList.add("clear");
-                div.classList.add("part-div-" + that.js_rand(100000000, 9999999999));
-                div.setAttribute("data-view", ""+that.js_rand(100000000, 9999999999));
-                div.innerHTML = data;
-                document.getElementById(by_id).appendChild(div); // 将模块渲染入主文件
+                // let div = document.createElement("div");
+                // if(class_name){div.classList.add(class_name);}
+                // div.classList.add("part-div");
+                // div.classList.add("clear");
+                // div.classList.add("part-div-" + that.time_ms());
+                // div.setAttribute("data-view", ""+that.time_date("YmdHis"));
+                // div.innerHTML = data;
+                // try {
+                //     document.getElementById(by_id).appendChild(div); // 将模块渲染入主文件
+                // }catch (e){
+                //     console.error("不能写入id_Dom", by_id);
+                // }
+
+                $("#"+by_id).append(data);
 
                 try {
                     call_func(true);
@@ -64,7 +70,7 @@ const view = {
                 let script = document.createElement("script");
                 script.setAttribute("class", "write-js");
                 script.setAttribute("src", js_src_array[i]);
-                script.setAttribute("nonce", ""+that.js_rand(100000000, 9999999999));
+                script.setAttribute("nonce", ""+that.time_date("YmdHis"));
                 try {
                     head.appendChild(script);
                     script.onload = function () {resolve(i); };
@@ -391,7 +397,7 @@ const view = {
         let day = t.getDate(); if (day<10){day = "0"+day;}
         let month = t.getMonth() + 1; if (month<10){month = "0"+month;}
         let year = t.getFullYear();
-         let week = ["Seven", "One", "Two", "Three", "Four", "Five", "Six"][t.getDay()]; // 周
+        let week = ["Seven", "One", "Two", "Three", "Four", "Five", "Six"][t.getDay()]; // 周
 
          format = format.replaceAll("Y", year);
          format = format.replaceAll("m", month);
@@ -650,9 +656,32 @@ const view = {
     hide_loading: function (){
         $(".loading-div").addClass("hide");
     },
+    play_mp3: function (mp3, volume, loop){
+        let that = this;
+
+        if (!volume*1){ // 默认半音量
+            volume = 0.5;
+        }else if (volume<0 || volume > 1) {
+            volume = 1;
+        }
+
+        if (!loop){ // 默认关闭循环
+            loop = false;
+        }
+
+        let audio = new Audio(mp3);
+        audio.play().then(r => {
+            
+        }); // 播放 mp3这个音频对象
+        // audio.pause(); // 暂停
+        // audio.load();
+    },
     voice: function (read_txt, volume, loop) { // 自动语音朗读文字
         let that = this;
         that.log(["voice", read_txt, volume, loop]);
+
+        that.notice_txt("语音接口已失效", 3000);
+        return;
 
         if (!volume*1){ // 默认半音量
             volume = 0.5;
@@ -667,7 +696,7 @@ const view = {
         // 文字生成语音源
         let make_mp3 = "https://tts.baidu.com/text2audio?cuid=baike&lan=zh&ctp=1&spd=5&pdt=301&vol=9&rate=32&per=0&tex=" + encodeURI(read_txt);
 
-        // 文档https://github.com/haima16/MPlayer
+        // 文档 https://github.com/haima16/MPlayer
         let player = new MPlayer(make_mp3, {
             loop: loop, // 循环 true or false
             volume: volume, // 音量 [0, 1]
@@ -813,6 +842,10 @@ const view = {
         let ua = window.navigator.userAgent.toLowerCase();
         return ua.match(/MicroMessenger/i) == 'micromessenger';
     },
+    is_qq: function (){
+        let ua = window.navigator.userAgent.toLowerCase();
+        return ua.match(/QQ/i) == 'qq';
+    },
     is_dingding: function (){
         let ua = window.navigator.userAgent.toLowerCase();
         return ua.indexOf("dingtalk")!=-1;
@@ -893,18 +926,18 @@ const view = {
     },
     get_switch_state: function (name){ // 获取节能模式状态
         let that = this;
-        let _state = that.get_cookie(name);
+        let _state = that.get_data(name);
         return _state?_state:"Off";
     },
     set_switch_state: function (name){ // 设置节能模式状态
         let that = this;
         let time = 2*365*24*60*60*1000;
-        let _state = that.get_cookie(name);
+        let _state = that.get_data(name);
         if (!_state || _state === "Off"){
-            that.set_cookie(name, "On", time);
+            that.set_data(name, "On", time);
             return "On";
         }else {
-            that.set_cookie(name, "Off", time);
+            that.set_data(name, "Off", time);
             return "Off";
         }
     },
@@ -984,12 +1017,31 @@ const view = {
         div.style.top = "0px";
         div.style.width = "100%";
         div.style.height = window.innerHeight + "px";
-        div.style.backgroundColor = "rgba(0,0,0,0)";
+        div.style.backgroundColor = "rgba(255,255,255,0.2)";
         document.getElementById("depend").appendChild(div);
         setTimeout(function (){
             div.remove();
         }, timeout);
     },
+    load_img: function(img_class, cdn_url){ // 保护性加载图片 // <img class="xxx" src="" data-src="xxx" >
+        try {
+            let img = document.getElementsByClassName(img_class);
+            for (let i=0; i<img.length; i++){
+                setTimeout(function (){
+                    let src = img[i].getAttribute("data-src");
+                    img[i].setAttribute("src", cdn_url+src);
+                }, 100+i*200);
+            }
+        }catch (e){
+            view.error("load_img报错："+e);
+        }
+    },
+    set_txt_logo: function (_class, txt1, txt2){
+        let that = this;
+        let txt_logo = '<div class="txt-logo-div phb-div select-none hover"><div class="phb-1">'+txt1+'</div><div class="phb-2">'+txt2+'</div><div class="clear"></div></div>';
+        $("."+_class).html(txt_logo);
+    },
+
 
 };
 

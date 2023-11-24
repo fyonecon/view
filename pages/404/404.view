@@ -1,0 +1,13 @@
+<div class="page-content" style="position: relative;">
+
+    <div class="center">
+        <img class="img-404" src="" data-src="404.png" />
+        <h2 class="font-class font-black">页面404，请检查链接、内容是否有效。</h2>
+        <br>
+        <div>
+            <a class="a-click click" data-href="./" data-target="_self"><span class="font-title font-blue click"> < 返回首页 </span></a>
+        </div>
+    </div>
+
+
+</div>

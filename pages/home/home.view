@@ -1,0 +1,69 @@
+
+<div class="home-content" style="position: relative;">
+
+    <!--code标签设置等宽字-->
+    <code>
+        <div class="content" id="content"></div>
+    </code>
+    <!--背部特效-->
+    <div class="content-bg" id="content-bg"></div>
+    <div class="left-fixed">
+
+        <!--网站信息-->
+        <div class="rights-div">
+            <span class="right-span rights-pwa click hide a-click" data-href="https://cdnaliyun.oss-cn-hangzhou.aliyuncs.com" data-target="_blank" title="Install WebApp">PWA App</span>
+            <span class="right-span rights-date hide" title="2019年至今"></span>
+            <span class="right-span click">
+                <a class="help-a a-click" data-href="./?route=home_help" data-target="_self" style="color: inherit;" title="">Help</a>
+            </span>
+        </div>
+
+        <!--        -->
+        <div class="contact-div hide">
+            <span class="right-span">
+                <a class="email-a" target="_self" style="color: inherit;" title="Email"></a>
+            </span>
+        </div>
+
+    </div>
+    <div class="right-fixed">
+
+        <!--QR-->
+        <div class="qr-div-div">
+            <div class="qr-div qr-20 click" id="qr-div">
+                <img class="new-qr-img" src="" alt="QR" title="QR for This Website">
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <!--节能模式-->
+        <div class="battery-model-div hide">
+            <span class="switch-battery_state click fixed-span-style" title=""></span>
+        </div>
+
+        <!--切换颜色-->
+        <div class="change-color-div hide">
+            <span class=" color-btn-span click fixed-span-style" title="">
+                🌓主题：<span id="change-color-span">昏黑</span>
+            </span>
+            <div class="clear"></div>
+        </div>
+
+        <!--报时-->
+        <div class="on-hour-div hide">
+            <span class="switch-hour_state click fixed-span-style" title="">Speak Clock</span>
+        </div>
+
+        <!--时钟-->
+        <div class="timer-div hide">
+            <code>
+                <span class="timer-span fixed-span-style" title="view"></span>
+            </code>
+        </div>
+
+    </div>
+
+
+    <div class="clear"></div>
+</div>

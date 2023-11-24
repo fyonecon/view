@@ -15,7 +15,8 @@ h3, h4, h5, p{
 
 .body{
     margin: 0;
-    font-size: 14px;
+    font-size: 16px;
+    background-color: #eeeeee;
 }
 
 .page-div{
@@ -24,6 +25,16 @@ h3, h4, h5, p{
 }
 .part-div{
     width: 100%;
+}
+
+.page-content{
+    width: calc(100% - 0px);
+    padding: 50px 0px;
+    overflow-x: hidden;
+    min-height: 400px;
+    max-width: 1200px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 /**/
@@ -47,16 +58,44 @@ h3, h4, h5, p{
 
 /*字体大小*/
 .font-mini{
-    font-size: 12px;
+    font-size: 14px;
 }
 .font-text{
-    font-size: 14px;
+    font-size: 16px;
 }
 .font-title{
     font-size: 18px;
 }
 .font-class{
     font-size: 22px;
+}
+
+/*字颜色*/
+.font-black{
+    color: black;
+}
+.font-grey{
+    color: rgba(0,0,0,0.6);;
+}
+.font-blue{
+    color: #0078fe;
+}
+.font-yellow{
+    color: orange;
+}
+.font-green{
+    color: green;
+}
+.font-white{
+    color: white;
+}
+
+/**/
+.bg-white{
+    background-color: white !important;
+}
+.bg-grey{
+    background-color: #EEEEEE !important;
 }
 
 /**/
@@ -106,7 +145,7 @@ h3, h4, h5, p{
 @media only screen and (max-width: 299px) {
     body:after{
         width: 700px; height: 100%;
-        content:"页面宽度太小！";
+        content:"minWidth=300px！";
         position:fixed; top: 0;
         text-align: left;
         padding: 0 0 0 20px;
@@ -268,7 +307,44 @@ img{
     font-size: 32px;
 }
 
-.back-div{
-    padding: 20px 10px;
-    font-size: 16px;
+
+.class-tab-item{
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    padding: 5px 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    float: left;
+    margin-bottom: 10px;
+}
+.class-tab-item-active{
+    background-color: #0078fe;
+    color: white;
+}
+
+.phb-div{ /*h=36px*/
+    display: inline-block;
+    font-weight: 600;
+    font-size: 14px;
+    background-color: black;
+    /*border-top-right-radius: 5px;*/
+    /*border-bottom-right-radius: 5px;*/
+    padding: 4px 4px;
+    border-radius: 5px;
+}
+.phb-1{
+    color: white;
+    background-color: transparent;
+    letter-spacing: 1px;
+    border-radius: 0px;
+    padding: 2px 2px;
+    float: left;
+}
+.phb-2{
+    color: black;
+    background-color: orange;
+    letter-spacing: 0px;
+    border-radius: 4px;
+    padding: 2px 2px;
+    float: left;
 }

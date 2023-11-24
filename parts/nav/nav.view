@@ -1,0 +1,12 @@
+<!--每个页面的脚部信息-->
+<nav class="nav-content select-none hide">
+    <div class="nav-title-div">
+<!--        <img class="nav-app-logo a-click click" src="" data-src="favicon.ico" data-href="./" data-target="_self"/>-->
+    </div>
+    <div class="nav-a-div hide">
+        <div class="tab-item font-text a-click click tab-item-home" data-href="./" data-target="_self" title="Home">Home</div>
+
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+</nav>

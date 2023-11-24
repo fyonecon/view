@@ -62,15 +62,60 @@ function frame_loaded(e, route){
         make_cache_files();
     }, 2000);
 
+    // 渲染nav、foot、left
+    //
+    // let nav_black_route = ["search"];
+    // if (nav_black_route.includes(route)) {
+    //     // 不加载
+    // }else { // 有就加载
+    //     view.write_js([
+    //         cdn_page_file+"parts/nav/nav.js",
+    //     ], function (){
+    //         start_nav();
+    //     });
+    // }
+    // //
+    // let foot_black_route = ["", "search"];
+    // if (foot_black_route.includes(route)) {
+    //     // 不加载
+    // }else { // 有就加载
+    //     view.write_js([
+    //         cdn_page_file+"parts/foot/foot.js",
+    //     ], function (){
+    //         start_foot();
+    //     });
+    // }
+
 }
 
 // 初始化page页面的开始函数，负责page事件
 function page_init(e, route){
     if(!navigator.webdriver){
-        if (route === "login" || route === "404" || route === "help" || route === ""){
+
+        // 检查是否由admin_token
+        login_token = view.get_data("login_token");
+        login_id = view.get_data("login_id")*1;
+        login_level = view.get_data("login_level")*1;
+        login_name = view.get_data("login_name");
+        login_nickname = view.get_data("login_nickname");
+
+        if (route === "login" || route === "404"|| route === "home_chatgpt" || route === "home_help" || route === "help"  || route === "search" || route === "" || route === "home" || route === "cat" || route === "tts"){
             start_page(e);
         } else { // 不是login的话就直接检查是否已经登录
-            check_admin_token(e, route);
+
+            // 处理是否过期
+            let login_time = view.get_data("login_time");
+            let now_time = view.time_s();
+            if (!login_time){
+                view.set_data("login_time", now_time);
+            }
+            let timeout = now_time - login_time;
+
+            if (login_token && login_id && login_level && timeout<login_timeout){
+                check_admin_token(e, route);
+            }else {
+                must_login("请先登录");
+            }
         }
     }else {
         view.alert_txt("请不要使用模拟浏览器操作页面信息！", "long", "clear");

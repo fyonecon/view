@@ -391,7 +391,7 @@ function run_search() { // 执行搜索
     setTimeout(function() {
         delete_loading();
         document.getElementById("input").value = "";
-    }, 3000);
+    }, 2000);
 
     // 校验关键词
     try{
@@ -1219,11 +1219,6 @@ $(document).on("click", ".timer-span", function (){
     // view.show_mask(200);
     // speak_time();
 });
-$(document).on("click", ".rights-pwa", function (){
-    let that = $(this);
-    window.open("https://cdnaliyun.oss-cn-hangzhou.aliyuncs.com", "_blank"); // 必须是https
-});
-
 
 let timer1_interval;
 
@@ -1263,7 +1258,7 @@ function start_page(info) {
         // $(".contact-div").removeClass("hide");
         $(".battery-model-div").removeClass("hide");
     }else { // m
-        $(".qr-div").removeClass("hide");
+        // $(".qr-div").removeClass("hide");
         // $(".timer-div").removeClass("hide");
     }
 

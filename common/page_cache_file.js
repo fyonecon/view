@@ -146,7 +146,7 @@ function make_cache_files(){
             view.cache_file(key, file, false);
         }
     }else {
-        console.log("'自动更新缓存'已关闭，主动清理特定旧缓存。");
+        view.log("'自动更新缓存'已关闭，主动清理特定旧缓存。");
         clear_cache_files();
     }
 }
