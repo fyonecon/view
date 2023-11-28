@@ -3,6 +3,7 @@
 
 // 框架依赖的其他js文件，注意这里是框架依赖的，最先载入的依赖文件。
 const map_cache = new Map(); // 设置页面键-值对缓存
+let lang_eq = 0; // 翻译的数组的下标
 const view = {
     log: function (txt, info) { // 日志打印统一函数
         if (txt === 0 || txt === "0") {}else {if (!txt){txt = "空txt，-log";} }
@@ -565,7 +566,7 @@ const view = {
             '   <div class="div-alert_txt-bg" style="z-index:'+ (alert_txt_index + 700000)  +';"></div>' +
             '   <div class="clear"></div>' +
             '</div>';
-        $("body").append(div);
+        $("#depend").append(div);
 
         if (!timeout || timeout < 200 || timeout > 60*60*1000){ // 默认
             timeout = 3000;
@@ -590,7 +591,7 @@ const view = {
 
         // 制作容器盒子
         if (!$(".notice_txt-box").length){
-            $("body").append('<div class="notice_txt-box"></div>');
+            $("#depend").append('<div class="notice_txt-box"></div>');
         }
 
         // notice_txt层级形态显示
@@ -1038,10 +1039,43 @@ const view = {
     },
     set_txt_logo: function (_class, txt1, txt2){
         let that = this;
-        let txt_logo = '<div class="txt-logo-div phb-div select-none hover"><div class="phb-1">'+txt1+'</div><div class="phb-2">'+txt2+'</div><div class="clear"></div></div>';
+        let txt_logo = '<div class="txt-logo-div phb-div select-none hover a-click" data-href="./" data-target="_self"><div class="phb-1">'+txt1+'</div><div class="phb-2">'+txt2+'</div><div class="clear"></div></div>';
         $("."+_class).html(txt_logo);
     },
+    set_html_lang: function (lang){
+        let that = this;
+        if (!lang){ lang = navigator.language; }
+        $("html").attr("lang", lang);
+    },
+    pure_page_extensions: function (){ // 清除加入页面的扩展程序（如：运营商广告、浏览器插件）。建议只在页面启动后运行一次，不建议多次运行。
+        let that = this;
+        // 节点
+        let div = $("#pure-browser-div").nextAll();
+        let body = $("body").nextAll();
+        let head = $("head").prevAll();
+        // 非法节点数量
+        let num = div.length + body.length + head.length;
+        // 清除节点
+        div.remove();
+        body.remove();
+        head.remove();
 
+        return num;
+    },
+    set_lang_eq: function (){ // 设置中英翻译的下标
+        // const txt_translate = { // 举例
+        //     name: ["zh", "en"],
+        // }
+        // let txt = txt_translate.name[lang_eq];
+        let browserLang = (navigator.language).toLowerCase();
+        if(browserLang.indexOf('zh') !== -1) {
+            lang_eq = 0;
+        }else if(browserLang.indexOf('en') !== -1) {
+            lang_eq = 1;
+        }else{
+            console.log("lang_eq=", browserLang);
+        }
+    }
 
 };
 

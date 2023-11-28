@@ -2,7 +2,7 @@
 let kw_word = "";
 
 function jump_location(engine, word, url) {
-    let page_time = view.time_date("YmdWHis");
+    let page_time = view.time_date("YmdWHi00");
     let _word = '';
 
     // 1-匹配到外部链接
@@ -163,7 +163,7 @@ function jump_location(engine, word, url) {
             return;
         }
 
-        view.title("Opening "+_word+ " " + " Using "+_engine);
+        view.title("Opening keywords" + " with " + _engine);
 
     }
 

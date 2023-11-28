@@ -350,6 +350,7 @@ function depend_pages(){
 
 // 入口
 (function (){
+    view.set_lang_eq();
     if (block_wechat && (view.is_weixin() || view.is_qq() || view.is_dingding())){
         view.title("😅");
         view.alert_txt("本网站禁止在 微信、QQ、钉钉 中打开。<br/>请使用外部浏览器。", "long");

@@ -90,19 +90,20 @@ function frame_loaded(e, route){
 
 // 初始化page页面的开始函数，负责page事件
 function page_init(e, route){
+    // 处理非法节点，建议只在页面启动后运行一次，不建议多次运行。
+    view.pure_page_extensions();
+    // 处理登录
     if(!navigator.webdriver){
-
         // 检查是否由admin_token
         login_token = view.get_data("login_token");
         login_id = view.get_data("login_id")*1;
         login_level = view.get_data("login_level")*1;
         login_name = view.get_data("login_name");
         login_nickname = view.get_data("login_nickname");
-
-        if (route === "login" || route === "404"|| route === "home_chatgpt" || route === "home_help" || route === "help"  || route === "search" || route === "" || route === "home" || route === "cat" || route === "tts"){
+        //
+        if (route === "login" || route === "404"|| route === "home_help" || route === "help"  || route === "search" || route === "" || route === "home"){ // 白名单
             start_page(e);
         } else { // 不是login的话就直接检查是否已经登录
-
             // 处理是否过期
             let login_time = view.get_data("login_time");
             let now_time = view.time_s();
