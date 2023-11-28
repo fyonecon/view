@@ -55,13 +55,6 @@ function frame_loaded(e, route){
         }
     });
 
-    // 自动清除缓存
-    auto_clear_cache_files();
-    // 主动缓存文件
-    setTimeout(function (){
-        make_cache_files();
-    }, 2000);
-
     // 渲染nav、foot、left
     //
     // let nav_black_route = ["search"];

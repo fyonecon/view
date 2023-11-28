@@ -24,3 +24,35 @@
 .notice-blue{background: rgba(60,140,255,0.8) !important;} .notice-blue>.notice_txt-show{color: black !important;}
 .notice_txt-show{font-size: 15px;color: #f5f5f5;letter-spacing: 1px;line-height: 24px;max-height: 96px;overflow: hidden;text-align: center;}
 .notice_txt-close{position: absolute;width: 30px;text-align: center;right: 1px;top: 4px;line-height: 30px;font-size: 16px;color: red;font-weight: 700;}
+.div-alert_confirm{line-height: 20px;font-size: 14px;color: #f5f5f5;letter-spacing: 0px;text-align: center;width: 280px;min-height: 20px;overflow: hidden;background: rgba(81,81,81,0.9);border-radius: 5px;border: 1px solid rgba(245,245,245,0.5);position: fixed;/*z-index: 9800000;*/left: 0;right: 0;top: calc(50% - 150px);margin: auto;}
+.div-alert_txt-title{
+    line-height: 40px;
+    height: 40px;
+    padding: 0 15px;
+    text-align: left;
+    font-weight: 600;
+    border: 1px solid rgba(245,245,245,0.2);
+}
+.div-alert_txt-msg{
+    padding: 10px 15px 10px 15px;
+    line-height: 24px;
+    text-align: left;
+}
+.div-alert_txt-btn{
+    padding: 20px 10px 20px 10px;
+    font-weight: 600;
+}
+.div-alert_txt-btn-no{
+    padding: 8px 30px;
+    border-radius: 5px;
+    background-color: red;
+    color: white;
+    margin-left: 20px;
+}
+.div-alert_txt-btn-yes{
+    padding: 8px 30px;
+    border-radius: 5px;
+    background-color: rgba(245,245,245,1);
+    color: black;
+    margin-right: 20px;
+}

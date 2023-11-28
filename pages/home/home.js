@@ -9,26 +9,26 @@ const _search_jump = "";
 const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。自定义。
     {
         "name": "Bing",
-        "m-url": "./?route=search&engine=bing&cache=_page_time_&word=",
-        "pc-url": "./?route=search&engine=bing&cache=_page_time_&word=",
+        "m-url": "?route=search&engine=bing&cache=_page_time_&word=",
+        "pc-url": "?route=search&engine=bing&cache=_page_time_&word=",
         "url_right": "",
     },
     {
         "name": "Baidu",
-        "m-url": "./?route=search&engine=baidu&cache=_page_time_&word=",
-        "pc-url": "./?route=search&engine=baidu&cache=_page_time_&word=",
+        "m-url": "?route=search&engine=baidu&cache=_page_time_&word=",
+        "pc-url": "?route=search&engine=baidu&cache=_page_time_&word=",
         "url_right": "",
     },
     {
         "name": "Google", // 引擎名称，可视5个字
-        "m-url": "./?route=search&engine=google&cache=_page_time_&word=", // 移动端，前缀
-        "pc-url": "./?route=search&engine=google&cache=_page_time_&word=", // PC端，前缀
+        "m-url": "?route=search&engine=google&cache=_page_time_&word=", // 移动端，前缀
+        "pc-url": "?route=search&engine=google&cache=_page_time_&word=", // PC端，前缀
         "url_right": "", // 参数的固顶后缀
     },
     {
         "name": "DuckDuckGo", // 引擎名称，可视5个字
-        "m-url": "./?route=search&engine=duckduckgo&cache=_page_time_&word=", // 移动端，前缀
-        "pc-url": "./?route=search&engine=duckduckgo&cache=_page_time_&word=", // PC端，前缀
+        "m-url": "?route=search&engine=duckduckgo&cache=_page_time_&word=", // 移动端，前缀
+        "pc-url": "?route=search&engine=duckduckgo&cache=_page_time_&word=", // PC端，前缀
         "url_right": "", // 参数的固顶后缀
     },
     {
@@ -40,39 +40,39 @@ const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。�
 
     // {
     //     "name": "Yandex", // 引擎名称，可视5个字
-    //     "m-url": "./?route=search&engine=yandex&cache=_page_time_&word=", // 移动端，前缀
-    //     "pc-url": "./?route=search&engine=yandex&cache=_page_time_&word=", // PC端，前缀
+    //     "m-url": "?route=search&engine=yandex&cache=_page_time_&word=", // 移动端，前缀
+    //     "pc-url": "?route=search&engine=yandex&cache=_page_time_&word=", // PC端，前缀
     //     "url_right": "", // 参数的固顶后缀
     // },
     // {
     //     "name": "头条搜索", // 引擎名称，可视5个字
-    //     "m-url": "./?route=search&engine=m_toutiao&cache=_page_time_&word=", // 移动端，前缀
-    //     "pc-url": "./?route=search&engine=toutiao&cache=_page_time_&word=", // PC端，前缀
+    //     "m-url": "?route=search&engine=m_toutiao&cache=_page_time_&word=", // 移动端，前缀
+    //     "pc-url": "?route=search&engine=toutiao&cache=_page_time_&word=", // PC端，前缀
     //     "url_right": "", // 参数的固顶后缀
     // },
     // {
     //     "name": "搜狗搜索", // 引擎名称，可视5个字
-    //     "m-url": "./?route=search&engine=m_sogou&cache=_page_time_&word=", // 移动端，前缀
-    //     "pc-url": "./?route=search&engine=sogou&cache=_page_time_&word=", // PC端，前缀
+    //     "m-url": "?route=search&engine=m_sogou&cache=_page_time_&word=", // 移动端，前缀
+    //     "pc-url": "?route=search&engine=sogou&cache=_page_time_&word=", // PC端，前缀
     //     "url_right": "", // 参数的固顶后缀
     // },
     {
         "name": "微信文章", // 引擎名称，可视5个字
-        "m-url": "./?route=search&engine=weixin&cache=_page_time_&word=", // 移动端，前缀
-        "pc-url": "./?route=search&engine=weixin&cache=_page_time_&word=", // PC端，前缀
+        "m-url": "?route=search&engine=weixin&cache=_page_time_&word=", // 移动端，前缀
+        "pc-url": "?route=search&engine=weixin&cache=_page_time_&word=", // PC端，前缀
         "url_right": "", // 参数的固顶后缀
     },
     {
         "name": "英文电影",
-        "m-url": "./?route=search&engine=video&cache=_page_time_&word=",
-        "pc-url": "./?route=search&engine=video&cache=_page_time_&word=",
+        "m-url": "?route=search&engine=video&cache=_page_time_&word=",
+        "pc-url": "?route=search&engine=video&cache=_page_time_&word=",
         "url_right": "",
     },
 
     {
         "name": "收费音乐",
-        "m-url": "./?route=search&engine=music&cache=_page_time_&word=",
-        "pc-url": "./?route=search&engine=music&cache=_page_time_&word=",
+        "m-url": "?route=search&engine=music&cache=_page_time_&word=",
+        "pc-url": "?route=search&engine=music&cache=_page_time_&word=",
         "url_right": "",
     },
     {
@@ -90,20 +90,20 @@ const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。�
 
     {
         "name": "东坡下载",
-        "m-url": "./?route=search&engine=dpxz_download&cache=_page_time_&word=",
-        "pc-url": "./?route=search&engine=dpxz_download&cache=_page_time_&word=",
+        "m-url": "?route=search&engine=dpxz_download&cache=_page_time_&word=",
+        "pc-url": "?route=search&engine=dpxz_download&cache=_page_time_&word=",
         "url_right": "",
     },
     {
         "name": "查IP、域名",
-        "m-url": "./?route=search&engine=ipdomain&cache=_page_time_&word=",
-        "pc-url": "./?route=search&engine=ipdomain&cache=_page_time_&word=",
+        "m-url": "?route=search&engine=ipdomain&cache=_page_time_&word=",
+        "pc-url": "?route=search&engine=ipdomain&cache=_page_time_&word=",
         "url_right": "",
     },
     {
         "name": "域名Whois",
-        "m-url": "./?route=search&engine=whois&cache=_page_time_&word=",
-        "pc-url": "./?route=search&engine=whois&cache=_page_time_&word=",
+        "m-url": "?route=search&engine=whois&cache=_page_time_&word=",
+        "pc-url": "?route=search&engine=whois&cache=_page_time_&word=",
         "url_right": "",
     },
 
@@ -329,7 +329,7 @@ function run_search() { // 执行搜索
     }
     let _select = document.getElementById("select");
     let engine = _select.options[_select.selectedIndex].value;
-    let tab_url = "";
+    let tab_url;
 
     if (!_input.trim()) {
         console_log("内容不能为空");
@@ -338,7 +338,7 @@ function run_search() { // 执行搜索
         return;
     }
 
-    let reg = /^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)+([A-Za-z0-9-~\/])/; // 至少是 http://a 这种格式
+    let reg = /^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)+([A-Za-z0-9-~\/])/; // 至少是 http://a 或 https://a这种格式
     if (!reg.test(_input)) {
         console_log("不是网址");
 
@@ -374,13 +374,10 @@ function run_search() { // 执行搜索
                 console_log("PC");
             }
         }
-
         // 替换时间戳
-        tab_url = tab_url.replaceAll("_page_time_", view.time_date("YmdHisW"));
-
+        tab_url = search_url + tab_url.replaceAll("_page_time_", view.time_date("YmdWHis"));
     } else {
         console_log("是网址");
-
         tab_url = _input;
     }
 
@@ -400,12 +397,12 @@ function run_search() { // 执行搜索
             view.log("匹配到了关键词："+kw_state, _input);
         }else {
             view.log("未匹配到关键词："+kw_state, _input);
-            window.open(tab_url, "_blank");
+            view.window_open(tab_url, "_blank");
         }
     }catch (e){
         console.error(e);
         console.error("匹配关键词运行时报错", _input);
-        window.open(tab_url, "_blank");
+        view.window_open(tab_url, "_blank");
     }
 
 }
@@ -420,7 +417,7 @@ function init_dom() {
         //
         '<div class="search-btn-center do-btn-center must-btn select-none">' +
         '   <div class="search-btn-style history-btn-span click red" title="清空搜索历史记录" data-clipboard-text=" ">'+txt_translate.clear_history[lang_eq]+'</div>' +
-        '   <div class="search-btn-style refresh-btn-span click " title="重新输入内容">'+txt_translate.reenter[lang_eq]+'</div>' +
+        '   <div class="search-btn-style refresh-btn-span click " title="重新输入内容" >'+txt_translate.reenter[lang_eq]+'</div>' +
         '   <div class="search-btn-style search-btn-span click" title="点击搜索">🔍'+txt_translate.search[lang_eq]+'</div>' +
         '   <div class="clear"></div>' +
         '</div>' +
@@ -693,16 +690,19 @@ function init_dom() {
     // });
     document.getElementsByClassName("history-btn-span")[0].addEventListener("click", function() {
         let that = this;
-        let ok= window.confirm("\n ⚠ "+txt_translate.clear_history_alert[lang_eq]+" \n");
-        if (ok === true){ // OK
-            view.show_mask(400);
-            clear_history();
-            document.getElementById("input").value = "";
-            clear_copy(that, "history-btn-span");
-        } else { // 取消
-            view.alert_txt(txt_translate.cancel_doing[lang_eq], 1000);
-            clear_copy(that, "history-btn-span");
-        }
+        //
+        view.alert_confirm("⚠️", txt_translate.clear_history_alert[lang_eq], function (state, class_name){
+            view.log(state, class_name);
+            if (state){
+                view.show_mask(400);
+                clear_history();
+                document.getElementById("input").value = "";
+                clear_copy(that, "history-btn-span");
+            }else{
+                clear_copy(that, "history-btn-span");
+            }
+
+        });
     });
     document.getElementsByClassName("refresh-btn-span")[0].addEventListener("click", function() {
         view.show_mask(200);
@@ -1027,7 +1027,7 @@ function href_ext(that) {
     console_log(el_href);
 
     if (el_href) {
-        window.open(el_href, "_blank");
+        view.window_open(el_href, "_blank");
     } else {
         view.alert_txt("参数不能为空", 2000);
         console_log("参数不能为空");
@@ -1229,7 +1229,7 @@ const txt_translate = {
     reenter:  ["重新输入", "Rewrite"],
     search:  ["搜 索", "Search"],
     input_placeholder:  ["输入搜索关键词", "Enter Search Keywords"],
-    keywords_null:  ["搜索内容不能为空", "The Search Content Cannot Be Empty"],
+    keywords_null:  ["搜索内容不能为空", "The Input Cannot Be Empty"],
     cancel_doing:  ["已取消操作", "Operation Canceled"],
     battery_on:  ["节能：已开", "Energy Conservation: ON"],
     battery_off:  ["节能：已关", "Energy Conservation: OFF"],

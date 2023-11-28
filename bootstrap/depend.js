@@ -9,7 +9,6 @@
 const depend_load_file = {
     "js": [
         "routes/route.js", // 路由文件
-        "common/page_cache_file.js", // 设置页面文件缓存
         "common/page_init.js", // 解析完路由后的操作
         "common/page_safe.js", // 用户全局安全校验
     ],

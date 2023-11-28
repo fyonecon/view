@@ -546,6 +546,40 @@ const view = {
         ];
 
     },
+    alert_confirm: function (title, msg, call_func) { // 文字提醒弹窗，会遮挡页面操作。(文字，超时时间，清除所有提示<仅限不为long时>)
+        let that = this;
+
+        // alert_txt层级形态显示
+        let alert_confirm_index = that.get_cache("alert_confirm_index")*1;
+        if (!alert_confirm_index){
+            alert_confirm_index = 9000000;
+        }else {
+            alert_confirm_index = alert_confirm_index + 10;
+        }
+        that.set_cache("alert_confirm_index", alert_confirm_index);
+
+        //that.log(["alert_txt", txt, timeout, clear, alert_txt_index]);
+        let class_name = "alert_confirm_" + alert_confirm_index;
+
+        let div = '<div class="'+class_name+' div-alert_confirm select-none" style="z-index:'+alert_confirm_index+';">' +
+            '   <div class="div-alert_txt-title">'+title+'</div>' +
+            '   <div class="div-alert_txt-msg">'+ msg +'</div>' +
+            '   <div class="div-alert_txt-btn"><span class="div-alert_txt-btn-no click float-left">No</span><span class="div-alert_txt-btn-yes click float-right">Yes</span><div class="clear"></div></div>' +
+            '   <div class="clear"></div>' +
+            '</div>';
+        $("#depend").append(div);
+        // 确认
+        $(document).on("click", ".div-alert_txt-btn-yes", function (){
+            call_func(true, class_name);
+            $("."+class_name).remove();
+        });
+        // 取消
+        $(document).on("click", ".div-alert_txt-btn-no", function (){
+            call_func(false, class_name);
+            $("." + class_name).remove();
+        });
+
+    },
     alert_txt: function (txt, timeout, clear) { // 文字提醒弹窗，会遮挡页面操作。(文字，超时时间，清除所有提示<仅限不为long时>)
         let that = this;
 
@@ -756,7 +790,7 @@ const view = {
         return navigator.webdriver;
     },
     is_url: function (url){ // 检查是否是完整网址
-        let reg=/^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~\/])+$/;
+        let reg = /^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)+([A-Za-z0-9-~\/])/;
         if(reg.test(url)){
             return true;
         }else{
@@ -1075,7 +1109,38 @@ const view = {
         }else{
             console.log("lang_eq=", browserLang);
         }
-    }
+    },
+    ping_url: function (url, call_func){ // 检查网址是否可用，也可用于检查网址协议是否可用如https是否可用
+        $.ajax({
+            type: "GET",
+            cache: false,
+            url: url,
+            data: "",
+            success: function () {
+                call_func(1);
+            },
+            error: function () {
+                call_func(0);
+            }
+        });
+    },
+    is_wails: function (){
+        let that = this;
+        let url = window.location.host;
+        return (url.toLowerCase().indexOf("wails") !== -1);
+    },
+    window_open: function (url, target){
+        let that = this;
+        if (that.is_wails()){
+            if (that.is_url(url)){
+                window.wailsJS.window_open(url); // 注意，启动此函数需要完整的网址（如http、https开头的）
+            }else{
+                console.log("启动此函数需要完整的网址（如http、https开头的）：", url);
+            }
+        }else{
+            window.open(url, target);
+        }
+    },
 
 };
 

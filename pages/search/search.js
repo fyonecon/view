@@ -11,7 +11,7 @@ function jump_location(engine, word, url) {
         kw_word=word;
         view.title("正在打开kws对应的内容");
         view.write_js(
-            [kws_url+"kws.js?cache="+view.time_date("YmdHWis")], function (bool){
+            [kws_url+".cache/js/kws.js?cache="+view.time_date("YmdHWis")], function (bool){
                 try{
                     kws.load(kw_word);
                 }catch (w){
@@ -29,9 +29,7 @@ function jump_location(engine, word, url) {
         view.hide_loading();
         $(".back-div").removeClass("hide");
 
-        let domain = window.location.host;
-
-        let show_txt = "http://"+domain+"/view/view.html?route=search&engine=bing&word=%s";
+        let show_txt = search_url + "?route=search&engine=bing&word=%s";
         $(".match-kw-span-msg").html("自定义必应搜索引擎（点击可复制）：");
         $(".match-kw-span-txt").html(show_txt).attr("data-clipboard-text", show_txt);
 
@@ -43,9 +41,7 @@ function jump_location(engine, word, url) {
         view.hide_loading();
         $(".back-div").removeClass("hide");
 
-        let domain = window.location.host;
-
-        let show_txt = "http://"+domain+"/view/view.html?route=search&engine=baidu&word=%s";
+        let show_txt = search_url + "?route=search&engine=baidu&word=%s";
         $(".match-kw-span-msg").html("自定义百度搜索引擎（点击可复制）：");
         $(".match-kw-span-txt").html(show_txt).attr("data-clipboard-text", show_txt);
 
@@ -57,9 +53,7 @@ function jump_location(engine, word, url) {
         view.hide_loading();
         $(".back-div").removeClass("hide");
 
-        let domain = window.location.host;
-
-        let show_txt = "http://"+domain+"/view/view.html?route=search&engine=google&word=%s";
+        let show_txt = search_url + "?route=search&engine=google&word=%s";
         $(".match-kw-span-msg").html("自定义Google搜索引擎（点击可复制）：");
         $(".match-kw-span-txt").html(show_txt).attr("data-clipboard-text", show_txt);
 
