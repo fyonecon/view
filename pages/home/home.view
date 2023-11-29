@@ -1,5 +1,5 @@
 
-<div class="home-content" style="position: relative;">
+<div class="home-content select-none" style="position: relative;">
 
     <!--code标签设置等宽字-->
     <code>
@@ -13,9 +13,10 @@
         <div class="rights-div">
             <span class="right-span rights-pwa click hide a-click" data-href="https://cdnaliyun.oss-cn-hangzhou.aliyuncs.com" data-target="_blank" title="Install WebApp">PWA App</span>
             <span class="right-span rights-date hide" title="2019年至今"></span>
-            <span class="right-span click">
-                <a class="help-a a-click" data-href="./?route=home_help" data-target="_self" style="color: inherit;" title="">Help</a>
+            <span class="right-span">
+                <a class="help-a a-click click" data-href="./?route=home_help" data-target="_self" style="color: inherit;" title="">Help</a>
             </span>
+            <span class="right-span click a-click" data-href="./" data-target="_self" title="Install WebApp">Refresh</span>
         </div>
 
         <!--        -->

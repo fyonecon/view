@@ -32,7 +32,7 @@ function make_paging(id, total, limit, page, page_hash, call_func){
 // 绑定跳转
 $(document).on("click", ".a-click", function (){
     let that = $(this);
-    view.show_mask(1800);
+    view.show_mask(1200);
     let href = that.attr("data-href");
     let target = that.attr("data-target");
     target = target?target:"_self";
