@@ -759,7 +759,7 @@ const view = {
         let that = this;
         //that.log([big_string, small_string]); // -1表示不包含
         let index = big_string.indexOf(small_string);
-        if ( index !== -1){ // 包含该字符串
+        if ( index !== -1){ // 包含该字符串 >=0
             return index;
         }else {
             return -1;
@@ -920,7 +920,8 @@ const view = {
         let href = location.href; href = encodeURIComponent(href);
         let refer = document.referrer; refer = encodeURIComponent(refer);
         iframe_div.innerHTML = "";
-        iframe.setAttribute("width", window.innerWidth);
+        iframe.setAttribute("width", "100%");
+        // iframe.setAttribute("width", window.innerWidth);
         iframe.setAttribute("height", window.innerHeight);
         iframe.setAttribute("scrolling", "yes");
         iframe.setAttribute("frameborder", "0");

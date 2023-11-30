@@ -15,7 +15,7 @@ const route_404       = "?route=404";   // 404
 const page_time       = "cache=" + index_func.MakeDate("YmdWHi");
 
 const api_url         = "./";  // api主地址
-const kws_url         = "." + "/view/";
+const kws_url         = "http://view.ggvs.net" + "/view/";
 const search_url      = "http://view.ggvs.net" + "/view/view.html";
 
 // 白名单host或refer域名

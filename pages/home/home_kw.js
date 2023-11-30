@@ -1,7 +1,7 @@
 // 输入kw@关键词时对应
 function home_kw(_word){
     let word = decodeURIComponent(_word);
-    view.log([_word, word]);
+    view.log("对比字符串：", [_word, word]);
     let state = true;
     let url = "";
     if (word === "kw@首页" || word === "kw@home" || word === "kw@" || word === "kw@fresh" || word === "kw@refresh"){
@@ -78,9 +78,23 @@ function home_kw(_word){
         view.notice_txt("已隐藏整点报时切换按钮", 2000);
         $(".on-hour-div").removeClass("hide");
     }
+    else if (view.string_include_string(word, "kw@url=") >= 0){
+        view.notice_txt("打开网址", 2000);
+        let dom_id = "content-bg";
+        let url = word.replace("kw@url=", "");
+        // 初始化
+        view.del_xss_iframe(dom_id);
+        $("#"+dom_id).css({"z-index": 80});
+        // 重新渲染
+        view.xss_iframe(dom_id, url, function (url){
+            $("#"+dom_id).css({"z-index": 120});
+        });
+        return true;
+    }
 
     else { // 未匹配
         state = false;
     }
+
     return state;
 }

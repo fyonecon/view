@@ -828,6 +828,8 @@ function init_color() {
     let body = document.getElementsByClassName("body")[0];
     let select = document.getElementsByTagName("select")[0];
     let input = document.getElementsByTagName("input")[0];
+    let search_btn = document.getElementsByClassName("search-btn-style");
+    let input_history = document.getElementById("input-history");
     console_log("设置色：" + bg_color);
 
     if (bg_color === 0) { // 亮
@@ -849,6 +851,24 @@ function init_color() {
         input.classList.remove("input-color-yellow");
         select.classList.remove("select-color-ivory");
         input.classList.remove("input-color-ivory");
+
+        input_history.classList.remove("search-bg-light");
+        input_history.classList.remove("search-bg-black");
+        input_history.classList.remove("search-bg-grey");
+        input_history.classList.remove("search-bg-yellow");
+        input_history.classList.remove("search-bg-ivory");
+        input_history.classList.add("search-bg-light");
+
+        try {
+            for (let s=0; s<search_btn.length; s++){
+                search_btn[s].classList.remove("search-bg-light");
+                search_btn[s].classList.remove("search-bg-black");
+                search_btn[s].classList.remove("search-bg-grey");
+                search_btn[s].classList.remove("search-bg-yellow");
+                search_btn[s].classList.remove("search-bg-ivory");
+                search_btn[s].classList.add("search-bg-light");
+            }
+        }catch (e) {}
     }
     else if (bg_color === 1) { // 暗
         change_color_span.innerHTML = "昏黑";
@@ -869,6 +889,24 @@ function init_color() {
         input.classList.remove("input-color-yellow");
         select.classList.remove("select-color-ivory");
         input.classList.remove("input-color-ivory");
+
+        input_history.classList.remove("input_history-search-bg-light");
+        input_history.classList.remove("input_history-search-bg-black");
+        input_history.classList.remove("input_history-search-bg-grey");
+        input_history.classList.remove("input_history-search-bg-yellow");
+        input_history.classList.remove("input_history-search-bg-ivory");
+        input_history.classList.add("input_history-search-bg-black");
+
+        try {
+            for (let s=0; s<search_btn.length; s++){
+                search_btn[s].classList.remove("search-bg-light");
+                search_btn[s].classList.remove("search-bg-black");
+                search_btn[s].classList.remove("search-bg-grey");
+                search_btn[s].classList.remove("search-bg-yellow");
+                search_btn[s].classList.remove("search-bg-ivory");
+                search_btn[s].classList.add("search-bg-black");
+            }
+        }catch (e) {}
     }
     else if (bg_color === 2) { // 灰
         change_color_span.innerHTML = "岩灰";
@@ -889,6 +927,24 @@ function init_color() {
         input.classList.remove("input-color-yellow");
         select.classList.remove("select-color-ivory");
         input.classList.remove("input-color-ivory");
+
+        input_history.classList.remove("input_history-search-bg-light");
+        input_history.classList.remove("input_history-search-bg-black");
+        input_history.classList.remove("input_history-search-bg-grey");
+        input_history.classList.remove("input_history-search-bg-yellow");
+        input_history.classList.remove("input_history-search-bg-ivory");
+        input_history.classList.add("input_history-search-bg-grey");
+
+        try {
+            for (let s=0; s<search_btn.length; s++){
+                search_btn[s].classList.remove("search-bg-light");
+                search_btn[s].classList.remove("search-bg-black");
+                search_btn[s].classList.remove("search-bg-grey");
+                search_btn[s].classList.remove("search-bg-yellow");
+                search_btn[s].classList.remove("search-bg-ivory");
+                search_btn[s].classList.add("search-bg-grey");
+            }
+        }catch (e) {}
     }
 
     else if (bg_color === 3) { // 黄
@@ -910,6 +966,24 @@ function init_color() {
         input.classList.add("input-color-yellow");
         select.classList.remove("select-color-ivory");
         input.classList.remove("input-color-ivory");
+
+        input_history.classList.remove("input_history-search-bg-light");
+        input_history.classList.remove("input_history-search-bg-black");
+        input_history.classList.remove("input_history-search-bg-grey");
+        input_history.classList.remove("input_history-search-bg-yellow");
+        input_history.classList.remove("input_history-search-bg-ivory");
+        input_history.classList.add("input_history-search-bg-yellow");
+
+        try {
+            for (let s=0; s<search_btn.length; s++){
+                search_btn[s].classList.remove("search-bg-light");
+                search_btn[s].classList.remove("search-bg-black");
+                search_btn[s].classList.remove("search-bg-grey");
+                search_btn[s].classList.remove("search-bg-yellow");
+                search_btn[s].classList.remove("search-bg-ivory");
+                search_btn[s].classList.add("search-bg-yellow");
+            }
+        }catch (e) {}
     }
     else if (bg_color === 4) { // 象牙
         change_color_span.innerHTML = "牙白";
@@ -930,6 +1004,24 @@ function init_color() {
         input.classList.remove("input-color-yellow");
         select.classList.add("select-color-ivory");
         input.classList.add("input-color-ivory");
+
+        input_history.classList.remove("input_history-search-bg-light");
+        input_history.classList.remove("input_history-search-bg-black");
+        input_history.classList.remove("input_history-search-bg-grey");
+        input_history.classList.remove("input_history-search-bg-yellow");
+        input_history.classList.remove("input_history-search-bg-ivory");
+        input_history.classList.add("input_history-search-bg-ivory");
+
+        try {
+            for (let s=0; s<search_btn.length; s++){
+                search_btn[s].classList.remove("search-bg-light");
+                search_btn[s].classList.remove("search-bg-black");
+                search_btn[s].classList.remove("search-bg-grey");
+                search_btn[s].classList.remove("search-bg-yellow");
+                search_btn[s].classList.remove("search-bg-ivory");
+                search_btn[s].classList.add("search-bg-ivory");
+            }
+        }catch (e) {}
     } else { // 默认
         view.alert_txt("无默认颜色，无法渲染")
     }
@@ -1252,6 +1344,7 @@ function start_page(info) {
         // },200);
         // $(".contact-div").removeClass("hide");
         $(".battery-model-div").removeClass("hide");
+        // $(".content-bg").addClass("hide");
     }else { // m
         // $(".qr-div").removeClass("hide");
         // $(".timer-div").removeClass("hide");
