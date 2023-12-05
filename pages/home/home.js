@@ -852,12 +852,12 @@ function init_color() {
         select.classList.remove("select-color-ivory");
         input.classList.remove("input-color-ivory");
 
-        input_history.classList.remove("search-bg-light");
-        input_history.classList.remove("search-bg-black");
-        input_history.classList.remove("search-bg-grey");
-        input_history.classList.remove("search-bg-yellow");
-        input_history.classList.remove("search-bg-ivory");
-        input_history.classList.add("search-bg-light");
+        input_history.classList.remove("input_history-search-bg-light");
+        input_history.classList.remove("input_history-search-bg-black");
+        input_history.classList.remove("input_history-search-bg-grey");
+        input_history.classList.remove("input_history-search-bg-yellow");
+        input_history.classList.remove("input_history-search-bg-ivory");
+        input_history.classList.add("input_history-search-bg-light");
 
         try {
             for (let s=0; s<search_btn.length; s++){
