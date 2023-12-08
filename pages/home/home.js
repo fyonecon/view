@@ -795,12 +795,37 @@ function update_history(input_value){
         }
 
     }else {
-        view.log("input_value不能为空")
+        view.log("input_value不能为空");
     }
 
+    // 自动处理历史记录，规则：start_history - new_history > 30 day，即表示无法在”长时间连续使用“的情况下，以前的历史即为fake历。
+    let len_day = 30*3; // 默认存3月
+    let input_history_start_time_key = "input_history_start_time";
+    let input_history_new_time_key = "input_history_new_time";
+    let input_history_start_time = view.get_data(input_history_start_time_key)*1;
+    let input_history_new_time = view.get_data(input_history_new_time_key)*1;
+    let input_history_len_time = len_day * 24 * 60 * 60; // 间隔时间，s
+    // 初始值
+    if (!input_history_start_time || input_history_start_time<0){
+        input_history_start_time = view.time_s()*1;
+    }
+    if (!input_history_new_time || input_history_new_time<0){
+        input_history_new_time = view.time_s()*1;
+    }
+    // 判断连续时间
+    if (input_history_new_time - input_history_start_time >= input_history_len_time){ // 不连续，重新计算时间
+        clear_history();
+    }else{ // 连续，更新最新的时间，即连续使用时，数据都为有效数据。
+        view.set_data(input_history_start_time_key, input_history_new_time);
+    }
 }
 function clear_history(){
     $("#input-history").html("");
+
+    let input_history_start_time_key = "input_history_start_time";
+    let input_history_new_time = view.time_s()*1;
+    view.set_data(input_history_start_time_key, input_history_new_time);
+
     let data_key = "input_history";
     return view.del_data(data_key);
 }
@@ -1396,6 +1421,7 @@ function hide_page(){
 
 function show_page(){
     view.log("前台状态，重新开启定时器");
+    show_history();
     timer1();
     timer1_interval = setInterval(function () {
         timer1();

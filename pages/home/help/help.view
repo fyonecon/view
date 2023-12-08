@@ -75,11 +75,11 @@
             <div class="cmd-li-explain">获取Google搜索引擎</div>
         </li>
 
-        <li class="cmd-li">
+        <li class="cmd-li hide">
             <div class="cmd-li-title">kw@clear_cache</div>
             <div class="cmd-li-explain">清除特定文件缓存，不包括历史搜索记录</div>
         </li>
-        <li class="cmd-li">
+        <li class="cmd-li hide">
             <div class="cmd-li-title">kw@clear_all_cache</div>
             <div class="cmd-li-explain">清除全部文件缓存</div>
         </li>

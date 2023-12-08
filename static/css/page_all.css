@@ -29,10 +29,9 @@ h3, h4, h5, p{
 
 .page-content{
     width: calc(100% - 0px);
-    padding: 50px 0px;
+    padding: 10px 0;
     overflow-x: hidden;
     min-height: 400px;
-    max-width: 1200px;
     margin-right: auto;
     margin-left: auto;
 }
