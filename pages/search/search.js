@@ -238,7 +238,7 @@ function jump_to_search_engine(state) {
     update_history(word); // 更新历史
 
     if (!engine){
-        let search_eq = view.get_cookie("search__eq");
+        let search_eq = view.get_data("search__eq");
         search_eq = 1*search_eq;
 
         if (search_eq === 0){

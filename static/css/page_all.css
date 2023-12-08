@@ -32,6 +32,7 @@ h3, h4, h5, p{
     padding: 10px 0;
     overflow-x: hidden;
     min-height: 400px;
+    max-width: 3840px;
     margin-right: auto;
     margin-left: auto;
 }

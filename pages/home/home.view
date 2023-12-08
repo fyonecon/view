@@ -13,11 +13,9 @@
         <div class="rights-div">
             <span class="right-span rights-pwa click hide a-click" data-href="https://cdnaliyun.oss-cn-hangzhou.aliyuncs.com" data-target="_blank" title="Install WebApp">PWA App</span>
             <span class="right-span rights-date hide" title="2019年至今"></span>
-            <span class="right-span">
-                <a class="help-a a-click click" data-href="./?route=home_help" data-target="_self" style="color: inherit;" title="">Help</a>
-            </span>
+            <span class="right-span a-click click" data-href="./?route=home_help" data-target="_self" title="Help Docs">Help</span>
             <span class="right-span click a-click" data-href="./" data-target="_self" title="Refresh the Page">Refresh</span>
-            <span class="right-span click window_close-span" title="Close the Tab or App">Close</span>
+            <span class="right-span click window_close-span hide" title="Close the Tab or App">Close</span>
         </div>
 
         <!--        -->
@@ -41,14 +39,12 @@
 
         <!--节能模式-->
         <div class="battery-model-div hide">
-            <span class="switch-battery_state click fixed-span-style" title=""></span>
+            <span class="switch-battery_state click fixed-span-style" title="点击切换节能模式"></span>
         </div>
 
         <!--切换颜色-->
         <div class="change-color-div hide">
-            <span class=" color-btn-span click fixed-span-style" title="">
-                🌓主题：<span id="change-color-span">昏黑</span>
-            </span>
+            <span class="color-btn-span click fixed-span-style" id="change_color_span" title="点击切换节主题色"></span>
             <div class="clear"></div>
         </div>
 

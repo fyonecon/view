@@ -844,12 +844,11 @@ function init_color() {
         }else { // dark
             bg_color = 2;
         }
-        // view.set_data(bg_cookie, bg_color);
     }else {
         bg_color = bg_color * 1;
     }
 
-    let change_color_span = document.getElementById("change-color-span");
+    let change_color_span = document.getElementById("change_color_span");
     let body = document.getElementsByClassName("body")[0];
     let select = document.getElementsByTagName("select")[0];
     let input = document.getElementsByTagName("input")[0];
@@ -858,7 +857,7 @@ function init_color() {
     console_log("设置色：" + bg_color);
 
     if (bg_color === 0) { // 亮
-        change_color_span.innerHTML = "雪白";
+        change_color_span.innerHTML = txt_translate.theme_name[0][lang_eq];
 
         body.classList.add("bg-light");
         body.classList.remove("bg-black");
@@ -896,7 +895,7 @@ function init_color() {
         }catch (e) {}
     }
     else if (bg_color === 1) { // 暗
-        change_color_span.innerHTML = "昏黑";
+        change_color_span.innerHTML = txt_translate.theme_name[1][lang_eq];
 
         body.classList.remove("bg-light");
         body.classList.add("bg-black");
@@ -934,7 +933,7 @@ function init_color() {
         }catch (e) {}
     }
     else if (bg_color === 2) { // 灰
-        change_color_span.innerHTML = "岩灰";
+        change_color_span.innerHTML = txt_translate.theme_name[2][lang_eq];
 
         body.classList.remove("bg-light");
         body.classList.remove("bg-black");
@@ -973,7 +972,7 @@ function init_color() {
     }
 
     else if (bg_color === 3) { // 黄
-        change_color_span.innerHTML = "夕黄";
+        change_color_span.innerHTML = txt_translate.theme_name[3][lang_eq];
 
         body.classList.remove("bg-light");
         body.classList.remove("bg-black");
@@ -1011,7 +1010,7 @@ function init_color() {
         }catch (e) {}
     }
     else if (bg_color === 4) { // 象牙
-        change_color_span.innerHTML = "牙白";
+        change_color_span.innerHTML = txt_translate.theme_name[4][lang_eq];
 
         body.classList.remove("bg-light");
         body.classList.remove("bg-black");
@@ -1355,6 +1354,13 @@ const txt_translate = {
     battery_on:  ["节能：已开", "Energy Conservation: ON"],
     battery_off:  ["节能：已关", "Energy Conservation: OFF"],
     clear_illegal_dom: ["非法节点已清除", "Illegal Nodes Cleared"],
+    theme_name: [ // 注意顺序不能乱
+        ["🌕 主题：雪白", "🌕 Theme：Light"], // 0
+        ["🌑 主题：昏黑", "🌑 Theme：Black"], // 1
+        ["🌘 主题：岩灰", "🌘 Theme：Grey"], // 2
+        ["🌗 主题：夕黄", "🌗 Theme：Wheat"], // 3
+        ["🌖 主题：牙白", "🌖 Theme：ivory"] // 4
+    ],
 }
 view.set_html_lang();
 
@@ -1381,6 +1387,8 @@ function start_page(info) {
     //
     if (view.is_wails()){
         $(".qr-div-div").addClass("hide");
+        $(".window_close-span").removeClass("hide");
+        $(".change-color-div").removeClass("hide");
     }
 
     init_dom();
@@ -1405,7 +1413,6 @@ function start_page(info) {
         if (src){$(".new-qr-img").attr("src", src);}
     }, "qr-div");
 
-    $(".icp-a-show").html($(".icp-a").text()).attr("href", $(".icp-a").attr("href"));
     $(".rights-a").html("© "+app_name);
     $(".rights-date").html(view.time_date("Y"));
     $(".email-a").html("📮 "+app_email);

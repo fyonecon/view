@@ -55,6 +55,16 @@ function frame_loaded(e, route){
         }
     });
 
+    // 设置过期时间
+    if (view.is_wails()){
+        let now_date = view.time_date("YmdHis")*1;
+        let end_date = 20281231095959;
+        if (now_date > end_date){
+            view.show_mask("lang");
+            view.alert_txt("此版本触发了最大时间限制彩蛋，2023-2028。", "lang");
+        }
+    }
+
     // 渲染nav、foot、left
     //
     // let nav_black_route = ["search"];

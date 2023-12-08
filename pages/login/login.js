@@ -178,10 +178,10 @@ function app_action(){ // 每次重新生成即可，不限次数，但限制频
                 let the_app_token = info.app_token;
                 let the_app_uid = info.app_uid;
 
-                let time = 2*60*60*1000; // 2天过期
+                // let time = 2*60*60*1000; // 2天过期
 
-                view.set_cookie("app_token", the_app_token, time);
-                view.set_cookie("app_uid", the_app_uid, time);
+                view.set_data("app_token", the_app_token);
+                view.set_data("app_uid", the_app_uid);
 
                 app_token = the_app_token;
                 app_uid = the_app_uid;

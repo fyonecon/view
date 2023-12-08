@@ -18,8 +18,6 @@
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <script id="depend-js" data-view="" data-desc="">
-        const cache_version = "202304251359"; // 没发布一次就对比此值是否匹配，不匹配就自动更新缓存
-        const cache_state = false; // 是否开启特定文件缓存，true & false
         const time_start = Math.floor((new Date()).getTime()); // ms。开始载入文件的时间戳
         let time_loaded = 0; // ms。框架载入完成的时间戳
         let time_error = 0; // ms。框架出错的时间戳
@@ -39,7 +37,7 @@
         const index_func = {
             AppRun: function  () { // 核心解析依赖
                 let that = this;
-                let clear_cache = "?cache=" + that.MakeDate("YmdWH00");
+                let clear_cache = "?cache=" + that.TimeDate("YmdWH00");
                 let head = document.head || document.getElementsByTagName("head")[0];
                 document.getElementsByTagName("title")[0].innerText = "Loading...";
                 // css
@@ -106,22 +104,6 @@
                     console.error(error);
                 });
             },
-            SetCookie: function (name, value, time) {
-                if (!time){
-                    time = 24*60*60*1000; // 默认1天
-                }
-                let exp = new Date();
-                exp.setTime(exp.getTime() + time);
-                document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
-            },
-            GetCookie: function (name) {
-                let arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
-                if(arr=document.cookie.match(reg)){
-                    return unescape(arr[2]);
-                } else{
-                    return "";
-                }
-            },
             GetData: function (key){ // 获取本地localstorage
                 return localStorage.getItem(key);
             },
@@ -131,7 +113,7 @@
             ClearData: function () {
                 return localStorage.clear();
             },
-            MakeDate: function (date_time){ // YmdHisW，日期周
+            TimeDate: function (date_time){ // YmdHisW，日期周
                 let t = new Date();
                 let seconds = t.getSeconds(); if (seconds<10){seconds = "0"+seconds;}
                 let minutes = t.getMinutes(); if (minutes<10){minutes = "0"+minutes;}
@@ -148,6 +130,9 @@
                 date_time = date_time.replaceAll("s", seconds);
                 date_time = date_time.replaceAll("W", week);
                 return date_time;
+            },
+            IsWails: function (){
+                return window.location.host.toLowerCase().indexOf("wails") !== -1;
             }
         };
 		(function (){

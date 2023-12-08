@@ -11,15 +11,14 @@
 .cmd-group{
     font-size: 20px;
     font-weight: 600;
-    line-height: 30px;
+    line-height: 32px;
 }
 .cmd-li-title{
     font-size: 16px;
     font-weight: 600;
-    line-height: 24px;
+    line-height: 32px;
 }
 .cmd-li-explain{
-    text-indent: 20px;
     font-size: 14px;
     margin-bottom: 10px;
     line-height: 24px;

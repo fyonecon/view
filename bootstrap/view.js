@@ -136,38 +136,8 @@ const view = {
             return ""; // 没有匹配的键即返回空
         }
     },
-    class_write_html: function (only_class_name, html) { // 根据唯一class写入html
-        document.getElementsByClassName(only_class_name)[0].innerHTML = html;
-    },
-    id_write_html: function (id_name, html) { // 根据唯一id写入html
-        document.getElementById(id_name).innerHTML = html;
-    },
-    set_cookie: function (name, value, time) {
-        name = cookie_prefix + name;
-        if (!time){
-            time = 1*24*60*60*1000; // 默认1天
-        }
-        let exp = new Date();
-        exp.setTime(exp.getTime() + time);
-        document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
-    },
-    get_cookie: function (name) {
-        name = cookie_prefix + name;
-        let arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
-        if(arr=document.cookie.match(reg)){
-            return unescape(arr[2]);
-        } else{
-            return "";
-        }
-    },
-    del_cookie: function (name) {
-        name = cookie_prefix + name;
-        let exp = new Date();
-        exp.setTime(exp.getTime() - 1);
-        let cval=this.get_cookie(name);
-        if(cval!=null) {
-            document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
-        }
+    insert_html: function (by_id, html) { // 根据id插入html
+        document.getElementById(by_id).innerHTML = html;
     },
     base64_encode: function (string) {
         return btoa(string);
@@ -178,57 +148,22 @@ const view = {
     md5: function (string) {
         return hex_md5(string);
     },
-    set_cache: function (_key, _value) { // key-value对 存入系统内存，页面关闭即key-value消失
+    set_cache: function (_key, _value) { // key-value对 存入系统运存，页面关闭即key-value消失
         let that = this;
-
-        let state = 0;
-        let msg = "";
-        let content = [];
-
         // 校验是否已经存在key
         const cache = new Map(map_cache);
-        let has = cache.get(_key);
-        if (has || has === 0) {
-            state = 2;
-            msg = "update-cache";
-        }else {
-            state = 1;
-            msg = "insert-cache";
-        }
-
         const items = [
             [_key, _value],
         ];
-        content = items;
-
         items.forEach(
             ([key, value]) => map_cache.set(key, value)
         );
-
-        // that.log([state, msg, content]);
+        return cache.get(_key);
     },
     get_cache: function (_key) {
         let that = this;
-
-        let state = 0;
-        let msg = "";
-        let content = [];
-
         const cache = new Map(map_cache);
-
-        let has = cache.get(_key);
-        if (has || has === 0) {
-            state = 1;
-            msg = "has-cache";
-        }else {
-            state = 0;
-            msg = "null-cache";
-        }
-        content = [_key, has, state, msg];
-
-        // that.log(content);
-
-        return has;
+        return cache.get(_key);
     },
     string_to_json: function (string) { // 将string转化为json，注意，里面所有key的引号为双引号，否则浏览器会报错。
         let json;
@@ -325,15 +260,11 @@ const view = {
         }
         return rand_n;
     },
-    set_data: function (key, value){
+    set_data: function (key, value){ // 新增或更新数据，总和最大4M，请不要存大文件
         localStorage.setItem(key,value);
-        if (localStorage.getItem(key)){
-            return true;
-        }else {
-            return false;
-        }
+        return localStorage.getItem(key);
     },
-    get_data: function (key) {
+    get_data: function (key) { // 获取一个
         let value = localStorage.getItem(key);
         if (value){
             return value;
@@ -341,10 +272,10 @@ const view = {
             return "";
         }
     },
-    del_data: function (key) {
+    del_data: function (key) { // 删除一个
         return localStorage.removeItem(key);
     },
-    clear_data: function () {
+    clear_data: function () { // 全部清空
         return localStorage.clear();
     },
     cache_file: function (cache_key, file_url, del_old_state, call_func){ // 缓存css，js文件到本地localstorage
@@ -409,142 +340,6 @@ const view = {
          format = format.replaceAll("W", week);
 
         return format;
-    },
-    get_date: function () {
-        let that = this;
-
-        let t = new Date();
-
-        let seconds = t.getSeconds(); if (seconds<10){seconds = "0"+seconds;}
-        let minutes = t.getMinutes(); if (minutes<10){minutes = "0"+minutes;}
-        let hour = t.getHours(); if (hour<10){hour = "0"+hour;}
-        let day = t.getDate(); if (day<10){day = "0"+day;}
-        let month = t.getMonth() + 1; if (month<10){month = "0"+month;}
-        let year = t.getFullYear();
-        let week = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"][t.getDay()]; // 周
-        let calender = {
-            'calender': function () { // 获取农历
-                //定义全局变量
-                let CalendarData=new Array(100);
-                let madd=new Array(12);
-                let tgString="甲乙丙丁戊己庚辛壬癸";
-                let dzString="子丑寅卯辰巳午未申酉戌亥";
-                let numString="一二三四五六七八九十";
-                let monString="正二三四五六七八九十冬腊";
-                let weekString="日一二三四五六";
-                let sx="鼠牛虎兔龙蛇马羊猴鸡狗猪";
-                let cYear,cMonth,cDay,TheDate;
-                CalendarData = new Array(0xA4B,0x5164B,0x6A5,0x6D4,0x415B5,0x2B6,0x957,0x2092F,0x497,0x60C96,0xD4A,0xEA5,0x50DA9,0x5AD,0x2B6,0x3126E, 0x92E,0x7192D,0xC95,0xD4A,0x61B4A,0xB55,0x56A,0x4155B, 0x25D,0x92D,0x2192B,0xA95,0x71695,0x6CA,0xB55,0x50AB5,0x4DA,0xA5B,0x30A57,0x52B,0x8152A,0xE95,0x6AA,0x615AA,0xAB5,0x4B6,0x414AE,0xA57,0x526,0x31D26,0xD95,0x70B55,0x56A,0x96D,0x5095D,0x4AD,0xA4D,0x41A4D,0xD25,0x81AA5,0xB54,0xB6A,0x612DA,0x95B,0x49B,0x41497,0xA4B,0xA164B, 0x6A5,0x6D4,0x615B4,0xAB6,0x957,0x5092F,0x497,0x64B, 0x30D4A,0xEA5,0x80D65,0x5AC,0xAB6,0x5126D,0x92E,0xC96,0x41A95,0xD4A,0xDA5,0x20B55,0x56A,0x7155B,0x25D,0x92D,0x5192B,0xA95,0xB4A,0x416AA,0xAD5,0x90AB5,0x4BA,0xA5B, 0x60A57,0x52B,0xA93,0x40E95);
-                madd[0]=0;
-                madd[1]=31;
-                madd[2]=59;
-                madd[3]=90;
-                madd[4]=120;
-                madd[5]=151;
-                madd[6]=181;
-                madd[7]=212;
-                madd[8]=243;
-                madd[9]=273;
-                madd[10]=304;
-                madd[11]=334;
-
-                function showCal(){
-                    let D=new Date();
-                    let yy=D.getFullYear();
-                    let mm=D.getMonth()+1;
-                    let dd=D.getDate();
-                    let ww=D.getDay();
-                    let ss=parseInt(D.getTime()/1000);
-                    if (yy<100) yy="19"+yy;
-                    return GetLunarDay(yy,mm,dd);
-                }
-                function GetBit(m,n){
-                    return (m>>n)&1;
-                }
-                //农历转换
-                function e2c(){
-                    TheDate= (arguments.length!==3) ? new Date() : new Date(arguments[0],arguments[1],arguments[2]);
-                    let total,m,n,k;
-                    let isEnd=false;
-                    let tmp=TheDate.getYear();
-                    if(tmp<1900){
-                        tmp+=1900;
-                    }
-                    total=(tmp-1921)*365+Math.floor((tmp-1921)/4)+madd[TheDate.getMonth()]+TheDate.getDate()-38;
-
-                    if(TheDate.getYear()%4===0&&TheDate.getMonth()>1) {
-                        total++;
-                    }
-                    for(m=0;;m++){
-                        k=(CalendarData[m]<0xfff)?11:12;
-                        for(n=k;n>=0;n--){
-                            if(total<=29+GetBit(CalendarData[m],n)){
-                                isEnd=true; break;
-                            }
-                            total=total-29-GetBit(CalendarData[m],n);
-                        }
-                        if(isEnd) break;
-                    }
-                    cYear=1921 + m;
-                    cMonth=k-n+1;
-                    cDay=total;
-                    if(k===12){
-                        if(cMonth===Math.floor(CalendarData[m]/0x10000)+1){
-                            cMonth=1-cMonth;
-                        }
-                        if(cMonth>Math.floor(CalendarData[m]/0x10000)+1){
-                            cMonth--;
-                        }
-                    }
-                }
-                function GetcDateString(){
-                    let tmp="";
-                    if(cMonth<1){
-                        tmp+="(闰)";
-                        tmp+=monString.charAt(-cMonth-1);
-                    }else{
-                        tmp+=monString.charAt(cMonth-1);
-                    }
-                    tmp+="月";
-                    tmp+=(cDay<11)?"初":((cDay<20)?"十":((cDay<30)?"廿":"三十"));
-                    if (cDay%10!=0||cDay==10){
-                        tmp+=numString.charAt((cDay-1)%10);
-                    }
-                    return tmp;
-                }
-                function GetLunarDay(solarYear,solarMonth,solarDay){
-                    //solarYear = solarYear<1900?(1900+solarYear):solarYear;
-                    if(solarYear<1921 || solarYear>2020){
-                        return "";
-                    }else{
-                        solarMonth = (parseInt(solarMonth)>0) ? (solarMonth-1) : 11;
-                        e2c(solarYear,solarMonth,solarDay);
-                        return GetcDateString();
-                    }
-                }
-
-                return showCal();
-            },
-        };
-
-        return [
-            year+""+month+""+day+""+hour+""+minutes+""+seconds, // 0
-            year+"-"+month+"-"+day+" "+hour+":"+minutes+":"+seconds, // 1
-            year, // 2
-            month+""+day, // 3
-            month+"-"+day, // 4
-            month+"/"+day, // 5
-            hour+""+minutes+""+seconds, // 6
-            hour+":"+minutes+":"+seconds, // 7
-            month, // 8
-            week, // 9
-            calender.calender(), // 农历 // 10
-            hour, // 11
-            minutes, // 12
-            seconds, // 13
-            hour+":"+minutes, // 14
-        ];
-
     },
     alert_confirm: function (title, msg, call_func) { // 文字提醒弹窗，会遮挡页面操作。(文字，超时时间，清除所有提示<仅限不为long时>)
         let that = this;
@@ -673,7 +468,7 @@ const view = {
         let that = this;
         let reg = /^1[3|4|5|6|7|8|9][0-9]{9}$/; //验证规则
         let res = reg.test(phone); // true、false
-        if(res === false){
+        if(res){
             view.log("不是手机号：" + phone);
             return false;
         }else {
@@ -691,69 +486,101 @@ const view = {
     hide_loading: function (){
         $(".loading-div").addClass("hide");
     },
-    play_mp3: function (mp3, volume, loop){
+    play_mp3: function (dom_id, params, call_func){ // 播放音频
         let that = this;
-
-        if (!volume*1){ // 默认半音量
-            volume = 0.5;
-        }else if (volume<0 || volume > 1) {
-            volume = 1;
+        // let params = {
+        //     src: "xxx.mp3", // 何时取决于浏览器所支持的
+        //     display: "none",
+        //     volume: 1,
+        //     loop: false,
+        //     autoplay: true,
+        // }
+        let dom = document.getElementById(dom_id);
+        // dom.innerHTML = ""; // 每次都初始化dom
+        let audio = document.getElementById("audio-play_mp3-"+dom_id);
+        if (!audio){
+            audio = document.createElement("audio");
+            audio.setAttribute("id", "audio-play_mp3-"+dom_id);
         }
-
-        if (!loop){ // 默认关闭循环
-            loop = false;
-        }
-
-        let audio = new Audio(mp3);
-        audio.play().then(r => {
-            
-        }); // 播放 mp3这个音频对象
-        // audio.pause(); // 暂停
-        // audio.load();
+        //
+        audio.setAttribute("src", params.src);
+        audio.style.display = params.display; // none，block
+        audio.volume = params.volume; // (0, 1]
+        audio.loop = params.loop; // false
+        audio.autoplay = params.autoplay; // true
+        dom.appendChild(audio);
+        audio.onerror = function (){
+            try{
+                call_func(dom, false);
+            }catch (e) {that.error(e);}
+        };
+        audio.addEventListener('ended', function () { // 播放结束
+            try{
+                call_func(dom, true);
+            }catch (e) {}
+        }, false);
+    },
+     stop_mp3: function(dom_id){ // 暂停音乐
+        let audio = document.getElementById("audio-play_mp3-"+dom_id);
+        audio.pause();
+    },
+    del_mp3: function (){ // 删除音乐，或初始化音乐
+        let dom = document.getElementById(dom_id);
+        dom.innerHTML = "";
+    },
+    play_mp4: function (dom_id, params, call_func){ // 播放视频
+        let that = this;
+        // let params = {
+        //     src: "xxx.mp4", // 何时取决于浏览器所支持的
+        //     autoplay: true,
+        //     loop: false,
+        //     width: "100%",
+        //     height: "auto",
+        //     filter:  "blur(0px)",
+        //     preload: true,
+        //     muted: true,
+        //     rate: 1,
+        // }
+        let dom = document.getElementById(dom_id);
+        // dom.innerHTML = ""; // 每次都初始化dom
+        // video
+        let video = document.createElement("video");
+        video.setAttribute("id", "video-play_mp4-"+dom_id);
+        video.setAttribute("src", params.src);
+        video.classList.add("video-play_mp4-"+dom_id);
+        video.autoplay = params.autoplay;
+        video.loop = params.loop;
+        video.style.width = params.width; // "100%"
+        video.style.height = params.height; // "auto"
+        video.style.filter = params.filter; // "blur(0px)"
+        video.preload = params.preload;
+        video.muted = params.muted; // false 打开视频声音，true 静音
+        video.playbackRate = params.rate; // 播放速度 (0, 1]
+        dom.appendChild(video);
+        video.onerror = function (){
+            try{
+                call_func(dom, false);
+            }catch (e) {that.error(e);}
+        };
+        video.addEventListener('ended', function () { // 播放结束
+            try{
+                call_func(dom, true);
+            }catch (e) {}
+        }, false);
+    },
+    stop_mp4: function(dom_id){ // 暂停视频
+        let audio = document.getElementById("video-play_mp4-"+dom_id);
+        audio.pause();
+    },
+    del_mp4: function (){ // 删除视频，或初始化视频
+        let dom = document.getElementById(dom_id);
+        dom.innerHTML = "";
     },
     voice: function (read_txt, volume, loop) { // 自动语音朗读文字
         let that = this;
         that.log(["voice", read_txt, volume, loop]);
 
         that.notice_txt("语音接口已失效", 3000);
-        return;
-
-        if (!volume*1){ // 默认半音量
-            volume = 0.5;
-        }else if (volume<0 || volume > 1) {
-            volume = 1;
-        }
-
-        if (!loop){ // 默认关闭循环
-            loop = false;
-        }
-
-        // 文字生成语音源
-        let make_mp3 = "https://tts.baidu.com/text2audio?cuid=baike&lan=zh&ctp=1&spd=5&pdt=301&vol=9&rate=32&per=0&tex=" + encodeURI(read_txt);
-
-        // 文档 https://github.com/haima16/MPlayer
-        let player = new MPlayer(make_mp3, {
-            loop: loop, // 循环 true or false
-            volume: volume, // 音量 [0, 1]
-            auto: true,
-            index: 1,
-            analyser: {
-                size: 1024,
-            }
-        });
-        player.onload = function() {
-            let the = this;
-            that.log("=开始播放=");
-            the.play();
-        };
-        player.onended = function() {
-            let the = this;
-            that.log("=播放完成=");
-        };
-
-        // that.write_js([cdn_page_file + "static/js/mplayer.js"], function () {
-        //
-        // });
     },
     string_include_string: function (big_string, small_string) { // 判断大字符串是否包含小字符串
         let that = this;
@@ -765,9 +592,9 @@ const view = {
             return -1;
         }
     },
-    refresh_page: function (second_waiting){
+    refresh_page: function (timeout){ // ms
         let second = 0;
-        let _second = second_waiting*1;
+        let _second = timeout*1;
         if (_second){
             second = _second;
         }
@@ -798,7 +625,7 @@ const view = {
         }
     },
     make_qr: function (id, txt){ // 生成二维码
-        var qrcode = new QRCode(id, {
+        let qrcode = new QRCode(id, {
             text: txt,
             width: 200,
             height: 200,
@@ -886,11 +713,11 @@ const view = {
         return ua.indexOf("dingtalk")!=-1;
     },
     is_white_ua: function (ua){ // 检测ua是否在正常范围
-        var white_ua = [
+        let white_ua = [
             "safari/604.1",
         ];
-        var has_ua = false;
-        for (var r=0; r<white_ua.length; r++){
+        let has_ua = false;
+        for (let r=0; r<white_ua.length; r++){
             if (ua.indexOf(white_ua[r]) !== -1){ // 含有
                 has_ua = true;
                 break;
@@ -948,17 +775,9 @@ const view = {
         let that = this;
         let rand = that.js_rand(10000000000, 999999999999);
         let ua = window.navigator.userAgent.toLowerCase();
-        let app_date = that.get_date()[0];
+        let app_date = that.time_date("YmdHisW");
         let href = window.location.href.toLowerCase();
         return [that.md5(app_class+"@"+ua+"@"+app_date+"@"+href+"@"+window.innerWidth+"@"+rand), app_date];
-    },
-    is_pv_history: function (){
-        let that = this;
-        let key = "page-pv";
-        let max_pv = 20;
-        let pv = that.get_cookie(key)*1;
-        that.set_cookie(key, pv + 1, 2*24*60*60*1000);
-        return pv < max_pv;
     },
     get_switch_state: function (name){ // 获取节能模式状态
         let that = this;
@@ -1043,6 +862,7 @@ const view = {
         }
     },
     show_mask: function (timeout){
+        let that = this;
         if (timeout<100){timeout=100;}
         let div =  document.createElement("div");
         div.setAttribute("id", "mask-div");
@@ -1055,9 +875,16 @@ const view = {
         div.style.height = window.innerHeight + "px";
         div.style.backgroundColor = "rgba(255,255,255,0.2)";
         document.getElementById("depend").appendChild(div);
-        setTimeout(function (){
-            div.remove();
-        }, timeout);
+        if (timeout === "lang"){
+            that.log("显示切不可关闭");
+        }else{
+            setTimeout(function (){
+                div.remove();
+            }, timeout);
+        }
+    },
+    del_mask: function (){
+        $(".mask-div").remove();
     },
     load_img: function(img_class, cdn_url){ // 保护性加载图片 // <img class="xxx" src="" data-src="xxx" >
         try {
@@ -1125,6 +952,69 @@ const view = {
             }
         });
     },
+    set_iDB_data: function (db_name, table_name, value){ // 新增或更新浏览器indexedDB数据库数据（文档：https://juejin.cn/post/7026900352968425486 ）
+        let that = this;
+        let request = db_name
+            .transaction([table_name], "readwrite") // 事务对象
+            .objectStore(table_name) // 仓库对象
+            .put(value);
+        request.onsuccess = function () {
+            that.log("数据新增或更新成功");
+        };
+        request.onerror = function () {
+            that.log("数据新增或更新失败");
+        };
+    },
+    get_iDB_data: function (db_name, table_name){ // 获取 指定表 全部数据。此处不做分页，分页请参考indexedDB文档。
+        let that = this;
+        let list = [];
+        let store = db_name
+            .transaction(table_name, "readwrite") // 事务
+            .objectStore(table_name); // 仓库对象
+        let request = store.openCursor(); // 指针对象
+        // 游标开启成功，逐行读数据
+        request.onsuccess = function (e) {
+            let cursor = e.target.result;
+            if(cursor){ // 遍历了存储对象中的所有内容
+                list.push(cursor.value);
+                cursor.continue();
+            }else{
+                that.log("游标读取的数据Success：", list);
+            }
+        }
+        request.onerror = function (e){
+            that.log("游标读取的数据Error：", list);
+        }
+        return list;
+    },
+    del_iDB_data: function (db_name, table_name, key){ // 删除一条数据
+        let that = this;
+        let request = db_name
+            .transaction([table_name], "readwrite")
+            .objectStore(table_name)
+            .delete(key);
+        request.onsuccess = function () {
+            that.log("数据删除成功");
+        };
+        request.onerror = function () {
+            that.log("数据删除失败");
+        };
+    },
+    clear_iDb: function (db_name){ // 清空指定数据库全部数据
+        let that = this;
+        let deleteRequest = window.indexedDB.deleteDatabase(db_name);
+        deleteRequest.onerror = function (event) {
+            that.log("清空数据库失败");
+        };
+        deleteRequest.onsuccess = function (event) {
+            that.log("清空数据库成功");
+        };
+    },
+    close_iDB: function (db_name){ // 关闭连接数据库
+        let that = this;
+        db_name.close();
+        that.log("关闭连接数据库");
+    },
     is_wails: function (){
         let that = this;
         let url = window.location.host;
@@ -1159,6 +1049,7 @@ const view = {
             window.close();
         }
     },
+
 
 };
 

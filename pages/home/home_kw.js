@@ -44,13 +44,8 @@ function home_kw(_word){
         url = "./?route=search&word="+_word;
         window.open(url, "_self");
     }
-    else if (word === "kw@clear_cache"){
-        view.notice_txt("已清除部分文件缓存", 2000);
-        clear_cache_files();
-    }
-    else if (word === "kw@clear_all_cache"){
-        view.notice_txt("已清除全部文件缓存", 2000);
-        view.clear_data();
+    else if (word === "kw@clear_all_data"){
+        clear_all_data();
     }
     else if (word === "kw@show"){
         view.notice_txt("已打开隐藏的标签列表", 2000);
