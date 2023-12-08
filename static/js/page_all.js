@@ -31,11 +31,17 @@ function make_paging(id, total, limit, page, page_hash, call_func){
 
 // 清除所有配置记录、数据库记录
 function clear_all_data(){
-    view.notice_txt("已清除全部配置数据", 3000);
-    view.show_mask(3000);
-    view.clear_data();
-    view.clear_iDb();
-    view.refresh_page(2000);
+    view.alert_confirm("⚠️", "清除全部配置数据 ？", function (state){
+        if (state){ // yes
+            view.show_mask(2000);
+            view.clear_data();
+            view.clear_iDb();
+            view.refresh_page(2000);
+        }else { // no
+            //
+        }
+    });
+
 }
 
 // 绑定跳转
