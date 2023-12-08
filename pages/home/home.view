@@ -16,7 +16,8 @@
             <span class="right-span">
                 <a class="help-a a-click click" data-href="./?route=home_help" data-target="_self" style="color: inherit;" title="">Help</a>
             </span>
-            <span class="right-span click a-click" data-href="./" data-target="_self" title="Install WebApp">Refresh</span>
+            <span class="right-span click a-click" data-href="./" data-target="_self" title="Refresh the Page">Refresh</span>
+            <span class="right-span click window_close-span" title="Close the Tab or App">Close</span>
         </div>
 
         <!--        -->
@@ -30,7 +31,7 @@
     <div class="right-fixed">
 
         <!--QR-->
-        <div class="qr-div-div">
+        <div class="qr-div-div hide">
             <div class="qr-div qr-20 click" id="qr-div">
                 <img class="new-qr-img" src="" alt="QR" title="QR for This Website">
                 <div class="clear"></div>

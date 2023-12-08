@@ -1336,6 +1336,10 @@ $(document).on("click", ".timer-span", function (){
     // view.show_mask(200);
     // speak_time();
 });
+$(document).on("click", ".window_close-span", function (){
+    let that = $(this);
+    view.window_close();
+});
 
 let timer1_interval; // 时钟
 
@@ -1360,8 +1364,8 @@ function start_page(info) {
 
     // $(".rights-div").removeClass("hide");
     $(".timer-div").removeClass("hide");
+    $(".qr-div-div").removeClass("hide");
     if (screen.width > 640){ // PC
-        // $(".qr-div").removeClass("hide");
         // $(".change-color-div").removeClass("hide");
         // $(".on-hour-div").removeClass("hide");
         // setTimeout(function (){
@@ -1371,8 +1375,12 @@ function start_page(info) {
         $(".battery-model-div").removeClass("hide");
         // $(".content-bg").addClass("hide");
     }else { // m
-        // $(".qr-div").removeClass("hide");
         // $(".timer-div").removeClass("hide");
+    }
+
+    //
+    if (view.is_wails()){
+        $(".qr-div-div").addClass("hide");
     }
 
     init_dom();

@@ -5,6 +5,9 @@
 .cmd-ul{
     padding: 10px 10px 0 10px;
 }
+.cmd-li{
+    padding: 0 20px;
+}
 .cmd-group{
     font-size: 20px;
     font-weight: 600;
@@ -16,6 +19,7 @@
     line-height: 24px;
 }
 .cmd-li-explain{
+    text-indent: 20px;
     font-size: 14px;
     margin-bottom: 10px;
     line-height: 24px;

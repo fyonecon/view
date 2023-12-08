@@ -1130,16 +1130,33 @@ const view = {
         let url = window.location.host;
         return (url.toLowerCase().indexOf("wails") !== -1);
     },
-    window_open: function (url, target){
+    window_open: function (url, target){ // 打开链接
         let that = this;
         if (that.is_wails()){
             if (that.is_url(url)){
-                window.wailsJS.window_open(url); // 注意，启动此函数需要完整的网址（如http、https开头的）
+                try {
+                    window.runtime.BrowserOpenURL(url); // 注意，启动此函数需要完整的网址（如http、https开头的）
+                }catch (e){
+                    that.notice_txt("不被支持的语法：BrowserOpenURL", 3000);
+                }
             }else{
                 console.log("启动此函数需要完整的网址（如http、https开头的）：", url);
             }
         }else{
             window.open(url, target);
+        }
+    },
+    window_close: function (){ // 关闭标签或App
+        let that = this;
+        if (that.is_wails()){
+            try {
+                window.runtime.Quit();
+            }catch (e){
+                that.notice_txt("不被支持的语法：Quit", 3000);
+            }
+        }else{
+            window.location.href="about:blank";
+            window.close();
         }
     },
 
