@@ -354,9 +354,9 @@ function depend_pages(){
         view.title("😅");
         view.alert_txt("本网站禁止在 微信、QQ、钉钉 中打开。<br/>请使用外部浏览器。", "long");
     }else {
-        if (!window.localStorage){
+        if (!window.localStorage || !window.indexedDB || navigator.webdriver){
             view.title("😅");
-            view.log("浏览器特性支持不完整：", ["localStorage"]);
+            view.log("浏览器特性支持不完整：", ["localStorage", "indexedDB", "webdriver"]);
         }else{
             depend_url();
         }

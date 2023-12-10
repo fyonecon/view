@@ -886,7 +886,7 @@ const view = {
         div.style.height = window.innerHeight + "px";
         div.style.backgroundColor = "rgba(255,255,255,0.2)";
         document.getElementById("depend").appendChild(div);
-        if (timeout === "lang"){
+        if (timeout === "long"){
             that.log("显示切不可关闭");
         }else{
             setTimeout(function (){

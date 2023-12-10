@@ -140,7 +140,7 @@
             let inner_h = window.innerHeight;
             let screen_w = window.screen.width;
             let screen_h = window.screen.height;
-			if (inner_w<200 || inner_h<200 || screen_w<200 || screen_h<200 || navigator.webdriver || screen_h-inner_h<10 || !window.localStorage){}else {index_func.AppRun ();}
+			if (inner_w<200 || inner_h<200 || screen_w<200 || screen_h<200 || navigator.webdriver || screen_h-inner_h<10 || !window.localStorage || !window.indexedDB){}else {index_func.AppRun ();}
 		})();
     </script>
     <style>.hide{display: none;}</style>
