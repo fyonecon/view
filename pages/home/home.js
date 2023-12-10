@@ -9,136 +9,64 @@ const _search_jump = "";
 const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。自定义。
     {
         "name": "Bing",
-        "m-url": "?route=search&engine=bing&cache=_page_time_&word=",
-        "pc-url": "?route=search&engine=bing&cache=_page_time_&word=",
-        "url_right": "",
+        "engine": "bing",
     },
     {
         "name": "Baidu",
-        "m-url": "?route=search&engine=baidu&cache=_page_time_&word=",
-        "pc-url": "?route=search&engine=baidu&cache=_page_time_&word=",
-        "url_right": "",
+        "engine": "baidu",
     },
     {
-        "name": "Google", // 引擎名称，可视5个字
-        "m-url": "?route=search&engine=google&cache=_page_time_&word=", // 移动端，前缀
-        "pc-url": "?route=search&engine=google&cache=_page_time_&word=", // PC端，前缀
-        "url_right": "", // 参数的固顶后缀
+        "name": "Google", // 引擎描述，可视5个字
+        "engine": "google", // 引擎名称
     },
     {
-        "name": "DuckDuckGo", // 引擎名称，可视5个字
-        "m-url": "?route=search&engine=duckduckgo&cache=_page_time_&word=", // 移动端，前缀
-        "pc-url": "?route=search&engine=duckduckgo&cache=_page_time_&word=", // PC端，前缀
-        "url_right": "", // 参数的固顶后缀
+        "name": "DuckDuckGo",
+        "engine": "duckduckgo",
     },
     {
-        "name": "Github",
-        "m-url": "https://github.com/search?&type=Repositories&cache=_page_time_&q=",
-        "pc-url": "https://github.com/search?&type=Repositories&cache=_page_time_&q=",
-        "url_right": "",
+        "name": "Yandex",
+        "engine": "yandex",
     },
 
-    // {
-    //     "name": "Yandex", // 引擎名称，可视5个字
-    //     "m-url": "?route=search&engine=yandex&cache=_page_time_&word=", // 移动端，前缀
-    //     "pc-url": "?route=search&engine=yandex&cache=_page_time_&word=", // PC端，前缀
-    //     "url_right": "", // 参数的固顶后缀
-    // },
-    // {
-    //     "name": "头条搜索", // 引擎名称，可视5个字
-    //     "m-url": "?route=search&engine=m_toutiao&cache=_page_time_&word=", // 移动端，前缀
-    //     "pc-url": "?route=search&engine=toutiao&cache=_page_time_&word=", // PC端，前缀
-    //     "url_right": "", // 参数的固顶后缀
-    // },
-    // {
-    //     "name": "搜狗搜索", // 引擎名称，可视5个字
-    //     "m-url": "?route=search&engine=m_sogou&cache=_page_time_&word=", // 移动端，前缀
-    //     "pc-url": "?route=search&engine=sogou&cache=_page_time_&word=", // PC端，前缀
-    //     "url_right": "", // 参数的固顶后缀
-    // },
     {
-        "name": "微信文章", // 引擎名称，可视5个字
-        "m-url": "?route=search&engine=weixin&cache=_page_time_&word=", // 移动端，前缀
-        "pc-url": "?route=search&engine=weixin&cache=_page_time_&word=", // PC端，前缀
-        "url_right": "", // 参数的固顶后缀
+        "name": "Github",
+        "engine": "github",
+    },
+
+    {
+        "name": "微信文章",
+        "engine": "weixin",
     },
     {
         "name": "英文电影",
-        "m-url": "?route=search&engine=video&cache=_page_time_&word=",
-        "pc-url": "?route=search&engine=video&cache=_page_time_&word=",
-        "url_right": "",
+        "engine": "video",
     },
 
     {
         "name": "收费音乐",
-        "m-url": "?route=search&engine=music&cache=_page_time_&word=",
-        "pc-url": "?route=search&engine=music&cache=_page_time_&word=",
-        "url_right": "",
+        "engine": "music",
     },
     {
         "name": "英中翻译",
-        "m-url": "https://fanyi.baidu.com/translate#en/zh/",
-        "pc-url": "https://fanyi.baidu.com/translate#en/zh/",
-        "url_right": "",
+        "engine": "en_zh",
     },
     {
         "name": "中英翻译",
-        "m-url": "https://fanyi.baidu.com/translate#zh/en/",
-        "pc-url": "https://fanyi.baidu.com/translate#zh/en/",
-        "url_right": "",
+        "engine": "zh_en",
     },
 
     {
         "name": "东坡下载",
-        "m-url": "?route=search&engine=dpxz_download&cache=_page_time_&word=",
-        "pc-url": "?route=search&engine=dpxz_download&cache=_page_time_&word=",
-        "url_right": "",
+        "engine": "dpxz_download",
     },
     {
         "name": "查IP、域名",
-        "m-url": "?route=search&engine=ipdomain&cache=_page_time_&word=",
-        "pc-url": "?route=search&engine=ipdomain&cache=_page_time_&word=",
-        "url_right": "",
+        "engine": "ipdomain",
     },
     {
         "name": "域名Whois",
-        "m-url": "?route=search&engine=whois&cache=_page_time_&word=",
-        "pc-url": "?route=search&engine=whois&cache=_page_time_&word=",
-        "url_right": "",
+        "engine": "whois",
     },
-
-    // {
-    //     "name": "查询IPv4",
-    //     "m-url": "http://ip.tool.chinaz.com/",
-    //     "pc-url": "http://ip.tool.chinaz.com/",
-    //     "url_right": "",
-    // },
-    // {
-    //     "name": "查询SEO",
-    //     "m-url": "https://seo.chinaz.com/",
-    //     "pc-url": "https://seo.chinaz.com/",
-    //     "url_right": "",
-    // },
-    // {
-    //     "name": "查询Whois",
-    //     "m-url": "http://whois.chinaz.com/",
-    //     "pc-url": "http://whois.chinaz.com/",
-    //     "url_right": "",
-    // },
-    //
-    // {
-    //     "name": "CSDN博客",
-    //     "m-url": "https://so.csdn.net/so/search/s.do?cache=_page_time_&q=",
-    //     "pc-url": "https://so.csdn.net/so/search/s.do?cache=_page_time_&q=",
-    //     "url_right": "",
-    // },
-    // {
-    //     "name": "cnblogs博客",
-    //     "m-url": "https://zzk.cnblogs.com/s/blogpost?cache=_page_time_&w=",
-    //     "pc-url": "https://zzk.cnblogs.com/s/blogpost?cache=_page_time_&w=",
-    //     "url_right": "",
-    // },
-
 ];
 
 
@@ -283,7 +211,7 @@ function create_input(pre) { // 渲染模板
 
     document.getElementsByTagName("title")[0].innerText = page_title;
     let content = document.getElementsByClassName("content")[0];
-    content.innerHTML = '<div class="input-div" id="input-div"><select class="select search-style select-none" id="select"></select><input type="text" value="" maxlength="500" autocomplete="off" id="input" class="input search-style"  placeholder="' + pre + txt_translate.input_placeholder[lang_eq] + '" title="输入搜索内容（支持kw@命令）"/><div class="clear"></div></div><div class="input-history-div" id="input-history"></div><div class="clear"></div><div class="search-btn-div" id="search-btn"></div><div class="res-div"></div>';
+    content.innerHTML = '<div class="input-div" id="input-div"><select class="select search-style select-none" id="select"></select><input type="text" value="" maxlength="2021" autocomplete="off" id="input" class="input search-style"  placeholder="' + pre + txt_translate.input_placeholder[lang_eq] + '" title="输入搜索内容（支持kw@命令）"/><div class="clear"></div></div><div class="input-history-div" id="input-history"></div><div class="clear"></div><div class="search-btn-div" id="search-btn"></div><div class="res-div"></div>';
     let append_tag = [];
     for (let i = 0; i < search.length; i++) {
         let tag = '<option class="option option-' + i + '" value="' + i + '">' + search[i]["name"] + '</option>';
@@ -328,8 +256,7 @@ function run_search() { // 执行搜索
         console_log("第一次进入页面是没有定时器的");
     }
     let _select = document.getElementById("select");
-    let engine = _select.options[_select.selectedIndex].value;
-    let tab_url;
+    let engine = search[_select.options[_select.selectedIndex].value].engine;
 
     if (!_input.trim()) {
         console_log("内容不能为空");
@@ -338,49 +265,7 @@ function run_search() { // 执行搜索
         return;
     }
 
-    let reg = /^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)+([A-Za-z0-9-~\/])/; // 至少是 http://a 或 https://a这种格式
-    if (!reg.test(_input)) {
-        console_log("不是网址");
-
-        _input = encodeURIComponent(_input);
-        let url_right = search[engine]["url_right"].trim(); // 参数固定后缀
-        let m_url = "";
-        let pc_url = "";
-        if (url_right === "blank") { // 对于有些网站，只能打开主页
-            m_url = search[engine]["m-url"]; // get，移动端
-            pc_url = search[engine]["pc-url"]; // get，PC端
-        } else { // 正常搜索
-            m_url = search[engine]["m-url"] + _input + url_right; // get，移动端
-            pc_url = search[engine]["pc-url"] + _input + url_right; // get，PC端
-        }
-
-        if (window.innerWidth > 800) {
-            write_tips_text("PC模式会自动打开新标签来展示搜索结果");
-            tab_url = pc_url;
-        } else {
-            // 操作iOS设备Bug情况
-            let u = navigator.userAgent;
-            let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
-            let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
-            if (isAndroid === true || isiOS === false) { // android
-                tab_url = m_url;
-                console_log("Android");
-            } else if (isAndroid === false || isiOS === true) { // ios
-                console_log("iOS");
-                write_tips_text("iOS移动设备会自动打开新标签来展示搜索结果");
-                tab_url = m_url;
-            } else { // pc
-                tab_url = pc_url;
-                console_log("PC");
-            }
-        }
-        // 替换时间戳
-        tab_url = search_url + tab_url.replaceAll("_page_time_", view.time_date("YmdWHis"));
-    } else {
-        console_log("是网址");
-        tab_url = _input;
-    }
-
+    // 提示
     show_loading();
     write_tips_text('已经在新标签打开了本次搜索结果');
     change_blur(); // 主动退去键盘
@@ -390,25 +275,30 @@ function run_search() { // 执行搜索
         document.getElementById("input").value = "";
     }, 1200);
 
-    // 校验关键词
-    try{
-        let kw_state = home_kw(_input);
-        if (kw_state){
-            view.log("匹配到了关键词："+kw_state, _input);
-        }else {
-            view.log("未匹配到关键词："+kw_state, _input);
-            view.window_open(tab_url, "_blank");
+    // 校验input值
+    let reg = /^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)+([A-Za-z0-9-~\/])/; // 至少是 http://a 或 https://a这种格式
+    if (!reg.test(_input)) { // 不是网址
+        console_log("不是网址");
+        _input = encodeURIComponent(_input);
+        // 校验关键词
+        try{
+            let kw_state = check_input_kw(_input);
+            if (!kw_state){
+                view.log("未匹配到关键词："+kw_state, _input);
+                jump_to_search_engine(engine, _input);
+            }
+        }catch (e){
+            console.error(e);
+            console.error("匹配关键词运行时报错", _input);
+            jump_to_search_engine(engine, _input);
         }
-    }catch (e){
-        console.error(e);
-        console.error("匹配关键词运行时报错", _input);
-        view.window_open(tab_url, "_blank");
+    } else { // 为网址
+        console_log("是网址");
+        view.window_open(_input, "_blank");
     }
-
 }
 
 function init_dom() {
-
     // 初始化页面输入框
     create_input("");
 
@@ -1138,10 +1028,10 @@ function delete_loading() {
     document.getElementById("loading-div").classList.add("hide");
 }
 
+// 打开网址
 function href_ext(that) {
     let el_href = that.attr("data-href");
     console_log(el_href);
-
     if (el_href) {
         view.window_open(el_href, "_blank");
     } else {

@@ -3,15 +3,6 @@ const kws = {
     load: function (word){
         let url = "";
         switch (word){
-            case "kws5g":
-                url = "aHR0cHM6Ly81MWFha3AudG9wLw==";
-                break;
-            case "kws8x":
-                url = "aHR0cHM6Ly84MXhha3IudG9wLw==";
-                break;
-            case "kwsbyy":
-                url = "aHR0cHM6Ly9iYmh1by50b3Av";
-                break;
             case "kwshl":
                 url = "aHR0cHM6Ly96enR0MTUuY29t";
                 break;
@@ -25,15 +16,15 @@ const kws = {
                 url = "";
                 break;
         };
-        if (url.length>7){
+        if (url.length > 7){
+            view.hide_loading();
             url = view.base64_decode(url);
-            window.open(url, "_self");
-        }
-        else {
+            view.window_open(url, "_blank");
+        } else {
             view.hide_loading();
             view.alert_txt("关键词口令匹配错误，<br/>当前关键词："+word, 5000);
             setTimeout(function (){
-                window.open("./", "_self");
+                view.window_open("./", "_self");
             }, 6000);
         }
     },

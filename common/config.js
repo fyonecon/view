@@ -10,25 +10,18 @@ const debug = false; // 调试模式，统一打印日志，true & false
 const block_wechat = true; // 是否禁止在微信中打开，true & false
 
 // 框架渲染的必要参数
-const cookie_prefix   = "view_";   // cookie前缀
 const route_404       = "?route=404";   // 404
 const page_time       = "cache=" + index_func.TimeDate("Ymd");
 
-const api_url         = "./";  // api主地址
-const kws_url         = index_func.IsWails()?"http://view.ggvs.net":"." + "/view/";
-const search_url      = "http://view.ggvs.net" + "/view/view.html";
+const api_url         = "";  // api主地址
 
 // 白名单host或refer域名
 const app_url = {
     'check_url': "host", // 是否开启白名单url检测，"refer"开启refer检测，"host"开启host检测，"any"不检测
     'jump_url': 'https://www.bing.com/?msg=black-host', // 遇到黑名单refer的落地地址
     'white_url': [ // 仅检测主域名，不包括http协议和url路径
-        '0.0.0.0', '127.0.0.1', 'localhost',
-        'aliyuncs.com',
-        // 'myqcloud.com',
-        '3so.net',
-        'wails',
-	    'gvs.net',
+        '0.0.0.0', '127.0.0.1', 'localhost', 'aliyuncs.com',
+        '3so.net', 'wails', 'gvs.net',
     ],
 };
 

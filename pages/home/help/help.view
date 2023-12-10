@@ -5,7 +5,37 @@
         </a>
     </div>
 
+    <div id="write-html"></div>
+    <div class="clear"></div>
+
+    <!---->
     <ul class="cmd-ul">
+        <div class="cmd-group"># 左下角按钮说明：</div>
+        <li class="cmd-li">
+            <div class="cmd-li-title">Refresh</div>
+            <div class="cmd-li-explain">手动刷新页面。</div>
+        </li>
+        <li class="cmd-li">
+            <div class="cmd-li-title blue click window_close-app" title="点击可彻底强制关闭软件">Close</div>
+            <div class="cmd-li-explain">由于软件开启了后台常驻模式，需要彻底强制关闭软件请点击此按钮。</div>
+        </li>
+    </ul>
+
+    <!---->
+        <ul class="cmd-ul">
+            <div class="cmd-group"># 右下角按钮说明：</div>
+            <li class="cmd-li">
+                <div class="cmd-li-title">节能</div>
+                <div class="cmd-li-explain">开启动画比较吃CPU+GPU资源，需要省电、省资源则请开启此功能。</div>
+            </li>
+            <li class="cmd-li">
+                <div class="cmd-li-title ">主题</div>
+                <div class="cmd-li-explain">软件适配了自动根据系统主题显示明、暗主题色，需要手动切换请按此按钮。一旦手动点击了主题色，软件将不能自动根据系统配色而变色，除非删除配置数据（功能在本页有说明：<span class="click blue clear_all_data" title="点击可快速清除所有配置数据" >kw@clear_all_data</span>）。</div>
+            </li>
+        </ul>
+
+    <!---->
+    <ul class="cmd-ul hide">
         <div class="cmd-group"># 安装PWA应用：</div>
         <li class="cmd-li">
             <div class="cmd-li-title">1）Win、Mac电脑端：Google Chrome、Microsoft Edge、Brave、Opera等</div>
@@ -36,7 +66,7 @@
         <div class="cmd-group"># 文件缓存策略说明：</div>
         <li class="cmd-li">
             <div class="cmd-li-title">缓存js文件</div>
-            <div class="cmd-li-explain">缓存周期为6个月，具体依靠是否更新了代码。</div>
+            <div class="cmd-li-explain">缓存周期为1个月，具体依靠是否更新了代码。</div>
         </li>
         <li class="cmd-li">
             <div class="cmd-li-title">不缓存css文件</div>
@@ -52,31 +82,31 @@
             <div class="cmd-li-title">kw@ 或 kw@fresh 或 kw@refresh </div>
             <div class="cmd-li-explain">刷新页面</div>
         </li>
-        <li class="cmd-li">
+        <li class="cmd-li hide">
             <div class="cmd-li-title">kw@help</div>
             <div class="cmd-li-explain">进入帮助页面</div>
         </li>
 
-        <li class="cmd-li">
+        <li class="cmd-li hide">
             <div class="cmd-li-title">kw@404</div>
             <div class="cmd-li-explain">打开404页面</div>
         </li>
 
-        <li class="cmd-li">
+        <li class="cmd-li hide">
             <div class="cmd-li-title">kw@bing</div>
             <div class="cmd-li-explain">获取必应搜索引擎</div>
         </li>
-        <li class="cmd-li">
+        <li class="cmd-li hide">
             <div class="cmd-li-title">kw@baidu</div>
             <div class="cmd-li-explain">获取百度搜索引擎</div>
         </li>
-        <li class="cmd-li">
+        <li class="cmd-li hide">
             <div class="cmd-li-title">kw@google</div>
             <div class="cmd-li-explain">获取Google搜索引擎</div>
         </li>
 
         <li class="cmd-li">
-            <div class="cmd-li-title click blue clear_all_data">kw@clear_all_data</div>
+            <div class="cmd-li-title click blue clear_all_data" title="点击可快速清除所有配置数据" >kw@clear_all_data</div>
             <div class="cmd-li-explain">清除全部配置数据（主题选中、节能选中、搜索引擎选中、搜索记录、大型数据记录 等）</div>
         </li>
         <li class="cmd-li hide">
@@ -98,11 +128,11 @@
             <div class="cmd-li-explain">隐藏主页的隐藏滑动的标签</div>
         </li>
 
-        <li class="cmd-li">
+        <li class="cmd-li hide">
             <div class="cmd-li-title">kw@show_color</div>
             <div class="cmd-li-explain">打开主题切换按钮</div>
         </li>
-        <li class="cmd-li">
+        <li class="cmd-li hide">
             <div class="cmd-li-title">kw@hide_color</div>
             <div class="cmd-li-explain">关闭主题切换按钮</div>
         </li>

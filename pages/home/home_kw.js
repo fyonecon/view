@@ -1,20 +1,20 @@
 // 输入kw@关键词时对应
-function home_kw(_word){
+function check_input_kw(_word){
     let word = decodeURIComponent(_word);
     view.log("对比字符串：", [_word, word]);
     let state = true;
     let url = "";
     if (word === "kw@首页" || word === "kw@home" || word === "kw@" || word === "kw@fresh" || word === "kw@refresh"){
         url = "./";
-        window.open(url, "_self");
+        view.window_open(url, "_self");
     }
     else if (word === "kw@login"){
         url = "./?route=login";
-        window.open(url, "_self");
+        view.window_open(url, "_self");
     }
     else if (word === "kw@help"){
         url = "./?route=home_help";
-        window.open(url, "_self");
+        view.window_open(url, "_self");
     }
     else if (word === "kw@pwa"){
         view.notice_txt("已打开PWA按钮", 2000);
@@ -22,27 +22,27 @@ function home_kw(_word){
     }
     else if (word === "kw@test"){
         url = "./?route=test";
-        window.open(url, "_self");
+        view.window_open(url, "_self");
     }
     else if (word === "kw@404"){
         url = "./?route=404";
-        window.open(url, "_self");
+        view.window_open(url, "_self");
     }
     else if (word === "kw@chatgpt" || word === "kw@chat" || word === "chat" || word === "poe"){
         url = "https://poe.com";
-        window.open(url, "_blank");
+        view.window_open(url, "_blank");
     }
     else if (word === "kw@bing"){
         url = "./?route=search&word="+_word;
-        window.open(url, "_self");
+        view.window_open(url, "_self");
     }
     else if (word === "kw@baidu"){
         url = "./?route=search&word="+_word;
-        window.open(url, "_self");
+        view.window_open(url, "_self");
     }
     else if (word === "kw@google"){
         url = "./?route=search&word="+_word;
-        window.open(url, "_self");
+        view.window_open(url, "_self");
     }
     else if (word === "kw@clear_all_data"){
         clear_all_data();
@@ -90,6 +90,5 @@ function home_kw(_word){
     else { // 未匹配
         state = false;
     }
-
     return state;
 }

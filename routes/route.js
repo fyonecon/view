@@ -29,6 +29,7 @@ const pages = [
             {
                 "js": [
                     "pages/home/home_kw.js",
+                    "pages/home/home_search.js",
                     "pages/home/home.js",
                 ],
                 "css": [

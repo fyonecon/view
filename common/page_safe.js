@@ -76,7 +76,7 @@ function must_login(msg){
     view.del_data("login_level");
 
     setTimeout(function (){
-        window.location.replace("./?route=login&back_url=" + encodeURIComponent(window.location.href));
+        view.window_open("./?route=login&back_url=" + encodeURIComponent(window.location.href), "_self");
     }, 500);
 }
 

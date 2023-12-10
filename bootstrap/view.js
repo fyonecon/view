@@ -18,7 +18,16 @@ const view = {
         console.error(txt, info);
     },
     title: function (txt){ // 改写title标签内容
-        document.getElementsByTagName("title")[0].innerText = txt;
+        let that = this;
+        if (that.is_wails()){
+            window.runtime.WindowSetTitle(txt);
+        }else{
+            document.getElementsByTagName("title")[0].innerText = txt;
+        }
+    },
+    get_route: function (){
+        let that = this;
+        return that.get_url_param("", "route")?that.get_url_param("", "route"):"home";
     },
     write_html: function (file_path, by_id, call_func, class_name) {  // 注射文件 | 写入htm
         let that = this;
@@ -618,11 +627,7 @@ const view = {
     },
     is_url: function (url){ // 检查是否是完整网址
         let reg = /^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)+([A-Za-z0-9-~\/])/;
-        if(reg.test(url)){
-            return true;
-        }else{
-            return false;
-        }
+        return reg.test(url);
     },
     make_qr: function (id, txt){ // 生成二维码
         let qrcode = new QRCode(id, {
@@ -863,6 +868,12 @@ const view = {
     },
     show_mask: function (timeout){
         let that = this;
+        // 初始化
+        try {
+            document.getElementById("mask-div").remove();
+        }catch (e) {}
+
+        //
         if (timeout<100){timeout=100;}
         let div =  document.createElement("div");
         div.setAttribute("id", "mask-div");
@@ -884,7 +895,7 @@ const view = {
         }
     },
     del_mask: function (){
-        $(".mask-div").remove();
+        $("#mask-div").remove();
     },
     load_img: function(img_class, cdn_url){ // 保护性加载图片 // <img class="xxx" src="" data-src="xxx" >
         try {
@@ -1022,15 +1033,19 @@ const view = {
     },
     window_open: function (url, target){ // 打开链接
         let that = this;
-        if (that.is_wails()){
-            if (that.is_url(url)){
-                try {
-                    window.runtime.BrowserOpenURL(url); // 注意，启动此函数需要完整的网址（如http、https开头的）
-                }catch (e){
-                    that.notice_txt("不被支持的语法：BrowserOpenURL", 3000);
+        if (target === "_blank"){
+            if (that.is_wails()){
+                if (that.is_url(url)){
+                    try {
+                        window.runtime.BrowserOpenURL(url); // 注意，启动此函数需要完整的网址（如http、https开头的）
+                    }catch (e){
+                        that.notice_txt("不被支持的语法：BrowserOpenURL", 3000);
+                    }
+                }else{
+                    that.notice_txt("需要完整的网址（如http、https开头的）");
                 }
             }else{
-                console.log("启动此函数需要完整的网址（如http、https开头的）：", url);
+                window.open(url, target);
             }
         }else{
             window.open(url, target);
@@ -1045,7 +1060,7 @@ const view = {
                 that.notice_txt("不被支持的语法：Quit", 3000);
             }
         }else{
-            window.location.href="about:blank";
+            window.location.replace("about:blank");
             window.close();
         }
     },
