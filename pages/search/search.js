@@ -26,7 +26,7 @@ function jump_location(engine, word, url) {
 
     // 2-匹配展示本网站文字
     else if (word === "kw@bing"){
-        $(".body").addClass("bg-white");
+        
         view.hide_loading();
         $(".back-div").removeClass("hide");
 
@@ -38,7 +38,7 @@ function jump_location(engine, word, url) {
         return;
     }
     else if (word === "kw@baidu"){
-        $(".body").addClass("bg-white");
+        
         view.hide_loading();
         $(".back-div").removeClass("hide");
 
@@ -50,7 +50,7 @@ function jump_location(engine, word, url) {
         return;
     }
     else if (word === "kw@google"){
-        $(".body").addClass("bg-white");
+        
         view.hide_loading();
         $(".back-div").removeClass("hide");
 

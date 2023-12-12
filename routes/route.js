@@ -53,8 +53,6 @@ const pages = [
             },
         ],
     },
-    // 结束-必要路由
-
     { // 页面模块
         "route"     : "login",
         "file_path" : "pages/login/login.view",
@@ -70,9 +68,10 @@ const pages = [
             },
         ],
     }, //
+    // 结束-必要路由
 
     { // 页面模块
-        "route"     : "home_help",
+        "route"     : "home-help",
         "file_path" : "pages/home/help/help.view",
         "title"     :  "使用帮助" + " - " +app_name,
         "file"      : [
@@ -101,6 +100,22 @@ const pages = [
             },
         ],
     }, //
+    { // 页面模块
+        "route"     : "tools",
+        "file_path" : "pages/tools/tools.html",
+        "title"     :  "工具" + " - " +app_name,
+        "file"      : [
+            {
+                "js": [
+                    "pages/tools/tools.js",
+                ],
+                "css": [
+                    "pages/tools/tools.css",
+                ],
+            },
+        ],
+    }, //
+
 
 
     //

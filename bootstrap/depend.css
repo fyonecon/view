@@ -1,7 +1,7 @@
 /*主入口css，可以做全局css使用。*/
 @charset "UTF-8";
 .hide{display:none !important;}
-.loading-div{position:fixed;z-index:20190100;top:0;left:0;bottom:0;right:0;margin:auto;background:rgba(232,232,232,0.4)}
+.loading-div{position:fixed;z-index:20190100;top:0;left:0;bottom:0;right:0;margin:auto;background:rgba(232,232,232,0.2)}
 .loading-img{position:fixed;z-index:20211020;width:40px;height: 40px;top:-15%;left:0;bottom:0;right:0;margin:auto;}
 .clear{clear:both}
 .div-alert_txt-text {line-height: 20px;font-size: 14px;color: #f5f5f5;letter-spacing: 0px;text-align: center;width: 260px;min-height: 20px;max-height: 60px;overflow: hidden;padding: 10px 10px;background: rgba(51,51,51,0.9);border-radius: 5px;border: 1px solid rgba(245,245,245,0.5);position: fixed;/*z-index: 8800000;*/left: 0;right: 0;top: calc(50% - 150px);margin: auto;}
@@ -23,8 +23,8 @@
 .notice-yellow{background: rgba(218,165,32,0.9) !important;} .notice-yellow>.notice_txt-show{color: black !important;}
 .notice-blue{background: rgba(60,140,255,0.8) !important;} .notice-blue>.notice_txt-show{color: black !important;}
 .notice_txt-show{font-size: 15px;color: #f5f5f5;letter-spacing: 1px;line-height: 24px;max-height: 96px;overflow: hidden;text-align: center;}
-.notice_txt-close{position: absolute;width: 30px;text-align: center;right: 1px;top: 4px;line-height: 30px;font-size: 16px;color: red;font-weight: 700;}
-.div-alert_confirm{line-height: 20px;font-size: 14px;color: #f5f5f5;text-align: center;width: 280px;min-height: 20px;overflow: hidden;background: rgba(51,51,51,0.9);border-radius: 5px;border: 1px solid rgba(245,245,245,0.5);position: fixed;/*z-index: 9800000;*/left: 0;right: 0;top: calc(50% - 150px);margin: auto;}
+.notice_txt-close{position: absolute;width: 30px;text-align: center;right: 1px;top: 4px;line-height: 30px;font-size: 16px;color: lightskyblue;font-weight: 700;}
+.div-alert_confirm{line-height: 20px;font-size: 14px;color: #f5f5f5;text-align: center;width: 280px;min-height: 20px;overflow: hidden;background: rgba(53,53,53,1);border-radius: 5px;border: 1px solid rgba(245,245,245,0.5);position: fixed;z-index: 20230330;left: 0;right: 0;top: calc(50% - 150px);margin: auto;}
 .div-alert_txt-title{
     line-height: 38px;
     height: 38px;
@@ -32,18 +32,15 @@
     text-align: left;
     font-weight: 600;
     border-bottom: 1px solid rgba(245,245,245,0.3);
-    font-size: 15px;
 }
 .div-alert_txt-msg{
     padding: 10px 15px 10px 15px;
     line-height: 24px;
     text-align: left;
-    font-size: 15px;
 }
 .div-alert_txt-btn{
     padding: 20px 10px 20px 10px;
     font-weight: 600;
-    font-size: 14px;
 }
 .div-alert_txt-btn-no{
     padding: 0 5px;
@@ -54,7 +51,6 @@
     text-align: center;
     border-radius: 5px;
     background-color: rgba(245,245,245,1);
-    color: black;
     margin-left: 30px;
     letter-spacing: 1px;
 }
@@ -66,8 +62,7 @@
     width: 70px;
     text-align: center;
     border-radius: 5px;
-    background-color: dodgerblue;
-    color: white;
+    background-color: rgba(245,245,245,1);
     margin-right: 30px;
     letter-spacing: 1px;
 }

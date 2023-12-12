@@ -29,12 +29,27 @@ h3, h4, h5, p{
 
 .page-content{
     width: calc(100% - 0px);
-    padding: 10px 0;
+    padding: 0 0;
     overflow-x: hidden;
-    min-height: 400px;
     max-width: 3840px;
     margin-right: auto;
     margin-left: auto;
+}
+
+/*定义scroll样式*/
+.scroll-y-style{
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.scroll-y-style::-webkit-scrollbar{
+    width: 8px;
+    background-color: rgba(245,245,245,0.3);
+}
+.scroll-y-style::-webkit-scrollbar-thumb{
+    border-radius: 8px;
+    height: 44px;
+    background-color: rgba(245,245,245,0.6);
+    cursor: pointer;
 }
 
 /**/
@@ -58,16 +73,16 @@ h3, h4, h5, p{
 
 /*字体大小*/
 .font-mini{
-    font-size: 14px;
+    font-size: 12px;
 }
 .font-text{
-    font-size: 16px;
+    font-size: 14px;
 }
 .font-title{
-    font-size: 18px;
+    font-size: 16px;
 }
 .font-class{
-    font-size: 22px;
+    font-size: 20px;
 }
 
 /*字颜色*/
@@ -79,6 +94,9 @@ h3, h4, h5, p{
 }
 .font-blue{
     color: #0078fe;
+}
+.font-light_blue{
+    color: deepskyblue;
 }
 .font-yellow{
     color: orange;
@@ -96,6 +114,9 @@ h3, h4, h5, p{
 }
 .bg-grey{
     background-color: #EEEEEE !important;
+}
+.bg-blue{
+    background-color: dodgerblue !important;
 }
 
 /**/
@@ -347,4 +368,8 @@ img{
     border-radius: 4px;
     padding: 2px 2px;
     float: left;
+}
+
+.back-div{
+    padding: 10px 10px;
 }

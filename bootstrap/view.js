@@ -29,8 +29,9 @@ const view = {
         let that = this;
         return that.get_url_param("", "route")?that.get_url_param("", "route"):"home";
     },
-    write_html: function (file_path, by_id, call_func, class_name) {  // 注射文件 | 写入htm
+    write_html: function (file_path, by_id, call_func, class_name) {  // 注射文件 | 写入html dom
         let that = this;
+        if (!class_name){class_name=by_id+view.time_date("YmdHi00");}
         $.ajax({ // 利用ajax的get请求获取文本内容
             url: file_path + "?" + page_time,
             async: true,
@@ -48,7 +49,7 @@ const view = {
                 //     console.error("不能写入id_Dom", by_id);
                 // }
 
-                $("#"+by_id).append(data);
+                $("#"+by_id).append("<div class='write_html-class_name "+class_name+"' data-by_id='"+by_id+"' >"+data+"</div>");
 
                 try {
                     call_func(true);
@@ -149,13 +150,55 @@ const view = {
         document.getElementById(by_id).innerHTML = html;
     },
     base64_encode: function (string) {
-        return btoa(string);
+        try {
+            return btoa(string);
+        }catch (e) {
+            return null;
+        }
     },
     base64_decode: function (string) {
-        return atob(string);
+        try {
+            return atob(string);
+        }catch (e) {
+            return null;
+        }
     },
     md5: function (string) {
         return hex_md5(string);
+    },
+    string_to_unicode: function (string){ // 字符串转unicode，任意字符串
+        let back = "";
+        for (let i=0; i<string.length; i++){
+            if (back){
+                back += ","+string.charCodeAt(i);
+            }else{
+                back = string.charCodeAt(i);
+            }
+
+        }
+        return back;
+    },
+    unicode_to_string: function (unicode){
+        const _unicode = unicode.split(",");
+        let back = "";
+        for (let i=0; i<_unicode.length; i++){
+            back += String.fromCharCode(_unicode[i]);
+        }
+        return back;
+    },
+    hex16_to_string: function (hex16) { // 除了不支持emoji外都支持
+        return decodeURIComponent(hex16);
+    },
+    string_to_hex16: function (string){ // 字符串转16进制，任意字符串（中文、emoji）
+        let hex = "";
+        for (let i = 0; i < string.length; i++) {
+            if (hex){
+                hex += "&#x"+string.charCodeAt(i).toString(16)+";";
+            }else{
+                hex = "&#x"+string.charCodeAt(i).toString(16)+";";
+            }
+        }
+        return hex;
     },
     set_cache: function (_key, _value) { // key-value对 存入系统运存，页面关闭即key-value消失
         let that = this;
@@ -356,7 +399,7 @@ const view = {
         // alert_txt层级形态显示
         let alert_confirm_index = that.get_cache("alert_confirm_index")*1;
         if (!alert_confirm_index){
-            alert_confirm_index = 9000000;
+            alert_confirm_index = 20230330;
         }else {
             alert_confirm_index = alert_confirm_index + 10;
         }
@@ -364,23 +407,28 @@ const view = {
 
         //that.log(["alert_txt", txt, timeout, clear, alert_txt_index]);
         let class_name = "alert_confirm_" + alert_confirm_index;
+        let class_yes = "alert_txt-btn-yes_" + alert_confirm_index;
+        let class_no = "alert_txt-btn-no_" + alert_confirm_index;
 
         let div = '<div class="'+class_name+' div-alert_confirm select-none" style="z-index:'+alert_confirm_index+';">' +
-            '   <div class="div-alert_txt-title">'+title+'</div>' +
-            '   <div class="div-alert_txt-msg">'+ msg +'</div>' +
-            '   <div class="div-alert_txt-btn"><span class="div-alert_txt-btn-no click float-left">No</span><span class="div-alert_txt-btn-yes click float-right">Yes</span><div class="clear"></div></div>' +
+            '   <div class="div-alert_txt-title font-text">'+title+'</div>' +
+            '   <div class="div-alert_txt-msg font-text">'+ msg +'</div>' +
+            '   <div class="div-alert_txt-btn"><span class="'+class_no+' div-alert_txt-btn-no click float-left font-black font-text">No</span><span class="'+class_yes+' div-alert_txt-btn-yes click float-right font-white font-text bg-blue">Yes</span><div class="clear"></div></div>' +
             '   <div class="clear"></div>' +
             '</div>';
         $("#depend").append(div);
+        that.show_mask("long");
         // 确认
-        $(document).on("click", ".div-alert_txt-btn-yes", function (){
+        $(document).on("click", "."+class_yes, function (){
             call_func(true, class_name);
             $("."+class_name).remove();
+            that.del_mask();
         });
         // 取消
-        $(document).on("click", ".div-alert_txt-btn-no", function (){
+        $(document).on("click", "."+class_no, function (){
             call_func(false, class_name);
             $("." + class_name).remove();
+            that.del_mask();
         });
 
     },
@@ -486,11 +534,15 @@ const view = {
         }
     },
     show_loading: function (timeout){ // (延迟几秒ms出现)
-        let _timeout = timeout*1;
-        if (_timeout<=0 || _timeout > 1000*1000){_timeout=0;}
-        setTimeout(function (){
+        if (timeout === "long"){ // 一直显示
             $(".loading-div").removeClass("hide");
-        }, _timeout);
+        }else{
+            let _timeout = timeout*1;
+            if (_timeout<=0 || _timeout > 1000*1000){_timeout=0;}
+            setTimeout(function (){
+                $(".loading-div").removeClass("hide");
+            }, _timeout);
+        }
     },
     hide_loading: function (){
         $(".loading-div").addClass("hide");

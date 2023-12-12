@@ -1,0 +1,86 @@
+
+
+.tools-content{
+    width: 100%;
+}
+.run-tools-content{
+    padding: 0 10px 10px 10px;
+}
+
+.tools-left-content{
+    width: calc(180px - 1px);
+    color: white;
+    background-color: rgba(205,205,205,0.1);
+    border-right: 1px solid rgba(245,245,245,0);
+    height: calc(100% - 45px - 10px);
+    padding-bottom: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: absolute;
+    top: 45px;
+    left: 0;
+}
+.tools-right-content{
+    width: calc(100% - 180px);
+    color: white;
+    height: calc(100% - 45px - 10px);
+    padding-bottom: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: absolute;
+    top: 45px;
+    right: 0;
+}
+
+.tools-left-item{
+    height: 40px;
+    line-height: 40px;
+    padding: 0 10px;
+    overflow: hidden;
+    letter-spacing: 1px;
+    border-bottom: 1px solid rgba(245,245,245,0.1);
+}
+.tools-left-item-active{
+    background-color: rgba(245,245,245,0.2);
+    border-bottom: 1px solid rgba(245,245,245,0.1);
+}
+
+.tools-right-content-null{
+    text-align: center;
+    margin-top: 150px;
+    font-size: 16px;
+    opacity: 0.3;
+}
+
+.textarea-style{
+    width: calc(100% - 20px);
+    max-width: calc(100% - 20px);
+    min-height: 220px;
+    padding: 10px 10px;
+    line-height: 20px;
+    border-radius: 5px;
+    background-color: rgba(245,245,245,1);
+    color: black;
+    overflow-x: hidden;
+}
+.textarea-div{
+    width: 100%;
+    min-height: 25px;
+    padding: 20px 0 0 0;
+    text-align: center;
+    overflow: hidden;
+}
+
+.span-click-btn{
+    padding: 7px 15px;
+    line-height: 19px;
+    overflow: hidden;
+    text-align: center;
+    border-radius: 5px;
+    background-color: rgba(245,245,245,1);
+    margin-right: 15px;
+    margin-left: 15px;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    float: left;
+}

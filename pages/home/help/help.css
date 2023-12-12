@@ -1,26 +1,36 @@
-.back-div{
-    padding: 10px 10px;
-}
 
+.tools-right-content{
+    width: calc(100%);
+    height: calc(100% - 45px - 10px);
+    padding-bottom: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: absolute;
+    top: 45px;
+    right: 0;
+}
 .cmd-ul{
-    padding: 10px 10px 0 10px;
+    padding: 10px 10px;
+    background-color: rgba(205,205,205,0.1);
 }
 .cmd-li{
-    padding: 0 20px;
+    padding: 0 20px 10px 20px;
 }
 .cmd-group{
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     line-height: 32px;
+    color: white;
+    padding-bottom: 10px;
 }
 .cmd-li-title{
     font-size: 16px;
     font-weight: 600;
-    line-height: 32px;
+    line-height: 30px;
+    color: white;
 }
 .cmd-li-explain{
-    font-size: 14px;
-    margin-bottom: 10px;
-    line-height: 24px;
-    color: grey;
+    font-size: 16px;
+    line-height: 30px;
+    color: rgba(200,200,200,1);
 }

@@ -9,16 +9,21 @@
     <div class="content-bg" id="content-bg"></div>
     <div class="left-fixed">
 
-        <!--网站信息-->
+        <!--更多信息-->
         <div class="rights-div">
-            <span class="right-span rights-pwa click hide a-click" data-href="https://cdnaliyun.oss-cn-hangzhou.aliyuncs.com" data-target="_blank" title="Install WebApp">PWA App</span>
-            <span class="right-span rights-date hide" title="2019年至今"></span>
-            <span class="right-span a-click click" data-href="./?route=home_help" data-target="_self" title="Help Docs">Help</span>
-            <span class="right-span click a-click" data-href="./" data-target="_self" title="Refresh the Page">Refresh</span>
-            <span class="right-span click window_close-span hide" title="Close the Tab or App">Close</span>
+            <span class="right-span a-click click tools-span hide" data-href="./?route=tools" data-target="_self" title="Tools">Tools</span>
+        </div>
+        <div class="rights-div">
+            <span class="right-span a-click click" data-href="./?route=home-help" data-target="_self" title="Help Docs">Help</span>
         </div>
 
-        <!--        -->
+        <!--辅助功能-->
+        <div class="rights-div" style="margin-top: 5px;">
+            <span class="right-span click a-click" data-href="./" data-target="_self" title="Refresh the Page">🔄</span>
+            <span class="right-span click window_close-span hide" title="Close the Tab or App">❎</span>
+        </div>
+
+        <!--  -->
         <div class="contact-div hide">
             <span class="right-span">
                 <a class="email-a" target="_self" style="color: inherit;" title="Email"></a>

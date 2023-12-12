@@ -59,6 +59,14 @@ function jump_location(engine, word) {
             tab_url = url+ word + "&cache=" + cache;
             name = "Yandex";
         }
+        //
+        else if (engine === "icons"){
+            let url = "https://cn.youicons.com/search/";
+            tab_url = url+ word;
+            name = "icon图";
+        }
+
+        //
         else if (engine === "m_toutiao"){
             let url = "https://m.toutiao.com/search/?keyword=";
             tab_url = url + word + "&cache=" + cache;

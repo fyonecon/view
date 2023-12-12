@@ -52,7 +52,7 @@ $(document).on("click", ".a-click", function (){
     let target = that.attr("data-target");
     target = target?target:"_self";
     if (href){
-        window.open(href, target);
+        view.window_open(href, target);
     }else {
         view.notice_txt("未设置data-href", 2000);
     }

@@ -12,25 +12,13 @@ function check_input_kw(_word){
         url = "./?route=login";
         view.window_open(url, "_self");
     }
-    else if (word === "kw@help"){
-        url = "./?route=home_help";
-        view.window_open(url, "_self");
-    }
-    else if (word === "kw@pwa"){
-        view.notice_txt("已打开PWA按钮", 2000);
-        $(".rights-pwa").removeClass("hide");
-    }
-    else if (word === "kw@test"){
-        url = "./?route=test";
-        view.window_open(url, "_self");
-    }
+    // else if (word === "kw@help"){
+    //     url = "./?route=home-help";
+    //     view.window_open(url, "_self");
+    // }
     else if (word === "kw@404"){
         url = "./?route=404";
         view.window_open(url, "_self");
-    }
-    else if (word === "kw@chatgpt" || word === "kw@chat" || word === "chat" || word === "poe"){
-        url = "https://poe.com";
-        view.window_open(url, "_blank");
     }
     else if (word === "kw@bing"){
         url = "./?route=search&word="+_word;
@@ -72,6 +60,10 @@ function check_input_kw(_word){
     else if (word === "kw@hide_on_hour"){
         view.notice_txt("已隐藏整点报时切换按钮", 2000);
         $(".on-hour-div").removeClass("hide");
+    }
+    else if (word === "kw@tools"){
+        view.notice_txt("已展示Tools按钮", 2000);
+        $(".tools-span").removeClass("hide");
     }
     else if (view.string_include_string(word, "kw@url=") >= 0){
         view.notice_txt("打开网址", 2000);

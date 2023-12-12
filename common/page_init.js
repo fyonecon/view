@@ -58,7 +58,6 @@ function frame_loaded(e, route){
     // 设置过期时间
     if (view.is_wails()){
         let now_date = view.time_date("YmdHis")*1;
-        console.log(now_date);
         let end_date = 20271231095959;
         if (now_date >= end_date){
             view.show_mask("long");
@@ -106,9 +105,16 @@ function page_init(e, route){
         login_name = view.get_data("login_name");
         login_nickname = view.get_data("login_nickname");
         //
-        if (route === "login" || route === "404"|| route === "home_help" || route === "help"  || route === "search" || route === "" || route === "home"){ // 白名单
+        if (
+            route === "" || route === "home"
+            || route === "404"
+            || route === "login"
+            || route === "home-help"
+            || route === "search"
+            || route === "tools" || route === "tools-pure_txt"
+        ){ // 不需要登录
             start_page(e);
-        } else { // 不是login的话就直接检查是否已经登录
+        } else { // 需要登录。不是login的话就直接检查是否已经登录
             // 处理是否过期
             let login_time = view.get_data("login_time");
             let now_time = view.time_s();

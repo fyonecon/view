@@ -58,9 +58,11 @@ function test_api(){
 
 function start_page(e){
     $(".back-div").removeClass("hide");
-    $(".body").addClass("bg-white");
 
-    // test_api();
+    // 仅在平板或笔记本设备展示
+    if (window.screen.width < 1500 && window.screen.width > 640){
+        $(".download-div").removeClass("hide");
+    }
 
     // 复制文字
     let clipboard = new Clipboard('.copy-txt-btn');

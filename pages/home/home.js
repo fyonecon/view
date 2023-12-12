@@ -27,12 +27,10 @@ const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。�
         "name": "Yandex",
         "engine": "yandex",
     },
-
     {
         "name": "Github",
         "engine": "github",
     },
-
     {
         "name": "微信文章",
         "engine": "weixin",
@@ -54,7 +52,6 @@ const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。�
         "name": "中英翻译",
         "engine": "zh_en",
     },
-
     {
         "name": "东坡下载",
         "engine": "dpxz_download",
@@ -67,6 +64,11 @@ const search = [ // 搜索引擎列表，分为移动和PC、前缀和后缀。�
         "name": "域名Whois",
         "engine": "whois",
     },
+    {
+        "name": "icon图",
+        "engine": "icons",
+    },
+
 ];
 
 
@@ -1121,15 +1123,15 @@ function battery_model(){
     if (window.innerWidth < 640){
         //
         view.log("当前节能模式：「移动端跳过」");
-        $(".switch-battery_state").removeClass("hide").html("🔋"+txt_translate.battery_on[lang_eq]);
+        $(".switch-battery_state").removeClass("hide").html("🔋 "+txt_translate.battery_on[lang_eq]);
     }else{
         if (view.get_switch_state("battery_state") === "Off"){
             view.log("当前节能模式：关闭");
-            $(".switch-battery_state").removeClass("hide").html("🪫"+txt_translate.battery_off[lang_eq]);
+            $(".switch-battery_state").removeClass("hide").html("🪫 "+txt_translate.battery_off[lang_eq]);
             view.write_js([cdn_page_file+"parts/bg_animate/bg_animate.js"+"?"+page_time]);
         }else {
             view.log("当前节能模式：打开");
-            $(".switch-battery_state").removeClass("hide").html("🔋"+txt_translate.battery_on[lang_eq]);
+            $(".switch-battery_state").removeClass("hide").html("🔋 "+txt_translate.battery_on[lang_eq]);
         }
     }
 }
@@ -1241,15 +1243,15 @@ const txt_translate = {
     input_placeholder:  ["输入搜索关键词", "Enter Search Keywords"],
     keywords_null:  ["搜索内容不能为空", "The Input Cannot Be Empty"],
     cancel_doing:  ["已取消操作", "Operation Canceled"],
-    battery_on:  ["节能：已开", "Energy Conservation: ON"],
-    battery_off:  ["节能：已关", "Energy Conservation: OFF"],
+    battery_on:  ["节能已开", "Energy Conservation: ON"],
+    battery_off:  ["节能已关", "Energy Conservation: OFF"],
     clear_illegal_dom: ["非法节点已清除", "Illegal Nodes Cleared"],
     theme_name: [ // 注意顺序不能乱
-        ["🌕 主题：雪白", "🌕 Theme：Light"], // 0
-        ["🌑 主题：昏黑", "🌑 Theme：Black"], // 1
-        ["🌘 主题：岩灰", "🌘 Theme：Grey"], // 2
-        ["🌗 主题：夕黄", "🌗 Theme：Wheat"], // 3
-        ["🌖 主题：牙白", "🌖 Theme：ivory"] // 4
+        ["🌕 主题雪白", "🌕 Theme：Light"], // 0
+        ["🌑 主题昏黑", "🌑 Theme：Black"], // 1
+        ["🌘 主题岩灰", "🌘 Theme：Grey"], // 2
+        ["🌗 主题夕黄", "🌗 Theme：Wheat"], // 3
+        ["🌖 主题牙白", "🌖 Theme：ivory"] // 4
     ],
 }
 view.set_html_lang();
@@ -1269,6 +1271,7 @@ function start_page(info) {
         // },200);
         // $(".contact-div").removeClass("hide");
         $(".battery-model-div").removeClass("hide");
+        $(".tools-span").removeClass("hide");
         // $(".content-bg").addClass("hide");
     }else { // m
         // $(".timer-div").removeClass("hide");
@@ -1279,6 +1282,7 @@ function start_page(info) {
         $(".qr-div-div").addClass("hide");
         $(".window_close-span").removeClass("hide");
         $(".change-color-div").removeClass("hide");
+        $(".tools-span").removeClass("hide");
     }
 
     init_dom();
