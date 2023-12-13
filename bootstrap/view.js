@@ -1001,6 +1001,104 @@ const view = {
             console.log("lang_eq=", browserLang);
         }
     },
+    filter_xss: function (html){
+        let that = this;
+        const list = [
+            {
+                "black": "<script",
+                "white": "< scrip*t"
+            },
+            {
+                "black": "</script>",
+                "white": "< / scrip*t>"
+            },
+            {
+                "black": "javascript",
+                "white": "javascrip*t"
+            },
+            {
+                "black": "localstorage",
+                "white": "localstorag*e"
+            },
+            {
+                "black": "onload",
+                "white": "onloa*d"
+            },
+            {
+                "black": "onclick",
+                "white": "onclic*k"
+            },
+            {
+                "black": "onrerror",
+                "white": "onrerro*r"
+            },
+            {
+                "black": "function",
+                "white": "functio*n"
+            },
+            {
+                "black": "request",
+                "white": "reques*t"
+            },
+            {
+                "black": "window",
+                "white": "windo*w"
+            },
+            {
+                "black": "target",
+                "white": "targe*t"
+            },
+            {
+                "black": "console",
+                "white": "consol*e"
+            },
+            {
+                "black": "alert",
+                "white": "aler*t"
+            },
+            {
+                "black": "object",
+                "white": "objec*t"
+            },
+            {
+                "black": "document",
+                "white": "documen*t"
+            },
+            {
+                "black": "replace",
+                "white": "replac*e"
+            },
+            {
+                "black": "eval",
+                "white": "eva*l"
+            },
+            {
+                "black": ".src",
+                "white": ".sr*c"
+            },
+            {
+                "black": ".test",
+                "white": ".tes*t"
+            },
+            {
+                "black": "navigator",
+                "white": "navigato*r"
+            },
+            {
+                "black": "display",
+                "white": "displa*y"
+            },
+            {
+                "black": "opacity",
+                "white": "opacit*y"
+            },
+        ];
+        html = html.toLowerCase();
+        list.forEach((ele, index)=>{
+           html = html.replaceAll(ele.black, ele.white);
+        })
+        return html;
+    },
     ping_url: function (url, call_func){ // 检查网址是否可用，也可用于检查网址协议是否可用如https是否可用
         $.ajax({
             type: "GET",

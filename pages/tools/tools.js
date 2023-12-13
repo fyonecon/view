@@ -26,7 +26,7 @@ $(document).on("click", ".a-write_js", function (){
                 $("#tools-right-content").html(""); // 每次正确运行时就初始化dom
                 view.write_html(_html_url, "tools-right-content", function (_state){
                     if (_state){
-                        run_tools_content(that.text(), [_js_url, _css_url, _html_url]);
+                        run_parts(that.text(), [_js_url, _css_url, _html_url]);
                     }else{
                         view.alert_txt("js_html加载失败！", 3000);
                     }
@@ -90,8 +90,19 @@ $(document).on("click", ".a-write_js", function (){
 });
 
 function start_page(){
+    $(".back-div").removeClass("hide");
 
     // 默认点击第一个
     // $(".a-write_js").eq(0).click();
+
+}
+
+//
+function show_page(){
+
+}
+
+//
+function hide_page(){
 
 }

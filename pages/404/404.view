@@ -5,7 +5,7 @@
         <h2 class="font-class font-white">页面404，请检查链接、内容是否有效。</h2>
         <br>
         <div>
-            <a class="a-click click" data-href="./" data-target="_self"><span class="font-title font-light_blue click"> ⬅️ 返回首页 </span></a>
+            <a class="a-click click select-none" data-href="./" data-target="_self"><span class="font-title font-light_blue click"> ⬅️ 返回首页 </span></a>
         </div>
     </div>
 

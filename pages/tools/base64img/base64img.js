@@ -1,12 +1,14 @@
 
-// 页面起始函数
-function run_tools_content(text, data){
+// 组件起始函数
+function run_parts(text, data){
 
     // 监听文件上传
     let elem = document.getElementById("input-file");
     elem.addEventListener("change", () => {
         console.log(elem.files);
         view.show_loading("long");
+
+        $("#textarea-2").val("");
 
         let file = elem.files[0];
         let filename = file.name;

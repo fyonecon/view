@@ -10,6 +10,9 @@
     <div class="left-fixed">
 
         <!--更多信息-->
+        <div class="rights-div hide">
+            <span class="right-span a-click click tools-span hide" data-href="./?route=note" data-target="_self" title="打开记事本">Note</span>
+        </div>
         <div class="rights-div">
             <span class="right-span a-click click tools-span hide" data-href="./?route=tools" data-target="_self" title="Tools">Tools</span>
         </div>

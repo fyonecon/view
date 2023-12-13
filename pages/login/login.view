@@ -20,7 +20,7 @@
         <input class=" user-input-check float-right" value="" placeholder="请输入计算结果" maxlength="10" type="text" />
         <div class="clear"></div>
     </div>
-    <div class="user-input-item center">
+    <div class="user-input-item center select-none">
         <div class="user-login-btn">登录/Enter</div>
     </div>
 

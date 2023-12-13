@@ -1,5 +1,5 @@
 <div class="page-content">
-    <div class="back-div hide">
+    <div class="back-div hide select-none">
         <a class="click a-click" data-href="./" alt="" title="返回" data-target="_self">
             <span class="font-light_blue font-title"> ⬅️ 返回 </span>
         </a>
@@ -10,6 +10,10 @@
         <!---->
         <div class="cmd-ul">
             <div class="cmd-group"># 问题反馈Feedback：</div>
+            <div class="cmd-li">
+                <div class="cmd-li-title">软件版本AppVersion：</div>
+                <div class="cmd-li-explain">2.4.4(update3)</div>
+            </div>
             <div class="cmd-li">
                 <div class="cmd-li-title">作者Author：</div>
                 <div class="cmd-li-explain">fyonecon@gmail.com</div>

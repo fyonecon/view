@@ -1,0 +1,11 @@
+.tools-right-content-part-style{
+    width: calc(100%);
+    color: white;
+    height: calc(100% - 45px - 10px);
+    padding-bottom: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: absolute;
+    top: 45px;
+    right: 0;
+}

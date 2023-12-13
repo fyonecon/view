@@ -111,7 +111,7 @@ function page_init(e, route){
             || route === "login"
             || route === "home-help"
             || route === "search"
-            || route === "tools" || route === "tools-pure_txt"
+            || route === "tools" || route === "tools-pure_txt" || route === "note"
         ){ // 不需要登录
             start_page(e);
         } else { // 需要登录。不是login的话就直接检查是否已经登录

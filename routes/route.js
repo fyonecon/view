@@ -115,6 +115,21 @@ const pages = [
             },
         ],
     }, //
+    { // 页面模块
+        "route"     : "note",
+        "file_path" : "pages/note/note.html",
+        "title"     :  "记事本" + " - " +app_name,
+        "file"      : [
+            {
+                "js": [
+                    "pages/note/note.js",
+                ],
+                "css": [
+                    "pages/note/note.css",
+                ],
+            },
+        ],
+    }, //
 
 
 
