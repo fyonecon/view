@@ -2,6 +2,8 @@
 >框架开源：https://github.com/fyonecon/view/
 >
 
+⚠️非git-hub、bit-bucket看到的本项目仓库都是盗版。
+
 > 
 >简单介绍：
 >
